@@ -1,27 +1,77 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Globals from './components/Globals';
+import Dexie from 'dexie';
+
+
+import './Core.css';
 import './App.css';
 
+import Header from './components/pages/Header';
+import Error from './components/pages/Error';
+import Progression from './components/pages/Progression/ProgressionRouter';
+
+
+
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      init: false,
+      manifest: null
+    }
+  }
+  
+  componentDidMount () {
+    
+    fetch(
+      `https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition`,
+      {
+        headers: {
+          "X-API-Key": Globals.key.braytech,
+        }
+      }
+    )
+    .then(response => {
+      return response.json();
+    })
+      .then(manifest => {
+  
+        this.setState({
+          manifest,
+          init: true
+        });
+
+      })
+    .catch(error => {
+      console.log(error);
+    })
+
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+
+    if (!this.state.init) {
+      return (
+        <div className="view" id="loading">
+          <p>loading app</p>
+        </div>
+      );
+    }
+    else {
+      console.log(this.state.manifest);
+      return (
+        <BrowserRouter>
+          <>
+            <Switch>
+              <Route path="/progression" render={()=> <Progression parentState={ this.state } />} />
+              <Route component={ Error } />
+            </Switch>
+          </>
+        </BrowserRouter>
+      );
+    }
   }
 }
 
