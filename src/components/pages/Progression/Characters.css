@@ -1,0 +1,120 @@
+
+.characters {
+  width: 474px;
+}
+
+.characters .list li {
+  display: block;
+  height: 0;
+  padding-bottom: calc(96 / 474 * 100%);
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.characters .list li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background-color: initial;
+  margin: initial;
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
+  transition: background-color .25s, box-shadow .25s;
+}
+
+.characters .list li:hover::before {
+  box-shadow: inset 0 0 0 1px #d6d6d6;
+}
+
+#characters .results ul .active::after {
+  box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+.characters .list li .image.emblem {
+  background-size: cover;
+}
+
+.characters .list li .image.emblem.missing {
+  width: calc(96 / 474 * 100% - 50px);
+  height: calc(100% - 50px);
+  top: 18px;
+  left: 18px;
+  background-size: contain;
+}
+
+.characters .list li:hover .image.emblem:not(.missing) {
+  opacity: 0.8;
+}
+
+.characters .list li .displayName {
+  position: absolute;
+  left: 88px;
+  top: 15px;
+  font-size: 27px;
+}
+
+.characters .list li .class {
+  position: absolute;
+  left: 88px;
+  top: 52px;
+  font-size: 16px;
+  opacity: 0.4;
+}
+
+.characters .list li .light {
+  position: absolute;
+  right: 12px;
+  top: 13px;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+  color: #2ed1c9;
+}
+
+.characters .list li .light::before {
+  content: "\e973";
+  position: absolute;
+  top: 4px;
+  left: -16px;
+  font-family: 'destiny' !important;
+  speak: none;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.characters .list li .level {
+  position: absolute;
+  right: 12px;
+  top: 55px;
+  font-size: 18px;
+}
+
+.characters .list li .progress {
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+  height: 12px;
+  width: calc(100% - 4px);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.characters .list li .progress .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #5aa366;
+}
+
+.characters .list li .progress .bar.capped {
+  background-color: #b88917;
+}

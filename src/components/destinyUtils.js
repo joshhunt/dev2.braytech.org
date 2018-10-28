@@ -1,5 +1,4 @@
-import { EMBLEM, HUNTER, TITAN, WARLOCK, NO_CLASS } from 'app/lib/destinyEnums';
-import { getLower } from 'app/lib/utils';
+import { EMBLEM, HUNTER, TITAN, WARLOCK, NO_CLASS } from './destinyEnums';
 
 // TODO: we can just use itemCategoryHashes for this now?
 export const isOrnament = item =>
@@ -29,28 +28,25 @@ function classFromString(str) {
   }
 }
 
-export const getItemClass = item => {
-  if (!item) {
-    return NO_CLASS;
-  }
-
-  const stackUniqueLabel = getLower(item, 'inventory.stackUniqueLabel');
-  const plugCategoryIdentifier = getLower(item, 'plug.plugCategoryIdentifier');
-
-  if (hasCategoryHash(item, EMBLEM) && stackUniqueLabel.length) {
-    return classFromString(stackUniqueLabel);
-  }
-
-  // TODO: Ornaments might provide this better now
-  if (item.classType === 3 && isOrnament(item)) {
-    return classFromString(plugCategoryIdentifier);
-  }
-
-  return item.classType;
-};
-
 export function hasCategoryHash(item, categoryHash) {
   return (
     item.itemCategoryHashes && item.itemCategoryHashes.includes(categoryHash)
   );
 }
+
+export function classFromType(str) {
+  
+  let string;
+
+  switch (str) {
+    case 0: string = "Titan"; break;
+    case 1: string = "Hunter"; break;
+    case 2: string = "Warlock"; break;
+    default: string = "uh oh"
+  }
+
+  return string;
+  
+}
+
+

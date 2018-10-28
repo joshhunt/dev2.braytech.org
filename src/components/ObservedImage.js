@@ -14,7 +14,7 @@ class ObservedImage extends React.Component {
 
   componentDidMount() {
 
-    const srcSet = this.props.srcSet;
+    const src = this.props.src;
     const ratio = this.props.ratio ? this.props.ratio : false;
 
     if (ratio) {
@@ -28,23 +28,6 @@ class ObservedImage extends React.Component {
     this.observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
-
-          // console.log(srcSet, entry.boundingClientRect.width);
-
-          let displayWidth = entry.boundingClientRect.width;
-          let dpr = window.devicePixelRatio;
-          let sets = [];
-          let data = srcSet.split(/,\s/);
-        
-          data.forEach(set => {
-            let processed = /(.+)\s([0-9].+)w/i.exec(set);
-            sets.push(
-              {
-                filePath: processed[1],
-                width: processed[2]
-              }
-            )
-          })
 
           const { isIntersecting } = entry;
 
@@ -80,26 +63,6 @@ class ObservedImage extends React.Component {
               this.observer = this.observer.disconnect();
 
             };
-
-            
-            let src = false;
-            sets.forEach(set => {
-              if (sets.length === 1) {
-                src = set.filePath;
-              }
-              if (!src) {
-                if (dpr === 1) {
-                  if (set.width >= displayWidth) {
-                    src = set.filePath;
-                  }
-                }
-                else {
-                  if (set.width >= displayWidth) {
-                    src = set.filePath;
-                  }
-                }
-              }
-            })
 
             loadImage.src = src;
             

@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Globals from '../../Globals';
 
+import Characters from './Characters';
+
 
 class Progression extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      playerResponse: undefined
+      ProfileResponse: undefined
     }
   }
 
@@ -26,10 +28,12 @@ class Progression extends React.Component {
     .then(response => {
       return response.json();
     })
-      .then(playerResponse => {
+      .then(ProfileResponse => {
   
+        ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) { return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal) });
+
         this.setState({
-          playerResponse
+          ProfileResponse: ProfileResponse.Response
         });
 
       })
@@ -43,7 +47,7 @@ class Progression extends React.Component {
 
     console.log(this.props, this.state)
 
-    if (!this.state.playerResponse) {
+    if (!this.state.ProfileResponse) {
       return (
         <div className="view" id="loading">
           <p>loading user</p>
@@ -53,7 +57,7 @@ class Progression extends React.Component {
     else {
       return (
         <div className="view" id="progression">
-          lol
+          <Characters data={this.state} />
         </div>
       );
     }

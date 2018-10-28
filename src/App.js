@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Globals from './components/Globals';
-import Dexie from 'dexie';
 
 
 import './Core.css';
