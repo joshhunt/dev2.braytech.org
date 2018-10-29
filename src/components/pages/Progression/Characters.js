@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cx from 'classnames'
 
 import { classFromType } from '../../destinyUtils'
@@ -24,7 +25,11 @@ const Characters = (props) => {
     : characterProgressions[character.characterId].progressions[1716568313].progressToNextLevel / characterProgressions[character.characterId].progressions[1716568313].nextLevelAt;
 
     charactersRender.push(
-      <li key={character.characterId}>
+      <li key={character.characterId} className={cx(
+          {
+            "active": character.characterId === props.data.activeCharacterId ? true : false
+          }
+        )}>
         <ObservedImage className={cx(
               "image",
               "emblem",
@@ -50,6 +55,8 @@ const Characters = (props) => {
               }
             } ></div>
         </div>
+        <Link to={ `/progression/${profile.userInfo.membershipType}/${profile.userInfo.membershipId}/${character.characterId}` }
+        onClick={props.changeCharacterIdTo} data-id={character.characterId}></Link>
       </li>
     )
   });

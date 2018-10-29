@@ -1,0 +1,55 @@
+
+
+.summaries {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1.5rem;
+}
+
+.summaries .module {
+  flex-basis: calc(100% / 3 - 3rem);
+  padding: 1.5rem;
+}
+
+
+
+
+.summaries .list li {
+  height: unset;
+}
+
+.summaries .list li .progress {
+  flex-basis: 100%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.summaries .list li .progress .title {
+  flex-basis: 70%;
+  font-size: 14px;
+  padding: 8px 0 8px 10px;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.summaries .list li .progress .fraction {
+  flex-basis: calc(30% - 20px);
+  text-align: right;
+  font-size: 14px;
+  padding: 8px 10px 8px 0;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.summaries .list li .progress .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #5aa366;
+}

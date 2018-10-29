@@ -17,8 +17,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      init: false,
-      manifest: null
+      init: false
     }
   }
   
@@ -38,9 +37,10 @@ class App extends Component {
       .then(manifest => {
   
         this.setState({
-          manifest,
           init: true
         });
+
+        localStorage.setItem("manifest", JSON.stringify(manifest));
 
       })
     .catch(error => {

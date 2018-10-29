@@ -1,0 +1,19 @@
+
+
+.view {
+  background-color: #5c5953;
+}
+
+#progression {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#progression .characters {
+  flex-basis: 474px;
+  margin: 3rem 0 0;
+}
+
+#progression .summaries {
+  flex-basis: calc(100% - 3rem - 474px);
+}
