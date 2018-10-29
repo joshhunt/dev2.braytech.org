@@ -11,9 +11,10 @@
 
 #progression .characters {
   flex-basis: 474px;
-  margin: 3rem 0 0;
+  margin: 3rem 0 0 1.5rem;
 }
 
 #progression .summaries {
   flex-basis: calc(100% - 3rem - 474px);
+  padding: 1.5rem 0 1.5rem 1.5rem;
 }

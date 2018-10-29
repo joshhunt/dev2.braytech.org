@@ -148,16 +148,19 @@ const Summaries = (props) => {
     values: {
       infamy: {
         text: "Infamy",
+        color: "#25986e",
         total: infamyProgressTotal,
         completed: infamyProgression.currentProgress
       },
       valor: {
         text: "Valor",
+        color: "#ed792c",
         total: valorProgressTotal,
         completed: valorProgression.currentProgress
       },
       glory: {
         text: "Glory",
+        color: "#b52422",
         total: gloryProgressTotal,
         completed: gloryProgression.currentProgress
       }
@@ -179,7 +182,8 @@ const Summaries = (props) => {
             <div className="title">{value.text}</div>
             <div className="fraction">{value.completed}/{value.total}</div>
             <div className="bar" style={{
-              width: `${ value.completed / value.total * 100 }%`
+              width: `${ value.completed / value.total * 100 }%`,
+              backgroundColor: value.color ? value.color : ``
             }}></div>
           </div>
         </li>
@@ -190,7 +194,10 @@ const Summaries = (props) => {
     modules.push(
       <div className="module" key={key}>
         <h4>{module.text}</h4>
-        <ul className="list">
+        <ul className={cx(
+            "list",
+            key
+          )}>
           {list}
         </ul>
       </div>

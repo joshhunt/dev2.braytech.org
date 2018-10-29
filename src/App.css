@@ -1,8 +1,8 @@
 .view {
   background-color: #888;
   color: #fff;
-  min-height: calc(100vh - 6rem);
-  padding: 3rem;
+  min-height: calc(100vh - 3rem);
+  padding: 1.5rem;
 }
 
 
@@ -13,6 +13,15 @@ h4 {
   letter-spacing: 2px;
   margin: 0 0 2rem;
   color: rgba(255, 255, 255, 0.4);
+}
+
+p {
+  line-height: 1.4;
+  margin: 0 0 0.4rem;
+}
+
+p:last-child {
+  margin: 0;
 }
 
 .image:not(.padding) {
@@ -49,11 +58,14 @@ h4 {
   margin: 0 0 3px;
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.8);  
   font-size: 18px;
   cursor: default;
   transition: color .25s, background-color .25s, box-shadow .25s;
+}
+
+.list:not(.no-interaction) li {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .list li::before {
@@ -65,7 +77,7 @@ h4 {
   width: 100%;
   height: 100%;
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
-  transition: background-color .25s;
+  transition: box-shadow .25s;
 }
 
 .list li::after {
@@ -78,19 +90,20 @@ h4 {
   z-index: 3;
   pointer-events: none;
   box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
+  transition: box-shadow .25s;
 }
 
-.list li:hover {
+.list:not(.no-interaction) li:hover {
   background-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 1);
   z-index: 2;
 }
 
-.list li:hover::before {
+.list:not(.no-interaction) li:hover::before {
   box-shadow: inset 0 0 0 1px #d6d6d6;
 }
 
-.list li:hover::after {
+.list:not(.no-interaction) li:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
 }
 

@@ -1,0 +1,46 @@
+
+
+
+.checklists .list li {
+  position: relative;
+  padding: 0;
+  margin: 0 0 0.8rem;
+  line-height: 1.4;
+  font-size: 14px;
+  align-items: flex-start;
+  height: unset;
+}
+
+.checklists .list li .state {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 5px 1rem 0 3px;
+}
+
+.checklists .list li .state::before {
+  content: " ";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.checklists .list li .state.completed {  
+  background-color: #78ba82;
+}
+
+.checklists .list li .state.completed + .text {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.checklists .list.single-line li {
+  align-items: center;
+}
+
+.checklists .list.single-line li .state {
+  margin: 0 1rem 0 3px;
+}

@@ -3,6 +3,7 @@
 .summaries {
   display: flex;
   flex-flow: row wrap;
+  align-items: flex-start;
   padding: 1.5rem;
 }
 
@@ -16,6 +17,7 @@
 
 .summaries .list li {
   height: unset;
+  cursor: pointer;
 }
 
 .summaries .list li .progress {
@@ -52,4 +54,13 @@
   width: 100%;
   height: 100%;
   background-color: #5aa366;
+  transition: background-color .25s;
+}
+
+.summaries .list li:hover .progress .bar {
+  opacity: 0.8;
+}
+
+.summaries .list.seals li .progress .bar {
+  background-color: #7b3274;
 }

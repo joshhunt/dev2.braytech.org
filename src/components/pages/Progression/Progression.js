@@ -6,6 +6,7 @@ import Globals from '../../Globals';
 import './Progression.css'
 import Characters from './Characters';
 import Summaries from './Summaries';
+import Checklists from './Checklists';
 
 
 class Progression extends React.Component {
@@ -72,6 +73,14 @@ class Progression extends React.Component {
         <div className="view" id="progression">
           <BrowserRouter>
             <Switch>
+              <Route 
+                path="/progression/:membershipType/:membershipId/:characterId/checklists/:list?" 
+                render={ (route) => 
+                  <>
+                    <Characters data={this.state} changeCharacterIdTo={this.changeCharacterIdTo} />
+                    <Checklists data={this.state} list={route.match.params.list} />
+                  </>
+                } />
               <Route 
                 path="/progression/:membershipType/:membershipId/:characterId?" 
                 render={ (route) => 
