@@ -17,6 +17,6 @@
 }
 
 #progression .checklists:not(.list) {
-  flex-basis: calc(100% - 3rem - 474px);
-  padding: 3rem 0 3rem 1.5rem;
+  flex-basis: 100%;
+  padding: 3rem 0;
 }

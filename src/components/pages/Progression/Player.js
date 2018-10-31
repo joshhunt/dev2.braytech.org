@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import cx from 'classnames'
 
 import { classFromType } from '../../destinyUtils'
@@ -13,6 +13,7 @@ import EmblemLoader from '../../EmblemLoader';
 
 
 const Player = (props) => {
+  console.log(props)
 
   let profile = props.data.ProfileResponse.profile.data
   let characters = props.data.ProfileResponse.characters.data;
@@ -78,6 +79,10 @@ const Player = (props) => {
       <div className="characters">
         <ul className="list">{charactersRender}</ul>
       </div>
+      <ul>
+        <li><NavLink to={props.route.match.url} exact>Summary</NavLink></li>
+        <li><NavLink to={`${props.route.match.url}/checklists`} exact>Checklists</NavLink></li>
+      </ul>
     </div>
   )
 }

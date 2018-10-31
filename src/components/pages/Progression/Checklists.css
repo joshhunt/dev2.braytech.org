@@ -6,7 +6,7 @@
 }
 
 .checklists .col {
-  flex-basis: calc(25% - 3rem);
+  flex-basis: calc(20% - 3rem);
   padding: 0 1.5rem;
 }
 

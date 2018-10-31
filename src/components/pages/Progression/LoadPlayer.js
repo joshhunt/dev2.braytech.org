@@ -23,6 +23,14 @@ class LoadPlayer extends React.Component {
   
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) { return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal) });
 
+        if (!this.props.data.match.params.characterId || ProfileResponse.Response.characters.data.filter(character => character.characterId === this.props.data.match.params.characterId).length < 1) {
+          let temp
+          if (this.props.data.match.params.characterId) {
+            temp = this.props.data.match.params.characterId
+          }
+          this.props.data.history.push(`${this.props.data.match.url.replace(this.props.data.match.params.characterId, "")}${ProfileResponse.Response.characters.data[0].characterId}/${temp}`);
+        }
+
         this.props.set(this.props.data.match.params.characterId ? this.props.data.match.params.characterId : ProfileResponse.Response.characters.data[0].characterId, 
           ProfileResponse.Response)
 

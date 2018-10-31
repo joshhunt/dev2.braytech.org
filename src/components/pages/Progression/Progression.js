@@ -44,7 +44,7 @@ class Progression extends React.Component {
               render={ (route) => 
                 <div className="view" id="progression">
                 { console.log(route) }
-                  <Player data={this.state} />
+                  <Player data={this.state} route={route} />
                   <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
                   <Route path={`${route.match.path}/checklists`} exact render={ () => <Checklists data={this.state} route={route} /> } />
                 </div>
