@@ -33,43 +33,47 @@ class Progression extends React.Component {
 
   render() {
 
-    console.log(this.props, this.state)    
-
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route 
-            path="/progression" 
-            exact
-            render={ (route) => 
-              <SearchPlayer />
-            } />
-          <Route 
-            path="/progression/:membershipType/:membershipId" 
-            exact
-            render={ (route) => 
-              <LoadPlayer data={route} set={this.setProfile} />
-            } />
-          <Route 
-            path="/progression/:membershipType/:membershipId/:characterId/checklists" 
-            render={ (route) => 
-              <div className="view" id="progression">
-                <Player data={this.state} />
-                <Checklists data={this.state} />
-              </div>
-            } />
-          <Route 
-            path="/progression/:membershipType/:membershipId/:characterId" 
-            render={ (route) => 
-              <div className="view" id="progression">
-                <Player data={this.state} />
-                <Summaries data={this.state} />
-              </div>
-            } />
-          <Route render={ (route) => <Error /> } />
-        </Switch>
-      </BrowserRouter>
-    )
+    console.log(this.props, this.state)
+    
+    if (this.state.ProfileResponse) {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route 
+              path="/progression/:membershipType/:membershipId/:characterId?" 
+              render={ (route) => 
+                <div className="view" id="progression">
+                { console.log(route) }
+                  <Player data={this.state} />
+                  <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
+                  <Route path={`${route.match.path}/checklists`} exact render={ () => <Checklists data={this.state} route={route} /> } />
+                </div>
+              } />
+            <Route render={ (route) => <Error /> } />
+          </Switch>
+        </BrowserRouter>
+      )
+    }
+    else {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route 
+              path="/progression" 
+              exact
+              render={ (route) => 
+                <SearchPlayer />
+              } />
+            <Route 
+              path="/progression/:membershipType/:membershipId/:characterId?" 
+              render={ (route) => 
+                <LoadPlayer data={route} set={this.setProfile} />
+              } />
+            <Route render={ (route) => <Error /> } />
+          </Switch>
+        </BrowserRouter>
+      )
+    }
   }
 }
 
