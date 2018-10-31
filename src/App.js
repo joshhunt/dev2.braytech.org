@@ -8,7 +8,7 @@ import './App.css';
 
 import Header from './components/pages/Header';
 import Error from './components/pages/Error';
-import Progression from './components/pages/Progression/ProgressionRouter';
+import Progression from './components/pages/Progression/Progression';
 
 
 
@@ -63,8 +63,9 @@ class App extends Component {
       return (
         <BrowserRouter>
           <>
+            <Header />
             <Switch>
-              <Route path="/progression" render={()=> <Progression parentState={ this.state } />} />
+              <Route path="/progression" render={(route)=> <Progression route={ route } />} />
               <Route component={ Error } />
             </Switch>
           </>

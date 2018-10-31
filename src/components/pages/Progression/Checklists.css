@@ -1,5 +1,18 @@
 
+.checklists:not(.list) {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1.5rem;
+}
 
+.checklists .col {
+  flex-basis: calc(25% - 3rem);
+  padding: 0 1.5rem;
+}
+
+.checklists .col .head {
+  margin: 0 0 3rem;
+}
 
 .checklists .list li {
   position: relative;

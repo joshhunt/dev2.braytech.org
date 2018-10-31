@@ -1,0 +1,31 @@
+
+
+
+#player {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 9rem 3rem 3rem;
+  height: 7rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+#player .backgroundImage {
+  background-size: cover;
+  background-position: left top;
+}
+
+#player .characters .list li:not(.active) {
+  display: none;
+}
+
+#player .characters .list li.active::after {
+  box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
+}
+
+#player .characters .list li.active:hover::after {
+  box-shadow: 0 0 0 2px #d6d6d6;
+}

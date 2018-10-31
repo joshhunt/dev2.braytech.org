@@ -22,12 +22,7 @@ class ProgressionRouter extends React.Component {
           <Route 
             path="/progression/:membershipType/:membershipId/:characterId?/:section?" 
             render={ (route) => 
-              <Progression 
-                platform={ route.match.params.platform }
-                membershipType={ route.match.params.membershipType }
-                membershipId={ route.match.params.membershipId }
-                characterId={ route.match.params.characterId }
-                section={ route.match.params.section } />
+              <Progression route={route} />
             } />
           <Route component={ Error } />
         </Switch>

@@ -5,17 +5,27 @@ import cx from 'classnames'
 import { classFromType } from '../../destinyUtils'
 
 import './Characters.css'
+import './Player.css'
 import ObservedImage from '../../ObservedImage';
+import EmblemLoader from '../../EmblemLoader';
 
-const Characters = (props) => {
+
+
+
+const Player = (props) => {
 
   let profile = props.data.ProfileResponse.profile.data
   let characters = props.data.ProfileResponse.characters.data;
   let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
 
+  let activeCharacter
   let charactersRender = [];
 
   characters.forEach(character => {
+
+    if (character.characterId === props.data.activeCharacterId) {
+      activeCharacter = character
+    }
 
     let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap 
     ? true : false;
@@ -63,11 +73,13 @@ const Characters = (props) => {
   });
 
   return (
-    <div className="characters">
-      <h4>Characters</h4>
-      <ul className="list">{charactersRender}</ul>
+    <div id="player">
+      <EmblemLoader hash={activeCharacter.emblemHash} />
+      <div className="characters">
+        <ul className="list">{charactersRender}</ul>
+      </div>
     </div>
   )
 }
 
-export default Characters;
+export default Player;

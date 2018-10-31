@@ -74,7 +74,6 @@ body {
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  width: 100vw;
   cursor: default;
 }
 
@@ -141,4 +140,72 @@ button {
 
 }
 
+
+header {
+  position: fixed;
+  top: 3rem;
+  left: 0;
+  width: calc(100% - 8rem);
+  height: 3rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin: 0 3rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+header .logo a {
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+header ul {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+header ul li {
+  padding: 0 0.4rem;
+  margin: 0 0.4rem;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+header ul li a {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  opacity: 0.2;
+}
+
+header ul li:hover a {
+  opacity: 0.6;
+}
+
+header ul li a.active {
+  opacity: 1;
+}
+
+header ul li a.active::before {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  border-bottom: 2px solid;
+}
 
