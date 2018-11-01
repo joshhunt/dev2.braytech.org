@@ -46,12 +46,12 @@ class Progression extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route 
-              path="/progression/:membershipType/:membershipId/:characterId?/:view?" 
+              path="/progression/:membershipType/:membershipId/:characterId/:view?" 
               render={ (route) => 
                 <div className="view" id="progression">
                   <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
-                  <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
-                  <Route path="/checklists" exact render={ () => <Checklists data={this.state} route={route} /> } />
+                  <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={ () => <Summaries data={this.state} route={route} /> } />
+                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists data={this.state} route={route} /> } />
                 </div>
               } />
             <Route render={ (route) => <Error /> } />

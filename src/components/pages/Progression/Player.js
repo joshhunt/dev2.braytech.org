@@ -51,7 +51,7 @@ class Player extends React.Component {
     }
   }
 
-  getEmblems = (hashes) => { console.log(hashes)
+  getEmblems = (hashes) => {
     fetch(
       `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ hashes.map(obj => { return obj.hash }).join(",") }`,
       {
@@ -89,8 +89,6 @@ class Player extends React.Component {
           emblemsLoaded: response.response.data.items
         });
 
-        console.log(this.state);
-
       })
     .catch(error => {
       console.log(error);
@@ -99,15 +97,13 @@ class Player extends React.Component {
 
   render() {
 
-    let props = this.props
+    let props = this.props;
 
-    console.log(props)
-
-    let profile = props.data.ProfileResponse.profile.data
+    let profile = props.data.ProfileResponse.profile.data;
     let characters = props.data.ProfileResponse.characters.data;
     let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
 
-    let activeCharacter
+    let activeCharacter;
     let charactersRender = [];
     let emblemHashes = [];
 
@@ -168,8 +164,19 @@ class Player extends React.Component {
     });
 
     if (!this.state.emblemsLoaded) {
-      this.getEmblems(emblemHashes)
+      this.getEmblems(emblemHashes);
     }
+
+    const views = [
+      {
+        name: "Summary",
+        slug: ""
+      },
+      {
+        name: "Checklists",
+        slug: "/checklists"
+      }
+    ]
 
     return (
       <div id="player">
@@ -179,8 +186,13 @@ class Player extends React.Component {
         </div>
         <div className="views">
           <ul>
-            <li><NavLink to="/progression/:membershipType/:membershipId/:characterId" exact>Summary</NavLink></li>
-            <li><NavLink to="/progression/:membershipType/:membershipId/:characterId/checklists" exact>Checklists</NavLink></li>
+            { views.map(view => {
+              let route = this.props.route;
+              let to = `/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${route.match.params.characterId}${view.slug}`;
+              return (
+                <li key={view.slug}><NavLink to={to} exact>{view.name}</NavLink></li>
+              )
+            }) }
           </ul>
         </div>
       </div>
