@@ -28,7 +28,7 @@ class LoadPlayer extends React.Component {
           if (this.props.data.match.params.characterId) {
             temp = this.props.data.match.params.characterId
           }
-          this.props.data.history.push(`${this.props.data.match.url.replace(this.props.data.match.params.characterId, "")}${ProfileResponse.Response.characters.data[0].characterId}/${temp}`);
+          this.props.data.history.push(`${this.props.data.match.url.replace(this.props.data.match.params.characterId, "")}${ProfileResponse.Response.characters.data[0].characterId}${temp ? `/${temp}` : ``}`);
         }
 
         this.props.set(this.props.data.match.params.characterId ? this.props.data.match.params.characterId : ProfileResponse.Response.characters.data[0].characterId, 

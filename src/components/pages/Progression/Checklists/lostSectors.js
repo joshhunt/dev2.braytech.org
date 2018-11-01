@@ -49,7 +49,7 @@ const lostSectors = (props) => {
     });
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-name={ place.displayProperties.name }>
+      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ place.displayProperties.name }>
         <div className={cx(
             "state",
             {
@@ -62,6 +62,12 @@ const lostSectors = (props) => {
         </div>
       </li>
     )
+  });
+
+  list.sort(function(a, b) {
+    let textA = a.props['data-sort'].toUpperCase();
+    let textB = b.props['data-sort'].toUpperCase();
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
   });
 
   return (

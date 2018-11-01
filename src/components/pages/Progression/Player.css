@@ -3,6 +3,7 @@
 
 #player {
   position: absolute;
+  z-index: 20;
   top: 0;
   left: 0;
   width: 100%;
@@ -18,14 +19,61 @@
   background-position: left top;
 }
 
+#player .characters {
+  height: 96px;
+}
+
 #player .characters .list li:not(.active) {
   display: none;
 }
 
-#player .characters .list li.active::after {
+#player .characters.expanded .list li:not(.active) {
+  display: inherit;
+}
+
+#player .characters .list li {
   box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
+}
+
+#player .characters .list li:last-child {
+  margin: 0;
+}
+
+#player .characters .list li.active::after {
+  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
 }
 
 #player .characters .list li.active:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+#player .views {
+  margin: 0 0 0 2rem;
+}
+
+#player .views ul {
+  display: flex;
+}
+
+#player .views ul li {
+  margin: 0 0 0 1rem;
+}
+
+#player .views ul li a {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 15px;
+}
+
+#player .views ul li a.active::before {
+  content: " ";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  border-bottom: 2px solid;
 }

@@ -25,7 +25,7 @@ const sleeperNodes = (props) => {
     });
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-name={ item.displayProperties.description.toString().replace("CB.NAV/RUN.()","").match(/.*?(?=\.)/)[0] }>
+      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ item.displayProperties.description.toString().replace("CB.NAV/RUN.()","").match(/.*?(?=\.)/)[0] }>
         <div className={cx(
             "state",
             {
@@ -37,6 +37,12 @@ const sleeperNodes = (props) => {
         </div>
       </li>
     )
+  });
+
+  list.sort(function(a, b) {
+    let textA = a.props['data-sort'].toUpperCase();
+    let textB = b.props['data-sort'].toUpperCase();
+    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
   });
 
   return (

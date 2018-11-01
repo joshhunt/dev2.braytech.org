@@ -20,7 +20,15 @@ class Progression extends React.Component {
 
     }
 
+    this.changeCharacterIdTo = this.changeCharacterIdTo.bind(this)
     this.setProfile = this.setProfile.bind(this)
+  }
+
+  changeCharacterIdTo = (characterId) => {
+    console.log(characterId)
+    this.setState({
+      activeCharacterId: characterId
+    })
   }
 
   setProfile = (x, y) => {
@@ -44,7 +52,7 @@ class Progression extends React.Component {
               render={ (route) => 
                 <div className="view" id="progression">
                 { console.log(route) }
-                  <Player data={this.state} route={route} />
+                  <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
                   <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
                   <Route path={`${route.match.path}/checklists`} exact render={ () => <Checklists data={this.state} route={route} /> } />
                 </div>

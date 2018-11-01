@@ -35,12 +35,12 @@ class App extends Component {
       return response.json();
     })
       .then(manifest => {
-  
+
+        localStorage.setItem("manifest", JSON.stringify(manifest));
+        
         this.setState({
           init: true
         });
-
-        localStorage.setItem("manifest", JSON.stringify(manifest));
 
       })
     .catch(error => {
