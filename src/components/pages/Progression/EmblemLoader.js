@@ -1,7 +1,7 @@
 import React from 'react';
-import Globals from './Globals';
+import Globals from '../../Globals';
 import cx from 'classnames'
-import ObservedImage from './ObservedImage';
+import ObservedImage from '../../ObservedImage';
 
 
 
@@ -15,12 +15,10 @@ class EmblemLoader extends React.Component {
     }
   }
 
-  componentDidMount () {
-
-    let emblemHash = this.props.hash
+  getEmblem = (hash) => {
     
     fetch(
-      `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ emblemHash }`,
+      `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ hash }`,
       {
         headers: {
           "X-API-Key": Globals.key.braytech,
@@ -42,10 +40,19 @@ class EmblemLoader extends React.Component {
     .catch(error => {
       console.log(error);
     })
+  }
 
+  componentDidMount () {
+    this.getEmblem(this.props.hash)
   }
 
   render() {
+
+    console.log(this.props)
+
+    if (this.state.Item && this.state.Item.hash !== this.props.hash) {
+      this.getEmblem(this.props.hash)
+    }
 
     if (this.state.Item) {
       return (

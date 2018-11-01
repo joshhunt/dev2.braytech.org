@@ -7,8 +7,8 @@ import './Progression.css'
 import SearchPlayer from './SearchPlayer';
 import LoadPlayer from './LoadPlayer';
 import Player from './Player';
-import Summaries from './Summaries';
-import Checklists from './Checklists';
+import Summaries from './Summaries/Summaries';
+import Checklists from './Checklists/Checklists';
 
 
 class Progression extends React.Component {
@@ -24,8 +24,9 @@ class Progression extends React.Component {
     this.setProfile = this.setProfile.bind(this)
   }
 
-  changeCharacterIdTo = (characterId) => {
-    console.log(characterId)
+  changeCharacterIdTo = (characterId, props) => {
+    console.log(characterId, props)
+    props.route.history.push(`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${characterId}${props.route.match.params.view ? `/${props.route.match.params.view}`:``}`);
     this.setState({
       activeCharacterId: characterId
     })
@@ -48,10 +49,10 @@ class Progression extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route 
-              path="/progression/:membershipType/:membershipId/:characterId?" 
+              path="/progression/:membershipType/:membershipId/:characterId?/:view?" 
               render={ (route) => 
                 <div className="view" id="progression">
-                { console.log(route) }
+                  { console.log(route) }
                   <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
                   <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
                   <Route path={`${route.match.path}/checklists`} exact render={ () => <Checklists data={this.state} route={route} /> } />

@@ -1,10 +1,10 @@
 import React from 'react';
 import cx from 'classnames'
 
-import regionChests from './Checklists/regionChests'
-import lostSectors from './Checklists/lostSectors'
-import adventures from './Checklists/adventures'
-import sleeperNodes from './Checklists/sleeperNodes'
+import regionChests from './regionChests'
+import lostSectors from './lostSectors'
+import adventures from './adventures'
+import sleeperNodes from './sleeperNodes'
 import './Checklists.css'
 
 class Checklists extends React.Component {

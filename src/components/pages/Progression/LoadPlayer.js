@@ -20,19 +20,26 @@ class LoadPlayer extends React.Component {
       return response.json();
     })
       .then(ProfileResponse => {
+
+        console.log(this)
   
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) { return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal) });
 
-        if (!this.props.data.match.params.characterId || ProfileResponse.Response.characters.data.filter(character => character.characterId === this.props.data.match.params.characterId).length < 1) {
-          let temp
-          if (this.props.data.match.params.characterId) {
-            temp = this.props.data.match.params.characterId
+        let route = this.props.data
+        let characterId = ProfileResponse.Response.characters.data.filter(character => character.characterId === route.match.params.characterId).length === 1 ? route.match.params.characterId : ProfileResponse.Response.characters.data[0].characterId
+
+        if (!route.match.params.characterId || ProfileResponse.Response.characters.data.filter(character => character.characterId === route.match.params.characterId).length < 1) {
+          let view
+          if (route.match.params.characterId) {
+            view = route.match.params.characterId
           }
-          this.props.data.history.push(`${this.props.data.match.url.replace(this.props.data.match.params.characterId, "")}${ProfileResponse.Response.characters.data[0].characterId}${temp ? `/${temp}` : ``}`);
+          route.history.push(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}`:``}`);
+
         }
 
-        this.props.set(this.props.data.match.params.characterId ? this.props.data.match.params.characterId : ProfileResponse.Response.characters.data[0].characterId, 
-          ProfileResponse.Response)
+        console.log(characterId)
+
+        this.props.set(characterId, ProfileResponse.Response)
 
       })
     .catch(error => {

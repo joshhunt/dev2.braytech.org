@@ -7,7 +7,7 @@ import { classFromType } from '../../destinyUtils'
 import './Characters.css'
 import './Player.css'
 import ObservedImage from '../../ObservedImage';
-import EmblemLoader from '../../EmblemLoader';
+import EmblemLoader from './EmblemLoader';
 
 
 
@@ -15,7 +15,6 @@ import EmblemLoader from '../../EmblemLoader';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-
 
     this.state = {
       expandCharacters: false
@@ -32,7 +31,7 @@ class Player extends React.Component {
       this.setState({
         expandCharacters: false
       })
-      this.props.changeCharacterIdTo(e.currentTarget.dataset.id)
+      this.props.changeCharacterIdTo(e.currentTarget.dataset.id, this.props)
     }
     else {
       this.charactersUI.classList.toggle("expanded")
