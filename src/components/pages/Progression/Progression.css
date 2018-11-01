@@ -7,8 +7,8 @@
 #progression {
   display: flex;
   flex-flow: row wrap;
-  padding: 20rem 1.5rem 1.5rem;
-  min-height: calc(100vh - 21.5rem);
+  padding: 19rem 1.5rem 1.5rem;
+  min-height: calc(100vh - 20.5rem);
 }
 
 #progression .summaries {

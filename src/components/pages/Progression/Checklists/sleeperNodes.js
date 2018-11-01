@@ -3,11 +3,11 @@ import cx from 'classnames'
 
 const sleeperNodes = (props) => {
 
-  let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
-  let profileProgressions = props.data.ProfileResponse.profileProgression.data;
-  let characterId = props.data.activeCharacterId;
+  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
+  let profileProgressions = props.state.ProfileResponse.profileProgression.data;
+  let characterId = props.state.activeCharacterId;
 
-  let manifest = JSON.parse(localStorage.getItem("manifest")).response.data
+  let manifest = props.manifest.response.data
 
   let list = []
 

@@ -20,23 +20,23 @@ class Progression extends React.Component {
 
     }
 
-    this.changeCharacterIdTo = this.changeCharacterIdTo.bind(this)
-    this.setProfile = this.setProfile.bind(this)
+    this.changeCharacterIdTo = this.changeCharacterIdTo.bind(this);
+    this.setProfile = this.setProfile.bind(this);
   }
 
   changeCharacterIdTo = (characterId, props) => {
-    console.log(characterId, props)
+    console.log(characterId, props);
     props.route.history.push(`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${characterId}${props.route.match.params.view ? `/${props.route.match.params.view}`:``}`);
     this.setState({
       activeCharacterId: characterId
-    })
+    });
   }
 
   setProfile = (x, y) => {
     this.setState({
       activeCharacterId: x,
       ProfileResponse: y
-    })
+    });
   }
 
   render() {
@@ -50,8 +50,8 @@ class Progression extends React.Component {
               render={ (route) => 
                 <div className="view" id="progression">
                   <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
-                  <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={ () => <Summaries data={this.state} route={route} /> } />
-                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists data={this.state} route={route} /> } />
+                  <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={ () => <Summaries state={this.state} manifest={this.props.manifest} route={route} /> } />
+                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists state={this.state} manifest={this.props.manifest} route={route} /> } />
                 </div>
               } />
             <Route render={ (route) => <Error /> } />

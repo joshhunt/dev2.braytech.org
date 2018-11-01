@@ -5,12 +5,12 @@ import './Summaries.css'
 
 const Summaries = (props) => {
 
-  let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
-  let profileProgressions = props.data.ProfileResponse.profileProgression.data;
-  let profileRecords = props.data.ProfileResponse.profileRecords.data.records;
-  let characterId = props.data.activeCharacterId;
+  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
+  let profileProgressions = props.state.ProfileResponse.profileProgression.data;
+  let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
+  let characterId = props.state.activeCharacterId;
 
-  let manifest = JSON.parse(localStorage.getItem("manifest")).response.data
+  let manifest = props.manifest.response.data
   
   /*
     checklists  

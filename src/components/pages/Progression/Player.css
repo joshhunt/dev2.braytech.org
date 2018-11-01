@@ -16,7 +16,7 @@
 
 #player .backgrounds .image {
   background-size: cover;
-  background-position: left top;
+  filter: brightness(0.9);
   opacity: 0;
 }
 

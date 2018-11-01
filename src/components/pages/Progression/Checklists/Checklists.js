@@ -5,6 +5,7 @@ import regionChests from './regionChests'
 import lostSectors from './lostSectors'
 import adventures from './adventures'
 import sleeperNodes from './sleeperNodes'
+import ghostScans from './ghostScans'
 import './Checklists.css'
 
 class Checklists extends React.Component {
@@ -32,6 +33,7 @@ class Checklists extends React.Component {
         {lostSectors(this.props)}
         {adventures(this.props)}
         {sleeperNodes(this.props)}
+        {ghostScans(this.props)}
       </div>
     )
   }

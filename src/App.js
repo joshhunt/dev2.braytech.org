@@ -17,7 +17,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      init: false
+      manifest: false
     }
   }
   
@@ -35,11 +35,9 @@ class App extends Component {
       return response.json();
     })
       .then(manifest => {
-
-        localStorage.setItem("manifest", JSON.stringify(manifest));
         
         this.setState({
-          init: true
+          manifest
         });
 
       })
@@ -51,7 +49,7 @@ class App extends Component {
 
   render() {
 
-    if (!this.state.init) {
+    if (!this.state.manifest) {
       return (
         <div className="view" id="loading">
           <p>loading app</p>
@@ -64,7 +62,7 @@ class App extends Component {
           <>
             <Header />
             <Switch>
-              <Route path="/progression" render={(route)=> <Progression route={ route } />} />
+              <Route path="/progression" render={(route)=> <Progression route={ route } manifest={this.state.manifest} />} />
               <Route component={ Error } />
             </Switch>
           </>

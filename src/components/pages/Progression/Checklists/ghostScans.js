@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames'
 
-const lostSectors = (props) => {
+const ghostScans = (props) => {
 
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
@@ -11,15 +11,15 @@ const lostSectors = (props) => {
 
   let list = []
 
-  Object.entries(characterProgressions[characterId].checklists[3142056444]).forEach(([key, value]) => {
+  Object.entries(profileProgressions.checklists[2360931290]).forEach(([key, value]) => {
     let hash = parseInt(key, 10);
 
     let completed = value;
 
     let item = false;
-    Object.entries(manifest.DestinyChecklistDefinition[3142056444].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[3142056444].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[3142056444].entries[pear];
+    Object.entries(manifest.DestinyChecklistDefinition[2360931290].entries).forEach(([pear, peach]) => {
+      if (manifest.DestinyChecklistDefinition[2360931290].entries[pear].checklistHash === hash) {
+        item = manifest.DestinyChecklistDefinition[2360931290].entries[pear];
         return;
       }
     });
@@ -40,16 +40,16 @@ const lostSectors = (props) => {
       }
     });
 
-    let lostsector = false;
+    let scan = false;
     Object.keys(destination.bubbles).forEach(subKey => {
       if (destination.bubbles[subKey].hash === item.bubbleHash) {
-        lostsector = destination.bubbles[subKey];
+        scan = destination.bubbles[subKey];
         return;
       }
     });
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ place.displayProperties.name }>
+      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ scan ? scan.displayProperties.name : `???` }>
         <div className={cx(
             "state",
             {
@@ -57,7 +57,7 @@ const lostSectors = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ lostsector ? lostsector.displayProperties.name : `???` }</p>
+          <p>{ scan ? scan.displayProperties.name : `???` }</p>
           <p>{ place.displayProperties.name }</p>
         </div>
       </li>
@@ -73,12 +73,12 @@ const lostSectors = (props) => {
   return (
     <div className="col">
       <div className="head">
-        <h4>Lost Sectors</h4>
+        <h4>Ghost scans</h4>
         <div className="progress">
-          <div className="title">Lost Sectors discovered</div>
-          <div className="fraction">{Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[3142056444]).length}</div>
+          <div className="title">Ghost scans performed</div>
+          <div className="fraction">{Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2360931290]).length}</div>
           <div className="bar" style={{
-            width: `${ Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[3142056444]).length * 100 }%`
+            width: `${ Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2360931290]).length * 100 }%`
           }}></div>
         </div>
       </div>
@@ -90,4 +90,4 @@ const lostSectors = (props) => {
 
 }
 
-export default lostSectors;
+export default ghostScans;
