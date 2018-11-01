@@ -113,8 +113,8 @@ class Player extends React.Component {
         </div>
         <div className="views">
           <ul>
-            <li><NavLink to={props.route.match.url} exact>Summary</NavLink></li>
-            <li><NavLink to={`${props.route.match.url}/checklists`} exact>Checklists</NavLink></li>
+            <li><NavLink to="/progression/:membershipType/:membershipId/:characterId" exact>Summary</NavLink></li>
+            <li><NavLink to="/progression/:membershipType/:membershipId/:characterId/checklists" exact>Checklists</NavLink></li>
           </ul>
         </div>
       </div>

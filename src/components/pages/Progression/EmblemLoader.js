@@ -16,6 +16,10 @@ class EmblemLoader extends React.Component {
   }
 
   getEmblem = (hash) => {
+
+    this.setState({
+      Item: false
+    })
     
     fetch(
       `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ hash }`,
