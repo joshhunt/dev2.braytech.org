@@ -37,12 +37,9 @@ class Progression extends React.Component {
       activeCharacterId: x,
       ProfileResponse: y
     })
-    console.log(this.state)
   }
 
   render() {
-
-    console.log(this.props, this.state)
     
     if (this.state.ProfileResponse) {
       return (
@@ -52,9 +49,8 @@ class Progression extends React.Component {
               path="/progression/:membershipType/:membershipId/:characterId?/:view?" 
               render={ (route) => 
                 <div className="view" id="progression">
-                  { console.log(route) }
                   <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
-                  <Route path="/" exact render={ () => <Summaries data={this.state} route={route} /> } />
+                  <Route path={route.match.path} exact render={ () => <Summaries data={this.state} route={route} /> } />
                   <Route path="/checklists" exact render={ () => <Checklists data={this.state} route={route} /> } />
                 </div>
               } />

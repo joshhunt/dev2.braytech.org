@@ -82,6 +82,7 @@ class ObservedImage extends React.Component {
 
     return (
       <div
+        {...this.props} 
         ref={el => this.element = el}
         className={cx(
           classNames,

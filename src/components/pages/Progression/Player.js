@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 import cx from 'classnames'
 
 import { classFromType } from '../../destinyUtils'
+import Globals from '../../Globals';
 
 import './Characters.css'
 import './Player.css'
 import ObservedImage from '../../ObservedImage';
-import EmblemLoader from './EmblemLoader';
+// import EmblemLoader from './EmblemLoader';
 
 
 
@@ -17,28 +18,83 @@ class Player extends React.Component {
     super(props);
 
     this.state = {
-      expandCharacters: false
+      expandCharacters: false,
+      emblemsLoaded: false
     }
 
-    this.expandCharacters = this.expandCharacters.bind(this)
+    this.expandCharacters = this.expandCharacters.bind(this);
+
+    this.emblemBackgrounds = null;
 
   }
 
   expandCharacters = (e) => {
 
     if (this.state.expandCharacters) {
-      this.charactersUI.classList.remove("expanded")
+      this.charactersUI.classList.remove("expanded");
+      this.backgroundsUI.childNodes.forEach(element => {
+        element.classList.remove("active");
+        if (element.dataset.id === e.currentTarget.dataset.id) {
+          element.classList.add("active");
+        }
+      });
       this.setState({
         expandCharacters: false
-      })
-      this.props.changeCharacterIdTo(e.currentTarget.dataset.id, this.props)
+      });
+      this.props.changeCharacterIdTo(e.currentTarget.dataset.id, this.props);
     }
     else {
-      this.charactersUI.classList.toggle("expanded")
+      this.charactersUI.classList.toggle("expanded");
       this.setState({
         expandCharacters: true
-      })
+      });
     }
+  }
+
+  getEmblems = (hashes) => { console.log(hashes)
+    fetch(
+      `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ hashes.map(obj => { return obj.hash }).join(",") }`,
+      {
+        headers: {
+          "X-API-Key": Globals.key.braytech,
+        }
+      }
+    )
+    .then(response => {
+      return response.json();
+    })
+      .then(response => {
+
+        let emblems = [];
+        response.response.data.items.forEach(item => {
+
+          let characterId = hashes.filter(obj => obj.hash === item.hash)[0].character;
+
+          emblems.push(
+            <ObservedImage key={characterId} data-id={characterId} className={cx(
+                  "image",
+                  "emblem",
+                  {
+                    "missing": item.redacted,
+                    "active": this.props.data.activeCharacterId === characterId ? true : false
+                  }
+                )}
+              src={ `https://www.bungie.net${ item.secondarySpecial ? item.secondarySpecial : `/img/misc/missing_icon_d2.png` }` } />
+          )
+        });
+
+        this.emblemBackgrounds = emblems;
+
+        this.setState({
+          emblemsLoaded: response.response.data.items
+        });
+
+        console.log(this.state);
+
+      })
+    .catch(error => {
+      console.log(error);
+    })
   }
 
   render() {
@@ -53,6 +109,7 @@ class Player extends React.Component {
 
     let activeCharacter
     let charactersRender = [];
+    let emblemHashes = [];
 
     characters.forEach(character => {
 
@@ -62,6 +119,11 @@ class Player extends React.Component {
 
       let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap 
       ? true : false;
+
+      emblemHashes.push({
+        character: character.characterId,
+        hash: character.emblemHash
+      })
 
       let progress = capped ? 
       characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt 
@@ -105,9 +167,13 @@ class Player extends React.Component {
       )
     });
 
+    if (!this.state.emblemsLoaded) {
+      this.getEmblems(emblemHashes)
+    }
+
     return (
       <div id="player">
-        <EmblemLoader hash={activeCharacter.emblemHash} />
+        <div className="backgrounds" ref={(backgrounds)=>{this.backgroundsUI = backgrounds}}>{this.emblemBackgrounds}</div>
         <div className="characters" ref={(characters)=>{this.charactersUI = characters}}>
           <ul className="list">{charactersRender}</ul>
         </div>

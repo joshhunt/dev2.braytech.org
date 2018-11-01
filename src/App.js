@@ -59,7 +59,6 @@ class App extends Component {
       );
     }
     else {
-      console.log(this.state.manifest);
       return (
         <BrowserRouter>
           <>

@@ -20,8 +20,6 @@ class LoadPlayer extends React.Component {
       return response.json();
     })
       .then(ProfileResponse => {
-
-        console.log(this)
   
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) { return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal) });
 
@@ -36,8 +34,6 @@ class LoadPlayer extends React.Component {
           route.history.push(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}`:``}`);
 
         }
-
-        console.log(characterId)
 
         this.props.set(characterId, ProfileResponse.Response)
 

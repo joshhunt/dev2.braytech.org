@@ -14,9 +14,14 @@
   align-items: center;
 }
 
-#player .backgroundImage {
+#player .backgrounds .image {
   background-size: cover;
   background-position: left top;
+  opacity: 0;
+}
+
+#player .backgrounds .image.active {
+  opacity: 1;
 }
 
 #player .characters {
