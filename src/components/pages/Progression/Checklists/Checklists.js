@@ -47,7 +47,7 @@ class Checklists extends React.Component {
 
     console.log(this.props)
 
-    let itemsPerPage = 4;
+    let itemsPerPage = 5;
     if (this.props.viewport.width < 1600) {
       itemsPerPage = 4;
     }
@@ -102,7 +102,10 @@ class Checklists extends React.Component {
                 // if (index < itemsPerPage) {
                 //   active = true;
                 // }
-                if (index < (this.state.skip + 1) * itemsPerPage && index >= this.state.skip) {
+                // if (index < (this.state.skip + 1) * itemsPerPage && index >= this.state.skip) {
+                //   active = true;
+                // }
+                if (index >= this.state.skip && index < (parseInt(this.state.skip, 10) + parseInt(itemsPerPage, 10))) {
                   active = true;
                 }
 
@@ -125,7 +128,7 @@ class Checklists extends React.Component {
             "checklists",
             "col-" + itemsPerPage
           )}>
-          { lists.slice(this.state.skip, lists.length).map(list => {
+          { lists.slice(this.state.skip, (parseInt(this.state.skip, 10) + parseInt(itemsPerPage, 10))).map(list => {
               return (
                 <div className="col" key={list.name}>{list.list}</div>
               )
