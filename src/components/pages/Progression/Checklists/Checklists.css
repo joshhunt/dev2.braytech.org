@@ -109,3 +109,17 @@
   height: calc(100% - 2px);
   border-bottom: 2px solid;
 }
+
+
+
+@media screen and (max-width: 1200px) {
+
+.checklistSelectors {
+  padding: 0 1.5rem;
+}
+
+.checklistSelectors ul li {
+  margin: 0 1rem 1rem 0;
+}
+
+}

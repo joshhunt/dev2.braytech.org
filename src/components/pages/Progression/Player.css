@@ -26,6 +26,7 @@
 
 #player .characters {
   height: 96px;
+  z-index: 10;
 }
 
 #player .characters .list li:not(.active) {
@@ -105,4 +106,81 @@
   width: 100%;
   height: calc(100% - 2px);
   border-bottom: 2px solid;
+}
+
+@media screen and (max-width: 1200px) {
+
+#player {
+  position: relative;
+  height: initial;
+}
+
+#player .stats {
+  flex-basis: 100%;
+  margin: 3rem 0 0;
+}
+
+#player .stats > div {
+  margin: 0 3rem 0 0;
+}
+
+#player .views {
+  margin: 1rem 0 0 0;
+}
+
+
+}
+
+@media screen and (max-width: 500px) {
+
+#player .characters {
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(96 / 474 * 100%);
+}
+
+#player .characters .image.emblem.missing {
+  width: calc(96 / 474 * 100% - 37px);
+  height: calc(100% - 35px);
+  top: 14px;
+  left: 14px;
+}
+
+#player .characters .displayName {
+  left: 20%;
+  top: 12%;
+  font-size: 16px;
+}
+
+#player .characters .class {
+  left: 20%;
+  top: 52%;
+  font-size: 11px;
+}
+
+#player .characters .light {
+  top: 10%;
+  right: 2%;
+  font-size: 24px;
+}
+
+#player .characters .light::before {
+  font-size: 11px;
+  left: -12px;
+}
+
+#player .characters .level {
+  top: 52%;
+  right: 2%;
+  font-size: 13px;
+}
+
+#player .characters .progress {
+  height: 7px;
+}
+
+#player .stats > div {
+  margin: 0 3rem 1rem 0;
+}
+
 }

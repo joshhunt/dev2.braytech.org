@@ -20,3 +20,16 @@
   flex-basis: 100%;
   padding: 3rem 0;
 }
+
+
+@media screen and (max-width: 1200px) {
+
+#progression {
+  padding: 0;
+}
+
+#progression .checklists:not(.list) {
+  padding: 3rem 1.5rem;
+}
+
+}
