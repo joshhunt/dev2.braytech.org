@@ -13,7 +13,7 @@ class Checklists extends React.Component {
     super(props);
 
     this.state = {
-      skip: 0
+      page: 0
     }
 
     this.changeSkip = this.changeSkip.bind(this);
@@ -30,15 +30,17 @@ class Checklists extends React.Component {
       caydes journals
   */
 
+  itemsPerPage = 5;
+
   changeSkip = (e) => {
 
     e.preventDefault();
 
     let index = e.currentTarget.dataset.index;
-    console.log(index);
+    console.log(index, Math.floor(index/this.itemsPerPage));
 
     this.setState({
-      skip: index
+      page: Math.floor(index/this.itemsPerPage)
     })
 
   }
@@ -47,18 +49,17 @@ class Checklists extends React.Component {
 
     console.log(this.props)
 
-    let itemsPerPage = 5;
     if (this.props.viewport.width < 1600) {
-      itemsPerPage = 4;
+      this.itemsPerPage = 4;
     }
     if (this.props.viewport.width < 1280) {
-      itemsPerPage = 3;
+      this.itemsPerPage = 3;
     }
     if (this.props.viewport.width < 900) {
-      itemsPerPage = 2;
+      this.itemsPerPage = 2;
     }
     if (this.props.viewport.width < 600) {
-      itemsPerPage = 1;
+      this.itemsPerPage = 1;
     }
 
     const lists = [
@@ -84,6 +85,9 @@ class Checklists extends React.Component {
       }
     ];
 
+    let sliceStart = parseInt(this.state.page, 10) * this.itemsPerPage;
+    let sliceEnd = sliceStart + this.itemsPerPage;
+
     return (
       <>
         <div className="checklistSelectors">
@@ -105,7 +109,10 @@ class Checklists extends React.Component {
                 // if (index < (this.state.skip + 1) * itemsPerPage && index >= this.state.skip) {
                 //   active = true;
                 // }
-                if (index >= this.state.skip && index < (parseInt(this.state.skip, 10) + parseInt(itemsPerPage, 10))) {
+                // if (index >= this.state.skip && index < (parseInt(this.state.skip, 10) + parseInt(this.itemsPerPage, 10))) {
+                //   active = true;
+                // }
+                if (index >= sliceStart && index < sliceEnd) {
                   active = true;
                 }
 
@@ -126,9 +133,9 @@ class Checklists extends React.Component {
         </div>
         <div className={cx(
             "checklists",
-            "col-" + itemsPerPage
+            "col-" + this.itemsPerPage
           )}>
-          { lists.slice(this.state.skip, (parseInt(this.state.skip, 10) + parseInt(itemsPerPage, 10))).map(list => {
+          { lists.slice(sliceStart, sliceEnd).map(list => {
               return (
                 <div className="col" key={list.name}>{list.list}</div>
               )
