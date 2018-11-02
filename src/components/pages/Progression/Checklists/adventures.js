@@ -71,7 +71,7 @@ const adventures = (props) => {
   });
 
   return (
-    <div className="col">
+    <>
       <div className="head">
         <h4>Adventures</h4>
         <div className="progress">
@@ -85,7 +85,7 @@ const adventures = (props) => {
       <ul className="list no-interaction">
         {list}
       </ul>
-    </div>
+    </>
   )
 
 }

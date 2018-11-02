@@ -46,7 +46,7 @@ const sleeperNodes = (props) => {
   });
 
   return (
-    <div className="col">
+    <>
       <div className="head">
         <h4>Sleeper nodes</h4>
         <div className="progress">
@@ -60,7 +60,7 @@ const sleeperNodes = (props) => {
       <ul className="list no-interaction">
         {list}
       </ul>
-    </div>
+    </>
   )
 
 }

@@ -10,6 +10,22 @@
   padding: 0 1.5rem;
 }
 
+.checklists.col-4 .col {
+  flex-basis: calc(25% - 3rem);
+}
+
+.checklists.col-3 .col {
+  flex-basis: calc(100% / 3 - 3rem);
+}
+
+.checklists.col-2 .col {
+  flex-basis: calc(50% - 3rem);
+}
+
+.checklists.col-1 .col {
+  flex-basis: calc(100% - 3rem);
+}
+
 .checklists .col .head {
   margin: 0 0 3rem;
 }
@@ -56,4 +72,40 @@
 
 .checklists .list.single-line li .state {
   margin: 0 1rem 0 3px;
+}
+
+
+
+
+
+
+
+
+.checklistSelectors ul {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 3rem 1.5rem 0;
+}
+
+.checklistSelectors ul li {
+  margin: 0 1rem 0 0;
+}
+
+.checklistSelectors ul li a {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 15px;
+}
+
+.checklistSelectors ul li a.active::before {
+  content: " ";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  border-bottom: 2px solid;
 }

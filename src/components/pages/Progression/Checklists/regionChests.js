@@ -71,7 +71,7 @@ const regionChests = (props) => {
   });
 
   return (
-    <div className="col">
+    <>
       <div className="head">
         <h4>Region chests</h4>
         <div className="progress">
@@ -85,7 +85,7 @@ const regionChests = (props) => {
       <ul className="list no-interaction">
         {list}
       </ul>
-    </div>
+    </>
   )
 
 }

@@ -51,7 +51,7 @@ class Progression extends React.Component {
                 <div className="view" id="progression">
                   <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} />
                   <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={ () => <Summaries state={this.state} manifest={this.props.manifest} route={route} /> } />
-                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists state={this.state} manifest={this.props.manifest} route={route} /> } />
+                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} /> } />
                 </div>
               } />
             <Route render={ (route) => <Error /> } />

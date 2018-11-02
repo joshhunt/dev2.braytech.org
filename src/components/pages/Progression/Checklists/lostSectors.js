@@ -71,7 +71,7 @@ const lostSectors = (props) => {
   });
 
   return (
-    <div className="col">
+    <>
       <div className="head">
         <h4>Lost Sectors</h4>
         <div className="progress">
@@ -85,7 +85,7 @@ const lostSectors = (props) => {
       <ul className="list no-interaction">
         {list}
       </ul>
-    </div>
+    </>
   )
 
 }

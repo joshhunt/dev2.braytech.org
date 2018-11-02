@@ -102,6 +102,8 @@ class Player extends React.Component {
     let profile = props.data.ProfileResponse.profile.data;
     let characters = props.data.ProfileResponse.characters.data;
     let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
+    let profileProgressions = props.data.ProfileResponse.profileProgression.data;
+    let profileRecords = props.data.ProfileResponse.profileRecords.data;
 
     let activeCharacter;
     let charactersRender = [];
@@ -184,7 +186,18 @@ class Player extends React.Component {
         <div className="characters" ref={(characters)=>{this.charactersUI = characters}}>
           <ul className="list">{charactersRender}</ul>
         </div>
+        <div className="stats">
+          <div>
+            <h4>Total score</h4>
+            <div>{profileRecords.score}</div>
+          </div>
+          <div>
+            <h4>Total days playtime</h4>
+            <div>{Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)}</div>
+          </div>
+        </div>
         <div className="views">
+          <h4>Views</h4>
           <ul>
             { views.map(view => {
               let route = this.props.route;

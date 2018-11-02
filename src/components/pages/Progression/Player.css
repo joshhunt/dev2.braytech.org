@@ -7,11 +7,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 9rem 3rem 3rem;
-  height: 7rem;
+  padding: 10rem 3rem 3rem;
+  height: 6rem;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
+  align-items: flex-start;
 }
 
 #player .backgrounds .image {
@@ -52,8 +52,32 @@
   box-shadow: 0 0 0 2px #d6d6d6;
 }
 
+#player .stats {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#player .stats > div {
+  margin: 0 0 0 3rem;
+}
+
+#player .stats div h4 {
+  margin: 0 0 1rem;
+}
+
+#player .stats div div {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
 #player .views {
-  margin: 0 0 0 2rem;
+  margin: 0 0 0 3rem;
+  position: relative;
+}
+
+#player .views h4 {
+  margin: 0 0 1rem;
 }
 
 #player .views ul {
@@ -61,7 +85,7 @@
 }
 
 #player .views ul li {
-  margin: 0 0 0 1rem;
+  margin: 0 1rem 0 0;
 }
 
 #player .views ul li a {
