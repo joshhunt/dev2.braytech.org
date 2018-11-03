@@ -1,0 +1,26 @@
+
+
+.almost {
+  font-size: 14px;
+}
+
+.almost > li {
+  margin: 0 0 1.2rem;
+}
+
+.almost li p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.almost li p:first-child {
+  color: rgba(255, 255, 255, 1);
+}
+
+.almost li .list {
+  margin: 0.8rem 0 0;
+}
+
+.almost li p span {
+  opacity: 0.2;
+  font-family: monospace;
+}

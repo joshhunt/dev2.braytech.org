@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import cx from 'classnames'
+import cx from 'classnames';
 
 import { classFromType } from '../../destinyUtils'
 import Globals from '../../Globals';
 
-import './Characters.css'
-import './Player.css'
+import './Characters.css';
+import './Player.css';
 import ObservedImage from '../../ObservedImage';
 // import EmblemLoader from './EmblemLoader';
 
@@ -23,6 +23,7 @@ class Player extends React.Component {
     }
 
     this.expandCharacters = this.expandCharacters.bind(this);
+    this.profileChange = this.profileChange.bind(this);
 
     this.emblemBackgrounds = null;
 
@@ -48,6 +49,14 @@ class Player extends React.Component {
       this.setState({
         expandCharacters: true
       });
+    }
+  }
+
+  profileChange = () => {
+    if (this.state.expandCharacters) {
+      this.charactersUI.classList.remove("expanded");
+      this.props.route.history.push(`/progression/`);
+      this.props.setProfile(false, false);
     }
   }
 
@@ -165,6 +174,15 @@ class Player extends React.Component {
       )
     });
 
+    charactersRender.push(
+      <li key="profileChange" className="change"
+        onClick={this.profileChange}>
+        <div className="text">
+          <h4>Change profile</h4>
+        </div>
+      </li>
+    )
+
     if (!this.state.emblemsLoaded) {
       this.getEmblems(emblemHashes);
     }
@@ -177,6 +195,21 @@ class Player extends React.Component {
       {
         name: "Checklists",
         slug: "/checklists"
+      },
+      {
+        name: "Ranks",
+        slug: "/ranks",
+        dev: true
+      },
+      {
+        name: "Triumphs",
+        slug: "/triumphs",
+        dev: true
+      },
+      {
+        name: "Exotics",
+        slug: "/exotics",
+        dev: true
       }
     ]
 
@@ -188,12 +221,12 @@ class Player extends React.Component {
         </div>
         <div className="stats">
           <div>
-            <h4>Total score</h4>
+            <h4>Score</h4>
             <div>{profileRecords.score}</div>
           </div>
           <div>
-            <h4>Total days playtime</h4>
-            <div>{Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)}</div>
+            <h4>Playtime</h4>
+            <div>{Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days</div>
           </div>
         </div>
         <div className="views">
@@ -203,7 +236,7 @@ class Player extends React.Component {
               let route = this.props.route;
               let to = `/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${route.match.params.characterId}${view.slug}`;
               return (
-                <li key={view.slug}><NavLink to={to} exact>{view.name}</NavLink></li>
+                <li key={view.slug}>{view.dev ? `${view.name}` : <NavLink to={to} exact>{view.name}</NavLink>}</li>
               )
             }) }
           </ul>

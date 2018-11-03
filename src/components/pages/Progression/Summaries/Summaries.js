@@ -1,7 +1,8 @@
 import React from 'react';
-import cx from 'classnames'
+import cx from 'classnames';
 
-import './Summaries.css'
+import './Summaries.css';
+import Almost from './Almost';
 
 const Summaries = (props) => {
 
@@ -70,14 +71,9 @@ const Summaries = (props) => {
           total: Object.keys(profileProgressions.checklists[2360931290]).length,
           completed: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
         },
-        latentMemories: {
-          text: "Latent memories resolved",
-          total: Object.keys(profileProgressions.checklists[2955980198]).length,
-          completed: Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length
-        },
         caydesJorunals: {
-          text: "Journals recovered",
-          total: Object.keys(profileProgressions.checklists[2448912219]).length,
+          text: "Cayde's journals recovered",
+          total: 4,
           completed: Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length
         }
       }
@@ -168,11 +164,22 @@ const Summaries = (props) => {
   }
   
 
-  let modules = []
+  let modules = [];  
+
+  modules.push(
+    <div className="module" key="almost">
+      <h4>Almost complete</h4>
+      <ul className={cx(
+          "almost"
+        )}>
+        <Almost records={profileRecords} manifest={manifest} />
+      </ul>
+    </div>
+  )
 
   for (const [key, module] of Object.entries(progression)) {
     
-    let list = []
+    let list = [];
 
     for (const [key, value] of Object.entries(module.values)) {
       

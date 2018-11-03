@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Globals from '../../Globals';
 
 
+import './SearchPlayer.css';
 
 class SearchPlayer extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class SearchPlayer extends React.Component {
       results: undefined
     }
 
-    this.query = this.query.bind(this)
+    this.query = this.query.bind(this);
+    this.playerSelect = this.playerSelect.bind(this);
   }
 
   query = (e) => {
@@ -51,6 +53,9 @@ class SearchPlayer extends React.Component {
     }, 1000);
   }
 
+  playerSelect = (e) => {
+    this.props.route.history.push(`/progression/${e.currentTarget.dataset.membershiptype}/${e.currentTarget.dataset.membershipid}`);
+  }
 
   render() {
 
@@ -66,9 +71,13 @@ class SearchPlayer extends React.Component {
             </div>
           </div>
           <div className="results">
-            <ul>{ this.state.results.map(result => <li key={result.membershipId}>
-                <Link to={`/progression/${result.membershipType}/${result.membershipId}/`}>{result.displayName}</Link>
-              </li>) }</ul>
+            <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
+              key={result.membershipId} 
+              data-membershiptype={result.membershipType} 
+              data-membershipid={result.membershipId}
+              onClick={this.playerSelect}>
+                {result.displayName}
+              </li>) : <li>No profiles found</li> }</ul>
           </div>
         </div>
       )
@@ -83,7 +92,7 @@ class SearchPlayer extends React.Component {
             </div>
           </div>
           <div className="results">
-            <ul></ul>
+            <ul className="list"></ul>
           </div>
         </div>
       )

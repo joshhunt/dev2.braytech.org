@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#737373">
     <meta name="generator" content="Thomas Chapman with Coffee" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="stylesheet" href="%PUBLIC_URL%/static/fonts/neue/style.css">
@@ -14,7 +14,27 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <filter id="sharpBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="7"></feGaussianBlur>
+        <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 10 0"></feColorMatrix>
+        <feComposite in2="SourceGraphic" operator="in"></feComposite>
+      </filter>
+      <filter id="bluntBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="17"></feGaussianBlur>
+        <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 10 0"></feColorMatrix>
+        <feComposite in2="SourceGraphic" operator="in"></feComposite>
+      </filter>
+      <filter id="ultraBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="45"/>
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"/>
+        <feGaussianBlur stdDeviation="45"/>
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"/>
+        <feComposite in2="SourceGraphic" operator="in"></feComposite>
+      </filter>
+    </svg>
     <div id="root"></div>
     <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+    <script src="%PUBLIC_URL%/static/js/modernizr-custom.js"></script>
   </body>
 </html>

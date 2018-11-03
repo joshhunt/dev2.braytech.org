@@ -1,12 +1,13 @@
 import React from 'react';
 import cx from 'classnames'
 
-import regionChests from './regionChests'
-import lostSectors from './lostSectors'
-import adventures from './adventures'
-import sleeperNodes from './sleeperNodes'
-import ghostScans from './ghostScans'
-import './Checklists.css'
+import regionChests from './regionChests';
+import lostSectors from './lostSectors';
+import adventures from './adventures';
+import sleeperNodes from './sleeperNodes';
+import ghostScans from './ghostScans';
+import caydesJournals from './caydesJournals';
+import './Checklists.css';
 
 class Checklists extends React.Component {
   constructor(props) {
@@ -37,10 +38,9 @@ class Checklists extends React.Component {
     e.preventDefault();
 
     let index = e.currentTarget.dataset.index;
-    console.log(index, Math.floor(index/this.itemsPerPage));
 
     this.setState({
-      page: Math.floor(index/this.itemsPerPage)
+      page: Math.floor(index/this.itemsPerPage) // credit: elviswolcott
     })
 
   }
@@ -49,6 +49,9 @@ class Checklists extends React.Component {
 
     console.log(this.props)
 
+    if (this.props.viewport.width >= 1600) {
+      this.itemsPerPage = 5;
+    }
     if (this.props.viewport.width < 1600) {
       this.itemsPerPage = 4;
     }
@@ -82,6 +85,10 @@ class Checklists extends React.Component {
       {
         name: "Ghost Scans",
         list: ghostScans(this.props)
+      },
+      {
+        name: "Cayde's Journals",
+        list: caydesJournals(this.props)
       }
     ];
 

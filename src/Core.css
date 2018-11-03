@@ -209,3 +209,14 @@ header ul li a.active::before {
   border-bottom: 2px solid;
 }
 
+
+
+
+@media screen and (max-width: 500px) {
+
+header {
+  width: calc(100% - 6rem);
+  margin: 0 2rem;
+}
+
+}

@@ -20,8 +20,12 @@
   opacity: 0;
 }
 
+#player .backgrounds .image {
+  filter: url("#sharpBlur");
+}
+
 #player .backgrounds .image.active {
-  opacity: 1;
+  opacity: inherit;
 }
 
 #player .characters {
@@ -83,10 +87,15 @@
 
 #player .views ul {
   display: flex;
+  flex-flow: row wrap;
 }
 
 #player .views ul li {
   margin: 0 1rem 0 0;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 15px;
 }
 
 #player .views ul li a {
@@ -131,7 +140,11 @@
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+
+#player {
+  padding: 9rem 2rem 3rem;
+}
 
 #player .characters {
   width: 100%;
@@ -148,20 +161,20 @@
 
 #player .characters .displayName {
   left: 20%;
-  top: 12%;
-  font-size: 16px;
+  top: 15%;
+  font-size: 18px;
 }
 
 #player .characters .class {
   left: 20%;
-  top: 52%;
-  font-size: 11px;
+  top: 54%;
+  font-size: 13px;
 }
 
 #player .characters .light {
   top: 10%;
   right: 2%;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 #player .characters .light::before {
@@ -170,9 +183,9 @@
 }
 
 #player .characters .level {
-  top: 52%;
+  top: 54%;
   right: 2%;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 #player .characters .progress {
@@ -181,6 +194,10 @@
 
 #player .stats > div {
   margin: 0 3rem 1rem 0;
+}
+
+#player .views ul li {
+  margin: 0 1rem 1rem 0;
 }
 
 }

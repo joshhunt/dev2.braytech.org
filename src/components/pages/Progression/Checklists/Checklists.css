@@ -46,6 +46,7 @@
   width: 10px;
   height: 10px;
   margin: 5px 1rem 0 3px;
+  flex-shrink: 0;
 }
 
 .checklists .list li .state::before {
@@ -120,6 +121,18 @@
 
 .checklistSelectors ul li {
   margin: 0 1rem 1rem 0;
+}
+
+}
+
+@media screen and (max-width: 600px) {
+
+.checklistSelectors {
+  padding: 0 0.5rem;
+}
+
+#progression .checklists:not(.list) {
+  padding: 3rem 0.5rem;
 }
 
 }

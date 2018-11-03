@@ -1,0 +1,11 @@
+
+
+
+#search {
+  padding: 9rem 3rem 3rem;
+  min-height: calc(100vh - 12rem);
+}
+
+#search .results {
+  margin: 2rem 0 0;
+}

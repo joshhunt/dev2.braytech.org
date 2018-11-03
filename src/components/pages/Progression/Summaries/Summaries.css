@@ -26,3 +26,30 @@
 .summaries .list.seals li .progress .bar {
   background-color: #7b3274;
 }
+
+
+
+@media screen and (max-width: 1280px) {
+
+.summaries .module {
+  flex-basis: calc(100% / 3 - 3rem);
+}
+
+}
+
+@media screen and (max-width: 900px) {
+
+.summaries .module {
+  flex-basis: calc(50% - 3rem);
+}
+
+}
+
+@media screen and (max-width: 600px) {
+
+.summaries .module {
+  flex-basis: calc(100% - 3rem);
+  padding: 0.5rem 2rem 2rem;
+}
+
+}

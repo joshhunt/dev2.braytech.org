@@ -120,7 +120,7 @@ p:last-child {
 }
 
 .progress .title {
-  flex-basis: 70%;
+  flex: 1 1 auto;
   font-size: 14px;
   padding: 8px 0 8px 10px;
   color: rgba(255, 255, 255, 0.8);
@@ -129,7 +129,7 @@ p:last-child {
 }
 
 .progress .fraction {
-  flex-basis: calc(30% - 20px);
+  flex: 1 0 auto;
   text-align: right;
   font-size: 14px;
   padding: 8px 10px 8px 0;
@@ -143,10 +143,134 @@ p:last-child {
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 100%;
   height: 100%;
   background-color: #5aa366;
   transition: background-color .25s;
 }
+
+
+input {
+  -webkit-appearance: none;
+  border: none;
+  font: inherit;
+  line-height: initial;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  white-space: normal;
+  box-sizing: inherit;
+  border-radius: 0;
+}
+
+input::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+:focus {
+  outline: none;
+}
+
+button.square {
+  display: inline-block;
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 6px 0 0;
+  justify-content: center;
+  font-size: 22px;
+  background-color: rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.2);
+  transition: color .25s, background-color .25s, box-shadow .25s;
+}
+
+button.square::after {
+  content: " ";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
+  transition: box-shadow .25s;
+}
+
+button.square:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px #d6d6d6;
+}
+
+button.square:hover::after {
+  box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+button.square.active {
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 1);
+}
+
+.form .field {
+  position: relative;
+  margin: 0 0 1rem;
+}
+
+.form .field::after {
+  content: " ";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);  
+  transition: color .25s, background-color .25s, box-shadow .25s;
+}
+
+.form .field input,
+.form .field button {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0 1rem;
+  transition: background-color .25s, box-shadow .25s;
+}
+
+.form .field input {
+  width: calc(100% - 2rem);
+}
+
+.form .field:hover input,
+.form .field:hover button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  z-index: 2;
+  box-shadow: inset 0 0 0 1px #d6d6d6;
+}
+
+.form .field:hover::after {
+  box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+.form .field input:focus,
+.form .field:hover input:focus,
+.form .field button:focus,
+.form .field:hover button:focus {
+  color: #fff;
+}
+
+
 
 
 
