@@ -19,7 +19,7 @@
   height: unset;
 }
 
-.summaries .list li:hover .progress .bar {
+.summaries .list:not(.no-interaction) li:hover .progress .bar {
   opacity: 0.8;
 }
 
@@ -48,8 +48,8 @@
 @media screen and (max-width: 600px) {
 
 .summaries .module {
-  flex-basis: calc(100% - 3rem);
-  padding: 0.5rem 2rem 2rem;
+  flex-basis: calc(100% - 1rem);
+  padding: 1rem 0.5rem 1rem 0.5rem;
 }
 
 }

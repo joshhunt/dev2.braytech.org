@@ -32,4 +32,17 @@
   padding: 3rem 1.5rem;
 }
 
+#progression .summaries {
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+#progression .summaries {
+  padding: 2rem 1.5rem 3rem;
+}
+
 }

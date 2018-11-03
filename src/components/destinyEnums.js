@@ -85,7 +85,7 @@ export const STAT_BLACKLIST = [
 export const PLATFORMS = {
   [XBOX]: 'Xbox',
   [PLAYSTATION]: 'PlayStation',
-  [PC_BLIZZARD]: 'PC (Battle.net)',
+  [PC_BLIZZARD]: 'PC',
   [TIGERDEMON]: 'TigerDemon',
   [BUNGIENEXT]: 'BungieNext'
 };

@@ -9,6 +9,7 @@ const Header = () => {
       <div className="logo">
         <NavLink to="/" exact>Braytech</NavLink>
       </div>
+      <a className="trigger"></a>
       <ul>
         <li>
           <NavLink to="/progression">Progression</NavLink>

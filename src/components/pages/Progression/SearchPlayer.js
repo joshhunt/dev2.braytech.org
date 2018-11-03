@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import Globals from '../../Globals';
 
+import * as destinyEnums from '../../destinyEnums';
+
 
 import './SearchPlayer.css';
 
@@ -64,20 +66,22 @@ class SearchPlayer extends React.Component {
     if (this.state.results) {
       return (
         <div className="view" id="search">
-          <h4>Search for player</h4>
-          <div className="form">
-            <div className="field">
-              <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
+          <div className="frame">
+            <h4>Search for player</h4>
+            <div className="form">
+              <div className="field">
+                <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
+              </div>
             </div>
-          </div>
-          <div className="results">
-            <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
-              key={result.membershipId} 
-              data-membershiptype={result.membershipType} 
-              data-membershipid={result.membershipId}
-              onClick={this.playerSelect}>
-                {result.displayName}
-              </li>) : <li>No profiles found</li> }</ul>
+            <div className="results">
+              <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
+                key={result.membershipId} 
+                data-membershiptype={result.membershipType} 
+                data-membershipid={result.membershipId}
+                onClick={this.playerSelect}>
+                  <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
+                </li>) : <li>No profiles found</li> }</ul>
+            </div>
           </div>
         </div>
       )
@@ -85,14 +89,16 @@ class SearchPlayer extends React.Component {
     else {
       return (
         <div className="view" id="search">
-          <h4>Search for player</h4>
-          <div className="form">
-            <div className="field">
-              <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
+          <div className="frame">
+            <h4>Search for player</h4>
+            <div className="form">
+              <div className="field">
+                <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
+              </div>
             </div>
-          </div>
-          <div className="results">
-            <ul className="list"></ul>
+            <div className="results">
+              <ul className="list"></ul>
+            </div>
           </div>
         </div>
       )

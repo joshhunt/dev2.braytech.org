@@ -6,6 +6,18 @@
   min-height: calc(100vh - 12rem);
 }
 
+#search .frame {
+  max-width: 20rem;
+}
+
 #search .results {
   margin: 2rem 0 0;
+}
+
+#search .results .list li {
+  font-size: 16px;
+}
+
+#search .results .list li span {
+  margin: 10px;
 }

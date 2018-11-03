@@ -165,6 +165,33 @@ header .logo a {
   text-transform: uppercase;
 }
 
+header .trigger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1rem;
+  height: 3rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  font-family: 'symbols' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 16px;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: default;
+  color: #fff;
+  display: none;
+}
+
+header .trigger::before {
+  content: "\ea55";
+}
+
 header ul {
   display: flex;
   height: 100%;
@@ -212,11 +239,65 @@ header ul li a.active::before {
 
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
 
 header {
   width: calc(100% - 6rem);
   margin: 0 2rem;
+}
+
+header .trigger {
+  display: flex;
+}
+
+header.display a {
+  color: #000;
+  height: initial;
+  display: initial;
+  opacity: 1;
+}
+
+header.display h1 {
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  height: 2rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  opacity: 1;
+}
+
+header ul {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100% - 4rem);
+  padding: 7rem 2rem 0;
+  height: calc(100% - 7rem);
+  background-color: #fff;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  display: none;
+}
+
+header.display ul {
+  display: flex;
+}
+
+header ul li {
+  padding: 0;
+  margin: 2rem 0 0.2rem 2rem;
+  font-size: 2rem;
+  flex-basis: 100%;
+  display: initial;
+  height: initial;
+  letter-spacing: initial;
+  text-transform: initial;
+}
+
+header ul li a.active::before {
+  border-bottom: 3px solid;
 }
 
 }

@@ -203,6 +203,7 @@ const Summaries = (props) => {
         <h4>{module.text}</h4>
         <ul className={cx(
             "list",
+            "no-interaction",
             key
           )}>
           {list}

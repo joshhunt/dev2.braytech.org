@@ -83,7 +83,7 @@ const Almost = (props) => {
           item: <li key={key}>
             <p>{manifest.DestinyRecordDefinition[key].displayProperties.name} <span>{key}</span></p>
             <p>{manifest.DestinyRecordDefinition[key].displayProperties.description}</p>
-            <ul className="list">
+            <ul className="list no-interaction">
               {objectives}
             </ul>
           </li>
