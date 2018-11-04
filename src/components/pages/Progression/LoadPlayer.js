@@ -31,7 +31,7 @@ class LoadPlayer extends React.Component {
           if (route.match.params.characterId) {
             view = route.match.params.characterId
           }
-          route.history.push(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}`:``}`);
+          route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}`:``}`);
 
         }
 
