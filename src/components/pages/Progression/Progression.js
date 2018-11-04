@@ -55,10 +55,15 @@ class Progression extends React.Component {
                 </div>
               } />
             <Route 
-            path="/progression" 
-            render={ (route) => 
-              <SearchPlayer route={route} />
-            } />
+              path="/progression/:membershipType/:membershipId/:characterId?" 
+              render={ (route) => 
+                <LoadPlayer data={route} set={this.setProfile} />
+              } />
+            <Route 
+              path="/progression" 
+              render={ (route) => 
+                <SearchPlayer route={route} />
+              } />
             <Route render={ (route) => <Error /> } />
           </Switch>
         </BrowserRouter>
