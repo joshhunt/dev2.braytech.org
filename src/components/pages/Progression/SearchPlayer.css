@@ -10,14 +10,30 @@
   max-width: 20rem;
 }
 
+#search .form {
+  margin: 0 0 1rem;
+}
+
 #search .results {
-  margin: 2rem 0 0;
+  margin: 1rem 0 3rem;
 }
 
 #search .results .list li {
-  font-size: 16px;
+  padding: 0 1rem;
 }
 
 #search .results .list li span {
-  margin: 10px;
+  margin: 0 10px 0 0;
+}
+
+@media screen and (max-width: 600px) {
+
+#search {
+  padding: 9rem 2rem 3rem;
+}
+
+#search .frame {
+  max-width: initial;
+}
+
 }
