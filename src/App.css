@@ -2,8 +2,8 @@
 .view {
   background-color: #888;
   color: #fff;
-  min-height: calc(100vh - 7.5rem);
-  padding: 6rem 1.5rem 1.5rem;
+  min-height: calc(100vh - 12rem);
+  padding: 9rem 3rem 3rem;
 }
 
 

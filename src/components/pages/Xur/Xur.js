@@ -4,12 +4,12 @@ import Globals from '../../Globals';
 import ObservedImage from '../../ObservedImage';
 
 
-const Index = () => {
+const Xur = () => {
   return (
-    <div className="view" id="index">
+    <div className="view" id="xur">
       <p>Soon™.</p>
     </div>
   )
 }
 
-export default Index;
+export default Xur;

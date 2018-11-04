@@ -54,6 +54,11 @@ class Progression extends React.Component {
                   <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={ () => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} /> } />
                 </div>
               } />
+            <Route 
+            path="/progression" 
+            render={ (route) => 
+              <SearchPlayer route={route} />
+            } />
             <Route render={ (route) => <Error /> } />
           </Switch>
         </BrowserRouter>

@@ -272,8 +272,8 @@ header ul {
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100% - 4rem);
-  padding: 7rem 2rem 0;
+  width: 100%;
+  padding: 7rem 0 0;
   height: calc(100% - 7rem);
   background-color: #fff;
   flex-flow: row wrap;
@@ -298,6 +298,17 @@ header ul li {
 
 header ul li a.active::before {
   border-bottom: 3px solid;
+}
+
+header.display .logo {
+  position: fixed;
+  top: 3rem;
+  left: 2rem;
+  color: #000;
+  z-index: 2;
+  height: 3rem;
+  display: flex;
+  align-items: center;
 }
 
 }

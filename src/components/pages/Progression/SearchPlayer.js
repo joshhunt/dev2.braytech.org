@@ -57,13 +57,11 @@ class SearchPlayer extends React.Component {
   }
 
   playerSelect = (e) => {
-    ls.update("profileHistory",e.currentTarget.dataset,true);
+    ls.update("profileHistory", e.currentTarget.dataset, true, 6);
     this.props.route.history.push(`/progression/${e.currentTarget.dataset.membershiptype}/${e.currentTarget.dataset.membershipid}`);
   }
 
   render() {
-
-    console.log(this.state)
 
     let profileHistory = ls.get("profileHistory") ? ls.get("profileHistory") : [];
 

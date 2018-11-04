@@ -24,8 +24,8 @@
   filter: url("#sharpBlur");
 }
 
-#player .backgrounds .image.active {
-  opacity: inherit;
+#player .backgrounds .image.active.dl {
+  opacity: 1;
 }
 
 #player .characters {

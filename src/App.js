@@ -8,7 +8,10 @@ import './App.css';
 
 import Header from './components/pages/Header';
 import Error from './components/pages/Error';
+import Index from './components/pages/Index/Index';
 import Progression from './components/pages/Progression/Progression';
+import Clans from './components/pages/Clans/Clans';
+import Xur from './components/pages/Xur/Xur';
 
 
 
@@ -81,7 +84,10 @@ class App extends Component {
           <>
             <Header />
             <Switch>
+              <Route path="/" exact render={(route)=> <Index route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
               <Route path="/progression" render={(route)=> <Progression route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/clans" render={(route)=> <Clans route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/xur" render={(route)=> <Xur route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
               <Route component={ Error } />
             </Switch>
           </>

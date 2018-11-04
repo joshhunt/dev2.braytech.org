@@ -35,7 +35,7 @@ function objectsAreSame(x, y) {
 }
 
 export function update(key, value, unique, limit) {
-  
+
   var json = null;
 
   try {
@@ -59,7 +59,12 @@ export function update(key, value, unique, limit) {
         }
       }
       if (passed) {
-        parsed.push(value);
+
+        if (!limit) {
+          limit = parsed.length + 1;
+        }
+
+        parsed = [value, ...parsed.slice(0, limit)];
       }
     }
     else {
