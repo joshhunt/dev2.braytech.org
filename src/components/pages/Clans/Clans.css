@@ -1,0 +1,13 @@
+#clans {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#clans .SearchPlayer {
+  flex-basis: 20rem;
+}
+
+#clans .SearchGroups {
+  flex-basis: 30rem;
+  margin: 0 0 0 3rem;
+}

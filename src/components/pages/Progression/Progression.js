@@ -23,7 +23,6 @@ class Progression extends React.Component {
 
   playerSelect = (e) => {
     ls.update("profileHistory", e.currentTarget.dataset, true, 6);
-    this.props.history.push(`/progression/${e.currentTarget.dataset.membershiptype}/${e.currentTarget.dataset.membershipid}`);
   }
 
   render() {
@@ -35,7 +34,9 @@ class Progression extends React.Component {
             path="/progression" 
             exact
             render={ (route) => 
-              <SearchPlayer route={route} playerSelect={this.playerSelect} />
+              <div className="view" id="search">
+                <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+              </div>
             } />
           <Route 
             path="/progression/:membershipType/:membershipId/:characterId?/:view?" 

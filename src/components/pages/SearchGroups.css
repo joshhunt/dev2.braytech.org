@@ -1,0 +1,49 @@
+.SearchGroups .results ul li {
+  height: initial;
+}
+
+.SearchGroups .results ul li::before {
+  content: none;
+}
+
+.SearchGroups .results ul li .header {
+  padding: 0.8rem 1rem;
+  flex-basis: calc(100% - 2rem);
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.SearchGroups .results ul li .header::after {
+  content: attr(data-members);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.8rem 1rem;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+.SearchGroups .results ul li .header p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.SearchGroups .results ul li .header p:last-child {
+  font-style: italic;
+}
+
+.SearchGroups .results ul li .about {
+  padding: 0.8rem 1rem;
+  flex-basis: calc(100% - 2rem);
+}
+
+.SearchGroups .results ul li .about p {
+  font-size: 14px;
+}
+
+.SearchGroups .results ul li a {
+  flex-flow: row wrap;
+  position: relative;
+  padding: 0;
+  width: 100%;
+}

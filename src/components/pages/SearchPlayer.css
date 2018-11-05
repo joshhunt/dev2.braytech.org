@@ -1,38 +1,29 @@
 
 
 
-#search {
-  padding: 9rem 3rem 3rem;
-  min-height: calc(100vh - 12rem);
-}
-
-#search .frame {
+.SearchPlayer {
   max-width: 20rem;
 }
 
-#search .form {
+.SearchPlayer .form {
   margin: 0 0 1rem;
 }
 
-#search .results {
+.SearchPlayer .results {
   margin: 1rem 0 3rem;
 }
 
-#search .results .list li {
+.SearchPlayer .results .list li {
   padding: 0 1rem;
 }
 
-#search .results .list li span {
+.SearchPlayer .results .list li span {
   margin: 0 10px 0 0;
 }
 
 @media screen and (max-width: 600px) {
 
-#search {
-  padding: 9rem 2rem 3rem;
-}
-
-#search .frame {
+.SearchPlayer {
   max-width: initial;
 }
 

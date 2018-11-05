@@ -58,10 +58,10 @@ class SearchPlayer extends React.Component {
   render() {
 
     let profileHistory = ls.get("profileHistory") ? ls.get("profileHistory") : [];
-
+console.log(this)
     if (this.state.results) {
       return (
-        <div className="view" id="search">
+        <>
           <div className="frame">
             <h4>Search for player</h4>
             <div className="form">
@@ -71,12 +71,20 @@ class SearchPlayer extends React.Component {
             </div>
             <div className="results">
               <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
-                key={result.membershipId} 
-                data-membershiptype={result.membershipType} 
-                data-membershipid={result.membershipId}
-                data-displayname={result.displayName} 
-                onClick={this.props.playerSelect}>
-                  <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
+                key={result.membershipId} >
+                  <Link 
+                    to={{
+                      pathname: `${this.props.appRoute.match.path}/${result.membershipType}/${result.membershipId}`,
+                      state: {
+                        
+                      }
+                    }} 
+                    onClick={this.props.playerSelect} 
+                    data-membershiptype={result.membershipType} 
+                    data-membershipid={result.membershipId}
+                    data-displayname={result.displayName} >
+                    <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
+                  </Link>
                 </li>) : <li>No profiles found</li> }</ul>
             </div>
             { profileHistory.length > 0 ? 
@@ -85,50 +93,64 @@ class SearchPlayer extends React.Component {
                 <div className="results">
                   <ul className="list">
                     { profileHistory.map(result => <li 
-                    key={result.membershipid} 
-                    data-membershiptype={result.membershiptype} 
-                    data-membershipid={result.membershipid}
-                    data-displayname={result.displayname} 
-                    onClick={this.props.playerSelect}>
-                      <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
+                    key={result.membershipid} >
+                      <Link 
+                       to={{
+                          pathname: `${this.props.appRoute.match.path}/${result.membershiptype}/${result.membershipid}`,
+                          state: {
+                            
+                          }
+                        }} 
+                        onClick={this.props.playerSelect} 
+                        data-membershiptype={result.membershiptype} 
+                        data-membershipid={result.membershipid}
+                        data-displayname={result.displayname} >
+                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
+                      </Link>
                     </li> ) }
                   </ul>
                 </div>
               </>
              : ``}
           </div>
-        </div>
+        </>
       )
     }
     else {
       return (
-        <div className="view" id="search">
-          <div className="frame">
-            <h4>Search for player</h4>
-            <div className="form">
-              <div className="field">
-                <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
-              </div>
+        <div className="SearchPlayer">
+          <h4>Search for player</h4>
+          <div className="form">
+            <div className="field">
+              <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
             </div>
-            <div className="results"></div>
-            { profileHistory.length > 0 ? 
-              <>
-                <h4>Previous searches</h4>
-                <div className="results">
-                  <ul className="list">
-                    { profileHistory.map(result => <li 
-                    key={result.membershipid} 
-                    data-membershiptype={result.membershiptype} 
-                    data-membershipid={result.membershipid}
-                    data-displayname={result.displayname} 
-                    onClick={this.props.playerSelect}>
-                      <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
-                    </li> ) }
-                  </ul>
-                </div>
-              </>
-             : ``}
           </div>
+          <div className="results"></div>
+          { profileHistory.length > 0 ? 
+            <>
+              <h4>Previous searches</h4>
+              <div className="results">
+                <ul className="list">
+                  { profileHistory.map(result => <li 
+                  key={result.membershipid} >
+                    <Link 
+                      to={{
+                        pathname: `${this.props.appRoute.match.path}/${result.membershiptype}/${result.membershipid}`,
+                        state: {
+                          
+                        }
+                      }} 
+                      onClick={this.props.playerSelect} 
+                      data-membershiptype={result.membershiptype} 
+                      data-membershipid={result.membershipid}
+                      data-displayname={result.displayname} >
+                      <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
+                    </Link>
+                  </li> ) }
+                </ul>
+              </div>
+            </>
+            : ``}
         </div>
       )
     }

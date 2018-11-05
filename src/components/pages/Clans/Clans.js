@@ -6,6 +6,7 @@ import * as ls from '../../localStorage';
 import Error from '../Error';
 import './Clans.css';
 import SearchPlayer from '../SearchPlayer';
+import SearchGroups from '../SearchGroups';
 
 
 class Clans extends React.Component {
@@ -17,7 +18,8 @@ class Clans extends React.Component {
 
     }
 
-    this.playerSelect = this.playerSelect.bind(this);    
+    this.playerSelect = this.playerSelect.bind(this);
+    this.groupSelect = this.groupSelect.bind(this);
   }
 
   playerSelect = (e) => {
@@ -26,15 +28,30 @@ class Clans extends React.Component {
     this.setState({
       membershipType: e.currentTarget.dataset.membershiptype,
       membershipiId: e.currentTarget.dataset.membershipid
-    })
+    });
+  }
+
+  groupSelect = (e) => {   
+    // this.setState({
+    //   membershipType: e.currentTarget.dataset.membershiptype,
+    //   membershipiId: e.currentTarget.dataset.membershipid
+    // });
   }
 
   render() {
     
-    if (this.state.ProfileResponse) {
+    if (this.state.GroupResponse) {
       return (
         <BrowserRouter>
           <Switch>
+            <Route 
+              path="/clans/:membershipType/:membershipId" 
+              render={ (route) => 
+                <div className="view" id="clans">
+                  <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+                  <SearchGroups {...this.props} {...route} groupSelect={this.groupSelect} />
+                </div>
+              } />
             <Route 
               path="/clans/:groupId" 
               render={ (route) => 
@@ -45,7 +62,9 @@ class Clans extends React.Component {
             <Route 
               path="/clans" 
               render={ (route) => 
-                <SearchPlayer route={route} playerSelect={this.playerSelect} />
+                <div className="view" id="clans">
+                  <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+                </div>
               } />
             <Route render={ (route) => <Error /> } />
           </Switch>
@@ -57,10 +76,27 @@ class Clans extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route 
+              path="/clans/:membershipType/:membershipId" 
+              render={ (route) => 
+                <div className="view" id="clans">
+                  <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+                  <SearchGroups {...this.props} {...route} groupSelect={this.groupSelect} />
+                </div>
+              } />
+            <Route 
+              path="/clans/:groupId" 
+              render={ (route) => 
+                <div className="view" id="clans">
+                  groupId
+                </div>
+              } />
+            <Route 
               path="/clans" 
               exact
               render={ (route) => 
-                <SearchPlayer route={route} playerSelect={this.playerSelect} />
+                <div className="view" id="clans">
+                  <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+                </div>
               } />
             <Route render={ (route) => <Error /> } />
           </Switch>
