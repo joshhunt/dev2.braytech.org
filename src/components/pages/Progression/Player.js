@@ -55,7 +55,7 @@ class Player extends React.Component {
   profileChange = () => {
     if (this.state.expandCharacters) {
       this.charactersUI.classList.remove("expanded");
-      this.props.route.history.push(`/progression/`);
+      this.props.route.history.push(`/progression`);
       this.props.setProfile(false, false);
     }
   }

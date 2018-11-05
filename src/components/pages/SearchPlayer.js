@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import Globals from '../../Globals';
+import Globals from '../Globals';
 
-import * as destinyEnums from '../../destinyEnums';
-import * as ls from '../../localStorage';
+import * as destinyEnums from '../destinyEnums';
+import * as ls from '../localStorage';
 
 
 import './SearchPlayer.css';
@@ -17,7 +17,6 @@ class SearchPlayer extends React.Component {
     }
 
     this.query = this.query.bind(this);
-    this.playerSelect = this.playerSelect.bind(this);
   }
 
   query = (e) => {
@@ -56,11 +55,6 @@ class SearchPlayer extends React.Component {
     }, 1000);
   }
 
-  playerSelect = (e) => {
-    ls.update("profileHistory", e.currentTarget.dataset, true, 6);
-    this.props.route.history.push(`/progression/${e.currentTarget.dataset.membershiptype}/${e.currentTarget.dataset.membershipid}`);
-  }
-
   render() {
 
     let profileHistory = ls.get("profileHistory") ? ls.get("profileHistory") : [];
@@ -81,7 +75,7 @@ class SearchPlayer extends React.Component {
                 data-membershiptype={result.membershipType} 
                 data-membershipid={result.membershipId}
                 data-displayname={result.displayName} 
-                onClick={this.playerSelect}>
+                onClick={this.props.playerSelect}>
                   <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
                 </li>) : <li>No profiles found</li> }</ul>
             </div>
@@ -95,7 +89,7 @@ class SearchPlayer extends React.Component {
                 data-membershiptype={result.membershiptype} 
                 data-membershipid={result.membershipid}
                 data-displayname={result.displayname} 
-                onClick={this.playerSelect}>
+                onClick={this.props.playerSelect}>
                       <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
                     </li> ) }
                   </ul>
@@ -127,7 +121,7 @@ class SearchPlayer extends React.Component {
                 data-membershiptype={result.membershiptype} 
                 data-membershipid={result.membershipid}
                 data-displayname={result.displayname} 
-                onClick={this.playerSelect}>
+                onClick={this.props.playerSelect}>
                       <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
                     </li> ) }
                   </ul>

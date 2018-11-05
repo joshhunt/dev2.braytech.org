@@ -42,7 +42,7 @@ class App extends Component {
     window.addEventListener("resize", this.updateViewport);
     
     fetch(
-      `https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition`,
+      `https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition`,
       {
         headers: {
           "X-API-Key": Globals.key.braytech,
@@ -84,10 +84,10 @@ class App extends Component {
           <>
             <Header />
             <Switch>
-              <Route path="/" exact render={(route)=> <Index route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
-              <Route path="/progression" render={(route)=> <Progression route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
-              <Route path="/clans" render={(route)=> <Clans route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
-              <Route path="/xur" render={(route)=> <Xur route={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/" exact render={(route)=> <Index appRoute={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/progression" render={(route)=> <Progression appRoute={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/clans" render={(route)=> <Clans appRoute={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
+              <Route path="/xur" render={(route)=> <Xur appRoute={ route } manifest={this.state.manifest} viewport={this.state.viewport} />} />} />
               <Route component={ Error } />
             </Switch>
           </>

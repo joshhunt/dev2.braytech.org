@@ -1,10 +1,10 @@
 {
   "name": "dev2.braytech.org",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
-    "dexie": "^2.0.4",
+    "moment": "^2.22.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-markdown": "^4.0.3",
