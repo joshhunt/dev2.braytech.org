@@ -5,7 +5,6 @@ import * as ls from '../../localStorage';
 
 import Error from '../Error'
 import './Progression.css'
-import LoadPlayer from './LoadPlayer';
 import Player from './Player';
 import Summaries from './Summaries/Summaries';
 import Checklists from './Checklists/Checklists';

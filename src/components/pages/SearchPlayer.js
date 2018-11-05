@@ -85,11 +85,11 @@ class SearchPlayer extends React.Component {
                 <div className="results">
                   <ul className="list">
                     { profileHistory.map(result => <li 
-                key={result.membershipid} 
-                data-membershiptype={result.membershiptype} 
-                data-membershipid={result.membershipid}
-                data-displayname={result.displayname} 
-                onClick={this.props.playerSelect}>
+                    key={result.membershipid} 
+                    data-membershiptype={result.membershiptype} 
+                    data-membershipid={result.membershipid}
+                    data-displayname={result.displayname} 
+                    onClick={this.props.playerSelect}>
                       <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
                     </li> ) }
                   </ul>
@@ -117,11 +117,11 @@ class SearchPlayer extends React.Component {
                 <div className="results">
                   <ul className="list">
                     { profileHistory.map(result => <li 
-                key={result.membershipid} 
-                data-membershiptype={result.membershiptype} 
-                data-membershipid={result.membershipid}
-                data-displayname={result.displayname} 
-                onClick={this.props.playerSelect}>
+                    key={result.membershipid} 
+                    data-membershiptype={result.membershiptype} 
+                    data-membershipid={result.membershipid}
+                    data-displayname={result.displayname} 
+                    onClick={this.props.playerSelect}>
                       <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
                     </li> ) }
                   </ul>

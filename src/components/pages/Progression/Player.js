@@ -8,7 +8,6 @@ import Globals from '../../Globals';
 import './Characters.css';
 import './Player.css';
 import ObservedImage from '../../ObservedImage';
-// import EmblemLoader from './EmblemLoader';
 
 
 
