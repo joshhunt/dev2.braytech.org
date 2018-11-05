@@ -1,16 +1,12 @@
 import React from 'react';
 import { withRouter } from "react-router";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Globals from '../../Globals';
 import * as ls from '../../localStorage';
 
 import Error from '../Error'
 import './Progression.css'
 import SearchPlayer from '../SearchPlayer';
 import DisplayProfile from './DisplayProfile';
-import Player from './Player';
-import Summaries from './Summaries/Summaries';
-import Checklists from './Checklists/Checklists';
 
 
 class Progression extends React.Component {
@@ -28,9 +24,6 @@ class Progression extends React.Component {
   playerSelect = (e) => {
     ls.update("profileHistory", e.currentTarget.dataset, true, 6);
     this.props.history.push(`/progression/${e.currentTarget.dataset.membershiptype}/${e.currentTarget.dataset.membershipid}`);
-    // this.setState({
-    //   playerSelect: true
-    // });
   }
 
   render() {
