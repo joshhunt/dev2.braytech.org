@@ -1,7 +1,6 @@
 
-
-
 .SearchPlayer {
+  margin: 9rem 0 0 3rem;
   max-width: 20rem;
 }
 
@@ -25,6 +24,8 @@
 
 .SearchPlayer {
   max-width: initial;
+  margin: 9rem 2rem 0rem;
+  width: 100%;
 }
 
 }

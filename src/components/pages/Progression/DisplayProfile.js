@@ -15,8 +15,7 @@ class DisplayProfile extends React.Component {
 
     this.state = {};
 
-    this.changeCharacterIdTo = this.changeCharacterIdTo.bind(this);
-    this.setProfile = this.setProfile.bind(this);
+    this.goToProgression = this.goToProgression.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +45,6 @@ class DisplayProfile extends React.Component {
         route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}`);
 
         this.setState({
-          activeCharacterId: characterId,
           ProfileResponse: ProfileResponse.Response
         });
       })
@@ -55,19 +53,9 @@ class DisplayProfile extends React.Component {
       });
   }
 
-  changeCharacterIdTo = (characterId, props) => {
-    props.route.history.push(`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${characterId}${props.route.match.params.view ? `/${props.route.match.params.view}` : ``}`);
-    this.setState({
-      activeCharacterId: characterId
-    });
-  };
-
-  setProfile = (x, y) => {
-    this.setState({
-      activeCharacterId: x,
-      ProfileResponse: y
-    });
-  };
+  goToProgression = () => {
+    this.props.history.push("/progression");
+  }
 
   render() {
     console.log(this);
@@ -86,7 +74,7 @@ class DisplayProfile extends React.Component {
               path="/progression/:membershipType/:membershipId/:characterId/:view?"
               render={route => (
                 <div className="view" id="progression">
-                  <Player data={this.state} route={route} changeCharacterIdTo={this.changeCharacterIdTo} setProfile={this.setProfile} />
+                  <Player data={this.state} route={route} goToProgression={this.goToProgression} />
                   <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => <Summaries state={this.state} manifest={this.props.manifest} route={route} />} />
                   <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                 </div>

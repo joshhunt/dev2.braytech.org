@@ -88,8 +88,8 @@ class App extends Component {
                 path="/progression"
                 exact
                 render={route => (
-                  <div className="view" id="search">
-                    <SearchPlayer {...this.props} {...route} />
+                  <div className="view progression-search" id="SearchPlayer">
+                    <SearchPlayer {...this.props} {...route} path="/progression" />
                   </div>
                 )}
               />
@@ -97,8 +97,8 @@ class App extends Component {
               <Route
                 path="/clans/:membershipType/:membershipId"
                 render={route => (
-                  <div className="view" id="clans">
-                    <SearchPlayer {...this.props} {...route} />
+                  <div className="view clan-search" id="SearchPlayer">
+                    <SearchPlayer {...this.props} {...route} path="/clans" />
                     <SearchGroups {...this.props} {...route} />
                   </div>
                 )}
@@ -108,8 +108,8 @@ class App extends Component {
                 path="/clans"
                 exact
                 render={route => (
-                  <div className="view" id="clans">
-                    <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
+                  <div className="view clan-search" id="SearchPlayer">
+                    <SearchPlayer {...this.props} {...route} path="/clans" />
                   </div>
                 )}
               />

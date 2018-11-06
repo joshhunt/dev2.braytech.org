@@ -5,7 +5,7 @@ const lostSectors = (props) => {
 
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-  let characterId = props.state.activeCharacterId;
+  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest.response.data
 

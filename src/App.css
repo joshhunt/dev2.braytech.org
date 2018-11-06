@@ -2,8 +2,8 @@
 .view {
   background-color: #888;
   color: #fff;
-  min-height: calc(100vh - 12rem);
-  padding: 9rem 3rem 3rem;
+  min-height: 100vh;
+  display: flex;
 }
 
 

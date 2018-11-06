@@ -37,6 +37,18 @@
   background-size: cover;
 }
 
+.characters .list li .image.emblem::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
 .characters .list li .image.emblem.missing {
   width: calc(96 / 474 * 100% - 50px);
   height: calc(100% - 50px);
@@ -45,12 +57,8 @@
   background-size: contain;
 }
 
-.characters .list li:hover {
-  background-color: #fff;
-}
-
-.characters .list li:hover .image.emblem {
-  opacity: 0.8;
+.characters .list li:hover .image.emblem::before {
+  opacity: 0.2;
 }
 
 .characters .list li .displayName {
@@ -128,10 +136,12 @@
 
 .characters .list li.change {
   background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 html.backdropfilter .characters .list li.change {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.25s;
 }
 
 .characters .list li.change::before {
@@ -154,6 +164,10 @@ html.backdropfilter .characters .list li.change {
 .characters .list li.change .text h4 {
   margin: 0;
   transition: color .25s;
+}
+
+html.backdropfilter .characters .list li.change:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .characters .list li.change:hover::before {

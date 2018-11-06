@@ -6,10 +6,12 @@ import Almost from './Almost';
 
 const Summaries = (props) => {
 
+  console.log(props)
+
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
-  let characterId = props.state.activeCharacterId;
+  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest.response.data
   

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
 import { classTypeToString } from '../../destinyUtils'
@@ -18,44 +18,25 @@ class Player extends React.Component {
 
     this.state = {
       expandCharacters: false,
-      emblemsLoaded: false
+      emblemsResponse: false,
+      activeCharacterId: this.props.route.match.params.characterId
     }
 
     this.expandCharacters = this.expandCharacters.bind(this);
-    this.profileChange = this.profileChange.bind(this);
-
     this.emblemBackgrounds = null;
-
   }
 
   expandCharacters = (e) => {
-
     if (this.state.expandCharacters) {
-      this.charactersUI.classList.remove("expanded");
-      this.backgroundsUI.childNodes.forEach(element => {
-        element.classList.remove("active");
-        if (element.dataset.id === e.currentTarget.dataset.id) {
-          element.classList.add("active");
-        }
-      });
       this.setState({
         expandCharacters: false
       });
-      this.props.changeCharacterIdTo(e.currentTarget.dataset.id, this.props);
     }
     else {
-      this.charactersUI.classList.toggle("expanded");
+      e.preventDefault();
       this.setState({
         expandCharacters: true
       });
-    }
-  }
-
-  profileChange = () => {
-    if (this.state.expandCharacters) {
-      this.charactersUI.classList.remove("expanded");
-      this.props.route.history.push(`/progression`);
-      this.props.setProfile(false, false);
     }
   }
 
@@ -73,34 +54,24 @@ class Player extends React.Component {
     })
       .then(response => {
 
-        let emblems = [];
-        response.response.data.items.forEach(item => {
-
-          let characterId = hashes.filter(obj => obj.hash === item.hash)[0].character;
-
-          emblems.push(
-            <ObservedImage key={characterId} data-id={characterId} className={cx(
-                  "image",
-                  "emblem",
-                  {
-                    "missing": item.redacted,
-                    "active": this.props.data.activeCharacterId === characterId ? true : false
-                  }
-                )}
-              src={ `https://www.bungie.net${ item.secondarySpecial ? item.secondarySpecial : `/img/misc/missing_icon_d2.png` }` } />
-          )
-        });
-
-        this.emblemBackgrounds = emblems;
-
         this.setState({
-          emblemsLoaded: response.response.data.items
+          emblemsResponse: response.response.data.items
         });
 
       })
     .catch(error => {
       console.log(error);
     })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+
+    if (prevProps.route.match.params.characterId !== this.props.route.match.params.characterId) {
+      this.setState({
+        activeCharacterId: this.props.route.match.params.characterId
+      });
+    }    
+
   }
 
   render() {
@@ -119,7 +90,7 @@ class Player extends React.Component {
 
     characters.forEach(character => {
 
-      if (character.characterId === props.data.activeCharacterId) {
+      if (character.characterId === this.state.activeCharacterId) {
         activeCharacter = character
       }
 
@@ -137,11 +108,10 @@ class Player extends React.Component {
 
       charactersRender.push(
         <li key={character.characterId} 
-          onClick={this.expandCharacters} 
           data-id={character.characterId}
           className={cx(
             {
-              "active": character.characterId === props.data.activeCharacterId ? true : false
+              "active": character.characterId === this.state.activeCharacterId ? true : false
             }
           )}>
           <ObservedImage className={cx(
@@ -169,20 +139,21 @@ class Player extends React.Component {
                 }
               } ></div>
           </div>
+          <Link onClick={this.expandCharacters} to={`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${character.characterId}${props.route.match.params.view ? `/${props.route.match.params.view}`:``}`}></Link>
         </li>
       )
     });
 
     charactersRender.push(
       <li key="profileChange" className="change"
-        onClick={this.profileChange}>
+        onClick={this.props.goToProgression}>
         <div className="text">
           <h4>Change profile</h4>
         </div>
       </li>
     )
 
-    if (!this.state.emblemsLoaded) {
+    if (!this.state.emblemsResponse) {
       this.getEmblems(emblemHashes);
     }
 
@@ -212,10 +183,43 @@ class Player extends React.Component {
       }
     ]
 
+    if (this.state.emblemsResponse) {
+      let emblems = [];
+      emblemHashes.forEach(obj => {
+
+        let characterId = obj.character;
+        let emblemResponse = null;
+        Object.keys(this.state.emblemsResponse).forEach(key => {
+          if (this.state.emblemsResponse[key].hash === obj.hash) {
+            emblemResponse = this.state.emblemsResponse[key];
+            return;
+          }
+        });
+
+        emblems.push(
+          <ObservedImage key={characterId} data-id={characterId} className={cx(
+                "image",
+                "emblem",
+                {
+                  "missing": emblemResponse.redacted,
+                  "active": this.state.activeCharacterId === characterId ? true : false
+                }
+              )}
+            src={ `https://www.bungie.net${ emblemResponse.secondarySpecial ? emblemResponse.secondarySpecial : `/img/misc/missing_icon_d2.png` }` } />
+        )
+      });
+      this.emblemBackgrounds = emblems;
+    }
+
     return (
       <div id="player">
-        <div className="backgrounds" ref={(backgrounds)=>{this.backgroundsUI = backgrounds}}>{this.emblemBackgrounds}</div>
-        <div className="characters" ref={(characters)=>{this.charactersUI = characters}}>
+        <div className="backgrounds">{this.emblemBackgrounds}</div>
+        <div className={cx(
+            "characters",
+            {
+              "expanded": this.state.expandCharacters
+            }
+          )} ref={(characters)=>{this.charactersUI = characters}}>
           <ul className="list">{charactersRender}</ul>
         </div>
         <div className="stats">

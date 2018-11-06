@@ -3,13 +3,18 @@
   flex-flow: row wrap;
 }
 
-#clans .SearchPlayer {
+#SearchPlayer {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#SearchPlayer .SearchPlayer {
   flex-basis: 20rem;
 }
 
-#clans .SearchGroups {
+#SearchPlayer .SearchGroups {
   flex-basis: 30rem;
-  margin: 0 0 0 3rem;
+  margin: 9rem 2rem 0rem 3rem;
 }
 
 #clans .group {
@@ -102,4 +107,23 @@
   flex-basis: calc(100% / 6.5);
   display: flex;
   align-items: center;
+}
+
+
+@media screen and (max-width: 600px) {
+
+#clans {
+  padding: 0;
+}
+
+#SearchPlayer .SearchPlayer {
+  width: 100%;
+  flex-basis: 100%;
+}
+
+#SearchPlayer .SearchGroups {
+  flex-basis: 100%;
+  margin: 0 2rem 2rem;
+}
+
 }

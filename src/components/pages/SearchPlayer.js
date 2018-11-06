@@ -75,7 +75,7 @@ class SearchPlayer extends React.Component {
                 key={result.membershipId} >
                   <Link 
                     to={{
-                      pathname: `${this.props.match.path}/${result.membershipType}/${result.membershipId}`,
+                      pathname: `${this.props.path}/${result.membershipType}/${result.membershipId}`,
                       state: {
                         
                       }
@@ -97,7 +97,7 @@ class SearchPlayer extends React.Component {
                     key={result.membershipid} >
                       <Link 
                        to={{
-                          pathname: `${this.props.match.path}/${result.membershiptype}/${result.membershipid}`,
+                          pathname: `${this.props.path}/${result.membershiptype}/${result.membershipid}`,
                           state: {
                             
                           }
@@ -136,7 +136,7 @@ class SearchPlayer extends React.Component {
                   key={result.membershipid} >
                     <Link 
                       to={{
-                        pathname: `${this.props.match.path}/${result.membershiptype}/${result.membershipid}`,
+                        pathname: `${this.props.path}/${result.membershiptype}/${result.membershipid}`,
                         state: {
                           
                         }
