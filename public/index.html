@@ -15,25 +15,6 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;">
-      <filter id="sharpBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
-        <feGaussianBlur stdDeviation="7"></feGaussianBlur>
-        <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 10 0"></feColorMatrix>
-        <feComposite in2="SourceGraphic" operator="in"></feComposite>
-      </filter>
-      <filter id="bluntBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
-        <feGaussianBlur stdDeviation="17"></feGaussianBlur>
-        <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 10 0"></feColorMatrix>
-        <feComposite in2="SourceGraphic" operator="in"></feComposite>
-      </filter>
-      <filter id="ultraBlur" width="150%" height="150%" x="-25%" y="-25%" color-interpolation-filters="sRGB">
-        <feGaussianBlur stdDeviation="45"/>
-        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"/>
-        <feGaussianBlur stdDeviation="45"/>
-        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0 0 0 0 10 0"/>
-        <feComposite in2="SourceGraphic" operator="in"></feComposite>
-      </filter>
-    </svg>
     <div id="root"></div>
     <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
     <script src="%PUBLIC_URL%/static/js/modernizr-custom.js"></script>
