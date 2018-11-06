@@ -34,7 +34,7 @@ export function hasCategoryHash(item, categoryHash) {
   );
 }
 
-export function classFromType(str) {
+export function classTypeToString(str) {
   
   let string;
 
@@ -42,6 +42,21 @@ export function classFromType(str) {
     case 0: string = "Titan"; break;
     case 1: string = "Hunter"; break;
     case 2: string = "Warlock"; break;
+    default: string = "uh oh"
+  }
+
+  return string;
+  
+}
+
+export function membershipTypeToString(str) {
+  
+  let string;
+
+  switch (str) {
+    case 1: string = "Xbox"; break;
+    case 2: string = "PlayStation"; break;
+    case 4: string = "PC"; break;
     default: string = "uh oh"
   }
 

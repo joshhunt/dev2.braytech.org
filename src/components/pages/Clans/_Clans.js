@@ -7,6 +7,7 @@ import Error from '../Error';
 import './Clans.css';
 import SearchPlayer from '../SearchPlayer';
 import SearchGroups from '../SearchGroups';
+import DisplayGroup from './DisplayGroup';
 
 
 class Clans extends React.Component {
@@ -39,6 +40,8 @@ class Clans extends React.Component {
   }
 
   render() {
+
+    console.log(this)
     
     if (this.state.GroupResponse) {
       return (
@@ -50,13 +53,6 @@ class Clans extends React.Component {
                 <div className="view" id="clans">
                   <SearchPlayer {...this.props} {...route} playerSelect={this.playerSelect} />
                   <SearchGroups {...this.props} {...route} groupSelect={this.groupSelect} />
-                </div>
-              } />
-            <Route 
-              path="/clans/:groupId" 
-              render={ (route) => 
-                <div className="view" id="clans">
-                  groupId
                 </div>
               } />
             <Route 
@@ -86,9 +82,7 @@ class Clans extends React.Component {
             <Route 
               path="/clans/:groupId" 
               render={ (route) => 
-                <div className="view" id="clans">
-                  groupId
-                </div>
+                <DisplayGroup {...this.props} {...route} />
               } />
             <Route 
               path="/clans" 

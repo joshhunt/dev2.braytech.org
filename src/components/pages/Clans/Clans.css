@@ -11,3 +11,95 @@
   flex-basis: 30rem;
   margin: 0 0 0 3rem;
 }
+
+#clans .group {
+  width: 100%;
+}
+
+#clans .group h2 {
+  text-transform: uppercase;
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+#clans .group .motto {
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  margin: 0 0 4rem;
+}
+
+#clans .group .meta {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#clans .group .meta div h4 {
+  margin: 0 0 1rem;
+}
+
+#clans .group .meta > div {
+  margin: 0 0 0 3rem;
+  flex-basis: 12rem;
+}
+
+#clans .group .meta div div {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#clans .group .meta > div:first-child {
+  margin: 0;
+  flex-basis: 30rem;
+}
+
+#clans .group .meta > div:first-child div {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#clans .roster {
+  margin: 3rem 0 0;
+  width: 100%;
+}
+
+#clans .roster li {
+  position: relative;
+  height: 28px;
+  margin: 0 0 3px;
+  display: flex;
+  flex-flow: row wrap;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  cursor: default;
+}
+
+#clans .roster > li {
+  opacity: 0.4;
+}
+
+#clans .roster .header {
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#clans .roster > li.online {
+  opacity: 1;
+}
+
+#clans .roster li ul {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+#clans .roster li li {
+  flex-basis: calc(100% / 6.5);
+  display: flex;
+  align-items: center;
+}

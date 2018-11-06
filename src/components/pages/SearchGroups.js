@@ -19,7 +19,7 @@ class SearchGroups extends React.Component {
     }
   }
 
-  componentDidMount () {
+  query = () => {
 
     fetch(
       `https://www.bungie.net/Platform/GroupV2/User/${ this.props.match.params.membershipType }/${ this.props.match.params.membershipId }/0/1/`,
@@ -45,9 +45,22 @@ class SearchGroups extends React.Component {
 
   }
 
-  render() {
+  componentDidUpdate(prevProps, prevState) {
 
-    console.log(this)
+    if (prevProps.match.params.membershipId !== this.props.match.params.membershipId) {
+      this.setState({
+        results: false
+      })
+      this.query();
+    }    
+
+  }
+
+  componentDidMount() {
+    this.query();
+  }
+
+  render() {
 
     if (this.state.results) {
       return (
@@ -65,7 +78,7 @@ class SearchGroups extends React.Component {
                     <p>{ result.group.name }</p>
                     <p>{ result.group.motto }</p>
                   </div>
-                  <ReactMarkdown className="about" source={result.group.about} />
+                  <ReactMarkdown className="about" escapeHtml disallowedTypes={["link","linkReference","image","imageReference"]} source={result.group.about} />
                 </Link>
               </li> ) }
             </ul>

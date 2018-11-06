@@ -20,16 +20,19 @@
   right: 0;
   padding: 0.8rem 1rem;
   line-height: 1.4;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .SearchGroups .results ul li .header p {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
+  margin: 0 0 0.4rem;
 }
 
 .SearchGroups .results ul li .header p:last-child {
   font-style: italic;
+  letter-spacing: 0.6px;
+  margin: 0;
 }
 
 .SearchGroups .results ul li .about {

@@ -45,6 +45,10 @@
   box-shadow: 0 20px 50px 0 rgba(0, 0, 0, 0.2);
 }
 
+#player .characters .list li a {
+  z-index: 20;
+}
+
 #player .characters .list li:last-child {
   margin: 0;
 }

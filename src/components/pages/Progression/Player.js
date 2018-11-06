@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 
-import { classFromType } from '../../destinyUtils'
+import { classTypeToString } from '../../destinyUtils'
 import Globals from '../../Globals';
 
 import './Characters.css';
@@ -153,7 +153,7 @@ class Player extends React.Component {
               )}
             src={ `https://www.bungie.net${ character.emblemBackgroundPath ? character.emblemBackgroundPath : `/img/misc/missing_icon_d2.png` }` } />
           <div className="displayName">{ profile.userInfo.displayName }</div>
-          <div className="class">{ classFromType(character.classType) }</div>
+          <div className="class">{ classTypeToString(character.classType) }</div>
           <div className="light">{ character.light }</div>
           <div className="level">Level { character.baseCharacterLevel }</div>
           <div className="progress">

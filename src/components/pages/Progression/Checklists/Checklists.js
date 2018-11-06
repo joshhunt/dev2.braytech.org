@@ -98,7 +98,6 @@ class Checklists extends React.Component {
         <div className="checklistSelectors">
           <ul>
             { lists.map((list, index) => {
-                console.log(list, index)
 
                 let active = false;
                 // % 5 === 0

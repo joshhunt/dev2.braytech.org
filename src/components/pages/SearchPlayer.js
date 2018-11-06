@@ -28,7 +28,7 @@ class SearchPlayer extends React.Component {
     this.inputTimeout = setTimeout(() => {
 
       fetch(
-        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${ membershipType }/${ displayName }/`,
+        `https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/${ membershipType }/${ encodeURIComponent(displayName) }/`,
         {
           headers: {
             "X-API-Key": Globals.key.bungie,
@@ -47,7 +47,7 @@ class SearchPlayer extends React.Component {
         })
       .catch(error => {
         console.log(error);
-      })
+      });
 
 
 
@@ -57,11 +57,12 @@ class SearchPlayer extends React.Component {
 
   render() {
 
+    console.log(this)
     let profileHistory = ls.get("profileHistory") ? ls.get("profileHistory") : [];
-console.log(this)
+
     if (this.state.results) {
       return (
-        <>
+        <div className="SearchPlayer">
           <div className="frame">
             <h4>Search for player</h4>
             <div className="form">
@@ -74,12 +75,12 @@ console.log(this)
                 key={result.membershipId} >
                   <Link 
                     to={{
-                      pathname: `${this.props.appRoute.match.path}/${result.membershipType}/${result.membershipId}`,
+                      pathname: `${this.props.match.path}/${result.membershipType}/${result.membershipId}`,
                       state: {
                         
                       }
                     }} 
-                    onClick={this.props.playerSelect} 
+                    onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } } 
                     data-membershiptype={result.membershipType} 
                     data-membershipid={result.membershipId}
                     data-displayname={result.displayName} >
@@ -96,12 +97,12 @@ console.log(this)
                     key={result.membershipid} >
                       <Link 
                        to={{
-                          pathname: `${this.props.appRoute.match.path}/${result.membershiptype}/${result.membershipid}`,
+                          pathname: `${this.props.match.path}/${result.membershiptype}/${result.membershipid}`,
                           state: {
                             
                           }
                         }} 
-                        onClick={this.props.playerSelect} 
+                        onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } }
                         data-membershiptype={result.membershiptype} 
                         data-membershipid={result.membershipid}
                         data-displayname={result.displayname} >
@@ -113,7 +114,7 @@ console.log(this)
               </>
              : ``}
           </div>
-        </>
+        </div>
       )
     }
     else {
@@ -135,12 +136,12 @@ console.log(this)
                   key={result.membershipid} >
                     <Link 
                       to={{
-                        pathname: `${this.props.appRoute.match.path}/${result.membershiptype}/${result.membershipid}`,
+                        pathname: `${this.props.match.path}/${result.membershiptype}/${result.membershipid}`,
                         state: {
                           
                         }
                       }} 
-                      onClick={this.props.playerSelect} 
+                      onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } }
                       data-membershiptype={result.membershiptype} 
                       data-membershipid={result.membershipid}
                       data-displayname={result.displayname} >
