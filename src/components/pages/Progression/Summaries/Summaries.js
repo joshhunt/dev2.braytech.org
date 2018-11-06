@@ -6,8 +6,6 @@ import Almost from './Almost';
 
 const Summaries = (props) => {
 
-  console.log(props)
-
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;

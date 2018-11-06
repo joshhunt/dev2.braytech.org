@@ -64,7 +64,6 @@ class DisplayGroup extends React.Component {
   }
 
   render() {
-    console.log(this);
     
     if (!this.state.data) {
       return (

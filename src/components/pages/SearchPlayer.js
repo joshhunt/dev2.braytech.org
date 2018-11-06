@@ -57,76 +57,50 @@ class SearchPlayer extends React.Component {
 
   render() {
 
-    console.log(this)
     let profileHistory = ls.get("profileHistory") ? ls.get("profileHistory") : [];
 
+    let searchResults = null;
+
     if (this.state.results) {
-      return (
-        <div className="SearchPlayer">
-          <div className="frame">
-            <h4>Search for player</h4>
-            <div className="form">
-              <div className="field">
-                <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
-              </div>
-            </div>
-            <div className="results">
-              <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
-                key={result.membershipId} >
-                  <Link 
-                    to={{
-                      pathname: `${this.props.path}/${result.membershipType}/${result.membershipId}`,
-                      state: {
-                        
-                      }
-                    }} 
-                    onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } } 
-                    data-membershiptype={result.membershipType} 
-                    data-membershipid={result.membershipId}
-                    data-displayname={result.displayName} >
-                    <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
-                  </Link>
-                </li>) : <li>No profiles found</li> }</ul>
-            </div>
-            { profileHistory.length > 0 ? 
-              <>
-                <h4>Previous searches</h4>
-                <div className="results">
-                  <ul className="list">
-                    { profileHistory.map(result => <li 
-                    key={result.membershipid} >
-                      <Link 
-                       to={{
-                          pathname: `${this.props.path}/${result.membershiptype}/${result.membershipid}`,
-                          state: {
-                            
-                          }
-                        }} 
-                        onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } }
-                        data-membershiptype={result.membershiptype} 
-                        data-membershipid={result.membershipid}
-                        data-displayname={result.displayname} >
-                        <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershiptype].toLowerCase()}`}></span>{result.displayname}
-                      </Link>
-                    </li> ) }
-                  </ul>
-                </div>
-              </>
-             : ``}
-          </div>
+      
+      searchResults = <div className="results">
+          <ul className="list">{ this.state.results.length > 0 ? this.state.results.map(result => <li 
+            key={result.membershipId} >
+              <Link 
+                to={{
+                  pathname: `${this.props.path}/${result.membershipType}/${result.membershipId}`,
+                  state: {
+                    
+                  }
+                }} 
+                onClick={ (e) => { ls.update("profileHistory", e.currentTarget.dataset, true, 6); } } 
+                data-membershiptype={result.membershipType} 
+                data-membershipid={result.membershipId}
+                data-displayname={result.displayName} >
+                <span className={`destiny-platform_${destinyEnums.PLATFORMS[result.membershipType].toLowerCase()}`}></span>{result.displayName}
+              </Link>
+            </li>) : <li>No profiles found</li> }</ul>
         </div>
-      )
+
     }
     else {
-      return (
-        <div className="SearchPlayer">
+
+      searchResults = <div className="results"></div>
+
+    }
+
+    return (
+      <div className="SearchPlayer">
+        <div className="frame">
           <h4>Search for player</h4>
           <div className="form">
             <div className="field">
               <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
             </div>
           </div>
-          <div className="results"></div>
+          <div className="results">
+            {searchResults}
+          </div>
           { profileHistory.length > 0 ? 
             <>
               <h4>Previous searches</h4>
@@ -153,8 +127,8 @@ class SearchPlayer extends React.Component {
             </>
             : ``}
         </div>
-      )
-    }
+      </div>
+    )
 
   }
 

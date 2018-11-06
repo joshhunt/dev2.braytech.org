@@ -51,24 +51,24 @@ export function update(key, value, unique, limit) {
   else {
     let parsed = JSON.parse(json);
     if (unique) {
-      var passed = true;
-      for (let index = 0; index < parsed.length; index++) {
-        let obj = parsed[index];
-        if (objectsAreSame(obj, value)) {
-          passed = false;
-        }
-      }
-      if (passed) {
 
-        if (!limit) {
-          limit = parsed.length + 1;
-        }
-
-        parsed = [value, ...parsed.slice(0, limit)];
+      var index = parsed.findIndex(obj => obj.membershipid === value.membershipid);
+      if (index > -1) {
+        parsed.splice(index, 1);
       }
+
+      if (!limit) {
+        limit = parsed.length + 1;
+      }
+  
+      parsed = [value, ...parsed.slice(0, limit)];
     }
     else {
-      parsed.push(value);
+      if (!limit) {
+        limit = parsed.length + 1;
+      }
+  
+      parsed = [value, ...parsed.slice(0, limit)];
     }
     //console.log(json, parsed, "updating");
     set(key, parsed);

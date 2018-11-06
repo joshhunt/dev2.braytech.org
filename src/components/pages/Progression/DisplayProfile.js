@@ -58,7 +58,6 @@ class DisplayProfile extends React.Component {
   }
 
   render() {
-    console.log(this);
 
     if (!this.state.ProfileResponse) {
       return (
