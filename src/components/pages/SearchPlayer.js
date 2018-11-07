@@ -95,7 +95,7 @@ class SearchPlayer extends React.Component {
           <h4>Search for player</h4>
           <div className="form">
             <div className="field">
-              <input onInput={this.query} type="text" placeholder="justrealmilk" spellCheck="false" />
+              <input onInput={this.query} type="text" placeholder="insert gamertag" spellCheck="false" />
             </div>
           </div>
           <div className="results">

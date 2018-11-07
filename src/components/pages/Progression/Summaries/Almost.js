@@ -63,7 +63,12 @@ const Almost = (props) => {
 
         objectives.push(
           <li key={objDef.hash}>
-            <div className="progress">
+            <div className={cx(
+                "progress",
+                {
+                  "complete": obj.progress >= obj.completionValue ? true : false
+                }
+              )}>
               <div className="title">{objDef.progressDescription}</div>
               <div className="fraction">{obj.progress}/{obj.completionValue}</div>
               <div className="bar" style={{

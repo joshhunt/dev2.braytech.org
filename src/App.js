@@ -75,7 +75,10 @@ class App extends Component {
   }
 
   render() {
-    GA.init();
+    
+    if (!window.ga) {
+      GA.init();
+    }
 
     if (!this.state.manifest) {
       return (

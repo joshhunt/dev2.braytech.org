@@ -24,3 +24,7 @@
   opacity: 0.2;
   font-family: monospace;
 }
+
+.almost .progress.complete .bar {
+  background-color: #537959;
+}
