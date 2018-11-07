@@ -78,12 +78,14 @@ class GroupMembers extends React.Component {
         if (member.isOnline) {
           
           var activeCharacter = false;
-          Object.keys(profile.characterActivities.data).forEach(key => {
-            if (profile.characterActivities.data[key].currentActivityHash != 0) {
-              activeCharacter = profile.characterActivities.data[key];
-              return;
-            }
-          });
+          if (profile.characterActivities.data) {
+            Object.keys(profile.characterActivities.data).forEach(key => {
+              if (profile.characterActivities.data[key].currentActivityHash != 0) {
+                activeCharacter = profile.characterActivities.data[key];
+                return;
+              }
+            });
+          }
           
           var modeDefinition = manifest.DestinyActivityModeDefinition[activeCharacter.currentActivityModeHash];
           var activityDefinition = manifest.DestinyActivityDefinition[activeCharacter.currentActivityHash];
@@ -112,12 +114,12 @@ class GroupMembers extends React.Component {
             }
           )}>
             <ul>
-              <li>{ member.destinyUserInfo.displayName }</li>
-              <li><Moment fromNow>{ member.joinDate }</Moment></li>
-              <li>{ profile.profileRecords.data.score }</li>
-              <li>{ profile.characters.data[0].light }</li>
-              <li>{ destinyUtils.classTypeToString(profile.characters.data[0].classType) }</li>
-              <li>{ activity }</li>
+              <li className="displayName">{ member.destinyUserInfo.displayName }</li>
+              <li className="light">{ profile.characters.data[0].light }</li>
+              <li className="joinDate"><Moment fromNow>{ member.joinDate }</Moment></li>
+              <li className="score">{ profile.profileRecords.data ? profile.profileRecords.data.score : null }</li>
+              <li className="primary">{ destinyUtils.classTypeToString(profile.characters.data[0].classType) }</li>
+              <li className="activity">{ activity }</li>
             </ul>
           </li>
         )

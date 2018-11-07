@@ -12,7 +12,7 @@
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
-  background-color: #6b6b6b;
+  background-color: #5f5f5f;
 }
 
 #player .backgrounds {
@@ -83,8 +83,8 @@
 }
 
 #player .stats div div {
-  font-size: 2rem;
-  font-weight: 600;
+  /* font-size: 2rem; */
+  font-weight: 500;
 }
 
 #player .views {
@@ -154,7 +154,7 @@
 @media screen and (max-width: 600px) {
 
 #player {
-  padding: 9rem 2rem 3rem;
+  padding: 9rem 2rem 2rem;
 }
 
 #player .characters {

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import cx from 'classnames';
 import Moment from 'react-moment';
 
 import Globals from '../../Globals';
+import ObservedImage from '../../ObservedImage';
 
 import * as destinyUtils from '../../destinyUtils';
 
@@ -88,10 +90,14 @@ class DisplayGroup extends React.Component {
       });
 
       var commonPlatform = Object.keys(platforms).reduce((a, b) => platforms[a] > platforms[b] ? a : b);
-
+      
       return (
         <div className="view" id="clans">
           <div className="group">
+            { group.detail.groupId === "172382" ? <div className="nrg"><ObservedImage className={cx(
+                "image"
+              )}
+            src="/static/images/NRG-NEON-red.png" /></div> : `` }
             <h2>{ group.detail.name }</h2>
             <div className="motto">{ group.detail.motto }</div>
             <div className="meta">
@@ -116,12 +122,12 @@ class DisplayGroup extends React.Component {
           <ul className="roster">
             <li className="header">
               <ul>
-                <li>Gamertag</li>
-                <li>Date joined</li>
-                <li>Triumph score</li>
-                <li>Current light</li>
-                <li>Class</li>
-                <li>Current activity</li>
+                <li className="displayName">Gamertag</li>
+                <li className="light"></li>
+                <li className="joinDate">Date joined</li>
+                <li className="score">Triumph score</li>
+                <li className="primary">Class</li>
+                <li className="activity">Current activity</li>
               </ul>
             </li>
             <GroupMembers members={members.results} manifest={this.props.manifest} />

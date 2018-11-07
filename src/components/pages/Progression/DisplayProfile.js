@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Globals from '../../Globals';
+import GA from '../../../GA';
 import * as ls from '../../localStorage';
 
 import Error from '../Error';
@@ -68,19 +69,22 @@ class DisplayProfile extends React.Component {
     } else {
       return (
         <BrowserRouter>
-          <Switch>
-            <Route
-              path="/progression/:membershipType/:membershipId/:characterId/:view?"
-              render={route => (
-                <div className="view" id="progression">
-                  <Player data={this.state} route={route} goToProgression={this.goToProgression} />
-                  <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => <Summaries state={this.state} manifest={this.props.manifest} route={route} />} />
-                  <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                </div>
-              )}
-            />
-            <Route render={route => <Error />} />
-          </Switch>
+          <>
+            { <GA.RouteTracker /> }
+            <Switch>
+              <Route
+                path="/progression/:membershipType/:membershipId/:characterId/:view?"
+                render={route => (
+                  <div className="view" id="progression">
+                    <Player data={this.state} route={route} goToProgression={this.goToProgression} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => <Summaries state={this.state} manifest={this.props.manifest} route={route} />} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
+                  </div>
+                )}
+              />
+              <Route render={route => <Error />} />
+            </Switch>
+          </>
         </BrowserRouter>
       );
     }

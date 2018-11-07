@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import Globals from './components/Globals';
+
+import GA from './GA';
 
 import './Core.css';
 import './App.css';
 
 import Header from './components/pages/Header';
+import Footer from './components/pages/Footer';
 import Error from './components/pages/Error';
 
 // index - placeholder
@@ -71,6 +75,8 @@ class App extends Component {
   }
 
   render() {
+    GA.init();
+
     if (!this.state.manifest) {
       return (
         <div className="view" id="loading">
@@ -83,39 +89,74 @@ class App extends Component {
           <>
             <Header />
             <Switch>
-              <Route path="/" exact render={route => <Index appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />} />
+              <Route
+                path="/"
+                exact
+                render={route => (
+                  <>
+                    <GA.RouteTracker />
+                    <Index appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />
+                  </>
+                )}
+              />
               <Route
                 path="/progression"
                 exact
                 render={route => (
-                  <div className="view progression-search" id="SearchPlayer">
-                    <SearchPlayer {...this.props} {...route} path="/progression" />
-                  </div>
+                  <>
+                    <GA.RouteTracker />
+                    <div className="view progression-search" id="SearchPlayer">
+                      <SearchPlayer {...this.props} {...route} path="/progression" />
+                    </div>
+                  </>
                 )}
               />
               <Route path="/progression/:membershipType/:membershipId/:characterId?/:view?" render={route => <DisplayProfile {...this.props} {...route} manifest={this.state.manifest} viewport={this.state.viewport} />} />
               <Route
                 path="/clans/:membershipType/:membershipId"
                 render={route => (
-                  <div className="view clan-search" id="SearchPlayer">
-                    <SearchPlayer {...this.props} {...route} path="/clans" />
-                    <SearchGroups {...this.props} {...route} />
-                  </div>
+                  <>
+                    <GA.RouteTracker />
+                    <div className="view clan-search" id="SearchPlayer">
+                      <SearchPlayer {...this.props} {...route} path="/clans" />
+                      <SearchGroups {...this.props} {...route} />
+                    </div>
+                  </>
                 )}
               />
-              <Route path="/clans/:groupId" render={route => <DisplayGroup {...this.props} {...route} manifest={this.state.manifest} />} />
+              <Route
+                path="/clans/:groupId"
+                render={route => (
+                  <>
+                    <GA.RouteTracker />
+                    <DisplayGroup {...this.props} {...route} manifest={this.state.manifest} />
+                  </>
+                )}
+              />
               <Route
                 path="/clans"
                 exact
                 render={route => (
-                  <div className="view clan-search" id="SearchPlayer">
-                    <SearchPlayer {...this.props} {...route} path="/clans" />
-                  </div>
+                  <>
+                    <GA.RouteTracker />
+                    <div className="view clan-search" id="SearchPlayer">
+                      <SearchPlayer {...this.props} {...route} path="/clans" />
+                    </div>
+                  </>
                 )}
               />
-              <Route path="/xur" render={route => <Xur appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />} />
+              <Route
+                path="/xur"
+                render={route => (
+                  <>
+                    <GA.RouteTracker />
+                    <Xur appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />
+                  </>
+                )}
+              />
               <Route component={Error} />
             </Switch>
+            <Footer />
           </>
         </BrowserRouter>
       );

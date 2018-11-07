@@ -18,10 +18,14 @@
 }
 
 #clans .group {
+  position: relative;
   width: 100%;
+  padding: 9rem 3rem 3rem;
+  background-color: #5f5f5f;
 }
 
 #clans .group h2 {
+  position: relative;
   text-transform: uppercase;
   font-size: 38px;
   font-weight: 600;
@@ -30,10 +34,11 @@
 }
 
 #clans .group .motto {
+  position: relative;
   font-style: italic;
   font-size: 14px;
   letter-spacing: 0.6px;
-  margin: 0 0 4rem;
+  margin: 0 0 3rem;
 }
 
 #clans .group .meta {
@@ -47,27 +52,28 @@
 }
 
 #clans .group .meta > div {
-  margin: 0 0 0 3rem;
-  flex-basis: 12rem;
+  flex-basis: calc(100% / 6.5);
 }
 
 #clans .group .meta div div {
-  font-size: 2rem;
-  font-weight: 600;
+  /* font-size: 1rem; */
+  font-weight: 500;
 }
 
 #clans .group .meta > div:first-child {
   margin: 0;
-  flex-basis: 30rem;
+  flex-basis: calc((100% / 6.5) * 2);
 }
 
 #clans .group .meta > div:first-child div {
   font-size: 14px;
   font-weight: 400;
+  padding: 0 3rem 0 0;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 #clans .roster {
-  margin: 3rem 0 0;
+  padding: 3rem;
   width: 100%;
 }
 
@@ -109,6 +115,53 @@
   align-items: center;
 }
 
+#clans .roster li .displayName {
+  flex-basis: calc(100% / 6.5 - 4rem);
+}
+
+#clans .roster li .light {
+  font-weight: 500;
+  line-height: 1;
+  color: #2ed1c9;
+  flex-basis: 4rem;
+}
+
+#clans .roster li .light::before {
+  content: "\E973";
+  font-family: 'destiny' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 8px;
+  margin: 0 1px 3px 0;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#clans .roster .header .light::before {
+  content: none;
+}
+
+#clans .group .nrg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 0 1rem 0 0;
+  width: calc(100% - 1rem);
+  background-color: #ed1c24;
+}
+
+#clans .group .nrg .image {
+  background-position-x: right;
+  width: 30%;
+  left: initial;
+  right: 1rem;
+}
+
 
 @media screen and (max-width: 600px) {
 
@@ -124,6 +177,72 @@
 #SearchPlayer .SearchGroups {
   flex-basis: 100%;
   margin: 0 2rem 2rem;
+}
+
+#clans .group {
+  padding: 9rem 2rem 0;
+}
+
+#clans .group h2 {
+  font-size: 24px;
+}
+
+#clans .group .motto {
+  margin: 0 0 2rem;
+}
+
+#clans .group .meta > div {
+  flex-basis: 50%;
+  margin: 0 0 2rem;
+}
+
+#clans .group .meta > div:first-child {
+  flex-basis: 100%;
+  margin: 0 0 2rem;
+}
+
+#clans .group .meta > div:first-child div {
+  padding: 0;
+}
+
+#clans .roster {
+  padding: 2rem;
+}
+
+#clans .roster .header, 
+#clans .roster li li {
+  display: none;
+}
+
+#clans .roster li {
+  height: initial;
+}
+
+#clans .roster > li {
+  margin: 0 0 1rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#clans .roster li .displayName, 
+#clans .roster li .light,
+#clans .roster li .activity {
+  display: flex;
+}
+
+#clans .roster li .displayName {
+  flex-basis: calc(100% - 4rem);
+}
+
+#clans .roster li .activity {
+  flex-basis: 100%;
+  margin-top: 3px;
+}
+
+#clans .group .nrg .image {
+  height: 15rem;
+  top: 4rem;
+  width: 100%;
 }
 
 }

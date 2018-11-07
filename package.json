@@ -1,12 +1,13 @@
 {
   "name": "dev2.braytech.org",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
     "moment": "^2.22.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-ga": "^2.5.3",
     "react-markdown": "^4.0.3",
     "react-moment": "^0.8.3",
     "react-router-dom": "^4.3.1",
