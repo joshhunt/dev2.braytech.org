@@ -6,17 +6,32 @@
   display: flex;
   flex-flow: row wrap;
   padding: 19rem 1.5rem 1.5rem;
-  min-height: 100vh;
+  min-height: initial;
 }
 
 #progression .summaries {
   flex-basis: 100%;
-  padding: 1.5rem 0 1.5rem;
+  padding: 0 0 1.5rem;
 }
 
-#progression .checklists:not(.list) {
+#progression .checklists {
   flex-basis: 100%;
-  padding: 3rem 0;
+  padding: 0 0 3rem;
+}
+
+#progression >.header {
+  position: relative;
+  padding: 1rem 0;
+  margin: 3rem 1.5rem 1rem;
+  width: calc(100% - 3rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 2px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 
@@ -26,12 +41,16 @@
   padding: 0;
 }
 
-#progression .checklists:not(.list) {
-  padding: 3rem 1.5rem;
+#progression .checklists {
+  
 }
 
 #progression .summaries {
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 0 1.5rem 3rem;
+}
+
+#progression >.header {
+  margin: 3rem 3rem 1rem;
 }
 
 }
@@ -40,7 +59,15 @@
 @media screen and (max-width: 600px) {
 
 #progression .summaries {
-  padding: 2rem 1.5rem 3rem;
+  padding: 0 1.5rem 3rem;
+}
+
+#progression .checklists {
+  padding: 0 0.5rem;
+}
+
+#progression >.header {
+  margin: 3rem 2rem 1rem;
 }
 
 }

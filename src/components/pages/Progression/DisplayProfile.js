@@ -9,6 +9,9 @@ import './Progression.css';
 import Player from './Player';
 import Summaries from './Summaries/Summaries';
 import Checklists from './Checklists/Checklists';
+// import Ranks from './Ranks/Ranks';
+import './Triumphs/Triumphs.css';
+import PresentationNode from './Triumphs/PresentationNode';
 
 class DisplayProfile extends React.Component {
   constructor(props) {
@@ -42,8 +45,12 @@ class DisplayProfile extends React.Component {
             view = route.match.params.characterId;
           }
         }
+        
+        let primary = route.match.params.primary;
+        let secondary = route.match.params.secondary;
+        let tertiary = route.match.params.tertiary;
 
-        route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}`);
+        route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}${primary ? `/${primary}` : ``}${secondary ? `/${secondary}` : ``}${tertiary ? `/${tertiary}` : ``}`);
 
         this.setState({
           ProfileResponse: ProfileResponse.Response
@@ -73,12 +80,41 @@ class DisplayProfile extends React.Component {
             { <GA.RouteTracker /> }
             <Switch>
               <Route
-                path="/progression/:membershipType/:membershipId/:characterId/:view?"
+                path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?"
                 render={route => (
                   <div className="view" id="progression">
                     <Player data={this.state} route={route} goToProgression={this.goToProgression} />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => <Summaries state={this.state} manifest={this.props.manifest} route={route} />} />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => 
+                      <>
+                        <div className="header">
+                          <div>Summaries</div>
+                        </div>
+                        <div className="summaries">
+                          <Summaries state={this.state} manifest={this.props.manifest} route={route} />
+                        </div>
+                      </>
+                    } />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => 
+                      <>
+                        <div className="header">
+                          <div>Checklists</div>
+                        </div>
+                        <div className="checklists">
+                          <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
+                        </div>
+                      </>
+                    } />
+                    {/* <Route path="/progression/:membershipType/:membershipId/:characterId/ranks" exact render={() => <Ranks state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} /> */}
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?" render={() => 
+                      <>
+                        <div className="header">
+                          <div>Triumphs</div>
+                        </div>
+                        <div className="triumphs">
+                          <PresentationNode state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
+                        </div>
+                      </>
+                    } />
                   </div>
                 )}
               />

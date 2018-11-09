@@ -165,11 +165,12 @@ input {
   -webkit-appearance: none;
   border: none;
   font: inherit;
+  font-size: 18px;
   line-height: initial;
   padding: 0;
   margin: 0;
   padding: 0;
-  min-height: 2rem;
+  height: 38px;
   display: inline-flex;
   align-items: center;
   color: inherit;

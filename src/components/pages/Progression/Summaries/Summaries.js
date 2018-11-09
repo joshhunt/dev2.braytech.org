@@ -213,11 +213,7 @@ const Summaries = (props) => {
 
   }
 
-  return (
-    <div className="summaries">
-      {modules}
-    </div>
-  )
+  return modules
 }
 
 export default Summaries;

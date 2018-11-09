@@ -1,0 +1,29 @@
+
+
+.ranks {
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.ranks .rank {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin: 0 0 3px;
+}
+
+.ranks .step {
+  flex-basis: calc(100% - 7rem);
+}
+
+.ranks .step .progress {
+  
+}
+
+.ranks .step .progress .bar {
+  width: 0%;
+}
+
+.ranks .infamy .step .progress .bar {
+  background-color: #25986e;
+}

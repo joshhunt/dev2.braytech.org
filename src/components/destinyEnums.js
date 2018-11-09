@@ -95,3 +95,16 @@ export const CLASSES = {
   [TITAN]: 'Titan',
   [HUNTER]: 'Hunter'
 };
+
+const flagEnum = (state, value) => !!(state & value);
+
+export const enumerateRecordState = state => ({
+  none: flagEnum(state, 0),
+  recordRedeemed: flagEnum(state, 1),
+  rewardUnavailable: flagEnum(state, 2),
+  objectiveNotCompleted: flagEnum(state, 4),
+  obscured: flagEnum(state, 8),
+  invisible: flagEnum(state, 16),
+  entitlementUnowned: flagEnum(state, 32),
+  canEquipTitle: flagEnum(state, 64)
+});

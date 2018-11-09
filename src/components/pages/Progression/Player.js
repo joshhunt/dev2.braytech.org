@@ -160,25 +160,23 @@ class Player extends React.Component {
     const views = [
       {
         name: "Summary",
-        slug: ""
+        slug: "",
+        exact: true
       },
       {
         name: "Checklists",
-        slug: "/checklists"
-      },
-      {
-        name: "Ranks",
-        slug: "/ranks",
-        dev: true
+        slug: "/checklists",
+        exact: true
       },
       {
         name: "Triumphs",
         slug: "/triumphs",
-        dev: true
+        exact: false
       },
       {
         name: "Exotics",
         slug: "/exotics",
+        exact: true,
         dev: true
       }
     ]
@@ -239,7 +237,7 @@ class Player extends React.Component {
               let route = this.props.route;
               let to = `/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${route.match.params.characterId}${view.slug}`;
               return (
-                <li key={view.slug}>{view.dev ? `${view.name}` : <NavLink to={to} exact>{view.name}</NavLink>}</li>
+                <li key={view.slug}>{view.dev ? `${view.name}` : <NavLink to={to} exact={view.exact}>{view.name}</NavLink>}</li>
               )
             }) }
           </ul>

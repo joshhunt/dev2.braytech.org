@@ -136,7 +136,7 @@ class Checklists extends React.Component {
           </ul>
         </div>
         <div className={cx(
-            "checklists",
+            "lists",
             "col-" + this.itemsPerPage
           )}>
           { lists.slice(sliceStart, sliceEnd).map(list => {

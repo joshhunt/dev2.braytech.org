@@ -1,36 +1,36 @@
 
-.checklists:not(.list) {
+.lists {
   display: flex;
   flex-flow: row wrap;
-  padding: 1.5rem;
+  padding: 3rem 0 0;
 }
 
-.checklists .col {
+.lists .col {
   flex-basis: calc(20% - 3rem);
   padding: 0 1.5rem;
 }
 
-.checklists.col-4 .col {
+.lists.col-4 .col {
   flex-basis: calc(25% - 3rem);
 }
 
-.checklists.col-3 .col {
+.lists.col-3 .col {
   flex-basis: calc(100% / 3 - 3rem);
 }
 
-.checklists.col-2 .col {
+.lists.col-2 .col {
   flex-basis: calc(50% - 3rem);
 }
 
-.checklists.col-1 .col {
+.lists.col-1 .col {
   flex-basis: calc(100% - 3rem);
 }
 
-.checklists .col .head {
+.lists .col .head {
   margin: 0 0 3rem;
 }
 
-.checklists .list li {
+.lists .list li {
   position: relative;
   padding: 0;
   margin: 0 0 0.8rem;
@@ -40,7 +40,7 @@
   height: unset;
 }
 
-.checklists .list li .state {
+.lists .list li .state {
   position: relative;
   display: inline-block;
   width: 10px;
@@ -49,7 +49,7 @@
   flex-shrink: 0;
 }
 
-.checklists .list li .state::before {
+.lists .list li .state::before {
   content: " ";
   position: absolute;
   top: -2px;
@@ -59,19 +59,19 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
-.checklists .list li .state.completed {  
+.lists .list li .state.completed {  
   background-color: #78ba82;
 }
 
-.checklists .list li .state.completed + .text {
+.lists .list li .state.completed + .text {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.checklists .list.single-line li {
+.lists .list.single-line li {
   align-items: center;
 }
 
-.checklists .list.single-line li .state {
+.lists .list.single-line li .state {
   margin: 0 1rem 0 3px;
 }
 
@@ -85,7 +85,7 @@
 .checklistSelectors ul {
   display: flex;
   flex-flow: row wrap;
-  padding: 3rem 1.5rem 0;
+  padding: 0 1.5rem;
 }
 
 .checklistSelectors ul li {
@@ -115,6 +115,10 @@
 
 @media screen and (max-width: 1200px) {
 
+.lists {
+  padding: 3rem 1.5rem 0;
+}
+
 .checklistSelectors {
   padding: 0 1.5rem;
 }
@@ -127,12 +131,14 @@
 
 @media screen and (max-width: 600px) {
 
-.checklistSelectors {
-  padding: 0 0.5rem;
+.lists {
+  padding: 2rem 0 0;
 }
 
-#progression .checklists:not(.list) {
-  padding: 3rem 0.5rem;
+.checklistSelectors {
+  padding: 0;
 }
+
+
 
 }
