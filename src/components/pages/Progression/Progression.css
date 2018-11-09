@@ -9,20 +9,10 @@
   min-height: initial;
 }
 
-#progression .summaries {
-  flex-basis: 100%;
-  padding: 0 0 1.5rem;
-}
-
-#progression .checklists {
-  flex-basis: 100%;
-  padding: 0 0 3rem;
-}
-
 #progression >.header {
   position: relative;
   padding: 1rem 0;
-  margin: 3rem 1.5rem 1rem;
+  margin: 3rem 1.5rem 0;
   width: calc(100% - 3rem);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.4);
@@ -32,6 +22,21 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+}
+
+#progression .summaries {
+  flex-basis: 100%;
+  padding: 0 0 1.5rem;
+}
+
+#progression .checklists {
+  flex-basis: 100%;
+  padding: 1rem 0 3rem;
+}
+
+#progression .triumphs {
+  flex-basis: 100%;
+  padding: 1rem 1.5rem 3rem;
 }
 
 
@@ -49,8 +54,12 @@
   padding: 0 1.5rem 3rem;
 }
 
+#progression .triumphs {
+  padding: 0 3rem 2rem;
+}
+
 #progression >.header {
-  margin: 3rem 3rem 1rem;
+  margin: 3rem 3rem 0;
 }
 
 }
@@ -66,8 +75,12 @@
   padding: 0 0.5rem;
 }
 
+#progression .triumphs {
+  padding: 0 2rem 2rem;
+}
+
 #progression >.header {
-  margin: 3rem 2rem 1rem;
+  margin: 3rem 2rem 0;
 }
 
 }

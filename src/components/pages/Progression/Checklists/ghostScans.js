@@ -47,9 +47,23 @@ const ghostScans = (props) => {
         return;
       }
     });
+
+    console.log(item)
+
+    let farmScans = [1711258227, 1763506864, 2127236170, 3249685481];
+
+    if (farmScans.includes(item.hash)) {
+      scan = {
+        displayProperties: {
+          name: "The Farm"
+        }
+      }
+    }
+
+    let number = item.displayProperties.name.match(/([0-9]+)/)[0];
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ scan ? scan.displayProperties.name : `???` }>
+      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
         <div className={cx(
             "state",
             {
@@ -57,7 +71,7 @@ const ghostScans = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ scan ? scan.displayProperties.name : `???` }</p>
+          <p>{ number } &mdash; { scan ? scan.displayProperties.name : `???` }</p>
           <p>{ place.displayProperties.name }</p>
         </div>
       </li>
@@ -65,9 +79,9 @@ const ghostScans = (props) => {
   });
 
   list.sort(function(a, b) {
-    let textA = a.props['data-sort'].toUpperCase();
-    let textB = b.props['data-sort'].toUpperCase();
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    let intA = a.props['data-sort'];
+    let intB = b.props['data-sort'];
+    return intA - intB;
   });
 
   return (

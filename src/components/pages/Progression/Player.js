@@ -91,7 +91,7 @@ class Player extends React.Component {
     characters.forEach(character => {
 
       if (character.characterId === this.state.activeCharacterId) {
-        activeCharacter = character
+        activeCharacter = character;
       }
 
       let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap 
@@ -209,6 +209,8 @@ class Player extends React.Component {
       this.emblemBackgrounds = emblems;
     }
 
+    // {Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days
+
     return (
       <div id="player">
         <div className="backgrounds">{this.emblemBackgrounds}</div>
@@ -222,12 +224,8 @@ class Player extends React.Component {
         </div>
         <div className="stats">
           <div>
-            <h4>Score</h4>
-            <div>{profileRecords.score}</div>
-          </div>
-          <div>
             <h4>Playtime</h4>
-            <div>{Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days</div>
+            <div>{Math.ceil(parseInt(activeCharacter.minutesPlayedTotal, 10) / 1440)} days</div>
           </div>
         </div>
         <div className="views">
