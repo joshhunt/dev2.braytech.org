@@ -88,7 +88,9 @@ class SearchGroups extends React.Component {
     }
     else {
       return (
-        <div className="SearchGroups">loading groups</div>
+        <div className="SearchGroups">
+          <h4>Asking Bungie</h4>
+        </div>
       )
     }
 

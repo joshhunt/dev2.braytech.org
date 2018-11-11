@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import cx from 'classnames';
+import axios from 'axios';
 
 import Globals from './components/Globals';
+import ObservedImage from './components/ObservedImage';
 
 import GA from './GA';
 
@@ -52,22 +55,29 @@ class App extends Component {
     this.updateViewport();
     window.addEventListener('resize', this.updateViewport);
 
-    fetch(`https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition`, {
+    axios.get('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
       headers: {
         'X-API-Key': Globals.key.braytech
+      },
+      onDownloadProgress: (progressEvent) => {
+        //console.log(progressEvent)
+        this.setState({
+          progressEvent: {
+            loaded: progressEvent.loaded,
+            total: progressEvent.total
+          }
+        });
       }
     })
-      .then(response => {
-        return response.json();
-      })
-      .then(manifest => {
-        this.setState({
-          manifest
-        });
-      })
-      .catch(error => {
-        console.log(error);
+    .then(response => {
+      this.setState({
+        manifest: response.data
       });
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+
   }
 
   componentWillUnmount() {
@@ -80,10 +90,22 @@ class App extends Component {
       GA.init();
     }
 
-    if (!this.state.manifest) {
+    if (!this.state.manifest && this.state.progressEvent) {
       return (
         <div className="view" id="loading">
-          <p>loading app</p>
+          <ObservedImage className={cx(
+              "image"
+            )}
+            src="/static/images/braytech.png" />
+          <h4>Braytech</h4>
+          <div className="download">{ (this.state.progressEvent.loaded / 1048576).toFixed(2) }MB of { (this.state.progressEvent.total / 1048576).toFixed(2) }MB</div>
+        </div>
+      );
+    } else if (!this.state.manifest) {
+      return (
+        <div className="view" id="loading">
+          <h4>Braytech</h4>
+          <div className="download">PREPARING</div>
         </div>
       );
     } else {

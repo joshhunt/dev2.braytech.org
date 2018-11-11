@@ -84,7 +84,7 @@
 
 #player .stats div div {
   /* font-size: 2rem; */
-  font-weight: 500;
+  /* font-weight: 500; */
 }
 
 #player .views {
@@ -172,20 +172,20 @@
 
 #player .characters .displayName {
   left: 20%;
-  top: 15%;
+  top: 14%;
   font-size: 18px;
 }
 
 #player .characters .class {
   left: 20%;
-  top: 54%;
+  top: 53%;
   font-size: 13px;
 }
 
 #player .characters .light {
   top: 10%;
   right: 2%;
-  font-size: 28px;
+  font-size: 26px;
 }
 
 #player .characters .light::before {
@@ -194,9 +194,9 @@
 }
 
 #player .characters .level {
-  top: 54%;
+  top: 51%;
   right: 2%;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 #player .characters .progress {
@@ -205,6 +205,10 @@
 
 #player .stats > div {
   margin: 0 3rem 1rem 0;
+}
+
+#player .stats > div:last-child {
+  margin: 0 0 1rem;
 }
 
 #player .views ul li {

@@ -145,6 +145,10 @@
   content: none;
 }
 
+#clans .roster li .activity {
+  flex-basis: calc(100% / 6.5 * 2.5);
+}
+
 #clans .group .nrg {
   position: absolute;
   top: 0;

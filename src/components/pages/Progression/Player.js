@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
+import Moment from 'react-moment';
 
 import { classTypeToString } from '../../destinyUtils'
 import Globals from '../../Globals';
@@ -78,8 +79,11 @@ class Player extends React.Component {
 
     let props = this.props;
 
+    const manifest = props.manifest.response.data;
+
     let profile = props.data.ProfileResponse.profile.data;
     let characters = props.data.ProfileResponse.characters.data;
+    let characterActivities = props.data.ProfileResponse.characterActivities.data;
     let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
     let profileProgressions = props.data.ProfileResponse.profileProgression.data;
     let profileRecords = props.data.ProfileResponse.profileRecords.data;
@@ -139,7 +143,7 @@ class Player extends React.Component {
                 }
               } ></div>
           </div>
-          <Link onClick={this.expandCharacters} to={`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${character.characterId}${props.route.match.params.view ? `/${props.route.match.params.view}`:``}`}></Link>
+          <Link onClick={this.expandCharacters} to={`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${character.characterId}${props.route.match.params.view ? `/${props.route.match.params.view}`:``}${props.route.match.params.primary ? `/${props.route.match.params.primary}`:``}${props.route.match.params.secondary ? `/${props.route.match.params.secondary}`:``}${props.route.match.params.tertiary ? `/${props.route.match.params.tertiary}`:``}`}></Link>
         </li>
       )
     });
@@ -209,7 +213,26 @@ class Player extends React.Component {
       this.emblemBackgrounds = emblems;
     }
 
+    console.log(this)
+
     // {Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days
+
+    let activity;
+    if (characterActivities[activeCharacter.characterId].currentActivityHash !== 0) {
+        
+      var modeDefinition = manifest.DestinyActivityModeDefinition[characterActivities[activeCharacter.characterId].currentActivityModeHash];
+      var activityDefinition = manifest.DestinyActivityDefinition[characterActivities[activeCharacter.characterId].currentActivityHash];
+
+      activity = activityDefinition ? (activityDefinition.displayProperties.name ? activityDefinition.displayProperties.name : false) : false;
+      activity = activity ? activity : activityDefinition ? (activityDefinition.placeHash == 2961497387 ? `Orbit` : false) : false;
+
+      var mode = activity == "Orbit" ? false : modeDefinition ? modeDefinition.displayProperties.name : false;
+
+      activity = `${ mode ? mode : `` }${ mode ? `: ` : `` }${ activity ? activity : `Ghosting` }`;
+    }
+    else {
+      activity = <>Last played <Moment fromNow>{ activeCharacter.dateLastPlayed }</Moment></>
+    }
 
     return (
       <div id="player">
@@ -226,6 +249,10 @@ class Player extends React.Component {
           <div>
             <h4>Playtime</h4>
             <div>{Math.ceil(parseInt(activeCharacter.minutesPlayedTotal, 10) / 1440)} days</div>
+          </div>
+          <div>
+            <h4>Activity</h4>
+            <div>{activity}</div>
           </div>
         </div>
         <div className="views">

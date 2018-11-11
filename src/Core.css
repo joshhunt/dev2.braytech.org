@@ -275,7 +275,7 @@ header .trigger {
 }
 
 header.display a {
-  color: #000;
+  color: #fff;
   height: initial;
   display: initial;
   opacity: 1;
@@ -299,7 +299,7 @@ header ul {
   width: 100%;
   padding: 7rem 0 0;
   height: calc(100% - 7rem);
-  background-color: #fff;
+  background-color: #d9221c;
   flex-flow: row wrap;
   align-content: flex-start;
   display: none;
@@ -311,7 +311,7 @@ header.display ul {
 
 header ul li {
   padding: 0;
-  margin: 2rem 0 0.2rem 2rem;
+  margin: 2rem 0 0 3rem;
   font-size: 2rem;
   flex-basis: 100%;
   display: initial;
@@ -321,14 +321,13 @@ header ul li {
 }
 
 header ul li a.active::before {
-  border-bottom: 3px solid;
+  bottom: -8px;
 }
 
 header.display .logo {
   position: fixed;
   top: 3rem;
-  left: 2rem;
-  color: #000;
+  left: 3rem;
   z-index: 2;
   height: 3rem;
   display: flex;

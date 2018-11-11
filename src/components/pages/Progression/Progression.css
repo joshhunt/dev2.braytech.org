@@ -55,7 +55,7 @@
 }
 
 #progression .triumphs {
-  padding: 0 3rem 2rem;
+  padding: 1rem 3rem 2rem;
 }
 
 #progression >.header {
@@ -72,11 +72,11 @@
 }
 
 #progression .checklists {
-  padding: 0 0.5rem;
+  padding: 1rem 0.5rem;
 }
 
 #progression .triumphs {
-  padding: 0 2rem 2rem;
+  padding: 1rem 2rem 2rem;
 }
 
 #progression >.header {

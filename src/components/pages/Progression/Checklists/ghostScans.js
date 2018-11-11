@@ -48,8 +48,6 @@ const ghostScans = (props) => {
       }
     });
 
-    console.log(item)
-
     let farmScans = [1711258227, 1763506864, 2127236170, 3249685481];
 
     if (farmScans.includes(item.hash)) {

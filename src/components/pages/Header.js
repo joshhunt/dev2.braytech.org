@@ -17,9 +17,16 @@ class Header extends React.Component {
 
   navToggle = (e) => {
     e.preventDefault();
-    this.setState({
-      display: true
-    });
+    if (this.state.display) {
+      this.setState({
+        display: false
+      });
+    }
+    else {
+      this.setState({
+        display: true
+      });
+    }
   }
 
   navHide = (e) => {
@@ -38,10 +45,6 @@ class Header extends React.Component {
       {
         name: "Clans",
         to: "/clans"
-      },
-      {
-        name: "Xûr",
-        to: "/xur"
       }
     ];
 
@@ -49,7 +52,7 @@ class Header extends React.Component {
       return (
         <header ref={this.headerEl} className="display">
           <div className="logo">
-            <NavLink to="/" exact>Braytech</NavLink>
+            <NavLink to="/" exact onClick={this.navHide}>Braytech</NavLink>
           </div>
           <div className="trigger" onClick={this.navToggle}></div>
           <ul>

@@ -1,7 +1,7 @@
 
 .view {
   display: flex;
-  min-height: calc(100vh - 10rem);
+  min-height: calc(100vh - 8rem);
 }
 
 
@@ -283,13 +283,92 @@ button.square.active {
 }
 
 
+.corners {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
 
+.corners::before,
+.corners::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+}
+
+.corners::after {
+  border-width: 1px 1px 0 0;
+  left: initial;
+  right: 0;
+}
+
+.corners.t {
+  top: 0;
+}
+
+.corners.b {
+  bottom: 8px;
+}
+
+.corners.b::before {
+  border-width: 0 0 1px 1px;
+}
+
+.corners.b::after {
+  border-width: 0 1px 1px 0;
+}
 
 
 
 #loading {
-  padding: 0;
+  width: 100%;
+  padding-top: 8rem;
+  min-height: calc(100vh - 16rem);
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
-  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+#loading .image {
+  position: relative;
+  height: 300px;
+  margin: 0 0 2rem;
+}
+
+#loading h4,
+#loading .download {
+  flex-basis: 100%;
+}
+
+#loading h4 {
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+#loading .download {
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 600px) {
+
+#loading .image {
+  height: 240px;
+  margin: 0 0 1rem;
+}
+
+#loading .download {
+  margin: 0 0 3rem;
+}
+
 }

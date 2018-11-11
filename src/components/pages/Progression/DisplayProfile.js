@@ -70,7 +70,7 @@ class DisplayProfile extends React.Component {
     if (!this.state.ProfileResponse) {
       return (
         <div className="view" id="loading">
-          <p>loading user</p>
+          <h4>Asking Bungie</h4>
         </div>
       );
     } else {
@@ -83,7 +83,7 @@ class DisplayProfile extends React.Component {
                 path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?"
                 render={route => (
                   <div className="view" id="progression">
-                    <Player data={this.state} route={route} goToProgression={this.goToProgression} />
+                    <Player data={this.state} manifest={this.props.manifest} route={route} goToProgression={this.goToProgression} />
                     <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => 
                       <>
                         <div className="header">
@@ -104,7 +104,6 @@ class DisplayProfile extends React.Component {
                         </div>
                       </>
                     } />
-                    {/* <Route path="/progression/:membershipType/:membershipId/:characterId/ranks" exact render={() => <Ranks state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} /> */}
                     <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?" render={() => 
                       <>
                         <div className="header">

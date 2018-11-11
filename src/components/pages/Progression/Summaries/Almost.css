@@ -26,5 +26,5 @@
 }
 
 .almost .progress.complete .bar {
-  background-color: #bcad71;
+  background-color: rgba(90, 163, 102, 0.5);
 }

@@ -66,11 +66,13 @@ class DisplayGroup extends React.Component {
   }
 
   render() {
+
+    console.log(this)
     
     if (!this.state.data) {
       return (
         <div className="view" id="loading">
-          <p>loading group</p>
+          <h4>Asking Bungie</h4>
         </div>        
       )
     }
@@ -125,7 +127,7 @@ class DisplayGroup extends React.Component {
                 <li className="displayName">Gamertag</li>
                 <li className="light"></li>
                 <li className="joinDate">Date joined</li>
-                <li className="score">Triumph score</li>
+                <li className="clanXp">Clan XP</li>
                 <li className="primary">Class</li>
                 <li className="activity">Current activity</li>
               </ul>
