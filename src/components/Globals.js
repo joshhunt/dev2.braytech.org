@@ -2,8 +2,8 @@
 
 export default {
   key: {
-    braytech: "5bd52db31930b",
-    bungie: "fabac2ab32e04313a86fb6018268969c"
+    braytech: process.env.REACT_APP_BRAYTECH_API_KEY,
+    bungie: process.env.REACT_APP_BUNGIE_API_KEY
   },
   url: {
     braytech: "https://api.braytech.org",

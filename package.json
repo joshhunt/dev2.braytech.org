@@ -1,6 +1,6 @@
 {
   "name": "dev2.braytech.org",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",

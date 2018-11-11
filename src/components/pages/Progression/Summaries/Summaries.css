@@ -14,6 +14,9 @@
 
 
 
+#progression .summaries .list.checklists {
+  padding: 0;
+}
 
 .summaries .list li {
   height: unset;
