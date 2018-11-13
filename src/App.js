@@ -13,7 +13,7 @@ import './App.css';
 
 import Header from './components/pages/Header';
 import Footer from './components/pages/Footer';
-import Error from './components/pages/Error';
+import ErrorHandler from './components/pages/ErrorHandler';
 
 // index - placeholder
 import Index from './components/pages/Index/Index';
@@ -188,7 +188,7 @@ class App extends Component {
                   </>
                 )}
               />
-              <Route component={Error} />
+              <Route component={ErrorHandler} />
             </Switch>
             <Footer />
           </>

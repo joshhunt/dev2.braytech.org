@@ -326,6 +326,62 @@ button.square.active {
 
 
 
+#error {
+  padding: 9rem 3rem 0;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+#error .icon {
+  flex-basis: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3rem 0 0;
+  height: 5rem;
+  font-size: 70px;
+  font-weight: 500;
+  box-shadow: inset 0 0 0 5px #F44336;
+  border-radius: 100%;
+  color: #F44336;
+}
+
+#error .text {
+  max-width: 30rem;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#error .text a {
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+
+#error {
+  padding: 9rem 2rem 0;
+}
+
+#error .icon {
+  flex-basis: 4rem;
+  height: 4rem;
+  margin: 0 2rem 0 0;
+  font-size: 30px;
+  box-shadow: inset 0 0 0 4px #F44336;
+}
+
+#error .text {
+  margin: 3rem 0 0;
+  flex-basis: 100%;
+  max-width: initial;
+}
+
+}
+
+
+
+
+
 #loading {
   width: 100%;
   padding-top: 8rem;

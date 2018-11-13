@@ -4,7 +4,7 @@ import Globals from '../../Globals';
 import GA from '../../../GA';
 import * as ls from '../../localStorage';
 
-import Error from '../Error';
+import ErrorHandler from '../ErrorHandler';
 import './Progression.css';
 import Player from './Player';
 import { Almost, Checklists as ChecklistsSummary, Seals, Ranks } from './Summaries/Summaries';
@@ -19,11 +19,13 @@ class DisplayProfile extends React.Component {
 
     this.state = {};
 
+    this.askBungie = this.askBungie.bind(this);
     this.goToProgression = this.goToProgression.bind(this);
   }
 
-  componentDidMount() {
-    fetch(`https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,800,900`, {
+  askBungie = () => {
+
+    return fetch(`https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,800,900`, {
       headers: {
         'X-API-Key': Globals.key.bungie
       }
@@ -31,7 +33,33 @@ class DisplayProfile extends React.Component {
       .then(response => {
         return response.json();
       })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }
+
+  componentDidMount() {
+
+
+      // .then(response => {
+
+      //   if (response.Response.characterProgressions.data) {
+      //     return response;
+      //   }
+      //   else {
+
+      //   }
+
+      // })
+
+    this.askBungie()
       .then(ProfileResponse => {
+
+        if (!ProfileResponse.Response.characterProgressions.data) {
+          throw new SyntaxError("privacy");
+        }
+
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) {
           return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal);
         });
@@ -57,7 +85,9 @@ class DisplayProfile extends React.Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        this.setState({
+          error: error.message
+        });
       });
   }
 
@@ -67,7 +97,12 @@ class DisplayProfile extends React.Component {
 
   render() {
 
-    if (!this.state.ProfileResponse) {
+    if (this.state.error) {
+      return (
+        <ErrorHandler kind={this.state.error} />
+      )
+    }
+    else if (!this.state.ProfileResponse) {
       return (
         <div className="view" id="loading">
           <h4>Asking Bungie</h4>
@@ -130,7 +165,7 @@ class DisplayProfile extends React.Component {
                   </div>
                 )}
               />
-              <Route render={route => <Error />} />
+              <Route render={route => <ErrorHandler />} />
             </Switch>
           </>
         </BrowserRouter>
