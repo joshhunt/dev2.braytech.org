@@ -600,9 +600,8 @@ export const Ranks = (props) => {
   let ranks = [];
 
   for (const [key, value] of Object.entries(progression.ranks.values)) {
-    
-    ranks.push(
 
+    ranks.push(
       <div className="c3 rank" key={key}>
         <div className="module">
           <h4>{value.mode}</h4>

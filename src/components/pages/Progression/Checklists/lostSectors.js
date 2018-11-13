@@ -74,6 +74,9 @@ const lostSectors = (props) => {
     <>
       <div className="head">
         <h4>Lost Sectors</h4>
+        <div className="binding">
+          <p>Character bound</p>
+        </div>
         <div className="progress">
           <div className="title">Lost Sectors discovered</div>
           <div className="fraction">{Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[3142056444]).length}</div>

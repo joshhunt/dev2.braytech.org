@@ -49,6 +49,9 @@ const sleeperNodes = (props) => {
     <>
       <div className="head">
         <h4>Sleeper nodes</h4>
+        <div className="binding">
+          <p>Profile bound</p>
+        </div>
         <div className="progress">
           <div className="title">Sleeper nodes hacked</div>
           <div className="fraction">{Object.values(profileProgressions.checklists[365218222]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[365218222]).length}</div>

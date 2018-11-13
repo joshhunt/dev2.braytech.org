@@ -86,6 +86,9 @@ const ghostScans = (props) => {
     <>
       <div className="head">
         <h4>Ghost scans</h4>
+        <div className="binding">
+          <p>Profile bound</p>
+        </div>
         <div className="progress">
           <div className="title">Ghost scans performed</div>
           <div className="fraction">{Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2360931290]).length}</div>

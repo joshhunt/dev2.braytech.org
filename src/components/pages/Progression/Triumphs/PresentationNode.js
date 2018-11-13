@@ -107,7 +107,7 @@ class PresentationNode extends React.Component {
                 src={ `https://www.bungie.net${ node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
-            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => enumerateRecordState(record).recordRedeemed || enumerateRecordState(record).objectiveNotCompleted || enumerateRecordState(record).none).length}</div>
+            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.length}</div>
           </div>
         )
         
@@ -132,7 +132,7 @@ class PresentationNode extends React.Component {
                 src={ `https://www.bungie.net${ node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
-            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => enumerateRecordState(record).recordRedeemed || enumerateRecordState(record).objectiveNotCompleted || enumerateRecordState(record).none).length}</div>
+            <div className="state">{sealBars[node.hash].completed}/{sealBars[node.hash].total}</div>
           </div>
         )
         

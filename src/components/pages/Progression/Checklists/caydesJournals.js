@@ -53,6 +53,9 @@ const caydesJournals = (props) => {
     <>
       <div className="head">
         <h4>Cayde's Journals</h4>
+        <div className="binding">
+          <p>Profile bound</p>
+        </div>
         <div className="progress">
           <div className="title">Journals recovered</div>
           <div className="fraction">{Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length}/4</div>

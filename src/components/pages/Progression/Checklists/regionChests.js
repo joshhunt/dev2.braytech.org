@@ -74,6 +74,9 @@ const regionChests = (props) => {
     <>
       <div className="head">
         <h4>Region chests</h4>
+        <div className="binding">
+          <p>Profile bound with the exception of DLC 1 and and DLC 2 chests</p>
+        </div>
         <div className="progress">
           <div className="title">Region chests opened</div>
           <div className="fraction">{Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[1697465175]).length}</div>
