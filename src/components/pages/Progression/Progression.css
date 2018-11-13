@@ -24,11 +24,6 @@
   justify-content: space-between;
 }
 
-#progression .summaries {
-  flex-basis: 100%;
-  padding: 0 0 1.5rem;
-}
-
 #progression .checklists {
   flex-basis: 100%;
   padding: 1rem 0 3rem;
@@ -50,10 +45,6 @@
   
 }
 
-#progression .summaries {
-  padding: 0 1.5rem 3rem;
-}
-
 #progression .triumphs {
   padding: 1rem 3rem 2rem;
 }
@@ -66,10 +57,6 @@
 
 
 @media screen and (max-width: 600px) {
-
-#progression .summaries {
-  padding: 0 1.5rem 3rem;
-}
 
 #progression .checklists {
   padding: 1rem 0.5rem;

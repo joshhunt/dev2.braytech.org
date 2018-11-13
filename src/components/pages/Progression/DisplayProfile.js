@@ -7,7 +7,7 @@ import * as ls from '../../localStorage';
 import Error from '../Error';
 import './Progression.css';
 import Player from './Player';
-import Summaries from './Summaries/Summaries';
+import { Almost, Checklists as ChecklistsSummary, Seals, Ranks } from './Summaries/Summaries';
 import Checklists from './Checklists/Checklists';
 // import Ranks from './Ranks/Ranks';
 import './Triumphs/Triumphs.css';
@@ -90,7 +90,20 @@ class DisplayProfile extends React.Component {
                           <div>Summaries</div>
                         </div>
                         <div className="summaries">
-                          <Summaries state={this.state} manifest={this.props.manifest} route={route} />
+                          <div className="c2">
+                            <div className="c2">
+                              <ChecklistsSummary state={this.state} manifest={this.props.manifest} route={route} />
+                            </div>
+                            <div className="c2">
+                              <Seals state={this.state} manifest={this.props.manifest} route={route} />
+                            </div>
+                            <div className="c1">
+                              <Ranks state={this.state} manifest={this.props.manifest} route={route} />
+                            </div>
+                          </div>
+                          <div className="c2">
+                            <Almost state={this.state} manifest={this.props.manifest} route={route} />
+                          </div>
                         </div>
                       </>
                     } />

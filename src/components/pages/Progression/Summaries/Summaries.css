@@ -4,12 +4,51 @@
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
-  padding: 1.5rem;
+}
+
+.summaries .c1 {
+  flex-basis: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+
+.summaries .c2 {
+  flex-basis: 50%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+
+.summaries .c3 {
+  flex-basis: calc(100% / 3);
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
 }
 
 .summaries .module {
-  flex-basis: calc(100% / 4 - 3rem);
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 2rem;
+  flex-basis: 100%;
+}
+
+.summaries .c3.rank .text {
+  flex-basis: 100%;
+  margin: 0 0 1rem;
+}
+
+.summaries .c3.rank .text p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.summaries .c3.rank .progress {
+  flex-basis: 100%;
+  margin: 0 0 1.4rem;
+}
+
+.summaries .c3.rank .progress:last-child {
+  margin: 0;
 }
 
 
@@ -26,33 +65,46 @@
   opacity: 0.8;
 }
 
-.summaries .list.seals li .progress .bar {
+/* .summaries .list.seals li .progress .bar {
   background-color: #7b3274;
+} */
+
+
+
+@media screen and (max-width: 1200px) {
+
+.summaries {
+  padding: 0 1.5rem;
 }
 
-
-
-@media screen and (max-width: 1280px) {
-
-.summaries .module {
-  flex-basis: calc(100% / 3 - 3rem);
+.summaries > .c2 {
+  flex-basis: 100%;
 }
 
 }
 
 @media screen and (max-width: 900px) {
 
-.summaries .module {
-  flex-basis: calc(50% - 3rem);
-}
+
 
 }
 
 @media screen and (max-width: 600px) {
 
+.summaries {
+  padding: 0 1rem 3rem;
+}
+
+.summaries .c2 {
+  flex-basis: 100%;
+}
+
+.summaries .c3 {
+  flex-basis: 100%;
+}
+
 .summaries .module {
-  flex-basis: calc(100% - 1rem);
-  padding: 1rem 0.5rem 1rem 0.5rem;
+  padding: 1rem 1rem 2rem;
 }
 
 }

@@ -85,6 +85,17 @@ class PresentationNode extends React.Component {
       parent.children.presentationNodes.forEach(child => {
 
         let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+        let states = [];
+
+        node.children.presentationNodes.forEach(nodeChild => {
+          let nodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
+          nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
+            let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
+            nodeChildNodeChildNode.children.records.forEach(record => {
+              states.push(profileRecords[record.hash] ? profileRecords[record.hash].state : characterRecords[this.props.route.match.params.characterId].records[record.hash].state);
+            });
+          });
+        });
 
         nodes.push(
           <div key={ node.hash } className="node">
@@ -96,6 +107,7 @@ class PresentationNode extends React.Component {
                 src={ `https://www.bungie.net${ node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
+            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => enumerateRecordState(record).recordRedeemed || enumerateRecordState(record).objectiveNotCompleted || enumerateRecordState(record).none).length}</div>
           </div>
         )
         
@@ -104,6 +116,11 @@ class PresentationNode extends React.Component {
       sealsParent.children.presentationNodes.forEach(child => {
 
         let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
+        let states = [];
+
+        node.children.records.forEach(record => {
+          states.push(profileRecords[record.hash] ? profileRecords[record.hash].state : characterRecords[this.props.route.match.params.characterId].records[record.hash].state);
+        });
 
         sealNodes.push(
           <div key={ node.hash } className="node">
@@ -115,6 +132,7 @@ class PresentationNode extends React.Component {
                 src={ `https://www.bungie.net${ node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
+            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => enumerateRecordState(record).recordRedeemed || enumerateRecordState(record).objectiveNotCompleted || enumerateRecordState(record).none).length}</div>
           </div>
         )
         

@@ -2,18 +2,54 @@
 
 .almost {
   font-size: 14px;
+  column-count: 2;
+  column-gap: 6rem;
+  column-rule: 1px solid rgba(255, 255, 255, 0.1);  
+  padding-left: 3rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .almost > li {
   margin: 0 0 2rem;
+  display: inline-block;
+  width: 100%;
 }
 
 .almost li p {
   color: rgba(255, 255, 255, 0.8);
 }
 
-.almost li p:first-child {
+.almost li p:first-of-type {
   color: rgba(255, 255, 255, 1);
+}
+
+.almost li .crumbs {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 0 1rem;
+  transition: all .2s;
+}
+
+.almost li .crumbs a {
+  transition: initial;
+}
+
+.almost li .crumbs a::before {
+  content: " ";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 2px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  transition: all .2s;
+}
+
+.almost li:hover .crumbs {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.almost li:hover .crumbs a::before {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .almost li .list {
@@ -25,6 +61,35 @@
   font-family: monospace;
 }
 
+.almost .progress.complete {
+  /* background-color: rgba(90, 163, 102, 0); */
+}
+
 .almost .progress.complete .bar {
-  background-color: rgba(90, 163, 102, 0.5);
+  /* background-color: rgba(90, 163, 102, 0); */
+}
+
+@media screen and (max-width: 1200px) {
+
+  .almost {
+    padding-left: 0;
+    border-left: 0px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .almost li .crumbs {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .almost li .crumbs a::before {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .almost {
+    column-count: 1;
+  }
+
 }

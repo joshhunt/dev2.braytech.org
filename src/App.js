@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import cx from 'classnames';
 import axios from 'axios';
 
@@ -176,6 +176,15 @@ class App extends Component {
                   <>
                     <GA.RouteTracker />
                     <Xur appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />
+                  </>
+                )}
+              />
+              <Route
+                path="/checklists"
+                render={route => (
+                  <>
+                    <GA.RouteTracker />
+                    <Redirect to="/progression" />
                   </>
                 )}
               />

@@ -176,12 +176,6 @@ class Player extends React.Component {
         name: "Triumphs",
         slug: "/triumphs",
         exact: false
-      },
-      {
-        name: "Exotics",
-        slug: "/exotics",
-        exact: true,
-        dev: true
       }
     ]
 
@@ -212,8 +206,6 @@ class Player extends React.Component {
       });
       this.emblemBackgrounds = emblems;
     }
-
-    console.log(this)
 
     // {Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days
 
