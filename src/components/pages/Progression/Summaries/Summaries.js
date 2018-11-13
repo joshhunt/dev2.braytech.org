@@ -609,7 +609,7 @@ export const Ranks = (props) => {
             <p>Progress to next rank:</p>
           </div>
           <div className="progress">
-            <div className="title">{value.definition.steps[value.step.stepIndex].stepName}</div>
+            <div className="title">{value.definition.steps[value.step.stepIndex % (value.definition.steps.length - 1)].stepName}</div>
             <div className="fraction">{value.step.progressToNextLevel}/{value.step.nextLevelAt}</div>
             <div className="bar" style={{
               width: `${ value.step.progressToNextLevel / value.step.nextLevelAt * 100 }%`
