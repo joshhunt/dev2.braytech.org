@@ -74,26 +74,28 @@ class App extends Component {
       }
     })
     .then(response => {
-      db.table('manifest').clear();
-
-      db.table('manifest').add({
-        version: response.data.response.version,
-        value: response.data.response.data
+      db.table('manifest').clear()
+      .then(() => {
+        db.table('manifest').add({
+          version: response.data.response.version,
+          value: response.data.response.data
+        })
       })
-
-      db.table('manifest')
-      .toArray()
-      .then((manifest) => {
-        this.manifest = manifest[0].value;
-        let state = this.state;
-        state.manifest.ready = true;
-        this.setState(state);
+      .then(() => {
+        db.table('manifest')
+        .toArray()
+        .then((manifest) => {
+          this.manifest = manifest[0].value;
+          let state = this.state;
+          state.manifest.ready = true;
+          this.setState(state);
+        });
       });
 
     })
-    .catch(function (error) {
+    .catch(error => {
       console.log(error);
-    })
+    });
 
   }
 
@@ -109,41 +111,44 @@ class App extends Component {
           state.manifest.version = manifest[0].version;
           this.setState(state);
         }
-      });
-
-      fetch(
-        `https://www.bungie.net/Platform/Destiny2/Manifest/`,
-        {
-          headers: {
-            "X-API-Key": Globals.key.bungie,
-          }
-        }
-      )
-      .then(response => {
-        return response.json();
       })
+      .then(() => {
+        fetch(
+          `https://www.bungie.net/Platform/Destiny2/Manifest/`,
+          {
+            headers: {
+              "X-API-Key": Globals.key.bungie,
+            }
+          }
+        )
         .then(response => {
-    
-          console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version)
-
-          if (response.Response.version !== this.state.manifest.version) {
-            this.getManifest();
-          }
-          else {
-            db.table('manifest')
-            .toArray()
-            .then((manifest) => {
-              this.manifest = manifest[0].value;
-              let state = this.state;
-              state.manifest.ready = true;
-              this.setState(state);
-            });
-          }
-  
+          return response.json();
         })
-      .catch(error => {
-        console.log(error);
-      });
+          .then(response => {
+      
+            console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version)
+  
+            if (response.Response.version !== this.state.manifest.version) {
+              this.getManifest();
+            }
+            else {
+              db.table('manifest')
+              .toArray()
+              .then((manifest) => {
+                this.manifest = manifest[0].value;
+                let state = this.state;
+                state.manifest.ready = true;
+                this.setState(state);
+              });
+            }
+    
+          })
+        .catch(error => {
+          console.log(error);
+        });
+      })
+
+      
 
 
   }
