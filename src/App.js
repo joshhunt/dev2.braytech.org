@@ -120,9 +120,9 @@ class App extends Component {
             return response.json();
           })
           .then(response => {
-            console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version);
+            console.log(response.Response.mobileWorldContentPaths.en === this.state.manifest.version, response.Response.mobileWorldContentPaths.en, this.state.manifest.version);
 
-            if (response.Response.version !== this.state.manifest.version) {
+            if (response.Response.mobileWorldContentPaths.en !== this.state.manifest.version) {
               this.getManifest();
             } else {
               db.table('manifest')
