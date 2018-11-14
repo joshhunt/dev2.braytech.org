@@ -58,46 +58,44 @@ class App extends Component {
   }
 
   getManifest = () => {
-
-    axios.get('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
-      headers: {
-        'X-API-Key': Globals.key.braytech
-      },
-      onDownloadProgress: (progressEvent) => {
-        //console.log(progressEvent)
-        let state = this.state;
-        state.manifest.downloading = {
-          loaded: progressEvent.loaded,
-          total: progressEvent.total
-        }
-        this.setState(state);
-      }
-    })
-    .then(response => {
-      db.table('manifest').clear()
-      .then(() => {
-        db.table('manifest').add({
-          version: response.data.response.version,
-          value: response.data.response.data
-        })
-      })
-      .then(() => {
-        db.table('manifest')
-        .toArray()
-        .then((manifest) => {
-          this.manifest = manifest[0].value;
+    axios
+      .get('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
+        headers: {
+          'X-API-Key': Globals.key.braytech
+        },
+        onDownloadProgress: progressEvent => {
           let state = this.state;
-          state.manifest.ready = true;
+          state.manifest.downloading = {
+            loaded: progressEvent.loaded,
+            total: progressEvent.total
+          };
           this.setState(state);
-        });
+        }
+      })
+      .then(response => {
+        db.table('manifest')
+          .clear()
+          .then(() => {
+            db.table('manifest').add({
+              version: response.data.response.version,
+              value: response.data.response.data
+            });
+          })
+          .then(() => {
+            db.table('manifest')
+              .toArray()
+              .then(manifest => {
+                this.manifest = manifest[0].value;
+                let state = this.state;
+                state.manifest.ready = true;
+                this.setState(state);
+              });
+          });
+      })
+      .catch(error => {
+        console.log(error);
       });
-
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-  }
+  };
 
   componentDidMount() {
     this.updateViewport();
@@ -105,7 +103,7 @@ class App extends Component {
 
     db.table('manifest')
       .toArray()
-      .then((manifest) => {
+      .then(manifest => {
         if (manifest.length > 0) {
           let state = this.state;
           state.manifest.version = manifest[0].version;
@@ -113,44 +111,34 @@ class App extends Component {
         }
       })
       .then(() => {
-        fetch(
-          `https://www.bungie.net/Platform/Destiny2/Manifest/`,
-          {
-            headers: {
-              "X-API-Key": Globals.key.bungie,
-            }
+        fetch(`https://www.bungie.net/Platform/Destiny2/Manifest/`, {
+          headers: {
+            'X-API-Key': Globals.key.bungie
           }
-        )
-        .then(response => {
-          return response.json();
         })
           .then(response => {
-      
-            console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version)
-  
+            return response.json();
+          })
+          .then(response => {
+            console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version);
+
             if (response.Response.version !== this.state.manifest.version) {
               this.getManifest();
-            }
-            else {
+            } else {
               db.table('manifest')
-              .toArray()
-              .then((manifest) => {
-                this.manifest = manifest[0].value;
-                let state = this.state;
-                state.manifest.ready = true;
-                this.setState(state);
-              });
+                .toArray()
+                .then(manifest => {
+                  this.manifest = manifest[0].value;
+                  let state = this.state;
+                  state.manifest.ready = true;
+                  this.setState(state);
+                });
             }
-    
           })
-        .catch(error => {
-          console.log(error);
-        });
-      })
-
-      
-
-
+          .catch(error => {
+            console.log(error);
+          });
+      });
   }
 
   componentWillUnmount() {
@@ -159,8 +147,6 @@ class App extends Component {
 
   render() {
 
-    console.log(this)
-    
     if (!window.ga) {
       GA.init();
     }
@@ -168,21 +154,17 @@ class App extends Component {
     if (!this.state.manifest.ready && this.state.manifest.downloading) {
       return (
         <div className="view" id="loading">
-          <ObservedImage className={cx(
-              "image"
-            )}
-            src="/static/images/braytech.png" />
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
           <h4>Braytech</h4>
-          <div className="download">{ (this.state.manifest.downloading.loaded / 1048576).toFixed(2) }MB of { (this.state.manifest.downloading.total / 1048576).toFixed(2) }MB</div>
+          <div className="download">
+            {(this.state.manifest.downloading.loaded / 1048576).toFixed(2)}MB of {(this.state.manifest.downloading.total / 1048576).toFixed(2)}MB
+          </div>
         </div>
       );
     } else if (!this.state.manifest.ready) {
       return (
         <div className="view" id="loading">
-          <ObservedImage className={cx(
-              "image"
-            )}
-            src="/static/images/braytech.png" />
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
           <h4>Braytech</h4>
           <div className="download">PREPARING</div>
         </div>
