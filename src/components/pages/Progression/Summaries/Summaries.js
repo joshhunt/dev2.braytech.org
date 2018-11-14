@@ -14,7 +14,7 @@ export const Almost = (props) => {
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data;
+  let manifest = props.manifest;
 
   let almost = [];
 
@@ -202,7 +202,7 @@ export const Checklists = (props) => {
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data;
+  let manifest = props.manifest;
 
   let progression = {
     checklists: {
@@ -215,7 +215,7 @@ export const Checklists = (props) => {
           completed: Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length
         },
         lostSectors: {
-          text: "Lost Sectors discovered",
+          text: "Lost sectors discovered",
           total: Object.keys(characterProgressions[characterId].checklists[3142056444]).length,
           completed: Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length
         },
@@ -233,6 +233,11 @@ export const Checklists = (props) => {
           text: "Ghost scans performed",
           total: Object.keys(profileProgressions.checklists[2360931290]).length,
           completed: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
+        },
+        latentMemories: {
+          text: "Latent memories shot",
+          total: Object.keys(profileProgressions.checklists[2955980198]).length,
+          completed: Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length
         },
         caydesJorunals: {
           text: "Cayde's journals recovered",
@@ -332,7 +337,7 @@ export const Seals = (props) => {
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data;
+  let manifest = props.manifest;
   
   let progression = {
     checklists: {
@@ -465,7 +470,7 @@ export const Ranks = (props) => {
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data;
+  let manifest = props.manifest;
 
   let progression = {
     checklists: {

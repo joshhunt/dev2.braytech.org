@@ -25,7 +25,7 @@ class PresentationNode extends React.Component {
     let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
     let characterId = this.props.route.match.params.characterId;
   
-    let manifest = this.props.manifest.response.data;
+    let manifest = this.props.manifest;
 
     const sealBars = {
       2588182977: {

@@ -60,7 +60,7 @@ class GroupMembers extends React.Component {
 
   render() {
     
-    const manifest = this.props.manifest.response.data;
+    const manifest = this.props.manifest;
 
     let members = [];
 

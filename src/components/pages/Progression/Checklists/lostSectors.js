@@ -1,5 +1,6 @@
 import React from 'react';
-import cx from 'classnames'
+import cx from 'classnames';
+import orderBy from 'lodash/orderBy';
 
 const lostSectors = (props) => {
 
@@ -7,7 +8,7 @@ const lostSectors = (props) => {
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data
+  let manifest = props.manifest;
 
   let list = []
 
@@ -47,9 +48,12 @@ const lostSectors = (props) => {
         return;
       }
     });
-    
-    list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ place.displayProperties.name }>
+
+    list.push({
+      completed: completed ? 1 : 0,
+      place: place.displayProperties.name,
+      name: lostsector ? lostsector.displayProperties.name : `???`,
+      element: <li key={item.hash}>
         <div className={cx(
             "state",
             {
@@ -61,14 +65,11 @@ const lostSectors = (props) => {
           <p>{ place.displayProperties.name }</p>
         </div>
       </li>
-    )
+      })
+
   });
 
-  list.sort(function(a, b) {
-    let textA = a.props['data-sort'].toUpperCase();
-    let textB = b.props['data-sort'].toUpperCase();
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-  });
+  list = orderBy(list, [item => item.completed, item => item.place, item => item.name], ['asc', 'asc', 'asc']);
 
   return (
     <>
@@ -86,7 +87,7 @@ const lostSectors = (props) => {
         </div>
       </div>
       <ul className="list no-interaction">
-        {list}
+        {list.map(obj => obj.element)}
       </ul>
     </>
   )

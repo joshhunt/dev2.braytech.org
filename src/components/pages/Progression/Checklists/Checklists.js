@@ -6,6 +6,7 @@ import lostSectors from './lostSectors';
 import adventures from './adventures';
 import sleeperNodes from './sleeperNodes';
 import ghostScans from './ghostScans';
+import latentMemories from './latentMemories';
 import caydesJournals from './caydesJournals';
 import './Checklists.css';
 
@@ -83,6 +84,10 @@ class Checklists extends React.Component {
       {
         name: "Ghost Scans",
         list: ghostScans(this.props)
+      },
+      {
+        name: "Latent Memory Fragments",
+        list: latentMemories(this.props)
       },
       {
         name: "Cayde's Journals",

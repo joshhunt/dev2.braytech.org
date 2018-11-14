@@ -10,7 +10,7 @@ const Ranks = (props) => {
   let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data
+  let manifest = props.manifest
   
   
 

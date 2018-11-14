@@ -79,7 +79,7 @@ class Player extends React.Component {
 
     let props = this.props;
 
-    const manifest = props.manifest.response.data;
+    const manifest = props.manifest;
 
     let profile = props.data.ProfileResponse.profile.data;
     let characters = props.data.ProfileResponse.characters.data;

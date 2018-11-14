@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "dexie": "^2.0.4",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "react": "^16.6.0",

@@ -1,5 +1,6 @@
 import React from 'react';
-import cx from 'classnames'
+import cx from 'classnames';
+import orderBy from 'lodash/orderBy';
 
 const regionChests = (props) => {
 
@@ -7,7 +8,7 @@ const regionChests = (props) => {
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data
+  let manifest = props.manifest;
 
   let list = []
 
@@ -48,8 +49,11 @@ const regionChests = (props) => {
       }
     });
     
-    list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ place.displayProperties.name }>
+    list.push({
+      completed: completed ? 1 : 0,
+      place: place.displayProperties.name,
+      name: regionchest ? regionchest.displayProperties.name : `???`,
+      element: <li key={item.hash}>
         <div className={cx(
             "state",
             {
@@ -61,21 +65,17 @@ const regionChests = (props) => {
           <p>{ place.displayProperties.name }</p>
         </div>
       </li>
-    )
+      })
   });
 
-  list.sort(function(a, b) {
-    let textA = a.props['data-sort'].toUpperCase();
-    let textB = b.props['data-sort'].toUpperCase();
-    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-  });
+  list = orderBy(list, [item => item.completed, item => item.place, item => item.name], ['asc', 'asc', 'asc']);
 
   return (
     <>
       <div className="head">
         <h4>Region chests</h4>
         <div className="binding">
-          <p>Profile bound with the exception of DLC 1 and and DLC 2 chests</p>
+          <p>Profile bound with the exception of DLC 1 and DLC 2 chests</p>
         </div>
         <div className="progress">
           <div className="title">Region chests opened</div>
@@ -86,7 +86,7 @@ const regionChests = (props) => {
         </div>
       </div>
       <ul className="list no-interaction">
-        {list}
+        {list.map(obj => obj.element)}
       </ul>
     </>
   )

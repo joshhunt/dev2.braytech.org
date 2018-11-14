@@ -4,8 +4,8 @@ import cx from 'classnames';
 import axios from 'axios';
 
 import Globals from './components/Globals';
+import db from './components/db';
 import ObservedImage from './components/ObservedImage';
-
 import GA from './GA';
 
 import './Core.css';
@@ -35,9 +35,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      manifest: false
+      manifest: {
+        downloading: false,
+        version: undefined,
+        ready: false
+      }
     };
     this.updateViewport = this.updateViewport.bind(this);
+    this.getManifest = this.getManifest.bind(this);
+    this.manifest = null;
   }
 
   updateViewport() {
@@ -51,9 +57,7 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    this.updateViewport();
-    window.addEventListener('resize', this.updateViewport);
+  getManifest = () => {
 
     axios.get('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
       headers: {
@@ -61,22 +65,86 @@ class App extends Component {
       },
       onDownloadProgress: (progressEvent) => {
         //console.log(progressEvent)
-        this.setState({
-          progressEvent: {
-            loaded: progressEvent.loaded,
-            total: progressEvent.total
-          }
-        });
+        let state = this.state;
+        state.manifest.downloading = {
+          loaded: progressEvent.loaded,
+          total: progressEvent.total
+        }
+        this.setState(state);
       }
     })
     .then(response => {
-      this.setState({
-        manifest: response.data
+      db.table('manifest').clear();
+
+      db.table('manifest').add({
+        version: response.data.response.version,
+        value: response.data.response.data
+      })
+
+      db.table('manifest')
+      .toArray()
+      .then((manifest) => {
+        this.manifest = manifest[0].value;
+        let state = this.state;
+        state.manifest.ready = true;
+        this.setState(state);
       });
+
     })
     .catch(function (error) {
       console.log(error);
     })
+
+  }
+
+  componentDidMount() {
+    this.updateViewport();
+    window.addEventListener('resize', this.updateViewport);
+
+    db.table('manifest')
+      .toArray()
+      .then((manifest) => {
+        if (manifest.length > 0) {
+          let state = this.state;
+          state.manifest.version = manifest[0].version;
+          this.setState(state);
+        }
+      });
+
+      fetch(
+        `https://www.bungie.net/Platform/Destiny2/Manifest/`,
+        {
+          headers: {
+            "X-API-Key": Globals.key.bungie,
+          }
+        }
+      )
+      .then(response => {
+        return response.json();
+      })
+        .then(response => {
+    
+          console.log(response.Response.version === this.state.manifest.version, response.Response.version, this.state.manifest.version)
+
+          if (response.Response.version !== this.state.manifest.version) {
+            this.getManifest();
+          }
+          else {
+            db.table('manifest')
+            .toArray()
+            .then((manifest) => {
+              this.manifest = manifest[0].value;
+              let state = this.state;
+              state.manifest.ready = true;
+              this.setState(state);
+            });
+          }
+  
+        })
+      .catch(error => {
+        console.log(error);
+      });
+
 
   }
 
@@ -85,12 +153,14 @@ class App extends Component {
   }
 
   render() {
+
+    console.log(this)
     
     if (!window.ga) {
       GA.init();
     }
 
-    if (!this.state.manifest && this.state.progressEvent) {
+    if (!this.state.manifest.ready && this.state.manifest.downloading) {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx(
@@ -98,12 +168,16 @@ class App extends Component {
             )}
             src="/static/images/braytech.png" />
           <h4>Braytech</h4>
-          <div className="download">{ (this.state.progressEvent.loaded / 1048576).toFixed(2) }MB of { (this.state.progressEvent.total / 1048576).toFixed(2) }MB</div>
+          <div className="download">{ (this.state.manifest.downloading.loaded / 1048576).toFixed(2) }MB of { (this.state.manifest.downloading.total / 1048576).toFixed(2) }MB</div>
         </div>
       );
-    } else if (!this.state.manifest) {
+    } else if (!this.state.manifest.ready) {
       return (
         <div className="view" id="loading">
+          <ObservedImage className={cx(
+              "image"
+            )}
+            src="/static/images/braytech.png" />
           <h4>Braytech</h4>
           <div className="download">PREPARING</div>
         </div>
@@ -120,7 +194,7 @@ class App extends Component {
                 render={route => (
                   <>
                     <GA.RouteTracker />
-                    <Index appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />
+                    <Index appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
                   </>
                 )}
               />
@@ -136,7 +210,7 @@ class App extends Component {
                   </>
                 )}
               />
-              <Route path="/progression/:membershipType/:membershipId/:characterId?/:view?/:primary?/:secondary?/:tertiary?" render={route => <DisplayProfile {...this.props} {...route} manifest={this.state.manifest} viewport={this.state.viewport} />} />
+              <Route path="/progression/:membershipType/:membershipId/:characterId?/:view?/:primary?/:secondary?/:tertiary?" render={route => <DisplayProfile {...this.props} {...route} manifest={this.manifest} viewport={this.state.viewport} />} />
               <Route
                 path="/clans/:membershipType/:membershipId"
                 render={route => (
@@ -154,7 +228,7 @@ class App extends Component {
                 render={route => (
                   <>
                     <GA.RouteTracker />
-                    <DisplayGroup {...this.props} {...route} manifest={this.state.manifest} />
+                    <DisplayGroup {...this.props} {...route} manifest={this.manifest} />
                   </>
                 )}
               />
@@ -175,7 +249,7 @@ class App extends Component {
                 render={route => (
                   <>
                     <GA.RouteTracker />
-                    <Xur appRoute={route} manifest={this.state.manifest} viewport={this.state.viewport} />
+                    <Xur appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
                   </>
                 )}
               />

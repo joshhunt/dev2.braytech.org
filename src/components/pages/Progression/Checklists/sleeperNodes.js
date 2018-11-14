@@ -7,7 +7,7 @@ const sleeperNodes = (props) => {
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let characterId = props.route.match.params.characterId;
 
-  let manifest = props.manifest.response.data
+  let manifest = props.manifest;
 
   let list = []
 
