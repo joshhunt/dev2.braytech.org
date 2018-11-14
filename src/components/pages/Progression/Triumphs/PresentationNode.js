@@ -107,7 +107,7 @@ class PresentationNode extends React.Component {
                 src={ `https://www.bungie.net${ node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
-            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.length}</div>
+            <div className="state">{states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => !enumerateRecordState(record).invisible).length}</div>
           </div>
         )
         
@@ -372,19 +372,23 @@ class PresentationNode extends React.Component {
 
         let state;
         if (profileRecords[child.hash]) {
-          state = profileRecords[child.hash] ? enumerateRecordState(profileRecords[child.hash].state).recordRedeemed : false;
+          state = profileRecords[child.hash] ? profileRecords[child.hash].state : 0;
         }
         else if (characterRecords[this.props.route.match.params.characterId].records[child.hash]) {
-          state = characterRecords[this.props.route.match.params.characterId].records[child.hash] ? enumerateRecordState(characterRecords[this.props.route.match.params.characterId].records[child.hash].state).recordRedeemed : false;
+          state = characterRecords[this.props.route.match.params.characterId].records[child.hash] ? characterRecords[this.props.route.match.params.characterId].records[child.hash].state : 0;
         }
         else {
-          state = false;
+          state = 0;
+        }
+
+        if (enumerateRecordState(state).invisible) {
+          return;
         }
         
         tertiaryChildren.push(
           <li key={recordDefinition.hash} className={cx(
                 {
-                  "completed": state
+                  "completed": enumerateRecordState(state).recordRedeemed
                 }
               )}>
             <div className="icon">  
@@ -403,6 +407,7 @@ class PresentationNode extends React.Component {
             </div>
           </li>
         )
+        
       });
 
       return (

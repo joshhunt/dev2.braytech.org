@@ -9,7 +9,7 @@ const ErrorHandler = (props) => {
       error = <>
         <h4>Profile privacy</h4>
         <p>Your profile data may be set to private on Bungie.net.</p>
-        <p>You can check here <a href="https://www.bungie.net/en/Profile/Settings?category=Privacy" target="_blank" rel="noopener noreferrer">https://www.bungie.net/en/Profile/Settings?category=Privacy</a>.</p>
+        <p>You can check here <a href="https://www.bungie.net/en/Profile/Settings?category=Privacy" target="_blank" rel="noopener noreferrer">https://www.bungie.net/en/Profile/Settings?category=Privacy</a>. Look for <em>Show my Progression (what I've completed in Destiny, and my current status)</em>.</p>
         <p>If I'm mistaken, I apologise. This error is generated when character progression data is unavailable, and this is the most likely cause.</p>
       </>;
 
