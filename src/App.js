@@ -18,9 +18,6 @@ import ErrorHandler from './components/pages/ErrorHandler';
 // index
 import Index from './components/pages/Index/Index';
 
-// index
-import Equipped from './components/pages/Equipped/Equipped';
-
 // progression
 import './components/pages/Progression/Progression.css';
 import SearchPlayer from './components/pages/SearchPlayer';
@@ -149,7 +146,6 @@ class App extends Component {
   }
 
   render() {
-
     if (!window.ga) {
       GA.init();
     }
@@ -185,16 +181,6 @@ class App extends Component {
                   <>
                     <GA.RouteTracker />
                     <Index appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
-                  </>
-                )}
-              />
-              <Route
-                path="/equipped"
-                exact
-                render={route => (
-                  <>
-                    <GA.RouteTracker />
-                    <Equipped appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
                   </>
                 )}
               />

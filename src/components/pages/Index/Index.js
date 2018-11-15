@@ -47,7 +47,7 @@ class Index extends Component {
             <div className="entries">
               {this.state.blogs.map(entry => {
                 return (
-                  <div className="entry">
+                  <div key={entry._id} className="entry">
                     <div className="title">{entry.title}</div>
                     <Moment fromNow>{entry._created * 1000}</Moment>
                     <ReactMarkdown className="content" source={entry.content} />
