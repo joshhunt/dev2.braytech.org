@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import cx from 'classnames';
-import axios from 'axios';
 
 import Globals from './components/Globals';
 import db from './components/db';
@@ -58,27 +57,25 @@ class App extends Component {
   }
 
   getManifest = () => {
-    axios
-      .get('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
-        headers: {
-          'X-API-Key': Globals.key.braytech
-        },
-        onDownloadProgress: progressEvent => {
-          let state = this.state;
-          state.manifest.downloading = {
-            loaded: progressEvent.loaded,
-            total: progressEvent.total
-          };
-          this.setState(state);
-        }
-      })
+    let state = this.state;
+    state.manifest.downloading = true;
+    this.setState(state);
+
+    fetch('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition', {
+      headers: {
+        'X-API-Key': Globals.key.braytech
+      }
+    })
       .then(response => {
+        return response.json();
+      })
+      .then(fetch => {
         db.table('manifest')
           .clear()
           .then(() => {
             db.table('manifest').add({
-              version: response.data.response.version,
-              value: response.data.response.data
+              version: fetch.response.version,
+              value: fetch.response.data
             });
           })
           .then(() => {
@@ -155,9 +152,7 @@ class App extends Component {
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
           <h4>Braytech</h4>
-          <div className="download">
-            {(this.state.manifest.downloading.loaded / 1048576).toFixed(2)}MB of {(this.state.manifest.downloading.total / 1048576).toFixed(2)}MB
-          </div>
+          <div className="download">UPDATING</div>
         </div>
       );
     } else if (!this.state.manifest.ready) {

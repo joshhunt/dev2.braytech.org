@@ -25,7 +25,7 @@ const ErrorHandler = (props) => {
   return (
     <div className="view" id="error">
       <div className="icon">!</div>
-      <div class="text">
+      <div className="text">
         {error}
       </div>      
     </div>

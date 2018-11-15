@@ -226,6 +226,20 @@ header ul li a {
   opacity: 0.4;
 }
 
+header .logo a::before {
+  content: "\e96b";
+  font-family: 'destiny' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  font-size: 14px;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0 7px 0 0;
+}
+
 header ul li:hover a {
   opacity: 0.8;
 }
