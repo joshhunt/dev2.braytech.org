@@ -123,13 +123,18 @@ class PresentationNode extends React.Component {
         });
 
         sealNodes.push(
-          <div key={ node.hash } className="node">
+          <div key={ node.hash } className={cx(
+              "node",
+              {
+                completed: sealBars[node.hash].completed === sealBars[node.hash].total
+              }
+            )}>
             <Link to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/seal/${node.hash}` }>
               <ObservedImage className={cx(
                     "image",
                     "icon"
                   )}
-                src={ `https://www.bungie.net${ node.originalIcon }` } />
+                src={ `https://www.bungie.net${ sealBars[node.hash].completed === sealBars[node.hash].total ? node.displayProperties.icon : node.originalIcon }` } />
                 { node.displayProperties.name }
             </Link>
             <div className="state">{sealBars[node.hash].completed}/{sealBars[node.hash].total}</div>

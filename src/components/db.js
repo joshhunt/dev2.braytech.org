@@ -6,14 +6,3 @@ db.version(1).stores({
 });
 
 export default db;
-
-// db.table('manifest')
-// .toArray()
-// .then((manifest) => {
-//   console.log(manifest)
-// });
-
-// db.table('manifest').add({
-//   modified: response.data.response.modified,
-//   value: response.data.response.data
-// });

@@ -71,11 +71,19 @@
 }
 
 .triumphs .parent.seals .node a .image {
-  transition: opacity 0.5s, filter 0.25s;
+  transition: opacity 0.5s;
 }
 
-.triumphs .parent.seals .node a:hover .image:hover {
-  filter: drop-shadow(0 0 10px #c5b678);
+.triumphs .parent.seals .node a .image.dl {
+  opacity: 0.6;
+}
+
+.triumphs .parent.seals .node.completed a .image.dl {
+  opacity: 1;
+}
+
+.triumphs .parent.seals .node a:hover .image {
+  opacity: 1;
 }
 
 .triumphs .parent.seals .node .image::before {

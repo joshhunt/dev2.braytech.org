@@ -15,8 +15,11 @@ import Header from './components/pages/Header';
 import Footer from './components/pages/Footer';
 import ErrorHandler from './components/pages/ErrorHandler';
 
-// index - placeholder
+// index
 import Index from './components/pages/Index/Index';
+
+// index
+import Equipped from './components/pages/Equipped/Equipped';
 
 // progression
 import './components/pages/Progression/Progression.css';
@@ -120,7 +123,7 @@ class App extends Component {
             return response.json();
           })
           .then(response => {
-            console.log(response.Response.mobileWorldContentPaths.en === this.state.manifest.version, response.Response.mobileWorldContentPaths.en, this.state.manifest.version);
+            // console.log(response.Response.mobileWorldContentPaths.en === this.state.manifest.version, response.Response.mobileWorldContentPaths.en, this.state.manifest.version);
 
             if (response.Response.mobileWorldContentPaths.en !== this.state.manifest.version) {
               this.getManifest();
@@ -182,6 +185,16 @@ class App extends Component {
                   <>
                     <GA.RouteTracker />
                     <Index appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
+                  </>
+                )}
+              />
+              <Route
+                path="/equipped"
+                exact
+                render={route => (
+                  <>
+                    <GA.RouteTracker />
+                    <Equipped appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
                   </>
                 )}
               />

@@ -11,3 +11,60 @@
   position: fixed;
   background-size: cover;
 }
+
+#index .blogs {
+  padding: 9rem 3rem 0;
+  position: relative;
+  width: 30rem;
+}
+
+#index .blogs h4 {
+  padding: 1rem 0;
+  margin: 0 0 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#index .blogs .entries {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#index .blogs .entries a {
+  color: #fff;
+}
+
+#index .blogs .entries .entry {
+  margin: 0 0 2rem;
+}
+
+#index .blogs .entries .entry .title {
+  color: #fff;
+  margin: 0 0 0.5rem;
+}
+
+#index .blogs .entries .entry time {
+  display: block;
+  margin: 0 0 1rem;
+}
+
+#index .blogs .entries .entry .content ul {
+  list-style-type: disc;
+  line-height: 1.6;
+  padding: 0 0 0 2rem;
+  margin: 1rem 0 2rem;
+}
+
+#index .blogs .entries .entry .content ul li del {
+  text-decoration-style: wavy;
+  text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+
+
+@media screen and (max-width: 600px) {
+
+#index .blogs {
+  padding: 9rem 2rem 0;
+  width: calc(100% - 4rem);
+}
+
+}
