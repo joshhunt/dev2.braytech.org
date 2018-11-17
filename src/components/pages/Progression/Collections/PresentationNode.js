@@ -4,7 +4,7 @@ import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
 
-import Records from './Records';
+import Collectibles from './Collectibles';
 
 class PresentationNode extends React.Component {
   
@@ -16,10 +16,10 @@ class PresentationNode extends React.Component {
 
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
       
-    let secondaryHash = this.props.route.match.params.secondary ? this.props.route.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash; // crucible -> lifetime
+    let secondaryHash = this.props.route.match.params.secondary ? this.props.route.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
   
-    let tertiaryHash = this.props.route.match.params.tertiary ? this.props.route.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash; // crucible -> lifetime -> combat record
+    let tertiaryHash = this.props.route.match.params.tertiary ? this.props.route.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
     
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
@@ -40,7 +40,7 @@ class PresentationNode extends React.Component {
   
       primaryChildren.push(
         <li key={node.hash}>
-          <NavLink isActive={isActive} to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/${primaryHash}/${node.hash}` }>
+          <NavLink isActive={isActive} to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections/${primaryHash}/${node.hash}` }>
             <ObservedImage className={cx(
                   "image",
                   "icon"
@@ -70,7 +70,7 @@ class PresentationNode extends React.Component {
       
       secondaryChildren.push(
         <li key={node.hash}>
-          <NavLink isActive={isActive} to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/${primaryHash}/${secondaryHash}/${node.hash}` }>{node.displayProperties.name}</NavLink>
+          <NavLink isActive={isActive} to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections/${primaryHash}/${secondaryHash}/${node.hash}` }>{node.displayProperties.name}</NavLink>
         </li>
       )
     });
@@ -88,9 +88,9 @@ class PresentationNode extends React.Component {
             {secondaryChildren}
           </ul>
         </div>
-        <div className="records">
-          <ul className="list no-interaction tertiary">
-            <Records {...this.props} tertiaryHash={tertiaryHash} />
+        <div className="collectibles">
+          <ul className="list tertiary">
+            <Collectibles {...this.props} tertiaryHash={tertiaryHash} />
           </ul>
         </div>
       </div>

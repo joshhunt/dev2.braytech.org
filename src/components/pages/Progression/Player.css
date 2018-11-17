@@ -163,6 +163,10 @@
   padding-bottom: calc(96 / 474 * 100%);
 }
 
+#player .characters .list li {
+  box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.4);
+}
+
 #player .characters .image.emblem.missing {
   width: calc(96 / 474 * 100% - 37px);
   height: calc(100% - 35px);

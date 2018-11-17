@@ -75,7 +75,7 @@ const regionChests = (props) => {
       <div className="head">
         <h4>Region chests</h4>
         <div className="binding">
-          <p>Profile bound with the exception of DLC 1 and DLC 2 chests</p>
+          <p>Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests</p>
         </div>
         <div className="progress">
           <div className="title">Region chests opened</div>

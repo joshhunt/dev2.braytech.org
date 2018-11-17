@@ -20,7 +20,7 @@ class Index extends Component {
         return response.json();
       })
       .then(data => {
-        let blogs = data.entries;
+        let blogs = data.entries.reverse();
         this.setState({
           blogs
         });

@@ -4,6 +4,7 @@
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
+  padding: 0 1.5rem;
 }
 
 .summaries .c1 {
@@ -72,10 +73,6 @@
 
 
 @media screen and (max-width: 1200px) {
-
-.summaries {
-  padding: 0 1.5rem;
-}
 
 .summaries > .c2 {
   flex-basis: 100%;

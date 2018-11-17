@@ -9,9 +9,9 @@ import './Progression.css';
 import Player from './Player';
 import { Almost, Checklists as ChecklistsSummary, Seals, Ranks } from './Summaries/Summaries';
 import Checklists from './Checklists/Checklists';
-// import Ranks from './Ranks/Ranks';
-import './Triumphs/Triumphs.css';
-import PresentationNode from './Triumphs/PresentationNode';
+import './PresentationNode.css';
+import Triumphs from './Triumphs/Triumphs';
+import Collections from './Collections/Collections';
 
 class DisplayProfile extends React.Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class DisplayProfile extends React.Component {
   }
 
   askBungie = () => {
-
     return fetch(`https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,800,900`, {
       headers: {
         'X-API-Key': Globals.key.bungie
@@ -36,28 +35,14 @@ class DisplayProfile extends React.Component {
       .catch(error => {
         console.log(error);
       });
-
-  }
+  };
 
   componentDidMount() {
 
-
-      // .then(response => {
-
-      //   if (response.Response.characterProgressions.data) {
-      //     return response;
-      //   }
-      //   else {
-
-      //   }
-
-      // })
-
     this.askBungie()
       .then(ProfileResponse => {
-
         if (!ProfileResponse.Response.characterProgressions.data) {
-          throw new SyntaxError("privacy");
+          throw new SyntaxError('privacy');
         }
 
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) {
@@ -73,7 +58,7 @@ class DisplayProfile extends React.Component {
             view = route.match.params.characterId;
           }
         }
-        
+
         let primary = route.match.params.primary;
         let secondary = route.match.params.secondary;
         let tertiary = route.match.params.tertiary;
@@ -92,17 +77,13 @@ class DisplayProfile extends React.Component {
   }
 
   goToProgression = () => {
-    this.props.history.push("/progression");
-  }
+    this.props.history.push('/progression');
+  };
 
   render() {
-
     if (this.state.error) {
-      return (
-        <ErrorHandler kind={this.state.error} />
-      )
-    }
-    else if (!this.state.ProfileResponse) {
+      return <ErrorHandler kind={this.state.error} />;
+    } else if (!this.state.ProfileResponse) {
       return (
         <div className="view" id="loading">
           <h4>Asking Bungie</h4>
@@ -112,56 +93,56 @@ class DisplayProfile extends React.Component {
       return (
         <BrowserRouter>
           <>
-            { <GA.RouteTracker /> }
+            {<GA.RouteTracker />}
             <Switch>
               <Route
                 path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?"
                 render={route => (
                   <div className="view" id="progression">
                     <Player data={this.state} manifest={this.props.manifest} route={route} goToProgression={this.goToProgression} />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId" exact render={() => 
-                      <>
-                        <div className="header">
-                          <div>Summaries</div>
-                        </div>
-                        <div className="summaries">
-                          <div className="c2">
+                    <Route
+                      path="/progression/:membershipType/:membershipId/:characterId"
+                      exact
+                      render={() => (
+                        <>
+                          <div className="sub-header">
+                            <div>Summaries</div>
+                          </div>
+                          <div className="summaries">
                             <div className="c2">
-                              <ChecklistsSummary state={this.state} manifest={this.props.manifest} route={route} />
+                              <div className="c2">
+                                <ChecklistsSummary state={this.state} manifest={this.props.manifest} route={route} />
+                              </div>
+                              <div className="c2">
+                                <Seals state={this.state} manifest={this.props.manifest} route={route} />
+                              </div>
+                              <div className="c1">
+                                <Ranks state={this.state} manifest={this.props.manifest} route={route} />
+                              </div>
                             </div>
                             <div className="c2">
-                              <Seals state={this.state} manifest={this.props.manifest} route={route} />
-                            </div>
-                            <div className="c1">
-                              <Ranks state={this.state} manifest={this.props.manifest} route={route} />
+                              <Almost state={this.state} manifest={this.props.manifest} route={route} />
                             </div>
                           </div>
-                          <div className="c2">
-                            <Almost state={this.state} manifest={this.props.manifest} route={route} />
+                        </>
+                      )}
+                    />
+                    <Route
+                      path="/progression/:membershipType/:membershipId/:characterId/checklists"
+                      exact
+                      render={() => (
+                        <>
+                          <div className="sub-header">
+                            <div>Checklists</div>
                           </div>
-                        </div>
-                      </>
-                    } />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId/checklists" exact render={() => 
-                      <>
-                        <div className="header">
-                          <div>Checklists</div>
-                        </div>
-                        <div className="checklists">
-                          <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
-                        </div>
-                      </>
-                    } />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?" render={() => 
-                      <>
-                        <div className="header">
-                          <div>Triumphs</div>
-                        </div>
-                        <div className="triumphs">
-                          <PresentationNode state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
-                        </div>
-                      </>
-                    } />
+                          <div className="checklists">
+                            <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
+                          </div>
+                        </>
+                      )}
+                    />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?" render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?" render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                   </div>
                 )}
               />

@@ -176,6 +176,11 @@ class Player extends React.Component {
         name: "Triumphs",
         slug: "/triumphs",
         exact: false
+      },
+      {
+        name: "Collections",
+        slug: "/collections",
+        exact: false
       }
     ]
 

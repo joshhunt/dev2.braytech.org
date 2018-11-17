@@ -1,31 +1,11 @@
 
 
-.triumphs {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0 1.5rem 1.5rem;
-  width: 100%;
-  align-items: flex-start;
-}
 
-.triumphs .parent {
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
 
-.triumphs .parent .node {
-  flex-basis: 10rem;
-  justify-content: center;
-  margin: 0 0 3rem;
-}
 
-.triumphs .parent .node a {
-  text-align: center;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-}
+
+
+
 
 .triumphs .parent .node .image {
   position: relative;
@@ -243,13 +223,6 @@
 }
 
 
-
-.triumphs .node .records {
-  flex-basis: calc(80% - (3rem - 3px));
-  margin: 0 0 0 calc(3rem - 3px);
-}
-
-
 .triumphs .list.tertiary {
   display: flex;
   flex-flow: row wrap;
@@ -327,11 +300,6 @@
   flex-basis: 30%;
 }
 
-.triumphs .node .records {
-  flex-basis: calc(70% - (2rem - 3px));
-  margin: 0 0 0 calc(2rem - 3px);
-}
-
 .triumphs .list.tertiary li {
   flex-basis: calc(100% / 2 - 3px - 2rem);
 }
@@ -341,16 +309,20 @@
 
 @media screen and (max-width: 600px) {
 
-.triumphs .node.seal .secondary .icon .image {
+.triumphs .node.seal .children .icon .image {
   padding-bottom: 50%;
 }
 
-.triumphs .node.seal .secondary .text .name {
-  font-size: 28px;
+.triumphs .node.seal .children .text .name {
+  font-size: 24px;
 }
 
-.triumphs .node.seal .secondary .until {
+.triumphs .node.seal .children .until {
   margin: 3rem 0 2rem;
+}
+
+.triumphs .header .name {
+  font-size: 24px;
 }
 
 .triumphs .parent .node {
@@ -371,11 +343,6 @@
 .triumphs .node .children {
   flex-basis: 100%;
   margin: 0 0 2rem;
-}
-
-.triumphs .node .records {
-  flex-basis: 100%;
-  margin: 0;
 }
 
 .triumphs .list.tertiary li {
