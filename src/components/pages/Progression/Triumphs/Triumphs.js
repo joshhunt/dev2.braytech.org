@@ -1,10 +1,4 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import cx from 'classnames';
-
-import ObservedImage from '../../../ObservedImage';
-
-import { enumerateRecordState } from '../../../destinyEnums';
 
 import Root from './Root';
 import SealNode from './SealNode';
@@ -19,8 +13,16 @@ class Triumphs extends React.Component {
     this.state = {};
 
   }
+
+  componentDidMount() {
+    if (!this.props.route.match.params.quaternary) {
+      window.scrollTo(0, 0);
+    }
+  }
   
   render() {
+
+    console.log(this)
 
     let primaryHash = this.props.route.match.params.primary ? this.props.route.match.params.primary : false;
     

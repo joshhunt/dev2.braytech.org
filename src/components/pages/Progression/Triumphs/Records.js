@@ -7,6 +7,20 @@ import ObservedImage from '../../../ObservedImage';
 import { enumerateRecordState } from '../../../destinyEnums';
 
 class Records extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.scrollToRecordRef = React.createRef();
+
+  }
+
+  componentDidMount() {
+    if (this.props.quaternaryHash) { console.log(this.scrollToRecordRef)
+      window.scrollTo({
+        top: this.scrollToRecordRef.current.offsetTop - (window.innerHeight / 2)
+      })
+    }
+  }
   
   render() {
    
@@ -87,9 +101,11 @@ class Records extends React.Component {
       if (enumerateRecordState(state).invisible) {
         return;
       }
+
+      let ref = highlightHash == recordDefinition.hash ? this.scrollToRecordRef : null;
       
       tertiaryChildren.push(
-        <li key={recordDefinition.hash} className={cx(
+        <li key={recordDefinition.hash} ref={ref} className={cx(
               {
                 "completed": enumerateRecordState(state).recordRedeemed,
                 "highlight": highlightHash && highlightHash == recordDefinition.hash

@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import packageJSON from '../../../package.json';
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +54,7 @@ class Header extends React.Component {
       return (
         <header ref={this.headerEl} className="display">
           <div className="logo">
-            <NavLink to="/" exact onClick={this.navHide}>Braytech</NavLink>
+            <NavLink to="/" exact onClick={this.navHide}>Braytech {packageJSON.version}</NavLink>
           </div>
           <div className="trigger" onClick={this.navToggle}></div>
           <ul>
