@@ -7,7 +7,8 @@ import * as ls from '../../localStorage';
 import ErrorHandler from '../ErrorHandler';
 import './Progression.css';
 import Player from './Player';
-import { Almost, Checklists as ChecklistsSummary, Seals, Ranks } from './Summaries/Summaries';
+import Summary from './Summary/Summary';
+import ThisWeek from './ThisWeek/ThisWeek';
 import Checklists from './Checklists/Checklists';
 import './PresentationNode.css';
 import Triumphs from './Triumphs/Triumphs';
@@ -38,7 +39,6 @@ class DisplayProfile extends React.Component {
   };
 
   componentDidMount() {
-
     this.askBungie()
       .then(ProfileResponse => {
         if (!ProfileResponse.Response.characterProgressions.data) {
@@ -62,8 +62,9 @@ class DisplayProfile extends React.Component {
         let primary = route.match.params.primary;
         let secondary = route.match.params.secondary;
         let tertiary = route.match.params.tertiary;
+        let quaternary = route.match.params.quaternary;
 
-        route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}${primary ? `/${primary}` : ``}${secondary ? `/${secondary}` : ``}${tertiary ? `/${tertiary}` : ``}`);
+        route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}${primary ? `/${primary}` : ``}${secondary ? `/${secondary}` : ``}${tertiary ? `/${tertiary}` : ``}${quaternary ? `/${quaternary}` : ``}`);
 
         this.setState({
           ProfileResponse: ProfileResponse.Response
@@ -96,52 +97,29 @@ class DisplayProfile extends React.Component {
             {<GA.RouteTracker />}
             <Switch>
               <Route
-                path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?"
+                path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?/:quaternary?"
                 render={route => (
                   <div className="view" id="progression">
                     <Player data={this.state} manifest={this.props.manifest} route={route} goToProgression={this.goToProgression} />
                     <Route
                       path="/progression/:membershipType/:membershipId/:characterId"
                       exact
-                      render={() => (
-                        <>
-                          <div className="sub-header">
-                            <div>Summaries</div>
-                          </div>
-                          <div className="summaries">
-                            <div className="c2">
-                              <div className="c2">
-                                <ChecklistsSummary state={this.state} manifest={this.props.manifest} route={route} />
-                              </div>
-                              <div className="c2">
-                                <Seals state={this.state} manifest={this.props.manifest} route={route} />
-                              </div>
-                              <div className="c1">
-                                <Ranks state={this.state} manifest={this.props.manifest} route={route} />
-                              </div>
-                            </div>
-                            <div className="c2">
-                              <Almost state={this.state} manifest={this.props.manifest} route={route} />
-                            </div>
-                          </div>
-                        </>
-                      )}
+                      render={() => <Summary  state={this.state} manifest={this.props.manifest} route={route} /> }
                     />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/this-week" exact render={() => <ThisWeek state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                     <Route
                       path="/progression/:membershipType/:membershipId/:characterId/checklists"
                       exact
                       render={() => (
-                        <>
+                        <div className="checklists">
                           <div className="sub-header">
                             <div>Checklists</div>
                           </div>
-                          <div className="checklists">
-                            <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
-                          </div>
-                        </>
+                          <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
+                        </div>
                       )}
                     />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?" render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?" render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                     <Route path="/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?" render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                   </div>
                 )}

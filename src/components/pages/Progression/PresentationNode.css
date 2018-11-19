@@ -91,6 +91,10 @@
   margin: 0 0 2rem;
 }
 
+.presentation-node .list.primary.single-primary {
+  display: none;
+}
+
 .presentation-node .list.primary li {
   height: 72px;
   margin: 0 3px 3px 0;
@@ -134,52 +138,7 @@
 }
 
 
-.presentation-node .list.tertiary {
-  display: flex;
-  flex-flow: row wrap;
-}
 
-.presentation-node .list.tertiary li {
-  flex-basis: calc(100% / 3 - 3px - 2rem);
-  margin: 0 0 3px 3px;
-  padding: 1rem;
-  height: initial;
-  flex-flow: row wrap;
-  align-content: flex-start;
-}
-
-.presentation-node .list.tertiary li .icon {
-  position: relative;
-  width: 48px;
-  height: 48px;
-  flex-basis: 48px;
-}
-
-.presentation-node .list.tertiary li .text {
-  flex-basis: calc(100% - 48px - 1rem);
-  margin: 0 0 0 1rem;
-}
-
-.presentation-node .list.tertiary li .text .description {
-  color: rgba(255, 255, 255, 0.6);
-  margin: 10px 0 0;
-  padding: 10px 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.presentation-node .list.tertiary li .objectives {
-  margin: 1rem 0 0;
-  padding: 0 0 0 calc(48px + 1rem);
-  flex-basis: calc(100% - 48px - 1rem);
-}
-
-.presentation-node .list.tertiary li .objectives .progress {
-  margin: 0 0 3px;
-}
-
-.presentation-node .list.tertiary li .objectives .progress:last-child {
-  margin: 0;
-}
 
 
 @media screen and (max-width: 1200px) {
@@ -190,10 +149,6 @@
 
 .presentation-node .node .records {
   flex-basis: calc(70% - 4rem);
-}
-
-.presentation-node .list.tertiary li {
-  flex-basis: calc(100% / 2 - 3px - 2rem);
 }
 
 }
@@ -224,11 +179,6 @@
   margin: 0;
   padding: 0;
   border-left: none;
-}
-
-.presentation-node .list.tertiary li {
-  flex-basis: 100%;
-  margin: 0 0 3px;
 }
 
 }

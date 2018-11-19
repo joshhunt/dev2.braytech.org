@@ -191,7 +191,7 @@ class App extends Component {
                   </>
                 )}
               />
-              <Route path="/progression/:membershipType/:membershipId/:characterId?/:view?/:primary?/:secondary?/:tertiary?" render={route => <DisplayProfile {...this.props} {...route} manifest={this.manifest} viewport={this.state.viewport} />} />
+              <Route path="/progression/:membershipType/:membershipId/:characterId?/:view?/:primary?/:secondary?/:tertiary?/:quaternary?" render={route => <DisplayProfile {...this.props} {...route} manifest={this.manifest} viewport={this.state.viewport} />} />
               <Route
                 path="/clans/:membershipType/:membershipId"
                 render={route => (

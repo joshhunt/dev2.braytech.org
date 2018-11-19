@@ -3,12 +3,12 @@ import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import Moment from 'react-moment';
 
-import { classTypeToString } from '../../destinyUtils'
+import ObservedImage from '../../ObservedImage';
+import { classTypeToString } from '../../destinyUtils';
 import Globals from '../../Globals';
 
 import './Characters.css';
 import './Player.css';
-import ObservedImage from '../../ObservedImage';
 
 
 
@@ -163,7 +163,7 @@ class Player extends React.Component {
 
     const views = [
       {
-        name: "Summary",
+        name: "Overview",
         slug: "",
         exact: true
       },

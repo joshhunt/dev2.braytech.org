@@ -16,24 +16,64 @@ class Records extends React.Component {
     let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
     let characterId = this.props.route.match.params.characterId;
 
-    let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.tertiaryHash];
-    
-    let highlightHash = this.props.quaternaryHash;
-
-    let tertiaryChildren = [];
-    tertiaryDefinition.children.records.forEach(child => {
+    let recordsRequested = this.props.hashes;
+      
+    let records = [];
+    recordsRequested.forEach(hash => {
   
-      let recordDefinition = child;
+      let recordDefinition = manifest.DestinyRecordDefinition[hash];
 
       let objectives = [];
-      child.objectiveHashes.forEach(hash => {
+      let link = false;
+
+      // selfLink
+
+      try {
+    
+        let reverse1;
+        let reverse2;
+        let reverse3;
+      
+        manifest.DestinyRecordDefinition[hash].presentationInfo.parentPresentationNodeHashes.forEach(element => {
+          if (manifest.DestinyPresentationNodeDefinition[1652422747].children.presentationNodes.filter(el => el.presentationNodeHash === element).length > 0) {
+            return; // if hash is a child of seals, skip it
+          }
+          if (reverse1) {
+            return;
+          }
+          reverse1 = manifest.DestinyPresentationNodeDefinition[element]
+        });
+      
+        let iteratees = reverse1.presentationInfo ? reverse1.presentationInfo.parentPresentationNodeHashes : reverse1.parentNodeHashes;
+        iteratees.forEach(element => {
+          if (reverse2) {
+            return;
+          }
+          reverse2 = manifest.DestinyPresentationNodeDefinition[element];
+        });
+      
+        if (reverse2 && reverse2.parentNodeHashes) {
+          reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
+        }
+
+        link = `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
+      
+      }
+      
+      catch (e) {
+        console.log(e);
+      }
+
+      //
+      
+      recordDefinition.objectiveHashes.forEach(hash => {
 
         let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
 
-        if (profileRecords[child.hash]) {
+        if (profileRecords[recordDefinition.hash]) {
 
           let playerProgress = null;
-          profileRecords[child.hash].objectives.forEach(objective => {
+          profileRecords[recordDefinition.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
               playerProgress = objective;
             }
@@ -48,10 +88,10 @@ class Records extends React.Component {
           )
 
         }
-        else if (characterRecords[characterId].records[child.hash]) {
+        else if (characterRecords[characterId].records[recordDefinition.hash]) {
 
           let playerProgress = null;
-          characterRecords[characterId].records[child.hash].objectives.forEach(objective => {
+          characterRecords[characterId].records[recordDefinition.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
               playerProgress = objective;
             }
@@ -74,11 +114,11 @@ class Records extends React.Component {
       });
 
       let state;
-      if (profileRecords[child.hash]) {
-        state = profileRecords[child.hash] ? profileRecords[child.hash].state : 0;
+      if (profileRecords[recordDefinition.hash]) {
+        state = profileRecords[recordDefinition.hash] ? profileRecords[recordDefinition.hash].state : 0;
       }
-      else if (characterRecords[characterId].records[child.hash]) {
-        state = characterRecords[characterId].records[child.hash] ? characterRecords[characterId].records[child.hash].state : 0;
+      else if (characterRecords[characterId].records[recordDefinition.hash]) {
+        state = characterRecords[characterId].records[recordDefinition.hash] ? characterRecords[characterId].records[recordDefinition.hash].state : 0;
       }
       else {
         state = 0;
@@ -88,11 +128,10 @@ class Records extends React.Component {
         return;
       }
       
-      tertiaryChildren.push(
+      records.push(
         <li key={recordDefinition.hash} className={cx(
               {
-                "completed": enumerateRecordState(state).recordRedeemed,
-                "highlight": highlightHash && highlightHash == recordDefinition.hash
+                "completed": enumerateRecordState(state).recordRedeemed
               }
             )}>
           <div className="icon">  
@@ -109,12 +148,13 @@ class Records extends React.Component {
           <div className="objectives">
             {objectives}
           </div>
+          {link && this.props.selfLink ? <Link to={link} /> : null}
         </li>
       )
       
     });
 
-    return tertiaryChildren
+    return records
 
   }
 

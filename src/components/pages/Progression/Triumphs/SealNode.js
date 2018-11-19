@@ -6,6 +6,8 @@ import ObservedImage from '../../../ObservedImage';
 
 import { enumerateRecordState } from '../../../destinyEnums';
 
+import '../RecordItems.css';
+
 class SealNode extends React.Component {
   
   render() {
@@ -156,7 +158,7 @@ class SealNode extends React.Component {
             </div>
           </div>
           <div className="records">
-            <ul className="list no-interaction tertiary">
+            <ul className="list no-interaction tertiary record-items">
               {sealChildren}
             </ul>
           </div>

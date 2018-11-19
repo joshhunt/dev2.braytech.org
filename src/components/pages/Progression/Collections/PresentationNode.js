@@ -5,6 +5,7 @@ import cx from 'classnames';
 import ObservedImage from '../../../ObservedImage';
 
 import Collectibles from './Collectibles';
+import '../CollectionItems.css';
 
 class PresentationNode extends React.Component {
   
@@ -89,7 +90,7 @@ class PresentationNode extends React.Component {
           </ul>
         </div>
         <div className="collectibles">
-          <ul className="list tertiary">
+          <ul className="list tertiary collection-items">
             <Collectibles {...this.props} tertiaryHash={tertiaryHash} />
           </ul>
         </div>

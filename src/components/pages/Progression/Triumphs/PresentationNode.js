@@ -5,6 +5,7 @@ import cx from 'classnames';
 import ObservedImage from '../../../ObservedImage';
 
 import Records from './Records';
+import '../RecordItems.css';
 
 class PresentationNode extends React.Component {
   
@@ -20,6 +21,7 @@ class PresentationNode extends React.Component {
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
   
     let tertiaryHash = this.props.route.match.params.tertiary ? this.props.route.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash; // crucible -> lifetime -> combat record
+    let quaternaryHash = this.props.route.match.params.quaternary ? this.props.route.match.params.quaternary : false;
     
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
@@ -78,10 +80,16 @@ class PresentationNode extends React.Component {
     return (
       <div className="node">
         <div className="header">
-          <div className="name">{primaryDefinition.displayProperties.name} <span>{secondaryDefinition.displayProperties.name}</span></div>
+          <div className="name">{primaryDefinition.displayProperties.name} <span>{primaryDefinition.children.presentationNodes.length !== 1 ? secondaryDefinition.displayProperties.name : null}</span></div>
         </div>
         <div className="children">
-          <ul className="list primary">
+          <ul className={cx(
+              "list",
+              "primary",
+              {
+                "single-primary": primaryDefinition.children.presentationNodes.length === 1
+              }
+            )}>
             {primaryChildren}
           </ul>
           <ul className="list secondary">
@@ -89,8 +97,8 @@ class PresentationNode extends React.Component {
           </ul>
         </div>
         <div className="records">
-          <ul className="list no-interaction tertiary">
-            <Records {...this.props} tertiaryHash={tertiaryHash} />
+          <ul className="list no-interaction tertiary record-items">
+            <Records {...this.props} tertiaryHash={tertiaryHash} quaternaryHash={quaternaryHash} />
           </ul>
         </div>
       </div>

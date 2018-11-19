@@ -121,7 +121,7 @@ class Root extends React.Component {
                   "image",
                   "icon"
                 )}
-              src={ `https://www.bungie.net${ sealBars[node.hash].completed === sealBars[node.hash].total ? node.displayProperties.icon : node.originalIcon }` } />
+              src={ `https://www.bungie.net${ node.originalIcon }` } />
               { node.displayProperties.name }
           </Link>
           <div className="state">{sealBars[node.hash].completed}/{sealBars[node.hash].total}</div>

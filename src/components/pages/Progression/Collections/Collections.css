@@ -166,8 +166,6 @@
 .collections .list.tertiary li {
   background-color: rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.4);
-  padding: 0;
-  flex-basis: calc(100% / 3 - 3px);
 }
 
 .collections .list.tertiary li.completed {

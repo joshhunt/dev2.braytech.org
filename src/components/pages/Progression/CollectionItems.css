@@ -1,0 +1,67 @@
+
+
+.list.collection-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 7px;
+}
+
+.list.collection-items li {
+  padding: 0;
+  margin: 0;
+  height: initial;
+  flex-flow: row wrap;
+  align-content: flex-start;
+}
+
+.list.collection-items li .icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-basis: 48px;
+}
+
+.list.collection-items li .text {
+  flex-basis: calc(100% - 48px - 1rem);
+  margin: 0 0 0 1rem;
+}
+
+.list.collection-items li .text .description {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 10px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.list.collection-items li .objectives {
+  margin: 1rem 0 0;
+  padding: 0 0 0 calc(48px + 1rem);
+  flex-basis: calc(100% - 48px - 1rem);
+}
+
+.list.collection-items li .objectives .progress {
+  margin: 0 0 3px;
+}
+
+.list.collection-items li .objectives .progress:last-child {
+  margin: 0;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+
+  .list.collection-items {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+  
+
+@media screen and (max-width: 600px) {
+
+  .list.collection-items {
+    grid-template-columns: 1fr;
+  }
+
+}

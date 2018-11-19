@@ -6,6 +6,7 @@ import ObservedImage from '../../../ObservedImage';
 
 import { enumerateCollectibleState } from '../../../destinyEnums';
 import Collectibles from './Collectibles';
+import '../CollectionItems.css';
 
 class BadgeNode extends React.Component {
   
@@ -70,7 +71,7 @@ class BadgeNode extends React.Component {
       badgeChildren.push(
         <div key={nodeDefinition.hash} className="class">
           <h5>{nodeDefinition.displayProperties.name}</h5>
-          <ul className="list tertiary items">
+          <ul className="list tertiary collection-items items">
             {childItems}
           </ul>
         </div>
