@@ -65,6 +65,19 @@
   margin: 0 0 2rem;
 }
 
+.presentation-node .header .options {
+  font-size: 14px;
+  margin: 0 0 0.4rem;
+}
+
+.presentation-node .header .options ul {
+  display: flex;
+}
+
+.presentation-node .header .options ul li {
+  margin: 0 0.8rem 0 0;
+}
+
 .presentation-node .header .name {
   font-size: 30px;
   font-weight: 500;

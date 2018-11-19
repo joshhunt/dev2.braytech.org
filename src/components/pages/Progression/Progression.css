@@ -22,7 +22,7 @@
 @media screen and (max-width: 1200px) {
 
 #progression {
-  padding: 0;
+  padding: 0 0 1rem;
 }
 
 #progression .presentation-node {
@@ -40,6 +40,10 @@
 
 #progression .presentation-node {
   padding: 0 2rem 0;
+}
+
+#progression .presentation-node .sub-header {
+  margin: 2rem 0 2rem;
 }
 
 }

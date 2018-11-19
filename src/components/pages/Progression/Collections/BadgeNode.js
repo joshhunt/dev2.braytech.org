@@ -1,11 +1,9 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
 
 import { enumerateCollectibleState } from '../../../destinyEnums';
-import Collectibles from './Collectibles';
 import '../CollectionItems.css';
 
 class BadgeNode extends React.Component {

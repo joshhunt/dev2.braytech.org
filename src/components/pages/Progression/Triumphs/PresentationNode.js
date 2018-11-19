@@ -3,11 +3,33 @@ import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
+import * as ls from '../../../localStorage';
 
 import Records from './Records';
 import '../RecordItems.css';
 
 class PresentationNode extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hideCompleted: ls.get("setting.hideCompletedRecords") ? ls.get("setting.hideCompletedRecords") : false
+    }
+
+    this.toggleCompleted = this.toggleCompleted.bind(this);
+  }
+
+  toggleCompleted = () => {
+
+    let currentSetting = ls.get("setting.hideCompletedRecords") ? ls.get("setting.hideCompletedRecords") : false;
+
+    ls.set("setting.hideCompletedRecords", currentSetting ? false : true);
+
+    this.setState({
+      hideCompleted: ls.get("setting.hideCompletedRecords")
+    })
+
+  }
   
   render() {
 
@@ -80,6 +102,13 @@ class PresentationNode extends React.Component {
     return (
       <div className="node">
         <div className="header">
+          <div className="options">
+            <ul>
+              <li><Link to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs` }>Go to root</Link></li>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <li><a onClick={this.toggleCompleted}>{ this.state.hideCompleted ? <>Show completed</> : <>Hide completed</> }</a></li>
+            </ul>
+          </div>
           <div className="name">{primaryDefinition.displayProperties.name} <span>{primaryDefinition.children.presentationNodes.length !== 1 ? secondaryDefinition.displayProperties.name : null}</span></div>
         </div>
         <div className="children">
@@ -98,7 +127,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className="records">
           <ul className="list no-interaction tertiary record-items">
-            <Records {...this.props} tertiaryHash={tertiaryHash} quaternaryHash={quaternaryHash} />
+            <Records {...this.props} {...this.state} tertiaryHash={tertiaryHash} quaternaryHash={quaternaryHash} />
           </ul>
         </div>
       </div>

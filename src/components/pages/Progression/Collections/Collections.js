@@ -1,10 +1,4 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import cx from 'classnames';
-
-import ObservedImage from '../../../ObservedImage';
-
-import { enumerateRecordState } from '../../../destinyEnums';
 
 import Root from './Root';
 import BadgeNode from './BadgeNode';

@@ -2,6 +2,7 @@
 .view {
   display: flex;
   min-height: calc(100vh - 8rem);
+  overflow-x: hidden;
 }
 
 

@@ -22,8 +22,6 @@ class Triumphs extends React.Component {
   
   render() {
 
-    console.log(this)
-
     let primaryHash = this.props.route.match.params.primary ? this.props.route.match.params.primary : false;
     
     if (!primaryHash) {

@@ -118,14 +118,23 @@
   font-size: 15px;
 }
 
-#player .views ul li a.active::before {
+#player .views ul li a::before {
   content: " ";
   position: absolute;
   bottom: -6px;
   left: 0;
   width: 100%;
   height: calc(100% - 2px);
-  border-bottom: 2px solid;
+  border-bottom: 2px solid rgba(255, 255, 255, 0);
+  transition: border-bottom 0.2s;
+}
+
+#player .views ul li a:hover::before {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+#player .views ul li a.active::before {
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
 }
 
 @media screen and (max-width: 1200px) {

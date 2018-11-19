@@ -71,6 +71,8 @@ class SealNode extends React.Component {
     sealDefinition.children.records.forEach(child => {
   
       let recordDefinition = child;
+
+      console.log(child)
   
       let objectives = [];
       child.objectiveHashes.forEach(hash => {

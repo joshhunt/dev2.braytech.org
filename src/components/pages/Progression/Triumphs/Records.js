@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
@@ -15,14 +14,16 @@ class Records extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.quaternaryHash) { console.log(this.scrollToRecordRef)
+    if (this.props.quaternaryHash) {
       window.scrollTo({
-        top: this.scrollToRecordRef.current.offsetTop - (window.innerHeight / 2)
+        top: this.scrollToRecordRef.current.offsetTop + (this.scrollToRecordRef.current.offsetHeight / 2) - (window.innerHeight / 2)
       })
     }
   }
   
   render() {
+
+    console.log(this)
    
     let manifest = this.props.manifest;
 
@@ -102,12 +103,18 @@ class Records extends React.Component {
         return;
       }
 
+      if (enumerateRecordState(state).recordRedeemed && this.props.hideCompleted) {
+        return;
+      }
+
+      // eslint-disable-next-line eqeqeq
       let ref = highlightHash == recordDefinition.hash ? this.scrollToRecordRef : null;
       
       tertiaryChildren.push(
         <li key={recordDefinition.hash} ref={ref} className={cx(
               {
                 "completed": enumerateRecordState(state).recordRedeemed,
+                // eslint-disable-next-line eqeqeq
                 "highlight": highlightHash && highlightHash == recordDefinition.hash
               }
             )}>
@@ -129,6 +136,17 @@ class Records extends React.Component {
       )
       
     });
+
+    if (tertiaryChildren.length === 0 && this.props.hideCompleted) {
+      tertiaryChildren.push(
+        <li key="lol">
+          <div className="text">
+            <div className="name">Nothing to show for your effort</div>
+            <div className="description">You've completed all the records here! GG</div>
+          </div>
+        </li>
+      )
+    }
 
     return tertiaryChildren
 
