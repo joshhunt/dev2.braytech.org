@@ -13,6 +13,12 @@ class Collections extends React.Component {
     this.state = {};
 
   }
+
+  componentDidMount() {
+    if (!this.props.route.match.params.quaternary) {
+      window.scrollTo(0, 0);
+    }
+  }
   
   render() {
 

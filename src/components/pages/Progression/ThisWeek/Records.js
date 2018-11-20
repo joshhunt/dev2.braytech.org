@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
@@ -131,19 +131,23 @@ class Records extends React.Component {
       records.push(
         <li key={recordDefinition.hash} className={cx(
               {
-                "completed": enumerateRecordState(state).recordRedeemed
+                "completed": enumerateRecordState(state).recordRedeemed,
+                "no-description": recordDefinition.displayProperties.description === ""
               }
             )}>
-          <div className="icon">  
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ recordDefinition.displayProperties.icon }` } />
-          </div>
-          <div className="text">
-            <div className="name">{ recordDefinition.displayProperties.name }</div>
-            <div className="description">{ recordDefinition.displayProperties.description }</div>
+          <div className="properties">
+            <div className="icon">  
+              <ObservedImage className={cx(
+                    "image",
+                    "icon"
+                  )}
+                src={ `https://www.bungie.net${ recordDefinition.displayProperties.icon }` } />
+            </div>
+            <div className="text">
+              <div className="name">{recordDefinition.displayProperties.name}</div>
+              {recordDefinition.completionInfo.ScoreValue && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className="score">{recordDefinition.completionInfo.ScoreValue}</div> : null}
+              <div className="description">{recordDefinition.displayProperties.description}</div>
+            </div>
           </div>
           <div className="objectives">
             {objectives}

@@ -51,6 +51,10 @@
   margin: 0 0 1rem;
 }
 
+.summary .module.ranks .content .rank .mode h3 {
+  margin: 0;
+}
+
 .summary .module.ranks .content .rank .description {
   color: rgba(255, 255, 255, 0.8);
   font-style: italic;

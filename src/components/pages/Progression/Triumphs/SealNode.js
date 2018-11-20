@@ -3,22 +3,41 @@ import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
+import * as ls from '../../../localStorage';
 
 import { enumerateRecordState } from '../../../destinyEnums';
 
+import Records from './Records';
 import '../RecordItems.css';
 
 class SealNode extends React.Component {
-  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hideCompleted: ls.get("setting.hideCompletedRecords") ? ls.get("setting.hideCompletedRecords") : false
+    }
+
+    this.toggleCompleted = this.toggleCompleted.bind(this);
+  }
+
+  toggleCompleted = () => {
+
+    let currentSetting = ls.get("setting.hideCompletedRecords") ? ls.get("setting.hideCompletedRecords") : false;
+
+    ls.set("setting.hideCompletedRecords", currentSetting ? false : true);
+
+    this.setState({
+      hideCompleted: ls.get("setting.hideCompletedRecords")
+    })
+
+  }
+
   render() {
 
     let manifest = this.props.manifest;
 
-    let characterProgressions = this.props.state.ProfileResponse.characterProgressions.data;
-    let profileProgressions = this.props.state.ProfileResponse.profileProgression.data;
-    let characterRecords = this.props.state.ProfileResponse.characterRecords.data;
     let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
-    let characterId = this.props.route.match.params.characterId;
 
     const sealBars = {
       2588182977: {
@@ -66,67 +85,7 @@ class SealNode extends React.Component {
     }
 
     let sealDefinition = manifest.DestinyPresentationNodeDefinition[this.props.route.match.params.secondary];
-  
-    let sealChildren = [];
-    sealDefinition.children.records.forEach(child => {
-  
-      let recordDefinition = child;
-
-      console.log(child)
-  
-      let objectives = [];
-      child.objectiveHashes.forEach(hash => {
-
-        let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
-        
-        if (profileRecords[child.hash]) {
-
-          let playerProgress = null;
-          profileRecords[child.hash].objectives.forEach(objective => {
-            if (objective.objectiveHash === hash) {
-              playerProgress = objective;
-            }
-          });
-
-          objectives.push(
-            <div key={objectiveDefinition.hash} className="progress">
-              <div className="title">{ objectiveDefinition.progressDescription }</div>
-              <div className="fraction">{ playerProgress.progress }/{ playerProgress.completionValue }</div>
-              <div className="bar" style={{width: `${ playerProgress.progress / playerProgress.completionValue * 100}%`}}></div>
-            </div>
-          )
-
-        }
-        else {
-          objectives.push(
-            null
-          )
-        }
-      });
-      
-      sealChildren.push(
-        <li key={recordDefinition.hash} className={cx(
-              {
-                "completed": profileRecords[child.hash] ? enumerateRecordState(profileRecords[child.hash].state).recordRedeemed : false
-              }
-            )}>
-          <div className="icon">  
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ recordDefinition.displayProperties.icon }` } />
-          </div>
-          <div className="text">
-            <div className="name">{ recordDefinition.displayProperties.name }</div>
-            <div className="description">{ recordDefinition.displayProperties.description }</div>
-          </div>
-          <div className="objectives">
-            {objectives}
-          </div>
-        </li>
-      )
-    });
+    let tertiaryHash = this.props.route.match.params.secondary;
 
     return (
       <div className="presentation-node triumphs">
@@ -142,6 +101,13 @@ class SealNode extends React.Component {
                   )}
                 src={ `https://www.bungie.net${ sealDefinition.displayProperties.icon }` } />
               <div className="corners b"></div>
+            </div>
+            <div className="options">
+              <ul>
+                <li><Link to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs` }>Go to root</Link></li>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <li><a onClick={this.toggleCompleted}>{ this.state.hideCompleted ? <>Show completed</> : <>Hide completed</> }</a></li>
+              </ul>
             </div>
             <div className="text">
               <div className="name">{ sealDefinition.displayProperties.name }</div>
@@ -161,7 +127,7 @@ class SealNode extends React.Component {
           </div>
           <div className="records">
             <ul className="list no-interaction tertiary record-items">
-              {sealChildren}
+              <Records {...this.props} {...this.state} tertiaryHash={tertiaryHash} />
             </ul>
           </div>
         </div>

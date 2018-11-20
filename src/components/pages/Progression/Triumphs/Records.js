@@ -10,21 +10,17 @@ class Records extends React.Component {
     super(props);
 
     this.scrollToRecordRef = React.createRef();
-
   }
 
   componentDidMount() {
-    if (this.props.quaternaryHash) {
+    if (this.props.quaternaryHash && this.scrollToRecordRef.current !== null) {
       window.scrollTo({
-        top: this.scrollToRecordRef.current.offsetTop + (this.scrollToRecordRef.current.offsetHeight / 2) - (window.innerHeight / 2)
-      })
+        top: this.scrollToRecordRef.current.offsetTop + this.scrollToRecordRef.current.offsetHeight / 2 - window.innerHeight / 2
+      });
     }
   }
-  
-  render() {
 
-    console.log(this)
-   
+  render() {
     let manifest = this.props.manifest;
 
     let characterRecords = this.props.state.ProfileResponse.characterRecords.data;
@@ -32,21 +28,18 @@ class Records extends React.Component {
     let characterId = this.props.route.match.params.characterId;
 
     let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.tertiaryHash];
-    
+
     let highlightHash = this.props.quaternaryHash;
 
     let tertiaryChildren = [];
     tertiaryDefinition.children.records.forEach(child => {
-  
       let recordDefinition = child;
 
       let objectives = [];
       child.objectiveHashes.forEach(hash => {
-
         let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
 
         if (profileRecords[child.hash]) {
-
           let playerProgress = null;
           profileRecords[child.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
@@ -56,15 +49,14 @@ class Records extends React.Component {
 
           objectives.push(
             <div key={objectiveDefinition.hash} className="progress">
-              <div className="title">{ objectiveDefinition.progressDescription }</div>
-              <div className="fraction">{ playerProgress.progress }/{ playerProgress.completionValue }</div>
-              <div className="bar" style={{width: `${ playerProgress.progress / playerProgress.completionValue * 100}%`}}></div>
+              <div className="title">{objectiveDefinition.progressDescription}</div>
+              <div className="fraction">
+                {playerProgress.progress}/{playerProgress.completionValue}
+              </div>
+              <div className="bar" style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
             </div>
-          )
-
-        }
-        else if (characterRecords[characterId].records[child.hash]) {
-
+          );
+        } else if (characterRecords[characterId].records[child.hash]) {
           let playerProgress = null;
           characterRecords[characterId].records[child.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
@@ -74,28 +66,24 @@ class Records extends React.Component {
 
           objectives.push(
             <div key={objectiveDefinition.hash} className="progress">
-              <div className="title">{ objectiveDefinition.progressDescription }</div>
-              <div className="fraction">{ playerProgress.progress }/{ playerProgress.completionValue }</div>
-              <div className="bar" style={{width: `${ playerProgress.progress / playerProgress.completionValue * 100}%`}}></div>
+              <div className="title">{objectiveDefinition.progressDescription}</div>
+              <div className="fraction">
+                {playerProgress.progress}/{playerProgress.completionValue}
+              </div>
+              <div className="bar" style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
             </div>
-          )
-          
-        }
-        else {
-          objectives.push(
-            null
-          )
+          );
+        } else {
+          objectives.push(null);
         }
       });
 
       let state;
       if (profileRecords[child.hash]) {
         state = profileRecords[child.hash] ? profileRecords[child.hash].state : 0;
-      }
-      else if (characterRecords[characterId].records[child.hash]) {
+      } else if (characterRecords[characterId].records[child.hash]) {
         state = characterRecords[characterId].records[child.hash] ? characterRecords[characterId].records[child.hash].state : 0;
-      }
-      else {
+      } else {
         state = 0;
       }
 
@@ -109,49 +97,49 @@ class Records extends React.Component {
 
       // eslint-disable-next-line eqeqeq
       let ref = highlightHash == recordDefinition.hash ? this.scrollToRecordRef : null;
-      
+
       tertiaryChildren.push(
-        <li key={recordDefinition.hash} ref={ref} className={cx(
-              {
-                "completed": enumerateRecordState(state).recordRedeemed,
-                // eslint-disable-next-line eqeqeq
-                "highlight": highlightHash && highlightHash == recordDefinition.hash
-              }
-            )}>
-          <div className="icon">  
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ recordDefinition.displayProperties.icon }` } />
+        <li
+          key={recordDefinition.hash}
+          ref={ref}
+          className={cx({
+            completed: enumerateRecordState(state).recordRedeemed,
+            // eslint-disable-next-line eqeqeq
+            highlight: highlightHash && highlightHash == recordDefinition.hash,
+            'no-description': recordDefinition.displayProperties.description === ''
+          })}
+        >
+          <div className="properties">
+            <div className="icon">
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${recordDefinition.displayProperties.icon}`} />
+            </div>
+            <div className="text">
+              <div className="name">{recordDefinition.displayProperties.name}</div>
+              {recordDefinition.completionInfo.ScoreValue && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className="score">{recordDefinition.completionInfo.ScoreValue}</div> : null}
+              <div className="description">{recordDefinition.displayProperties.description}</div>
+            </div>
           </div>
-          <div className="text">
-            <div className="name">{ recordDefinition.displayProperties.name }</div>
-            <div className="description">{ recordDefinition.displayProperties.description }</div>
-          </div>
-          <div className="objectives">
-            {objectives}
-          </div>
+          <div className="objectives">{objectives}</div>
         </li>
-      )
-      
+      );
     });
 
     if (tertiaryChildren.length === 0 && this.props.hideCompleted) {
       tertiaryChildren.push(
         <li key="lol">
-          <div className="text">
-            <div className="name">Nothing to show for your effort</div>
-            <div className="description">You've completed all the records here! GG</div>
+          <div className="properties">
+            <div class="icon" />
+            <div className="text">
+              <div className="name">Nothing to show for your effort</div>
+              <div className="description">You've completed all the records here! GG</div>
+            </div>
           </div>
         </li>
-      )
+      );
     }
 
-    return tertiaryChildren
-
+    return tertiaryChildren;
   }
-
 }
 
 export default Records;

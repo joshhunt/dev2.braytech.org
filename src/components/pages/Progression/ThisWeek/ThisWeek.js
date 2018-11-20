@@ -3,7 +3,9 @@ import cx from 'classnames'
 
 import './ThisWeek.css';
 import Records from './Records';
+import Collectibles from './Collectibles';
 import '../RecordItems.css';
+import '../CollectionItems.css';
 
 class ThisWeek extends React.Component {
   constructor(props) {
@@ -35,19 +37,20 @@ class ThisWeek extends React.Component {
       elapsed: {}, // elapsed time since cycle started
       week: {} // current week in cycle
     };
-    
+
     const time = new Date().getTime();
     const msPerWk = 604800000;
-    
+
     for (var cycle in cycleInfo.cycle) {
       cycleInfo.elapsed[cycle] = time - cycleInfo.epoch[cycle];
       cycleInfo.week[cycle] =
         Math.floor((cycleInfo.elapsed[cycle] / msPerWk) % cycleInfo.cycle[cycle]) + 1;
     }
-    
+
     const consolidatedInfo = {
       curse: {
         1: {
+          intensity: "Pestersome",
           triumphs: [
             // DestinyRecordDefinition.Hashes
             2144075646, // The Scorn Champion (Heroic Blind Well)
@@ -59,6 +62,7 @@ class ThisWeek extends React.Component {
           collectibles: [] // DestinyCollectableDefinition.Hashes
         },
         2: {
+          intensity: "Obstructive",
           triumphs: [
             2144075647, // The Hive Champion (Heroic Blind Well)
             3675740699, // Bolder Fortunes (Ascendant Chests)
@@ -69,6 +73,7 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         3: {
+          intensity: "Deadly",
           triumphs: [
             2144075645, // The Taken Champion (Heroic Blind Well)
             3675740698, // War Chests (Ascendant Chests)
@@ -96,6 +101,8 @@ class ThisWeek extends React.Component {
       },
       ascendant: {
         1: {
+          challenge: "Ouroborea",
+          region: "Aphelion's Rest",
           triumphs: [
             3024450470, // Nigh II (Eggs)
             1842255608, // Imponent I (Bones)
@@ -105,6 +112,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         2: {
+          challenge: "Forfeit Shrine",
+          region: "Gardens of Esila",
           triumphs: [
             2974117611, // Imponent II (Eggs)
             1842255611, // Heresiology (Bones)
@@ -114,6 +123,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         3: {
+          challenge: "Shattered Ruins",
+          region: "Spine of Keres",
           triumphs: [
             3024450469, // Imponent V (Eggs)
             1859033176, // Ecstasiate I (Bones)
@@ -123,6 +134,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         4: {
+          challenge: "Keep of Honed Edges",
+          region: "Harbinger's Seclude",
           triumphs: [
             2974117605, // Imponent IV (Eggs)
             1842255614, // Ecstasiate II (Bones)
@@ -132,6 +145,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         5: {
+          challenge: "Agonarch Abyss",
+          region: "Bay of Drowned Wishes",
           triumphs: [
             3024450465, // Palingenesis I (Eggs)
             1859033177, // Cosmogyre IV (Bones)
@@ -141,6 +156,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         6: {
+          challenge: "Cimmerian Garrison",
+          region: "Chamber of Stralight",
           triumphs: [
             3024450471, // Nigh I (Eggs)
             1859033173, // Brephos III (Bones)
@@ -217,9 +234,9 @@ class ThisWeek extends React.Component {
         }
       }
     };
-    
+
     console.log(cycleInfo.week);
-    
+
     console.log(
       consolidatedInfo.curse[cycleInfo.week.curse],
       consolidatedInfo.ascendant[cycleInfo.week.ascendant],
@@ -230,11 +247,13 @@ class ThisWeek extends React.Component {
       <div className="this-week">
         <div className="module curse">
           <div className="sub-header">
-            <div>Curse week {cycleInfo.week.curse}</div>
+            <div>The Curse</div>
           </div>
           <div className="content">
+            <div className="sub-title">The Dreaming City</div>
+            <h3>Cycle week {cycleInfo.week.curse}</h3>
             <ul className="list record-items">
-              <Records {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} />
+              <Records selfLink {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} />
             </ul>
           </div>
         </div>
@@ -243,18 +262,23 @@ class ThisWeek extends React.Component {
             <div>Ascendant challenge</div>
           </div>
           <div className="content">
+            <div className="sub-title">{consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
+            <h3>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}</h3>
             <ul className="list record-items">
-              <Records {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} />
+              <Records selfLink {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} />
             </ul>
           </div>
         </div>
         <div className="module">
           <div className="sub-header">
-            <div>Escalation Pprotocol</div>
+            <div>Escalation Protocol</div>
           </div>
           <div className="content">
-            <p>This week's boss is <strong>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</strong>. He comes baring gifts.</p>
-            <p>{JSON.stringify(consolidatedInfo.ep[cycleInfo.week.ep].collectibles)}</p>
+            <div className="sub-title">Mars</div>
+            <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
+            <ul className="list collection-items">
+              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+            </ul>
           </div>
         </div>
       </div>

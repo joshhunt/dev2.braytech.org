@@ -523,7 +523,7 @@ class Summary extends React.Component {
           },
           valor: {
             definition: valorDefinition,
-            mode: "Crucible Quickplay",
+            mode: "Quickplay",
             text: "Valor",
             color: "#ed792c",
             total: valorProgressTotal,
@@ -531,7 +531,7 @@ class Summary extends React.Component {
           },
           glory: {
             definition: gloryDefinition,
-            mode: "Crucible Competitive",
+            mode: "Competitive",
             text: "Glory",
             color: "#b52422",
             total: gloryProgressTotal,
@@ -547,7 +547,7 @@ class Summary extends React.Component {
         ranks.push(
           <div className="rank" key={key}>
             <div className="mode">
-              <p>{value.mode}</p>
+              <h3>{value.mode}</h3>
             </div>
             <ReactMarkdown className="description" source={value.definition.displayProperties.description} />
             <h4>To next rank</h4>

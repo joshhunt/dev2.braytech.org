@@ -120,7 +120,7 @@ class DisplayProfile extends React.Component {
                       )}
                     />
                     <Route path="/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?" render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                    <Route path="/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?" render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
+                    <Route path="/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?/:quaternary?" render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                   </div>
                 )}
               />

@@ -168,6 +168,11 @@ class Player extends React.Component {
         exact: true
       },
       {
+        name: "This Week",
+        slug: "/this-week",
+        exact: true
+      },
+      {
         name: "Checklists",
         slug: "/checklists",
         exact: true

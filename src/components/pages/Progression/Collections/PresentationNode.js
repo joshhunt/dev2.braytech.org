@@ -21,6 +21,7 @@ class PresentationNode extends React.Component {
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
   
     let tertiaryHash = this.props.route.match.params.tertiary ? this.props.route.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    let quaternaryHash = this.props.route.match.params.quaternary ? this.props.route.match.params.quaternary : false;
     
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
@@ -91,7 +92,7 @@ class PresentationNode extends React.Component {
         </div>
         <div className="collectibles">
           <ul className="list tertiary collection-items">
-            <Collectibles {...this.props} tertiaryHash={tertiaryHash} />
+            <Collectibles {...this.props} tertiaryHash={tertiaryHash} quaternaryHash={quaternaryHash} />
           </ul>
         </div>
       </div>
