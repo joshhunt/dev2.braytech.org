@@ -41,9 +41,11 @@ class Index extends Component {
       return (
         <div className="view" id="index">
           <div className="blogs">
-            <h4>Updates</h4>
+            <div className="sub-header">
+              <div>Updates</div>
+            </div>
             <div className="entries">
-              {this.state.blogs.map(entry => {
+              {this.state.blogs.slice(0, 3).map(entry => {
                 return (
                   <div key={entry._id} className="entry">
                     <div className="title">{entry.title}</div>

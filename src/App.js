@@ -72,7 +72,7 @@ class App extends Component {
       }
     });
     const response = await request.json();
-    return response;
+    return response.response.version;
   };
 
   getManifest = () => {
@@ -152,33 +152,20 @@ class App extends Component {
         }
       })
       .then(() => {
-        fetch(`https://www.bungie.net/Platform/Destiny2/Manifest/`, {
-          headers: {
-            'X-API-Key': Globals.key.bungie
-          }
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(response => {
-            if (response.Response.mobileWorldContentPaths.en !== this.state.manifest.version) {
-              this.getManifestVersion().then(request => {
-                let state = this.state;
-                state.manifest.version = request.response.version;
-                this.setState(state);
-
-                this.getManifest();
-              });
+        this.getManifestVersion()
+          .then(version => {
+            if (version !== this.state.manifest.version) {
+              let state = this.state;
+              state.manifest.version = version;
+              this.setState(state);
+              this.getManifest();
             } else {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
                   if (!manifest[0].value.DestinySocketTypeDefinition) {
                     console.log('missing table! lol.');
-
-                    this.getManifestVersion().then(response => {
-                      this.getManifest(response.version);
-                    });
+                    this.getManifest();
                   } else {
                     this.manifest = manifest[0].value;
                     let state = this.state;
