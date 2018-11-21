@@ -36,12 +36,16 @@ class App extends Component {
     super();
     this.state = {
       manifest: {
-        downloading: false,
-        version: undefined,
-        ready: false
+        state: false,
+        progress: {
+          total: 0,
+          completed: 0
+        },
+        version: undefined
       }
     };
     this.updateViewport = this.updateViewport.bind(this);
+    this.getManifestVersion = this.getManifestVersion.bind(this);
     this.getManifest = this.getManifest.bind(this);
     this.manifest = null;
   }
@@ -57,54 +61,65 @@ class App extends Component {
     });
   }
 
-  getManifest = () => {
+  getManifestVersion = async () => {
     let state = this.state;
-    state.manifest.downloading = true;
+    state.manifest.state = 'version';
     this.setState(state);
 
-    let most = fetch('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition,DestinySocketCategoryDefinition', {
+    const request = await fetch(`https://api.braytech.org/?request=manifest&get=version`, {
       headers: {
         'X-API-Key': Globals.key.braytech
       }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(fetch => {
-        return fetch;
-      });
+    });
+    const response = await request.json();
+    return response;
+  };
 
-    let items = fetch('https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition', {
-      headers: {
-        'X-API-Key': Globals.key.braytech
-      }
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(fetch => {
-        return fetch;
-      });
+  getManifest = () => {
+    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition'];
 
-    Promise.all([most, items])
+    let state = this.state;
+    state.manifest.state = 'fetching';
+    state.manifest.progress.total = tables.length;
+    this.setState(state);
+
+    let fetches = tables.map(table => {
+      return fetch(`https://api.braytech.org/cache/json/manifest/${table}.json`, {
+        headers: {
+          'X-API-Key': Globals.key.braytech
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(fetch => {
+          let state = this.state;
+          state.manifest.progress.completed += 1;
+          this.setState(state);
+
+          let object = {};
+          object[table] = fetch;
+          return object;
+        });
+    });
+
+    Promise.all(fetches)
       .then(promises => {
-        console.log(promises);
 
-        let fetch = promises[0];
-        fetch.response.data = assign(fetch.response.data, promises[1].response.data);
+        const manifest = assign(...promises);
 
-        console.log(fetch);
+        console.log(manifest);
 
         let state = this.state;
-        state.manifest.almost = true;
+        state.manifest.state = 'almost';
         this.setState(state);
 
         db.table('manifest')
           .clear()
           .then(() => {
             db.table('manifest').add({
-              version: fetch.response.version,
-              value: fetch.response.data
+              version: this.state.manifest.version,
+              value: manifest
             });
           })
           .then(() => {
@@ -113,7 +128,7 @@ class App extends Component {
               .then(manifest => {
                 this.manifest = manifest[0].value;
                 let state = this.state;
-                state.manifest.ready = true;
+                state.manifest.state = 'ready';
                 this.setState(state);
               });
           });
@@ -146,21 +161,28 @@ class App extends Component {
             return response.json();
           })
           .then(response => {
-            // console.log(response.Response.mobileWorldContentPaths.en === this.state.manifest.version, response.Response.mobileWorldContentPaths.en, this.state.manifest.version);
-
             if (response.Response.mobileWorldContentPaths.en !== this.state.manifest.version) {
-              this.getManifest();
+              this.getManifestVersion().then(request => {
+                let state = this.state;
+                state.manifest.version = request.response.version;
+                this.setState(state);
+
+                this.getManifest();
+              });
             } else {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinySocketCategoryDefinition) {
-                    console.log('missing table!');
-                    this.getManifest();
+                  if (!manifest[0].value.DestinySocketTypeDefinition) {
+                    console.log('missing table! lol.');
+
+                    this.getManifestVersion().then(response => {
+                      this.getManifest(response.version);
+                    });
                   } else {
                     this.manifest = manifest[0].value;
                     let state = this.state;
-                    state.manifest.ready = true;
+                    state.manifest.state = 'ready';
                     this.setState(state);
                   }
                 });
@@ -181,7 +203,23 @@ class App extends Component {
       GA.init();
     }
 
-    if (!this.state.manifest.ready && this.state.manifest.almost) {
+    if (this.state.manifest.state === 'version') {
+      return (
+        <div className="view" id="loading">
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
+          <h4>Braytech</h4>
+          <div className="download">CHECKING DATA</div>
+        </div>
+      );
+    } else if (this.state.manifest.state === 'fetching') {
+      return (
+        <div className="view" id="loading">
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
+          <h4>Braytech</h4>
+          <div className="download">FETCHING {Math.ceil((this.state.manifest.progress.completed / this.state.manifest.progress.total) * 100)}%</div>
+        </div>
+      );
+    } else if (this.state.manifest.state === 'almost') {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
@@ -189,23 +227,7 @@ class App extends Component {
           <div className="download">SO CLOSE</div>
         </div>
       );
-    } else if (!this.state.manifest.ready && this.state.manifest.downloading) {
-      return (
-        <div className="view" id="loading">
-          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
-          <div className="download">READING MANIFEST</div>
-        </div>
-      );
-    } else if (!this.state.manifest.ready) {
-      return (
-        <div className="view" id="loading">
-          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
-          <div className="download">PREPARING</div>
-        </div>
-      );
-    } else {
+    } else if (this.manifest !== null) {
       return (
         <BrowserRouter>
           <>
@@ -290,6 +312,14 @@ class App extends Component {
             <Footer />
           </>
         </BrowserRouter>
+      );
+    } else {
+      return (
+        <div className="view" id="loading">
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
+          <h4>Braytech</h4>
+          <div className="download">PREPARING</div>
+        </div>
       );
     }
   }
