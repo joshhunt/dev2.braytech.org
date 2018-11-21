@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames'
 
 import './ThisWeek.css';
 import Records from './Records';
@@ -26,7 +25,7 @@ class ThisWeek extends React.Component {
         // start of cycle in UTC
         ascendant: new Date('September 4 2018 17:00 UTC').getTime(),
         curse: new Date('September 11 2018 17:00 UTC').getTime(),
-        ep: new Date('May 8 2018 18:00 UTC').getTime()
+        ep: new Date('May 8 2018 17:00 UTC').getTime()
       },
       cycle: {
         // how many week cycle

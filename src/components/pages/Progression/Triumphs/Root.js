@@ -12,11 +12,8 @@ class Root extends React.Component {
 
     let manifest = this.props.manifest;
 
-    let characterProgressions = this.props.state.ProfileResponse.characterProgressions.data;
-    let profileProgressions = this.props.state.ProfileResponse.profileProgression.data;
     let characterRecords = this.props.state.ProfileResponse.characterRecords.data;
     let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
-    let characterId = this.props.route.match.params.characterId;
 
     const sealBars = {
       2588182977: {
@@ -79,7 +76,7 @@ class Root extends React.Component {
         nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
           let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
           nodeChildNodeChildNode.children.records.forEach(record => {
-            states.push(profileRecords[record.hash] ? profileRecords[record.hash].state : characterRecords[this.props.route.match.params.characterId].records[record.hash].state);
+            states.push(profileRecords[record.recordHash] ? profileRecords[record.recordHash].state : characterRecords[this.props.route.match.params.characterId].records[record.recordHash].state);
           });
         });
       });
@@ -106,7 +103,7 @@ class Root extends React.Component {
       let states = [];
 
       node.children.records.forEach(record => {
-        states.push(profileRecords[record.hash] ? profileRecords[record.hash].state : characterRecords[this.props.route.match.params.characterId].records[record.hash].state);
+        states.push(profileRecords[record.recordHash] ? profileRecords[record.recordHash].state : characterRecords[this.props.route.match.params.characterId].records[record.recordHash].state);
       });
 
       sealNodes.push(

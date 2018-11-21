@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Globals from '../../Globals';
 import GA from '../../../GA';
-import * as ls from '../../localStorage';
 
 import ErrorHandler from '../ErrorHandler';
 import './Progression.css';

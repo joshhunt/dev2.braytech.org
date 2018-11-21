@@ -85,6 +85,37 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
+.lists .list li .text {
+  flex-basis: calc(100% - 2.8rem - 10px);
+}
+
+.lists .list li .lowlines {
+  flex-basis: 2rem;
+  position: relative;
+  text-align: right;
+}
+
+.lists .list li .lowlines a {
+  position: relative;
+  width: inherit;
+  height: inherit;
+  padding: 0 0.4rem;
+  opacity: 0;
+}
+
+.lists .list li .lowlines a span {
+  line-height: 1.3;
+  font-size: 16px;
+}
+
+.lists .list li:hover .lowlines a {
+  opacity: 0.6;
+}
+
+.lists .list li:hover .lowlines a:hover {
+  opacity: 1;
+}
+
 .lists .list.single-line li {
   align-items: center;
 }
@@ -144,6 +175,14 @@
 
 .checklistSelectors ul li {
   margin: 0 1rem 1rem 0;
+}
+
+.lists .list li .text {
+  flex-basis: calc(100% - 1rem - 10px);
+}
+
+.lists .list li .lowlines {
+  display: none;
 }
 
 }

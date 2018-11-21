@@ -4,9 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 const caydesJournals = (props) => {
 
-  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
 
@@ -21,7 +19,7 @@ const caydesJournals = (props) => {
       var completed = value;
       var item = false;
       Object.entries(manifest.DestinyChecklistDefinition[2448912219].entries).forEach(([pear, peach]) => {
-        if (manifest.DestinyChecklistDefinition[2448912219].entries[pear].checklistHash === hash) {
+        if (manifest.DestinyChecklistDefinition[2448912219].entries[pear].hash === hash) {
           item = manifest.DestinyChecklistDefinition[2448912219].entries[pear];
           return;
         }

@@ -5,7 +5,6 @@ import orderBy from 'lodash/orderBy';
 const lostSectors = (props) => {
 
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
-  let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
@@ -17,17 +16,17 @@ const lostSectors = (props) => {
 
     let completed = value;
 
-    let item = false;
+    let checklist = false;
     Object.entries(manifest.DestinyChecklistDefinition[3142056444].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[3142056444].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[3142056444].entries[pear];
+      if (manifest.DestinyChecklistDefinition[3142056444].entries[pear].hash === hash) {
+        checklist = manifest.DestinyChecklistDefinition[3142056444].entries[pear];
         return;
       }
     });
 
     let destination = false;
     Object.keys(manifest.DestinyDestinationDefinition).forEach(subKey => {
-      if (manifest.DestinyDestinationDefinition[subKey].hash === item.destinationHash) {
+      if (manifest.DestinyDestinationDefinition[subKey].hash === checklist.destinationHash) {
         destination = manifest.DestinyDestinationDefinition[subKey];
         return;
       }
@@ -43,7 +42,7 @@ const lostSectors = (props) => {
 
     let lostsector = false;
     Object.keys(destination.bubbles).forEach(subKey => {
-      if (destination.bubbles[subKey].hash === item.bubbleHash) {
+      if (destination.bubbles[subKey].hash === checklist.bubbleHash) {
         lostsector = destination.bubbles[subKey];
         return;
       }
@@ -53,7 +52,7 @@ const lostSectors = (props) => {
       completed: completed ? 1 : 0,
       place: place.displayProperties.name,
       name: lostsector ? lostsector.displayProperties.name : `???`,
-      element: <li key={item.hash}>
+      element: <li key={checklist.hash}>
         <div className={cx(
             "state",
             {
@@ -63,6 +62,11 @@ const lostSectors = (props) => {
         <div className="text">
           <p>{ lostsector ? lostsector.displayProperties.name : `???` }</p>
           <p>{ place.displayProperties.name }</p>
+        </div>
+        <div className="lowlines">
+          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
+            <i className="uniE1C4" />
+          </a>
         </div>
       </li>
       })

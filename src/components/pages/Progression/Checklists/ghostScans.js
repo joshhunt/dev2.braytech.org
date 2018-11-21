@@ -3,9 +3,7 @@ import cx from 'classnames'
 
 const ghostScans = (props) => {
 
-  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
 
@@ -16,17 +14,17 @@ const ghostScans = (props) => {
 
     let completed = value;
 
-    let item = false;
+    let checklist = false;
     Object.entries(manifest.DestinyChecklistDefinition[2360931290].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[2360931290].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[2360931290].entries[pear];
+      if (manifest.DestinyChecklistDefinition[2360931290].entries[pear].hash === hash) {
+        checklist = manifest.DestinyChecklistDefinition[2360931290].entries[pear];
         return;
       }
     });
 
     let destination = false;
     Object.keys(manifest.DestinyDestinationDefinition).forEach(subKey => {
-      if (manifest.DestinyDestinationDefinition[subKey].hash === item.destinationHash) {
+      if (manifest.DestinyDestinationDefinition[subKey].hash === checklist.destinationHash) {
         destination = manifest.DestinyDestinationDefinition[subKey];
         return;
       }
@@ -42,7 +40,7 @@ const ghostScans = (props) => {
 
     let scan = false;
     Object.keys(destination.bubbles).forEach(subKey => {
-      if (destination.bubbles[subKey].hash === item.bubbleHash) {
+      if (destination.bubbles[subKey].hash === checklist.bubbleHash) {
         scan = destination.bubbles[subKey];
         return;
       }
@@ -50,7 +48,7 @@ const ghostScans = (props) => {
 
     let farmScans = [1711258227, 1763506864, 2127236170, 3249685481];
 
-    if (farmScans.includes(item.hash)) {
+    if (farmScans.includes(checklist.hash)) {
       scan = {
         displayProperties: {
           name: "The Farm"
@@ -58,10 +56,10 @@ const ghostScans = (props) => {
       }
     }
 
-    let number = item.displayProperties.name.match(/([0-9]+)/)[0];
+    let number = checklist.displayProperties.name.match(/([0-9]+)/)[0];
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
+      <li key={checklist.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
         <div className={cx(
             "state",
             {
@@ -71,6 +69,11 @@ const ghostScans = (props) => {
         <div className="text">
           <p>{ number } &mdash; { scan ? scan.displayProperties.name : `???` }</p>
           <p>{ place.displayProperties.name }</p>
+        </div>
+        <div className="lowlines">
+          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
+            <i className="uniE1C4" />
+          </a>
         </div>
       </li>
     )

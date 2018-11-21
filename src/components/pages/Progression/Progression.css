@@ -5,7 +5,7 @@
 #progression {
   display: flex;
   flex-flow: row wrap;
-  padding: 19rem 0 1.5rem;
+  padding: 18rem 0 1.5rem;
   min-height: initial;
 }
 

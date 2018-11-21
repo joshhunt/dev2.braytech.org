@@ -5,7 +5,6 @@ import orderBy from 'lodash/orderBy';
 const adventures = (props) => {
 
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
-  let profileProgressions = props.state.ProfileResponse.profileProgression.data;
   let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
@@ -17,17 +16,17 @@ const adventures = (props) => {
 
     let completed = value;
 
-    let item = false;
+    let checklist = false;
     Object.entries(manifest.DestinyChecklistDefinition[4178338182].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[4178338182].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[4178338182].entries[pear];
+      if (manifest.DestinyChecklistDefinition[4178338182].entries[pear].hash === hash) {
+        checklist = manifest.DestinyChecklistDefinition[4178338182].entries[pear];
         return;
       }
     });
 
     let destination = false;
     Object.keys(manifest.DestinyDestinationDefinition).forEach(subKey => {
-      if (manifest.DestinyDestinationDefinition[subKey].hash === item.destinationHash) {
+      if (manifest.DestinyDestinationDefinition[subKey].hash === checklist.destinationHash) {
         destination = manifest.DestinyDestinationDefinition[subKey];
         return;
       }
@@ -43,18 +42,20 @@ const adventures = (props) => {
 
     let adventure = false;
     Object.keys(destination.bubbles).forEach(subKey => {
-      if (destination.bubbles[subKey].hash === item.bubbleHash) {
+      if (destination.bubbles[subKey].hash === checklist.bubbleHash) {
         adventure = destination.bubbles[subKey];
         return;
       }
     });
 
+    let activityDef = manifest.DestinyActivityDefinition[checklist.activityHash];
+
     list.push({
       completed: completed ? 1 : 0,
       place: place.displayProperties.name,
       place2: adventure.displayProperties.name,
-      name: item.activityDef.displayProperties.name,
-      element: <li key={item.hash}>
+      name: activityDef.displayProperties.name,
+      element: <li key={checklist.hash}>
         <div className={cx(
             "state",
             {
@@ -62,8 +63,13 @@ const adventures = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ item.activityDef.displayProperties.name }</p>
+          <p>{ activityDef.displayProperties.name }</p>
           <p>{ adventure.displayProperties.name }, { place.displayProperties.name }</p>
+        </div>
+        <div className="lowlines">
+          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
+            <i className="uniE1C4" />
+          </a>
         </div>
       </li>
       })

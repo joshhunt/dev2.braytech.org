@@ -3,9 +3,7 @@ import cx from 'classnames'
 
 const sleeperNodes = (props) => {
 
-  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
 
@@ -16,16 +14,20 @@ const sleeperNodes = (props) => {
 
     let completed = value;
 
-    let item = false;
+    let checklist = false;
     Object.entries(manifest.DestinyChecklistDefinition[365218222].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[365218222].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[365218222].entries[pear];
+      if (manifest.DestinyChecklistDefinition[365218222].entries[pear].hash === hash) {
+        checklist = manifest.DestinyChecklistDefinition[365218222].entries[pear];
         return;
       }
     });
+
+    let itemDefintion = manifest.DestinyInventoryItemDefinition[checklist.itemHash];
+
+    console.log(itemDefintion)
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ item.displayProperties.description.toString().replace("CB.NAV/RUN.()","").match(/.*?(?=\.)/)[0] }>
+      <li key={checklist.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ itemDefintion.displayProperties.description.toString().replace("CB.NAV/RUN.()","").match(/.*?(?=\.)/)[0] }>
         <div className={cx(
             "state",
             {
@@ -33,7 +35,12 @@ const sleeperNodes = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ item.displayProperties.description.toString().replace("CB.NAV/RUN.()","") }</p>
+          <p>{ itemDefintion.displayProperties.description.toString().replace("CB.NAV/RUN.()","") }</p>
+        </div>
+        <div className="lowlines">
+          <a href={`https://lowlidev.com.au/destiny/maps/mars/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
+            <i className="uniE1C4" />
+          </a>
         </div>
       </li>
     )

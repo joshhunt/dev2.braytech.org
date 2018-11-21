@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
 import Moment from 'react-moment';
@@ -66,8 +65,6 @@ class DisplayGroup extends React.Component {
   }
 
   render() {
-
-    console.log(this)
     
     if (!this.state.data) {
       return (
@@ -99,7 +96,7 @@ class DisplayGroup extends React.Component {
             { group.detail.groupId === "172382" ? <div className="nrg"><ObservedImage className={cx(
                 "image"
               )}
-            src="/static/images/NRG-NEON-red.png" /></div> : `` }
+            src="/static/images/NRG-NEON-BLUE-GOLD-BADGE.png" /></div> : `` }
             <h2>{ group.detail.name }</h2>
             <div className="motto">{ group.detail.motto }</div>
             <div className="meta">

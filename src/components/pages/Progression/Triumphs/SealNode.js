@@ -1,11 +1,9 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
 import * as ls from '../../../localStorage';
-
-import { enumerateRecordState } from '../../../destinyEnums';
 
 import Records from './Records';
 import '../RecordItems.css';

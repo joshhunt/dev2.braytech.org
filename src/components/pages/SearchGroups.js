@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import Globals from '../Globals';
 import ReactMarkdown from 'react-markdown';
 
-import * as destinyEnums from '../destinyEnums';
-import * as ls from '../localStorage';
-
-
 import './SearchPlayer.css';
 import './SearchGroups.css';
 

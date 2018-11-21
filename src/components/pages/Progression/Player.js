@@ -85,8 +85,6 @@ class Player extends React.Component {
     let characters = props.data.ProfileResponse.characters.data;
     let characterActivities = props.data.ProfileResponse.characterActivities.data;
     let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
-    let profileProgressions = props.data.ProfileResponse.profileProgression.data;
-    let profileRecords = props.data.ProfileResponse.profileRecords.data;
 
     let activeCharacter;
     let charactersRender = [];
@@ -226,9 +224,9 @@ class Player extends React.Component {
       var activityDefinition = manifest.DestinyActivityDefinition[characterActivities[activeCharacter.characterId].currentActivityHash];
 
       activity = activityDefinition ? (activityDefinition.displayProperties.name ? activityDefinition.displayProperties.name : false) : false;
-      activity = activity ? activity : activityDefinition ? (activityDefinition.placeHash == 2961497387 ? `Orbit` : false) : false;
+      activity = activity ? activity : activityDefinition ? (activityDefinition.placeHash === 2961497387 ? `Orbit` : false) : false;
 
-      var mode = activity == "Orbit" ? false : modeDefinition ? modeDefinition.displayProperties.name : false;
+      var mode = activity === "Orbit" ? false : modeDefinition ? modeDefinition.displayProperties.name : false;
 
       activity = `${ mode ? mode : `` }${ mode ? `: ` : `` }${ activity ? activity : `Ghosting` }`;
     }

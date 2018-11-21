@@ -29,10 +29,7 @@ class Summary extends React.Component {
 
     const Almost = () => {
 
-      let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
-      let profileProgressions = props.state.ProfileResponse.profileProgression.data;
       let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
-      let characterId = props.route.match.params.characterId;
     
       let manifest = props.manifest;
     
@@ -147,9 +144,7 @@ class Summary extends React.Component {
       let profileProgressions = props.state.ProfileResponse.profileProgression.data;
       let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
       let characterId = props.route.match.params.characterId;
-    
-      let manifest = props.manifest;
-    
+        
       let progression = {
         checklists: {
           text: "Checklists",
@@ -278,9 +273,7 @@ class Summary extends React.Component {
       let profileProgressions = props.state.ProfileResponse.profileProgression.data;
       let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
       let characterId = props.route.match.params.characterId;
-    
-      let manifest = props.manifest;
-      
+          
       let progression = {
         checklists: {
           text: "Checklists",

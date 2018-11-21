@@ -3,9 +3,7 @@ import cx from 'classnames'
 
 const latentMemories = (props) => {
 
-  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-  let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
 
@@ -16,18 +14,18 @@ const latentMemories = (props) => {
 
     let completed = value;
 
-    let item = false;
+    let checklist = false;
     Object.entries(manifest.DestinyChecklistDefinition[2955980198].entries).forEach(([pear, peach]) => {
-      if (manifest.DestinyChecklistDefinition[2955980198].entries[pear].checklistHash === hash) {
-        item = manifest.DestinyChecklistDefinition[2955980198].entries[pear];
+      if (manifest.DestinyChecklistDefinition[2955980198].entries[pear].hash === hash) {
+        checklist = manifest.DestinyChecklistDefinition[2955980198].entries[pear];
         return;
       }
     });
 
-    let number = item.displayProperties.name.match(/([0-9]+)/)[0];
+    let number = checklist.displayProperties.name.match(/([0-9]+)/)[0];
     
     list.push(
-      <li key={item.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
+      <li key={checklist.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
         <div className={cx(
             "state",
             {
@@ -35,7 +33,12 @@ const latentMemories = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ item.displayProperties.name }</p>
+          <p>{ checklist.displayProperties.name }</p>
+        </div>
+        <div className="lowlines">
+          <a href={`https://lowlidev.com.au/destiny/maps/mars/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
+            <i className="uniE1C4" />
+          </a>
         </div>
       </li>
     )

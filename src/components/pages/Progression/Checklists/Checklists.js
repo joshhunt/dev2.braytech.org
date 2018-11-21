@@ -1,5 +1,5 @@
 import React from 'react';
-import cx from 'classnames'
+import cx from 'classnames';
 
 import regionChests from './regionChests';
 import lostSectors from './lostSectors';
@@ -15,37 +15,43 @@ class Checklists extends React.Component {
     super(props);
 
     this.state = {
-      page: 0
-    }
+      page: 0,
+      lowlidev: false
+    };
 
     this.changeSkip = this.changeSkip.bind(this);
+    this.lowlines = this.lowlines.bind(this);
   }
-  
-  /*
-    checklists  
-      region chests
-      lost sectors
-      adventures
-      sleeper nodes
-      ghost scans
-      latent memories
-      caydes journals
-  */
 
   itemsPerPage = 5;
 
-  changeSkip = (e) => {
-
+  changeSkip = e => {
     e.preventDefault();
 
     let index = e.currentTarget.dataset.index;
 
     this.setState({
-      page: Math.floor(index/this.itemsPerPage) // credit: elviswolcott
-    })
+      page: Math.floor(index / this.itemsPerPage) // credit: elviswolcott
+    });
+  };
 
+  lowlines = async () => {
+    const request = await fetch(`https://lowlidev.com.au/destiny/api/v2/map/supported`);
+    const response = await request.json();
+    return response;
   }
-  
+
+  componentDidMount() {
+    // this.lowlines().then(response => {
+    //   const state = this.state;
+    //   state.lowlidev = response.data;
+    //   this.setState(state);
+    // })
+    // .catch(error => {
+    //   console.log(error);
+    // })
+  }
+
   render() {
 
     if (this.props.viewport.width >= 1600) {
@@ -66,27 +72,27 @@ class Checklists extends React.Component {
 
     const lists = [
       {
-        name: "Region Chests",
-        list: regionChests(this.props)
+        name: 'Region Chests',
+        list: regionChests(this)
       },
       {
-        name: "Lost Sectors",
+        name: 'Lost Sectors',
         list: lostSectors(this.props)
       },
       {
-        name: "Adventures",
+        name: 'Adventures',
         list: adventures(this.props)
       },
       {
-        name: "Sleeper Nodes",
+        name: 'Sleeper Nodes',
         list: sleeperNodes(this.props)
       },
       {
-        name: "Ghost Scans",
+        name: 'Ghost Scans',
         list: ghostScans(this.props)
       },
       {
-        name: "Latent Memory Fragments",
+        name: 'Latent Memory Fragments',
         list: latentMemories(this.props)
       },
       {
@@ -102,56 +108,41 @@ class Checklists extends React.Component {
       <>
         <div className="checklistSelectors">
           <ul>
-            { lists.map((list, index) => {
+            {lists.map((list, index) => {
+              let active = false;
 
-                let active = false;
-                // % 5 === 0
-                // if (index >= this.state.skip && index <= itemsPerPage) {
-                //   active = true;
-                // }
-                // if (this.state.skip > 0 && (index + 1) > itemsPerPage) {
-                //   active = false;
-                // }
-                // if (index < itemsPerPage) {
-                //   active = true;
-                // }
-                // if (index < (this.state.skip + 1) * itemsPerPage && index >= this.state.skip) {
-                //   active = true;
-                // }
-                // if (index >= this.state.skip && index < (parseInt(this.state.skip, 10) + parseInt(this.itemsPerPage, 10))) {
-                //   active = true;
-                // }
-                if (index >= sliceStart && index < sliceEnd) {
-                  active = true;
-                }
+              if (index >= sliceStart && index < sliceEnd) {
+                active = true;
+              }
 
-                return (
-                  <li key={list.name}>
-                    <a href="/" 
-                    className={cx(
-                      {
-                        "active": active
-                      }
-                    )} 
-                    data-index={index} 
-                    onClick={this.changeSkip}>{list.name}</a>
-                  </li>
-                )
-              }) }
+              return (
+                <li key={list.name}>
+                  <a
+                    href="/"
+                    className={cx({
+                      active: active
+                    })}
+                    data-index={index}
+                    onClick={this.changeSkip}
+                  >
+                    {list.name}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
-        <div className={cx(
-            "lists",
-            "col-" + this.itemsPerPage
-          )}>
-          { lists.slice(sliceStart, sliceEnd).map(list => {
-              return (
-                <div className="col" key={list.name}>{list.list}</div>
-              )
-            }) }
+        <div className={cx('lists', 'col-' + this.itemsPerPage)}>
+          {lists.slice(sliceStart, sliceEnd).map(list => {
+            return (
+              <div className="col" key={list.name}>
+                {list.list}
+              </div>
+            );
+          })}
         </div>
       </>
-    )
+    );
   }
 }
 

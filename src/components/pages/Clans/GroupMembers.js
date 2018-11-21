@@ -37,7 +37,7 @@ class GroupMembers extends React.Component {
       })
         .then(ProfileResponse => {
     
-          if (ProfileResponse.ErrorCode != 1) {
+          if (ProfileResponse.ErrorCode !== 1) {
             console.warn(member.destinyUserInfo.membershipType + "/" + member.destinyUserInfo.membershipId + " - " + ProfileResponse.Message);
             return;
           }
@@ -72,34 +72,37 @@ class GroupMembers extends React.Component {
       }
 
       if (profile) {
-              
-        var currentActivity = ``;
+
+        let activity;
+        let currentActivity;
+        let lastActive;
+
         if (member.isOnline) {
           
           var activeCharacter = false;
           if (profile.characterActivities.data) {
             Object.keys(profile.characterActivities.data).forEach(key => {
-              if (profile.characterActivities.data[key].currentActivityHash != 0) {
+              if (profile.characterActivities.data[key].currentActivityHash !== 0) {
                 activeCharacter = profile.characterActivities.data[key];
                 return;
               }
             });
           }
           
-          var modeDefinition = manifest.DestinyActivityModeDefinition[activeCharacter.currentActivityModeHash];
-          var activityDefinition = manifest.DestinyActivityDefinition[activeCharacter.currentActivityHash];
+          let modeDefinition = manifest.DestinyActivityModeDefinition[activeCharacter.currentActivityModeHash];
+          let activityDefinition = manifest.DestinyActivityDefinition[activeCharacter.currentActivityHash];
 
-          let activity = activityDefinition ? (activityDefinition.displayProperties.name ? activityDefinition.displayProperties.name : false) : false;
-          activity = activity ? activity : activityDefinition ? (activityDefinition.placeHash == 2961497387 ? `Orbit` : false) : false;
+          activity = activityDefinition ? (activityDefinition.displayProperties.name ? activityDefinition.displayProperties.name : false) : false;
+          activity = activity ? activity : activityDefinition ? (activityDefinition.placeHash === 2961497387 ? `Orbit` : false) : false;
 
-          var mode = activity == "Orbit" ? false : modeDefinition ? modeDefinition.displayProperties.name : false;
+          let mode = activity === "Orbit" ? false : modeDefinition ? modeDefinition.displayProperties.name : false;
 
           currentActivity = `${ mode ? mode : `` }${ mode ? `: ` : `` }${ activity ? activity : `Ghosting` }`;
 
         }
 
-        let activity = <div>Last played <Moment fromNow>{ profile.profile.data.dateLastPlayed }</Moment></div>;
-        let lastActive = new Date(profile.profile.data.dateLastPlayed).getTime();
+        activity = <div>Last played <Moment fromNow>{ profile.profile.data.dateLastPlayed }</Moment></div>;
+        lastActive = new Date(profile.profile.data.dateLastPlayed).getTime();
 
         if (member.isOnline) {
           activity = currentActivity;
@@ -113,7 +116,7 @@ class GroupMembers extends React.Component {
             }
           )}>
             <ul>
-              <li className="displayName">{ member.destinyUserInfo.displayName }</li>
+              <li className="displayName"><Link to={`/progression/${member.destinyUserInfo.membershipType}/${member.destinyUserInfo.membershipId}`}>{ member.destinyUserInfo.displayName }</Link></li>
               <li className="light">{ profile.characters.data[0].light }</li>
               <li className="joinDate"><Moment fromNow>{ member.joinDate }</Moment></li>
               <li className="clanXp">{ profile.profileRecords.data ? profile.profileRecords.data.records[1738299320].objectives[0].progress : null }</li>
@@ -140,16 +143,6 @@ class GroupMembers extends React.Component {
         )
       }
     });
-
-    // members.sort(function(b, a) {
-    //   let timeA = a.props.time;
-    //   let timeB = b.props.time;
-    //   return (timeA < timeB) ? -1 : (timeA > timeB) ? 1 : 0;
-    // });
-
-    //console.log(members)
-
-    
 
     return orderBy(members, [member => member.props.alt !== "" ? member.props.alt : "zzzzzzzzzzzzzzzzz", member => member.props.time], ['asc', 'desc']);
 

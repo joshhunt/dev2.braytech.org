@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import cx from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import Moment from 'react-moment';
-import ObservedImage from '../../ObservedImage';
 
 import './Index.css';
 

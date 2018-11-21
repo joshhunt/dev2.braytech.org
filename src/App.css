@@ -485,14 +485,15 @@ button.square.active {
 
 #loading h4 {
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin: 0 0 1rem;
+  margin: 0 0 0.6rem;
 }
 
 #loading .download {
-  font-family: monospace;
+  font-size: 14px;
+  letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.2);
 }
 

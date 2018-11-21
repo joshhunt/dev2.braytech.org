@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10rem 3rem 3rem;
+  padding: 10rem 3rem 2rem;
   height: 6rem;
   display: flex;
   flex-flow: row wrap;
@@ -163,7 +163,7 @@
 @media screen and (max-width: 600px) {
 
 #player {
-  padding: 9rem 2rem 2rem;
+  padding: 9rem 2rem 1rem;
 }
 
 #player .characters {

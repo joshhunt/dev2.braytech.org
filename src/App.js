@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import cx from 'classnames';
+import assign from 'lodash/assign';
 
 import Globals from './components/Globals';
 import db from './components/db';
@@ -61,7 +62,7 @@ class App extends Component {
     state.manifest.downloading = true;
     this.setState(state);
 
-    fetch('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition,DestinyInventoryItemDefinition', {
+    let most = fetch('https://api.braytech.org/?request=manifest&table=DestinyDestinationDefinition,DestinyPlaceDefinition,DestinyPresentationNodeDefinition,DestinyRecordDefinition,DestinyProgressionDefinition,DestinyCollectibleDefinition,DestinyChecklistDefinition,DestinyObjectiveDefinition,DestinyActivityDefinition,DestinyActivityModeDefinition,DestinySocketCategoryDefinition', {
       headers: {
         'X-API-Key': Globals.key.braytech
       }
@@ -70,6 +71,34 @@ class App extends Component {
         return response.json();
       })
       .then(fetch => {
+        return fetch;
+      });
+
+    let items = fetch('https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition', {
+      headers: {
+        'X-API-Key': Globals.key.braytech
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(fetch => {
+        return fetch;
+      });
+
+    Promise.all([most, items])
+      .then(promises => {
+        console.log(promises);
+
+        let fetch = promises[0];
+        fetch.response.data = assign(fetch.response.data, promises[1].response.data);
+
+        console.log(fetch);
+
+        let state = this.state;
+        state.manifest.almost = true;
+        this.setState(state);
+
         db.table('manifest')
           .clear()
           .then(() => {
@@ -125,10 +154,15 @@ class App extends Component {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  this.manifest = manifest[0].value;
-                  let state = this.state;
-                  state.manifest.ready = true;
-                  this.setState(state);
+                  if (!manifest[0].value.DestinySocketCategoryDefinition) {
+                    console.log('missing table!');
+                    this.getManifest();
+                  } else {
+                    this.manifest = manifest[0].value;
+                    let state = this.state;
+                    state.manifest.ready = true;
+                    this.setState(state);
+                  }
                 });
             }
           })
@@ -147,12 +181,20 @@ class App extends Component {
       GA.init();
     }
 
-    if (!this.state.manifest.ready && this.state.manifest.downloading) {
+    if (!this.state.manifest.ready && this.state.manifest.almost) {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
           <h4>Braytech</h4>
-          <div className="download">UPDATING</div>
+          <div className="download">SO CLOSE</div>
+        </div>
+      );
+    } else if (!this.state.manifest.ready && this.state.manifest.downloading) {
+      return (
+        <div className="view" id="loading">
+          <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
+          <h4>Braytech</h4>
+          <div className="download">READING MANIFEST</div>
         </div>
       );
     } else if (!this.state.manifest.ready) {
@@ -225,7 +267,7 @@ class App extends Component {
                   </>
                 )}
               />
-              <Route
+              {/* <Route
                 path="/xur"
                 render={route => (
                   <>
@@ -233,7 +275,7 @@ class App extends Component {
                     <Xur appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
                   </>
                 )}
-              />
+              /> */}
               <Route
                 path="/checklists"
                 render={route => (

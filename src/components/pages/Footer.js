@@ -17,7 +17,7 @@ class Footer extends React.Component {
     return (
       <footer>
         <div>© 2018 Tom Chapman / <Link to="/progression/1/4611686018449662397/">justrealmilk</Link>. This is a fan site. All content is owned by their respective owners.</div>
-        <div>Braytech {packageJSON.version} / <a href="https://github.com/justrealmilk/dev2.braytech.org/issues" target="_blank" rel="noopener noreferrer">Issues?</a></div>
+        <div>Braytech {packageJSON.version} / <a href="https://twitter.com/justrealmilk" target="_blank" rel="noopener noreferrer">Twitter</a> / <a href="https://www.reddit.com/user/xhtmlvalid" target="_blank" rel="noopener noreferrer">Reddit</a> / <a href="https://github.com/justrealmilk/dev2.braytech.org/issues" target="_blank" rel="noopener noreferrer">Issues?</a></div>
       </footer>
     )
   }

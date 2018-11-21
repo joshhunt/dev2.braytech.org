@@ -33,15 +33,15 @@ class Records extends React.Component {
 
     let tertiaryChildren = [];
     tertiaryDefinition.children.records.forEach(child => {
-      let recordDefinition = child;
+      let recordDefinition = manifest.DestinyRecordDefinition[child.recordHash];
 
       let objectives = [];
-      child.objectiveHashes.forEach(hash => {
+      recordDefinition.objectiveHashes.forEach(hash => {
         let objectiveDefinition = manifest.DestinyObjectiveDefinition[hash];
 
-        if (profileRecords[child.hash]) {
+        if (profileRecords[recordDefinition.hash]) {
           let playerProgress = null;
-          profileRecords[child.hash].objectives.forEach(objective => {
+          profileRecords[recordDefinition.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
               playerProgress = objective;
             }
@@ -56,9 +56,9 @@ class Records extends React.Component {
               <div className="bar" style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
             </div>
           );
-        } else if (characterRecords[characterId].records[child.hash]) {
+        } else if (characterRecords[characterId].records[recordDefinition.hash]) {
           let playerProgress = null;
-          characterRecords[characterId].records[child.hash].objectives.forEach(objective => {
+          characterRecords[characterId].records[recordDefinition.hash].objectives.forEach(objective => {
             if (objective.objectiveHash === hash) {
               playerProgress = objective;
             }
@@ -79,10 +79,10 @@ class Records extends React.Component {
       });
 
       let state;
-      if (profileRecords[child.hash]) {
-        state = profileRecords[child.hash] ? profileRecords[child.hash].state : 0;
-      } else if (characterRecords[characterId].records[child.hash]) {
-        state = characterRecords[characterId].records[child.hash] ? characterRecords[characterId].records[child.hash].state : 0;
+      if (profileRecords[recordDefinition.hash]) {
+        state = profileRecords[recordDefinition.hash] ? profileRecords[recordDefinition.hash].state : 0;
+      } else if (characterRecords[characterId].records[recordDefinition.hash]) {
+        state = characterRecords[characterId].records[recordDefinition.hash] ? characterRecords[characterId].records[recordDefinition.hash].state : 0;
       } else {
         state = 0;
       }
@@ -128,7 +128,7 @@ class Records extends React.Component {
       tertiaryChildren.push(
         <li key="lol">
           <div className="properties">
-            <div class="icon" />
+            <div className="icon" />
             <div className="text">
               <div className="name">Nothing to show for your effort</div>
               <div className="description">You've completed all the records here! GG</div>
