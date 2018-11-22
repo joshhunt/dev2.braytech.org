@@ -156,7 +156,7 @@ class ThisWeek extends React.Component {
         },
         6: {
           challenge: "Cimmerian Garrison",
-          region: "Chamber of Stralight",
+          region: "Chamber of Starlight",
           triumphs: [
             3024450471, // Nigh I (Eggs)
             1859033173, // Brephos III (Bones)
