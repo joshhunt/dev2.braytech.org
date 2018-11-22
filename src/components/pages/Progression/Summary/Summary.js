@@ -157,7 +157,7 @@ class Summary extends React.Component {
               completed: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
             },
             latentMemories: {
-              text: 'Latent memories shot',
+              text: 'Lost memory fragments destroyed',
               total: Object.keys(profileProgressions.checklists[2955980198]).length,
               completed: Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length
             },
@@ -465,7 +465,7 @@ class Summary extends React.Component {
                   'disabled': value.step.currentProgress === value.total && key === "glory"
                 }
               )}>
-                <div className="title">Next rank: {value.step.currentProgress === value.total && value.step.stepIndex === value.definition.steps.length ? value.definition.steps[0].stepName : (value.definition.steps[(value.step.stepIndex + 1) % (value.definition.steps.length - 1)].stepName)}</div>
+                <div className="title">Next rank: {value.step.currentProgress === value.total && value.step.stepIndex === value.definition.steps.length ? value.definition.steps[0].stepName : (value.definition.steps[(value.step.stepIndex + 1) % (value.definition.steps.length)].stepName)}</div>
                 <div className="fraction">
                   {value.step.progressToNextLevel}/{value.step.nextLevelAt}
                 </div>

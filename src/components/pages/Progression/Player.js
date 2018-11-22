@@ -19,12 +19,10 @@ class Player extends React.Component {
 
     this.state = {
       expandCharacters: false,
-      emblemsResponse: false,
       activeCharacterId: this.props.route.match.params.characterId
     }
 
     this.expandCharacters = this.expandCharacters.bind(this);
-    this.emblemBackgrounds = null;
   }
 
   expandCharacters = (e) => {
@@ -41,37 +39,13 @@ class Player extends React.Component {
     }
   }
 
-  getEmblems = (hashes) => {
-    fetch(
-      `https://api.braytech.org/?request=manifest&table=DestinyInventoryItemDefinition&hash=${ hashes.map(obj => { return obj.hash }).join(",") }`,
-      {
-        headers: {
-          "X-API-Key": Globals.key.braytech,
-        }
-      }
-    )
-    .then(response => {
-      return response.json();
-    })
-      .then(response => {
-
-        this.setState({
-          emblemsResponse: response.response.data.items
-        });
-
-      })
-    .catch(error => {
-      console.log(error);
-    })
-  }
-
   componentDidUpdate(prevProps, prevState) {
 
     if (prevProps.route.match.params.characterId !== this.props.route.match.params.characterId) {
       this.setState({
         activeCharacterId: this.props.route.match.params.characterId
       });
-    }    
+    }
 
   }
 
@@ -88,7 +62,7 @@ class Player extends React.Component {
 
     let activeCharacter;
     let charactersRender = [];
-    let emblemHashes = [];
+    let emblemBackgrounds = [];
 
     characters.forEach(character => {
 
@@ -99,10 +73,18 @@ class Player extends React.Component {
       let capped = characterProgressions[character.characterId].progressions[1716568313].level === characterProgressions[character.characterId].progressions[1716568313].levelCap 
       ? true : false;
 
-      emblemHashes.push({
-        character: character.characterId,
-        hash: character.emblemHash
-      })
+      let emblemDefinition = manifest.DestinyInventoryItemDefinition[character.emblemHash];
+      emblemBackgrounds.push(
+        <ObservedImage key={character.characterId} data-id={character.characterId} className={cx(
+              "image",
+              "emblem",
+              {
+                "missing": emblemDefinition.redacted,
+                "active": this.state.activeCharacterId === character.characterId ? true : false
+              }
+            )}
+          src={ `https://www.bungie.net${ emblemDefinition.secondarySpecial ? emblemDefinition.secondarySpecial : `/img/misc/missing_icon_d2.png` }` } />
+      )
 
       let progress = capped ? 
       characterProgressions[character.characterId].progressions[2030054750].progressToNextLevel / characterProgressions[character.characterId].progressions[2030054750].nextLevelAt 
@@ -153,11 +135,7 @@ class Player extends React.Component {
           <h4>Change profile</h4>
         </div>
       </li>
-    )
-
-    if (!this.state.emblemsResponse) {
-      this.getEmblems(emblemHashes);
-    }
+    );
 
     const views = [
       {
@@ -185,37 +163,7 @@ class Player extends React.Component {
         slug: "/collections",
         exact: false
       }
-    ]
-
-    if (this.state.emblemsResponse) {
-      let emblems = [];
-      emblemHashes.forEach(obj => {
-
-        let characterId = obj.character;
-        let emblemResponse = null;
-        Object.keys(this.state.emblemsResponse).forEach(key => {
-          if (this.state.emblemsResponse[key].hash === obj.hash) {
-            emblemResponse = this.state.emblemsResponse[key];
-            return;
-          }
-        });
-
-        emblems.push(
-          <ObservedImage key={characterId} data-id={characterId} className={cx(
-                "image",
-                "emblem",
-                {
-                  "missing": emblemResponse.redacted,
-                  "active": this.state.activeCharacterId === characterId ? true : false
-                }
-              )}
-            src={ `https://www.bungie.net${ emblemResponse.secondarySpecial ? emblemResponse.secondarySpecial : `/img/misc/missing_icon_d2.png` }` } />
-        )
-      });
-      this.emblemBackgrounds = emblems;
-    }
-
-    // {Math.floor(Object.keys(characters).reduce((sum, key) => { return sum + parseInt(characters[key].minutesPlayedTotal); }, 0 ) / 1440)} days
+    ];
 
     let activity;
     if (characterActivities[activeCharacter.characterId].currentActivityHash !== 0) {
@@ -236,7 +184,7 @@ class Player extends React.Component {
 
     return (
       <div id="player">
-        <div className="backgrounds">{this.emblemBackgrounds}</div>
+        <div className="backgrounds">{emblemBackgrounds}</div>
         <div className={cx(
             "characters",
             {

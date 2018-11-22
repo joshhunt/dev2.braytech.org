@@ -53,12 +53,12 @@ const latentMemories = (props) => {
   return (
     <>
       <div className="head">
-        <h4>Latent Memory Fragments</h4>
+        <h4>Lost Memory Fragments</h4>
         <div className="binding">
           <p>Profile bound</p>
         </div>
         <div className="progress">
-          <div className="title">Memories shot</div>
+          <div className="title">Memories destroyed</div>
           <div className="fraction">{Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2955980198]).length}</div>
           <div className="bar" style={{
             width: `${ Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2955980198]).length * 100 }%`

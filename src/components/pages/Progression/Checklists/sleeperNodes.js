@@ -23,8 +23,6 @@ const sleeperNodes = (props) => {
     });
 
     let itemDefintion = manifest.DestinyInventoryItemDefinition[checklist.itemHash];
-
-    console.log(itemDefintion)
     
     list.push(
       <li key={checklist.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ itemDefintion.displayProperties.description.toString().replace("CB.NAV/RUN.()","").match(/.*?(?=\.)/)[0] }>

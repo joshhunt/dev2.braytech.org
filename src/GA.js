@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import ReactGA from 'react-ga'
-import { Route } from 'react-router-dom'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import ReactGA from 'react-ga';
+import { Route } from 'react-router-dom';
+import packageJSON from '../package.json';
 
 class GoogleAnalytics extends Component {
   componentDidMount () {
@@ -56,6 +57,10 @@ const init = (options = {}) => {
     ReactGA.initialize(
       process.env.REACT_APP_GA_TRACKING_ID, {
         debug: process.env.REACT_APP_GA_DEBUG === 'true',
+        gaOptions: {
+          appName: 'Braytech',
+          appVersion: packageJSON.version
+        },
         ...options
       }
     )

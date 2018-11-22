@@ -92,7 +92,7 @@ class Checklists extends React.Component {
         list: ghostScans(this.props)
       },
       {
-        name: 'Latent Memory Fragments',
+        name: 'Lost Memory Fragments',
         list: latentMemories(this.props)
       },
       {

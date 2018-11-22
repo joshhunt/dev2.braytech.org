@@ -44,9 +44,37 @@ class DisplayProfile extends React.Component {
           throw new SyntaxError('privacy');
         }
 
+        // convert character response to an array
         ProfileResponse.Response.characters.data = Object.values(ProfileResponse.Response.characters.data).sort(function(a, b) {
           return parseInt(b.minutesPlayedTotal) - parseInt(a.minutesPlayedTotal);
         });
+
+        // adjust adventures checklist state https://github.com/Bungie-net/api/issues/786
+        let completed = false;
+        // Signal Light
+        Object.values(ProfileResponse.Response.characterProgressions.data).forEach(character => {
+          if (character.checklists[4178338182][844419501]) {
+            completed = true;
+          }
+        });
+        Object.values(ProfileResponse.Response.characterProgressions.data).forEach(character => {
+          if (completed) {
+            character.checklists[4178338182][844419501] = true;
+          }
+        });
+        completed = false;
+        //Not Even the Darkness
+        Object.values(ProfileResponse.Response.characterProgressions.data).forEach(character => {
+          if (character.checklists[4178338182][1942564430]) {
+            completed = true;
+          }
+        });
+        Object.values(ProfileResponse.Response.characterProgressions.data).forEach(character => {
+          if (completed) {
+            character.checklists[4178338182][1942564430] = true;
+          }
+        });
+        completed = false;
 
         let route = this.props;
         let characterId = ProfileResponse.Response.characters.data.filter(character => character.characterId === route.match.params.characterId).length === 1 ? route.match.params.characterId : ProfileResponse.Response.characters.data[0].characterId;
@@ -63,6 +91,7 @@ class DisplayProfile extends React.Component {
         let tertiary = route.match.params.tertiary;
         let quaternary = route.match.params.quaternary;
 
+        // i hate this
         route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}${primary ? `/${primary}` : ``}${secondary ? `/${secondary}` : ``}${tertiary ? `/${tertiary}` : ``}${quaternary ? `/${quaternary}` : ``}`);
 
         this.setState({

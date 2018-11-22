@@ -147,7 +147,7 @@ header {
   padding: 0 1rem 0 2rem;
   margin: 0 3rem;
   background-color: rgba(115, 115, 115, 0.5);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 html.backdropfilter header {

@@ -9,11 +9,11 @@ const adventures = (props) => {
 
   let manifest = props.manifest;
 
-  let list = []
+  let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[4178338182]).forEach(([key, value]) => {
     let hash = parseInt(key, 10);
-
+    
     let completed = value;
 
     let checklist = false;
@@ -49,6 +49,8 @@ const adventures = (props) => {
     });
 
     let activityDef = manifest.DestinyActivityDefinition[checklist.activityHash];
+
+    // console.log(activityDef.displayProperties.name, checklist, hash)
 
     list.push({
       completed: completed ? 1 : 0,
