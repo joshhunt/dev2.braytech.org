@@ -99,19 +99,20 @@ class Collectibles extends React.Component {
         if (enumerateCollectibleState(state).invisible) {
           return;
         }
-        
-        // eslint-disable-next-line eqeqeq      
+
+        // eslint-disable-next-line eqeqeq
         let ref = highlightHash == collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
         tertiaryChildren.push(
           <li
             key={collectibleDefinition.hash}
             ref={ref}
-            className={cx({
+            className={cx('tooltip', {
               completed: !enumerateCollectibleState(state).notAcquired,
               // eslint-disable-next-line eqeqeq
               highlight: highlightHash && highlightHash == collectibleDefinition.hash
             })}
+            data-itemhash={collectibleDefinition.itemHash}
           >
             <div className="icon">
               <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />

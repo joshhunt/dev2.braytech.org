@@ -122,7 +122,7 @@ class DisplayProfile extends React.Component {
       return (
         <BrowserRouter>
           <>
-            {<GA.RouteTracker />}
+            <GA.RouteTracker />
             <Switch>
               <Route
                 path="/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?/:quaternary?"

@@ -11,6 +11,8 @@ import GA from './GA';
 import './Core.css';
 import './App.css';
 
+import Tooltip from './components/Tooltip/Tooltip';
+
 import Header from './components/pages/Header';
 import Footer from './components/pages/Footer';
 import ErrorHandler from './components/pages/ErrorHandler';
@@ -76,7 +78,7 @@ class App extends Component {
   };
 
   getManifest = () => {
-    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition'];
+    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
 
     let state = this.state;
     state.manifest.state = 'fetching';
@@ -105,7 +107,6 @@ class App extends Component {
 
     Promise.all(fetches)
       .then(promises => {
-
         const manifest = assign(...promises);
 
         console.log(manifest);
@@ -163,7 +164,7 @@ class App extends Component {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinySocketTypeDefinition) {
+                  if (!manifest[0].value.DestinySandboxPerkDefinition) {
                     console.log('missing table! lol.');
                     this.getManifest();
                   } else {
@@ -218,6 +219,7 @@ class App extends Component {
       return (
         <BrowserRouter>
           <>
+            <Tooltip manifest={this.props.manifest} />
             <Header />
             <Switch>
               <Route

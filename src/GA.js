@@ -28,6 +28,8 @@ class GoogleAnalytics extends Component {
     ReactGA.set({
       page,
       location: `${location.origin}${page}`,
+      appName: 'Braytech',
+      appVersion: packageJSON.version,
       ...this.props.options
     })
     ReactGA.pageview(page)
@@ -57,10 +59,6 @@ const init = (options = {}) => {
     ReactGA.initialize(
       process.env.REACT_APP_GA_TRACKING_ID, {
         debug: process.env.REACT_APP_GA_DEBUG === 'true',
-        gaOptions: {
-          appName: 'Braytech',
-          appVersion: packageJSON.version
-        },
         ...options
       }
     )

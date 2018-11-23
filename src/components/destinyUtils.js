@@ -46,4 +46,35 @@ export function membershipTypeToString(str) {
   
 }
 
+export function damageTypeToString(type) {
+  
+  let string;
+
+  switch (type) {
+    case 3373582085: string = "Kinetic"; break;
+    case 1847026933: string = "Solar"; break;
+    case 2303181850: string = "Arc"; break;
+    case 3454344768: string = "Void"; break;
+    default: string = "idk";
+  }
+
+  return string;
+  
+}
+
+export function ammoTypeToString(type) {
+  
+  let string;
+
+  switch (type) {
+    case 1: string = "Primary"; break;
+    case 2: string = "Special"; break;
+    case 3: string = "Heavy"; break;
+    default: string = "idk";
+  }
+
+  return string;
+  
+}
+
 

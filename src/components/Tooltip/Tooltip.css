@@ -1,10 +1,12 @@
 #tooltip {
   position: fixed;
   width: 384px;
+  pointer-events: none;
   z-index: 2000;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
   color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
+  line-height: 1;
   --background-body: 238, 238, 238;
   --dark: 0,0,0;
   --light: 255,255,255;
@@ -15,22 +17,11 @@
   --uncommon: 54, 111, 60;
   --common: 204, 204, 204;
   --cream: 255, 251, 176;
-  --exoticDark: 37, 31, 9;
-  --legendaryDark: 25, 15, 31;
+  --exoticDark: 17, 13, 3;
+  --legendaryDark: 14, 8, 17;
   --rareDark: 24, 34, 48;
   --uncommonDark: 13, 28, 15;
   --commonDark: 38, 38, 38;
-}
-
-.example {
-  position: fixed;
-  width: 384px;
-  z-index: 1999;
-  left: 0;
-  background-image: url(/example.jpg);
-  background-size: contain;
-  height: 479px;
-  opacity: 0.8;
 }
 
 #tooltip .acrylic {
@@ -39,7 +30,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* backdrop-filter: brightness(1.2) blur(2px); */
+  backdrop-filter: brightness(1.2) blur(3px);
 }
 
 #tooltip .frame {
@@ -47,7 +38,8 @@
 }
 
 #tooltip .header {
-  padding: 10px 16px;
+  padding: 12px 16px 10px;
+  margin: 0;
   background-color: rgba(var(--basic),0.9);
   color: #fff;
   display: flex;
@@ -66,7 +58,9 @@
 #tooltip .header .name {
   font-size: 25px;
   font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  margin: 0 0 4px;
 }
 
 #tooltip .header .kind {
@@ -83,7 +77,7 @@
 }
 
 #tooltip .damage {
-  padding: 16px;
+  padding: 12px 16px 10px;
   color: #fff;
   display: flex;
   flex-flow: row wrap;
@@ -99,13 +93,16 @@
 }
 
 #tooltip .damage .power .text {
-  font-size: 38px;
+  font-size: 40px;
   padding: 0 0 0 7px;
-  line-height: 0;
+}
+
+#tooltip .damage .power .icon {
+  display: flex;
 }
 
 #tooltip .damage .power .icon::before {
-  font-family: "destiny-icons";
+  font-family: "destiny";
 }
 
 #tooltip .damage .power .icon.kinetic::before {
@@ -136,16 +133,16 @@
   content: "v";
 }
 
-#inspector .damage.armor .power {
+#tooltip .damage.armor .power {
   border-right: none;
 }
 
-#inspector .damage.armor .power .text {
+#tooltip .damage.armor .power .text {
   padding: 0;
   line-height: 1;
 }
 
-#inspector .damage.armor .power .text:last-child {
+#tooltip .damage.armor .power .text:last-child {
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
@@ -153,85 +150,90 @@
   line-height: 0;
 }
 
-#inspector .damage .slot {
+#tooltip .damage .slot {
   padding: 0 0 0 16px;
   display: flex;
   align-items: center;
 }
 
-#inspector .damage .slot .icon {
-  font-size: 32px;
+#tooltip .damage .slot .icon {
+  font-size: 32px;  
+  display: flex;
 }
 
-#inspector .damage .slot .icon::before {
-  font-family: "destiny-icons";
+#tooltip .damage .slot .icon::before {
+  font-family: "destiny";
 }
 
-#inspector .damage .slot .icon.primary::before {
-  content: "1";
+#tooltip .damage .slot .icon.primary::before {
+  content: "P";
 }
 
-#inspector .damage .slot .icon.special::before {
-  content: "2";
+#tooltip .damage .slot .icon.special::before {
+  content: "S";
+  color: #84f186;
 }
 
-#inspector .damage .slot .icon.heavy::before {
-  content: "3";
+#tooltip .damage .slot .icon.heavy::before {
+  content: "H";
+  color: #a981fc;
 }
 
-#inspector .damage .slot .text {
+#tooltip .damage .slot .text {
   padding: 0 0 0 10px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 
-#inspector .source {
-  padding: 16px;
+#tooltip .source {
+  padding: 12px 16px 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-style: italic;
-  letter-spacing: 0.5px;
+  font-size: 14px;
+  letter-spacing: 0.8px;
   color: rgba(255, 255, 255, 0.8);
 }
 
-#inspector .stats {
-  padding: 16px;
+#tooltip .stats {
+  padding: 14px 16px 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#inspector .stats .stat {
+#tooltip .stats .stat {
   display: flex;
   align-items: center;
   line-height: 1.6;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
-#inspector .stats .stat .name {
-  color: rgba(255,255,255, 0.8);
+#tooltip .stats .stat .name {
+  color: rgba(255,255,255, 0.6);
   padding: 0 16px 0 0;
   flex-basis: 45%;
-  height: 18px;  
+  height: 16px;  
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-#inspector .stats .stat .value {
+#tooltip .stats .stat .value {
   flex-basis: calc(55% - 16px);
-  height: 18px;
+  height: 16px;
   position: relative;
   color: #fff;
 }
 
-#inspector .stats .stat .value.bar {
-  background-color: rgba(255, 255, 255, 0.1);
+#tooltip .stats .stat .value.bar {
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
-#inspector .stats .stat .value.int {
+#tooltip .stats .stat .value.int {
   display: flex;
   align-items: center;
 }
 
-#inspector .stats .stat .value .bar {
+#tooltip .stats .stat .value .bar {
   position: absolute;
   top: 0;
   left: 0;
@@ -239,7 +241,7 @@
   background-color: #fff;
 }
 
-#inspector .stats .stat .value .bar::before {
+#tooltip .stats .stat .value .bar::before {
   content: attr(data-value);
   position: absolute;
   top: 0;
@@ -254,51 +256,55 @@
   opacity: 0.4;
 }
 
-#inspector .sockets.hasTraits {
+#tooltip .sockets.hasTraits {
   padding: 0 0 16px;
 }
 
-#inspector .plug {
-  padding: 16px 16px 0;
+#tooltip .plug {
+  padding: 12px 16px 0;
   display: flex;
 }
 
-#inspector .plug .icon {
+#tooltip .plug .icon {
   position: relative;
-  width: 42px;
-  height: 42px;
-  flex-basis: 42px;
+  width: 40px;
+  height: 40px;
+  flex-basis: 40px;
   background-size: contain;
 }
 
-#inspector .plug .text {
-  flex-basis: calc(100% - 58px);
+#tooltip .plug .text {
+  flex-basis: calc(100% - 56px);
   padding: 0 0 0 16px;
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
 }
 
-#inspector .plug .text .name {
-  text-transform: uppercase;
+#tooltip .plug .text .name {
   margin: 0 0 3px;
+  flex-basis: 100%;
 }
 
-#inspector .plug .text .description {
+#tooltip .plug .text .description {
   color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
 }
 
-#inspector .intrinsic {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 16px;
+#tooltip .intrinsic {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px 16px 10px;
 }
 
-#inspector .frame.exotic .intrinsic .text .name {
+#tooltip .frame.exotic .intrinsic .text .name {
   color: rgba(var(--exotic),1);
 }
 
-#inspector .description pre {
+#tooltip .description pre {
   padding: 16px;
-  white-space: pre-line;
+  white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.8);
   font-style: italic;
   letter-spacing: 0.5px;
