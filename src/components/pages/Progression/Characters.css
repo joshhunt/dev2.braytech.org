@@ -87,7 +87,7 @@
 }
 
 .characters .list li .light::before {
-  content: "\e973";
+  content: "l";
   position: absolute;
   top: 4px;
   left: -16px;

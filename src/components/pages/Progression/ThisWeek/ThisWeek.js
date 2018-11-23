@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Tooltip from '../../../Tooltip/Tooltip';
+
 import './ThisWeek.css';
 import Records from './Records';
 import Collectibles from './Collectibles';
@@ -244,6 +246,7 @@ class ThisWeek extends React.Component {
 
     return (
       <div className="this-week">
+        <Tooltip hash="3766045777" />
         <div className="module curse">
           <div className="sub-header">
             <div>The Curse</div>

@@ -1,0 +1,383 @@
+#tooltip {
+  position: fixed;
+  width: 384px;
+  z-index: 2000;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  --background-body: 238, 238, 238;
+  --dark: 0,0,0;
+  --light: 255,255,255;
+  --accent: 0,0,255;
+  --exotic: 221, 174, 51;
+  --legendary: 82, 47, 101;
+  --rare: 80, 118, 163;
+  --uncommon: 54, 111, 60;
+  --common: 204, 204, 204;
+  --cream: 255, 251, 176;
+  --exoticDark: 37, 31, 9;
+  --legendaryDark: 25, 15, 31;
+  --rareDark: 24, 34, 48;
+  --uncommonDark: 13, 28, 15;
+  --commonDark: 38, 38, 38;
+}
+
+.example {
+  position: fixed;
+  width: 384px;
+  z-index: 1999;
+  left: 0;
+  background-image: url(/example.jpg);
+  background-size: contain;
+  height: 479px;
+  opacity: 0.8;
+}
+
+#tooltip .acrylic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* backdrop-filter: brightness(1.2) blur(2px); */
+}
+
+#tooltip .frame {
+  position: relative;
+}
+
+#tooltip .header {
+  padding: 10px 16px;
+  background-color: rgba(var(--basic),0.9);
+  color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#tooltip .header > div {
+  flex-basis: 100%;
+  display: flex;
+}
+
+#tooltip .header div div {
+  flex: 1 1 auto;
+}
+
+#tooltip .header .name {
+  font-size: 25px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#tooltip .header .kind {
+  opacity: 0.8;
+}
+
+#tooltip .header .rarity {
+  opacity: 0.4;
+  text-align: right;
+}
+
+#tooltip .black {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+#tooltip .damage {
+  padding: 16px;
+  color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#tooltip .damage .power {
+  font-size: 32px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;  
+  padding: 0 16px 0 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#tooltip .damage .power .text {
+  font-size: 38px;
+  padding: 0 0 0 7px;
+  line-height: 0;
+}
+
+#tooltip .damage .power .icon::before {
+  font-family: "destiny-icons";
+}
+
+#tooltip .damage .power .icon.kinetic::before {
+  content: "k";
+}
+
+#tooltip .damage .power.solar {
+  color: #ef641f;
+}
+
+#tooltip .damage .power .icon.solar::before {
+  content: "s";
+}
+
+#tooltip .damage .power.arc {
+  color: #79bbe7;
+}
+
+#tooltip .damage .power .icon.arc::before {
+  content: "a";
+}
+
+#tooltip .damage .power.void {
+  color: #a371c2;
+}
+
+#tooltip .damage .power .icon.void::before {
+  content: "v";
+}
+
+#inspector .damage.armor .power {
+  border-right: none;
+}
+
+#inspector .damage.armor .power .text {
+  padding: 0;
+  line-height: 1;
+}
+
+#inspector .damage.armor .power .text:last-child {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 0 0 16px;
+  line-height: 0;
+}
+
+#inspector .damage .slot {
+  padding: 0 0 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+#inspector .damage .slot .icon {
+  font-size: 32px;
+}
+
+#inspector .damage .slot .icon::before {
+  font-family: "destiny-icons";
+}
+
+#inspector .damage .slot .icon.primary::before {
+  content: "1";
+}
+
+#inspector .damage .slot .icon.special::before {
+  content: "2";
+}
+
+#inspector .damage .slot .icon.heavy::before {
+  content: "3";
+}
+
+#inspector .damage .slot .text {
+  padding: 0 0 0 10px;
+  text-transform: uppercase;
+}
+
+#inspector .source {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#inspector .stats {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#inspector .stats .stat {
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+  margin: 0 0 6px;
+}
+
+#inspector .stats .stat .name {
+  color: rgba(255,255,255, 0.8);
+  padding: 0 16px 0 0;
+  flex-basis: 45%;
+  height: 18px;  
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#inspector .stats .stat .value {
+  flex-basis: calc(55% - 16px);
+  height: 18px;
+  position: relative;
+  color: #fff;
+}
+
+#inspector .stats .stat .value.bar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#inspector .stats .stat .value.int {
+  display: flex;
+  align-items: center;
+}
+
+#inspector .stats .stat .value .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #fff;
+}
+
+#inspector .stats .stat .value .bar::before {
+  content: attr(data-value);
+  position: absolute;
+  top: 0;
+  right: -16px;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0.4;
+}
+
+#inspector .sockets.hasTraits {
+  padding: 0 0 16px;
+}
+
+#inspector .plug {
+  padding: 16px 16px 0;
+  display: flex;
+}
+
+#inspector .plug .icon {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex-basis: 42px;
+  background-size: contain;
+}
+
+#inspector .plug .text {
+  flex-basis: calc(100% - 58px);
+  padding: 0 0 0 16px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#inspector .plug .text .name {
+  text-transform: uppercase;
+  margin: 0 0 3px;
+}
+
+#inspector .plug .text .description {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#inspector .intrinsic {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 16px;
+}
+
+#inspector .frame.exotic .intrinsic .text .name {
+  color: rgba(var(--exotic),1);
+}
+
+#inspector .description pre {
+  padding: 16px;
+  white-space: pre-line;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+
+
+#tooltip .frame.exotic .header {
+  background-color: rgba(var(--exotic),0.9);
+}
+
+#tooltip .frame.exotic .black {
+  background-color: rgba(var(--exoticDark),0.9);
+}
+
+#tooltip .frame.legendary .header {
+  background-color: rgba(var(--legendary),0.9);
+}
+
+#tooltip .frame.legendary .black {
+  background-color: rgba(var(--legendaryDark),0.9);
+}
+
+#tooltip .frame.rare .header {
+  background-color: rgba(var(--rare),0.9);
+}
+
+#tooltip .frame.rare .black {
+  background-color: rgba(var(--rareDark),0.9);
+}
+
+#tooltip .frame.uncommon .header {
+  background-color: rgba(var(--uncommon),0.9);
+}
+
+#tooltip .frame.uncommon .black {
+  background-color: rgba(var(--uncommonDark),0.9);
+}
+
+#tooltip .frame.common .header {
+  background-color: rgba(var(--common),0.9);
+  color: #000;
+}
+
+#tooltip .frame.common .black {
+  background-color: rgba(var(--commonDark),0.9);
+}
+
+
+
+
+@media screen and (max-width: 500px) {
+
+#inspector {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100%;
+  height: 100%;
+  box-shadow: none;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+#inspector.active {  
+  pointer-events: initial;
+}
+
+#inspector .window {
+  margin: 32px;
+  position: relative;
+}
+
+#inspector .frame {
+  position: relative;
+  padding: initial;
+  width: 100%;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
+}
+
+}
+
+

@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'destiny';
   src:
-    url('destiny.ttf?uee3bk') format('truetype'),
-    url('destiny.woff?uee3bk') format('woff'),
-    url('destiny.svg?uee3bk#destiny') format('svg');
+    url('destiny.ttf?dk2502') format('truetype'),
+    url('destiny.woff?dk2502') format('woff'),
+    url('destiny.svg?dk2502#destiny') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,16 +24,43 @@
 }
 
 .destiny-ammo_heavy:before {
-  content: "\e9ab";
+  content: "\68";
   color: #a981fc;
 }
 .destiny-ammo_primary:before {
-  content: "\e9ac";
-  color: #fff;
+  content: "\70";
 }
 .destiny-ammo_special:before {
-  content: "\e9ad";
+  content: "\73";
   color: #84f186;
+}
+.destiny-damage_solar:before {
+  content: "\66";
+  color: #ef641f;
+}
+.destiny-damage_arc:before {
+  content: "\61";
+  color: #79bbe7;
+}
+.destiny-damage_void:before {
+  content: "\76";
+  color: #a371c2;
+}
+.destiny-damage_kinetic:before {
+  content: "\6b";
+}
+.destiny-platform_pc:before {
+  content: "\34";
+}
+.destiny-platform_playstation:before {
+  content: "\32";
+}
+.destiny-platform_xbox:before {
+  content: "\31";
+}
+.destiny-power:before {
+  content: "\6c";
+  color: #09d7d0;
 }
 .destiny-ace_of_spades:before {
   content: "\e9aa";
@@ -58,15 +85,6 @@
 }
 .destiny-gambit_dazzle:before {
   content: "\e9a7";
-}
-.destiny-platform_pc:before {
-  content: "\e99e";
-}
-.destiny-platform_playstation:before {
-  content: "\e998";
-}
-.destiny-platform_xbox:before {
-  content: "\e999";
 }
 .destiny-gambit:before {
   content: "\e997";
@@ -707,10 +725,6 @@
   margin-left: -1em;
   color: rgb(210, 98, 42);
 }
-.destiny-power:before {
-  content: "\e973";
-  color: #09d7d0;
-}
 .destiny-class_titan:before {
   content: "\e90a";
 }
@@ -719,19 +733,4 @@
 }
 .destiny-class_warlock:before {
   content: "\e90c";
-}
-.destiny-damage_solar:before {
-  content: "\e905";
-  color: #ef641f;
-}
-.destiny-damage_arc:before {
-  content: "\e907";
-  color: #79bbe7;
-}
-.destiny-damage_void:before {
-  content: "\e98c";
-  color: #a371c2;
-}
-.destiny-damage_kinetic:before {
-  content: "\e908";
 }
