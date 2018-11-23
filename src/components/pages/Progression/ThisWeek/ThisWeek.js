@@ -22,12 +22,14 @@ class ThisWeek extends React.Component {
   
   render() {
 
+    const resetTime = '17:00 UTC';
+
     const cycleInfo = {
       epoch: {
         // start of cycle in UTC
-        ascendant: new Date('September 4 2018 17:00 UTC').getTime(),
-        curse: new Date('September 11 2018 17:00 UTC').getTime(),
-        ep: new Date('May 8 2018 17:00 UTC').getTime()
+        ascendant: new Date(`September 4 2018 ${resetTime}`).getTime(),
+        curse: new Date(`September 11 2018 ${resetTime}`).getTime(),
+        ep: new Date(`May 8 2018 ${resetTime}`).getTime()
       },
       cycle: {
         // how many week cycle
@@ -68,7 +70,8 @@ class ThisWeek extends React.Component {
             2144075647, // The Hive Champion (Heroic Blind Well)
             3675740699, // Bolder Fortunes (Ascendant Chests)
             2419556790, // The Oracle Engine (Weekly Mission)
-            2968758821 // Aggro No (Hidden Boss in Weekly Mission)
+            2968758821, // Aggro No (Hidden Boss in Weekly Mission)
+            202137963 // Twinsies (Kill ogres in Weekly Mission within 5 secs of each other)
           ],
           items: [],
           collectibles: []
@@ -93,8 +96,7 @@ class ThisWeek extends React.Component {
             1859033171, // Brephos I (Bones in Shattered Throne)
             2358176597, // Dark Monastery (Weekly Mission)
             1842255615, // Ecstasiate III (Bones in Weekly Mission)
-            1236992882, // Odynom-Nom-Nom (Hidden Boss in Weekly Mission)
-            202137963 // Twinsies (Kill ogres in Weekly Mission within 5 secs of each other)
+            1236992882 // Odynom-Nom-Nom (Hidden Boss in Weekly Mission)
           ],
           items: [],
           collectibles: []
