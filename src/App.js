@@ -11,8 +11,6 @@ import GA from './GA';
 import './Core.css';
 import './App.css';
 
-import Tooltip from './components/Tooltip/Tooltip';
-
 import Header from './components/pages/Header';
 import Footer from './components/pages/Footer';
 import ErrorHandler from './components/pages/ErrorHandler';
@@ -219,7 +217,6 @@ class App extends Component {
       return (
         <BrowserRouter>
           <>
-            <Tooltip manifest={this.props.manifest} />
             <Header />
             <Switch>
               <Route

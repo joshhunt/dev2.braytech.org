@@ -44,9 +44,9 @@ class Collectibles extends React.Component {
 
           let state;
           if (profileCollectibles[child.collectibleHash]) {
-            state = profileCollectibles[child.collectibleHash] ? profileCollectibles[child.collectibleHash].state : 0;
+            state = profileCollectibles[child.collectibleHash].state;
           } else if (characterCollectibles[characterId].collectibles[child.collectibleHash]) {
-            state = characterCollectibles[characterId].collectibles[child.collectibleHash] ? characterCollectibles[characterId].collectibles[child.collectibleHash].state : 0;
+            state = characterCollectibles[characterId].collectibles[child.collectibleHash].state;
           } else {
             state = 0;
           }
@@ -56,9 +56,10 @@ class Collectibles extends React.Component {
           row.push(
             <li
               key={collectibleDefinition.hash}
-              className={cx('item', {
-                completed: !enumerateCollectibleState(state).notAcquired
+              className={cx('item', 'tooltip', {
+                completed: !enumerateCollectibleState(state).notAcquired && !enumerateCollectibleState(state).invisible
               })}
+              data-itemhash={collectibleDefinition.itemHash}
             >
               <div className="icon">
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
@@ -67,11 +68,15 @@ class Collectibles extends React.Component {
           );
         });
 
+        // if (rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length && this.props.hideCompleted) {
+        //   return;
+        // }
+
         tertiaryChildren.push(
           <li
             key={nodeDefinition.hash}
             className={cx('is-set', {
-              completed: rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.filter(collectible => !enumerateCollectibleState(collectible).invisible).length
+              completed: rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length
             })}
           >
             <div className="set">
@@ -99,6 +104,10 @@ class Collectibles extends React.Component {
         if (enumerateCollectibleState(state).invisible) {
           return;
         }
+
+        // if (!enumerateCollectibleState(state).notAcquired && this.props.hideCompleted) {
+        //   return;
+        // }
 
         // eslint-disable-next-line eqeqeq
         let ref = highlightHash == collectibleDefinition.hash ? this.scrollToRecordRef : null;

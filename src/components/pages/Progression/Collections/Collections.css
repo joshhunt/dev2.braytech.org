@@ -96,64 +96,40 @@
 
 
 
-.collections .parent .node {
-  padding: 0 1rem 1rem;
-  flex-basis: 14rem;
-}
 
-.collections .parent .node a {
-  padding-bottom: 130%;
-  width: 100%;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-  border-top-right-radius: 20%;
-}
-
-.collections .parent .node a::after {
-  content: " ";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  border-top-right-radius: 20%;
-  z-index: 3;
-  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
-  transition: box-shadow .25s;
-  pointer-events: none;
-}
-
-.collections .parent .node a .text {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  height: calc(50% - 1rem);
-  width: 100%;
-  display: flex;
-  flex-flow: row wrap;
-  align-content: center;
-  text-align: center;
-  padding: 0.5rem 0;
-}
-
-.collections .parent .node a .text div {
+.collections .parent .list {
   flex-basis: 100%;
-  padding: 0.6rem 0;
-  margin: 0 1rem;
+  margin: 0 0 1rem;
+  display: grid;
+  grid-gap: 7px;
+  grid-template-columns: 1fr 1fr;
 }
 
-.collections .parent .node a .text .state {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.collections .parent .list li {
+  margin: 0;
+  height: unset;
+  display: grid;
+  grid-template-columns: 100px 1fr;
 }
 
-.collections .parent .node a:hover {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 1);
-  background-color: rgba(255, 255, 255, 0.2);
+.collections .parent .list li .image.icon {
+  position: relative;
+  width: 100px;
+  height: initial;
+  padding-bottom: 80%;
+  background-size: cover;
+  background-position: center -10%;
 }
 
-.collections .parent .node a:hover::after {
-  box-shadow: 0 0 0 2px #d6d6d6;
+.collections .parent .list li .text {
+  padding: 0 1rem 0 0;
+  display: flex;
+  justify-content: space-between;
 }
 
+.collections .parent .list li a {
+  position: absolute;
+}
 
 
 .collections .node .collectibles {
@@ -209,7 +185,7 @@
 }
 
 .collections .list.tertiary li.is-set .text {
-  flex-basis: unset;
+  flex-basis: calc(100% - ((48px * 5) + (3px * 4)) - 2rem);
 }
 
 
@@ -347,6 +323,10 @@
   margin: 0;
 }
 
+.collections .parent .list {
+  grid-template-columns: 1fr;
+}
+
 .collections .parent .node {
   margin: 0 0 2rem;
   flex-basis: calc(100% / 3);
@@ -373,6 +353,31 @@
 
 .collections .node.badge .children .until {
   margin: 3rem 0 2rem;
+}
+
+.collections .list.tertiary li.is-set .set {
+  flex-basis: 100%;
+}
+
+.collections .list.tertiary li.is-set .set .list li {
+  flex-basis: calc(100% / 5);
+}
+
+.collections .list.tertiary li.is-set .set .list li .icon:not(.image) {
+  width: 100%;
+  height: initial;
+  flex-basis: 100%;
+}
+
+.collections .list.tertiary li.is-set .set .list li .image.icon {
+  width: 100%;
+  height: initial;
+  padding-bottom: 100%;
+}
+
+.collections .list.tertiary li.is-set .text {
+  flex-basis: calc(100% - 2rem);
+  padding: 0.5rem 0;
 }
 
 }

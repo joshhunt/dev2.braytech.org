@@ -131,7 +131,7 @@
 }
 
 #clans .roster li .light::before {
-  content: "\E973";
+  content: "l";
   font-family: 'destiny' !important;
   font-style: normal;
   font-weight: normal;

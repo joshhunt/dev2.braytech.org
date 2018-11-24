@@ -7,15 +7,13 @@ import ObservedImage from '../../../ObservedImage';
 import { enumerateCollectibleState } from '../../../destinyEnums';
 
 class Root extends React.Component {
-  
   render() {
-
     let manifest = this.props.manifest;
 
     let characterCollectibles = this.props.state.ProfileResponse.characterCollectibles.data;
     let profileCollectibles = this.props.state.ProfileResponse.profileCollectibles.data;
     let characterId = this.props.route.match.params.characterId;
-    
+
     let parent = manifest.DestinyPresentationNodeDefinition[3790247699];
     let parentBadges = manifest.DestinyPresentationNodeDefinition[498211331];
 
@@ -24,23 +22,15 @@ class Root extends React.Component {
     let badges = [];
 
     profileCollectibles.recentCollectibleHashes.forEach(child => {
-    
       let collectibleDefinition = manifest.DestinyCollectibleDefinition[child];
-      
+
       recentlyDiscovered.push(
-        <li key={collectibleDefinition.hash} className={cx(
-              "item"
-            )}>
-          <div className="icon">  
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ collectibleDefinition.displayProperties.icon }` } />
+        <li key={collectibleDefinition.hash} className={cx('item', 'tooltip')} data-itemhash={collectibleDefinition.itemHash}>
+          <div className="icon">
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
           </div>
         </li>
-      )
-      
+      );
     });
 
     parent.children.presentationNodes.forEach(child => {
@@ -58,8 +48,7 @@ class Root extends React.Component {
                 states.push(profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : characterCollectibles[characterId].collectibles[collectible.collectibleHash].state);
               });
             });
-          }
-          else {
+          } else {
             nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
               states.push(profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : characterCollectibles[characterId].collectibles[collectible.collectibleHash].state);
             });
@@ -68,21 +57,17 @@ class Root extends React.Component {
       });
 
       nodes.push(
-        <div key={ node.hash } className="node">
-          <Link to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/${node.hash}` }>
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ node.originalIcon }` } />
-            <div className="text">
-              <div>{ node.displayProperties.name }</div>
-              <div className="state">{states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}</div>
+        <li key={node.hash}>
+          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+          <div className="text">
+            <div>{node.displayProperties.name}</div>
+            <div className="state">
+              {states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
             </div>
-          </Link>
-        </div>
-      )
-      
+          </div>
+          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/${node.hash}`} />
+        </li>
+      );
     });
 
     parentBadges.children.presentationNodes.forEach(child => {
@@ -92,19 +77,16 @@ class Root extends React.Component {
 
       node.children.presentationNodes.forEach(nodeChild => {
         let nodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChild.presentationNodeHash];
-        
+
         let sweep = [];
         nodeChildNode.children.collectibles.forEach(collectible => {
           sweep.push(profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : characterCollectibles[characterId].collectibles[collectible.collectibleHash].state);
         });
 
-        classes.push(
-          {
-            "className": nodeChildNode.displayProperties.name,
-            "states": sweep
-          }
-        );
-
+        classes.push({
+          className: nodeChildNode.displayProperties.name,
+          states: sweep
+        });
       });
 
       classes.forEach(obj => {
@@ -114,25 +96,20 @@ class Root extends React.Component {
       });
 
       badges.push(
-        <li key={ node.hash } className={cx(
-              "badge",
-              {
-                "completed": completed
-              }
-            )}>
-          <Link to={ `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/badge/${node.hash}` }>
-            <ObservedImage className={cx(
-                  "image",
-                  "icon"
-                )}
-              src={ `https://www.bungie.net${ node.originalIcon }` } />
+        <li
+          key={node.hash}
+          className={cx('badge', {
+            completed: completed
+          })}
+        >
+          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/badge/${node.hash}`}>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             <div className="text">
-              <div>{ node.displayProperties.name }</div>
+              <div>{node.displayProperties.name}</div>
             </div>
           </Link>
         </li>
-      )
-      
+      );
     });
 
     return (
@@ -143,7 +120,7 @@ class Root extends React.Component {
           </div>
           <div className="node">
             <div className="parent">
-              { nodes }
+              <ul className="list">{nodes}</ul>
             </div>
           </div>
         </div>
@@ -152,24 +129,18 @@ class Root extends React.Component {
             <div>Recently discovered</div>
           </div>
           <div className="recently-discovered">
-            <ul className="list">
-              { recentlyDiscovered }
-            </ul>
+            <ul className="list">{recentlyDiscovered}</ul>
           </div>
           <div className="sub-header">
             <div>Badges</div>
           </div>
           <div className="badges">
-            <ul className="list">
-              { badges }
-            </ul>
+            <ul className="list">{badges}</ul>
           </div>
         </div>
       </div>
-    )
-
+    );
   }
-
 }
 
 export default Root;

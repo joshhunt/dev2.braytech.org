@@ -13,7 +13,6 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  margin: 1rem 0 0;
 }
 
 .presentation-node .parent .node {

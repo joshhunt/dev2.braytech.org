@@ -102,7 +102,6 @@ const weaponsStats = [
 ];
 
 const weapon = (manifest, item) => {
-  console.log(item);
 
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
@@ -125,8 +124,6 @@ const weapon = (manifest, item) => {
     socket.reusablePlugItems.forEach(reusablePlug => {
 
       let plug = manifest.DestinyInventoryItemDefinition[reusablePlug.plugItemHash];
-
-      console.log(plug)
 
       if (plug.itemCategoryHashes.includes(2237038328)) {
         intrinsic = manifest.DestinySandboxPerkDefinition[plug.perks[0].perkHash];
@@ -188,7 +185,7 @@ const weapon = (manifest, item) => {
         </div>
       ) : null}
       <div className="stats">{stats}</div>
-      <div className={cx('sockets', { hasTraits: traits })}>
+      <div className={cx('sockets', { hasTraits: traits.length > 0 })}>
         {intrinsic ? (
           <div className="plug intrinsic">
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
@@ -198,7 +195,7 @@ const weapon = (manifest, item) => {
             </div>
           </div>
         ) : null}
-        {traits ? traits : null}
+        {traits.length > 0 ? traits : null}
       </div>
     </>
   );
