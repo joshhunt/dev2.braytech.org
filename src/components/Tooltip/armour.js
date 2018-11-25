@@ -77,7 +77,7 @@ const armour = (manifest, item) => {
   });
 
   let stats = [];
-console.log(item)
+
   armourStats.forEach(stat => {
     let value = item.stats.stats[stat.hash] ? item.stats.stats[stat.hash].value : 0;
     let modifier = stat.modifier ? stat.modifier : 0;

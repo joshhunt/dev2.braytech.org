@@ -28,8 +28,8 @@ import './components/pages/Clans/Clans.css';
 import SearchGroups from './components/pages/SearchGroups';
 import DisplayGroup from './components/pages/Clans/DisplayGroup';
 
-// xur - placeholder
-import Xur from './components/pages/Xur/Xur';
+// vendors
+import Vendors from './components/pages/Vendors/Vendors';
 
 class App extends Component {
   constructor() {
@@ -76,7 +76,7 @@ class App extends Component {
   };
 
   getManifest = () => {
-    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
+    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
 
     let state = this.state;
     state.manifest.state = 'fetching';
@@ -162,7 +162,7 @@ class App extends Component {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinySandboxPerkDefinition) {
+                  if (!manifest[0].value.DestinyVendorDefinition) {
                     console.log('missing table! lol.');
                     this.getManifest();
                   } else {
@@ -275,15 +275,15 @@ class App extends Component {
                   </>
                 )}
               />
-              {/* <Route
-                path="/xur"
+              <Route
+                path="/vendors/:hash?"
                 render={route => (
                   <>
                     <GA.RouteTracker />
-                    <Xur appRoute={route} manifest={this.manifest} viewport={this.state.viewport} />
+                    <Vendors {...this.props} {...route} manifest={this.manifest} />
                   </>
                 )}
-              /> */}
+              />
               <Route
                 path="/checklists"
                 render={route => (

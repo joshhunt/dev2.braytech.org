@@ -1,0 +1,29 @@
+
+
+.list.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 64px);
+  grid-gap: 7px;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.list.items .item {
+  font-size: 14px;
+  background-color: rgba(255, 255, 255, 0);
+  padding-bottom: 100%;
+  margin: 0;
+  height: unset;
+}
+
+.list.items .item::before {
+  box-shadow: inset 0 0 0 2px #d6d6d6;
+}
+
+
+
+@media screen and (max-width: 600px) {
+  .list.items {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}

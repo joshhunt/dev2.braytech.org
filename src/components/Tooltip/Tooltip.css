@@ -306,7 +306,7 @@
 }
 
 #tooltip .description pre {
-  padding: 16px;
+  padding: 16px 16px 12px;
   white-space: pre-wrap;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.4;

@@ -16,6 +16,7 @@
 
 #progression .presentation-node .sub-header {
   margin: 3rem 0 2rem;
+  width: calc(100% - 4rem);
 }
 
 

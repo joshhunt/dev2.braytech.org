@@ -41,6 +41,10 @@ class Header extends React.Component {
 
     const routes = [
       {
+        name: "Vendors",
+        to: "/vendors"
+      },
+      {
         name: "Progression",
         to: "/progression"
       },
