@@ -8,6 +8,7 @@ import fallback from './fallback';
 import weapon from './weapon';
 import armour from './armour';
 import emblem from './emblem';
+import bounty from './bounty';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -85,7 +86,8 @@ class Tooltip extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (prevProps.route.location.pathname !== this.props.route.location.pathname) {
+
+    if (prevProps !== this.props) {
       this.setState({
         hash: false
       });
@@ -139,15 +141,21 @@ class Tooltip extends React.Component {
           kind = 'emblem';
           render = emblem(manifest, item);
           break;
+        case 26:
+          kind = 'bounty';
+          render = bounty(manifest, item);
+          break;
         default:
           kind = '';
           render = fallback(manifest, item);
       }
 
+      let tier = item.inventory.tierTypeName.toLowerCase() === 'basic' ? 'common' : item.inventory.tierTypeName.toLowerCase();
+
       return (
         <div id="tooltip" ref={this.tooltip}>
           <div className="acrylic" />
-          <div className={cx('frame', item.inventory.tierTypeName.toLowerCase(), kind)}>
+          <div className={cx('frame', tier, kind)}>
             <div className="header">
               <div className="name">{item.displayProperties.name}</div>
               <div>

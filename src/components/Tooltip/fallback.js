@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames';
-import ObservedImage from '../ObservedImage';
 import '../destinyEnums';
 
 const fallback = (manifest, item) => {

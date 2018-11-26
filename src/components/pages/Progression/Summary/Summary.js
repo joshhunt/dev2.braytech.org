@@ -444,8 +444,6 @@ class Summary extends React.Component {
         }
       };
 
-      console.log(progression)
-
       let ranks = [];
 
       for (const [key, value] of Object.entries(progression.ranks.values)) {

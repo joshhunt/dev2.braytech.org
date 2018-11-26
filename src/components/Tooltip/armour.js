@@ -7,17 +7,20 @@ const armourStats = [
   {
     hash: 2996146975,
     name: 'Mobility',
-    type: 'bar'
+    type: 'bar',
+    modifier: 0
   },
   {
     hash: 392767087,
     name: 'Resilience',
-    type: 'bar'
+    type: 'bar',
+    modifier: 0
   },
   {
     hash: 1943323491,
     name: 'Recovery',
-    type: 'bar'
+    type: 'bar',
+    modifier: 0
   }
 ];
 
@@ -25,6 +28,10 @@ const armour = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
   let socketIndexes = [];
+
+  armourStats.forEach(stat => {
+    stat.modifier = 0;
+  });
 
   if (item.sockets) {
     Object.keys(item.sockets.socketCategories).forEach(key => {
