@@ -25,17 +25,11 @@ class DisplayProfile extends React.Component {
     this.goToProgression = this.goToProgression.bind(this);
   }
 
-  //
-
   askBungie = () => {
     let requests = [
       {
         name: 'profile',
         path: `https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,800,900`
-      },
-      {
-        name: 'stats',
-        path: `https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Account/${this.props.match.params.membershipId}/Character/0/Stats/?groups=0&modes=4,7,63&periodType=0`
       }
     ];
 
@@ -67,8 +61,6 @@ class DisplayProfile extends React.Component {
   componentDidMount() {
     this.askBungie()
       .then(responses => {
-
-
 
         if (responses.profile.ErrorCode !== 1) {
           throw new SyntaxError(responses.profile.ErrorCode);
@@ -134,8 +126,7 @@ class DisplayProfile extends React.Component {
 
         this.setState({
           response: {
-            profile: responses.profile,
-            stats: responses.stats,
+            profile: responses.profile.Response
           }
         });
       })

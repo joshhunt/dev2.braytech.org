@@ -15,6 +15,10 @@
   width: calc(100% - 4rem);
 }
 
+#progression .presentation-node .sub-header.sub {
+  margin: 0 0 2rem;
+}
+
 @media screen and (max-width: 1200px) {
   #progression .presentation-node {
     padding: 0 3rem 0;

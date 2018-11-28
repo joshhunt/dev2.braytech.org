@@ -114,7 +114,7 @@ class Checklists extends React.Component {
       }
     ];
 
-    if (Object.values(this.props.state.ProfileResponse.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
+    if (Object.values(this.props.state.response.profile.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
       lists.push({
         name: "Cayde's Journals",
         icon: 'destiny-ace_of_spades',

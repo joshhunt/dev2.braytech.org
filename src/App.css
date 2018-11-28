@@ -1,4 +1,3 @@
-
 .view {
   display: flex;
   min-height: calc(100vh - 8rem);
@@ -13,11 +12,9 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
-
   h3 {
     font-size: 20px;
   }
-
 }
 
 h4 {
@@ -64,17 +61,16 @@ p:last-child {
   opacity: 1;
 }
 
-
 .list li {
   position: relative;
   height: 38px;
   margin: 0 0 3px;
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.8);  
+  color: rgba(255, 255, 255, 0.8);
   font-size: 18px;
   cursor: default;
-  transition: color .25s, background-color .25s, box-shadow .25s;
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
 }
 
 .list:not(.no-interaction) li {
@@ -82,7 +78,7 @@ p:last-child {
 }
 
 .list li::before {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: 0;
   left: 0;
@@ -91,11 +87,11 @@ p:last-child {
   height: 100%;
   pointer-events: none;
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0);
-  transition: box-shadow .25s;
+  transition: box-shadow 0.25s;
 }
 
 .list li::after {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: -2px;
   left: -2px;
@@ -104,7 +100,7 @@ p:last-child {
   z-index: 3;
   pointer-events: none;
   box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
-  transition: box-shadow .25s;
+  transition: box-shadow 0.25s;
 }
 
 .list:not(.no-interaction) li:hover {
@@ -133,8 +129,6 @@ p:last-child {
   z-index: 2;
 }
 
-
-
 /* .list li.item {
   box-shadow: 0 0 0 2px #d6d6d6;
 } */
@@ -156,9 +150,6 @@ p:last-child {
 .list:not(.no-interaction) li.item:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
 }
-
-
-
 
 .progress {
   flex-basis: 100%;
@@ -195,9 +186,8 @@ p:last-child {
   max-width: 100%;
   height: 100%;
   background-color: #5aa366;
-  transition: background-color .25s;
+  transition: background-color 0.25s;
 }
-
 
 input {
   -webkit-appearance: none;
@@ -239,11 +229,11 @@ button.square {
   background-color: rgba(255, 255, 255, 0);
   color: rgba(255, 255, 255, 0.8);
   box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.2);
-  transition: color .25s, background-color .25s, box-shadow .25s;
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
 }
 
 button.square::after {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: -2px;
   left: -2px;
@@ -252,7 +242,7 @@ button.square::after {
   z-index: 3;
   pointer-events: none;
   box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
-  transition: box-shadow .25s;
+  transition: box-shadow 0.25s;
 }
 
 button.square:hover {
@@ -278,7 +268,7 @@ button.square.active {
 }
 
 .form .field::after {
-  content: " ";
+  content: ' ';
   position: absolute;
   top: -2px;
   left: -2px;
@@ -286,15 +276,15 @@ button.square.active {
   height: calc(100% + 4px);
   z-index: 3;
   pointer-events: none;
-  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);  
-  transition: color .25s, background-color .25s, box-shadow .25s;
+  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
+  transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
 }
 
 .form .field input,
 .form .field button {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 0 1rem;
-  transition: background-color .25s, box-shadow .25s;
+  transition: background-color 0.25s, box-shadow 0.25s;
 }
 
 .form .field input {
@@ -320,7 +310,6 @@ button.square.active {
   color: #fff;
 }
 
-
 .corners {
   position: absolute;
   width: 100%;
@@ -329,7 +318,7 @@ button.square.active {
 
 .corners::before,
 .corners::after {
-  content: " ";
+  content: ' ';
   position: absolute;
   left: 0;
   width: 7px;
@@ -361,9 +350,6 @@ button.square.active {
   border-width: 0 1px 1px 0;
 }
 
-
-
-
 .sub-header {
   position: relative;
   padding: 0.6rem 2rem;
@@ -373,27 +359,31 @@ button.square.active {
   background-color: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.4);
   text-transform: uppercase;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 6px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
 }
 
-@media screen and (max-width: 600px) {
-
-.sub-header {
-  margin: 2rem 2rem 1rem;
+.sub-header.sub {
+  padding: 0 0 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0);
+  width: 100%;
+  margin: 0 0 1rem;
 }
 
+@media screen and (max-width: 600px) {
+  .sub-header {
+    margin: 2rem 2rem 1rem;
+  }
 }
 
 .sub-title {
   font-size: 14px;
   margin: 0 0 0.4rem;
 }
-
-
 
 #error {
   padding: 9rem 3rem 0;
@@ -410,9 +400,9 @@ button.square.active {
   height: 5rem;
   font-size: 70px;
   font-weight: 500;
-  box-shadow: inset 0 0 0 5px #F44336;
+  box-shadow: inset 0 0 0 5px #f44336;
   border-radius: 100%;
-  color: #F44336;
+  color: #f44336;
 }
 
 #error .text {
@@ -426,30 +416,24 @@ button.square.active {
 }
 
 @media screen and (max-width: 600px) {
+  #error {
+    padding: 9rem 2rem 0;
+  }
 
-#error {
-  padding: 9rem 2rem 0;
+  #error .icon {
+    flex-basis: 4rem;
+    height: 4rem;
+    margin: 0 2rem 0 0;
+    font-size: 30px;
+    box-shadow: inset 0 0 0 4px #f44336;
+  }
+
+  #error .text {
+    margin: 3rem 0 0;
+    flex-basis: 100%;
+    max-width: initial;
+  }
 }
-
-#error .icon {
-  flex-basis: 4rem;
-  height: 4rem;
-  margin: 0 2rem 0 0;
-  font-size: 30px;
-  box-shadow: inset 0 0 0 4px #F44336;
-}
-
-#error .text {
-  margin: 3rem 0 0;
-  flex-basis: 100%;
-  max-width: initial;
-}
-
-}
-
-
-
-
 
 #loading {
   width: 100%;
@@ -470,7 +454,8 @@ button.square.active {
 }
 
 @keyframes pulsater {
-  0%, 100% {
+  0%,
+  100% {
     filter: drop-shadow(0 0 60px rgba(220, 36, 30, 0.6));
   }
   50% {
@@ -498,14 +483,12 @@ button.square.active {
 }
 
 @media screen and (max-width: 600px) {
+  #loading .image {
+    height: 240px;
+    margin: 0 0 1rem;
+  }
 
-#loading .image {
-  height: 240px;
-  margin: 0 0 1rem;
-}
-
-#loading .download {
-  margin: 0 0 3rem;
-}
-
+  #loading .download {
+    margin: 0 0 3rem;
+  }
 }

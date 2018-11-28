@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import assign from 'lodash/assign';
+import Globals from '../../../Globals';
 import cx from 'classnames';
 import ReactMarkdown from 'react-markdown';
 
@@ -15,13 +17,83 @@ class Summary extends React.Component {
     super(props);
 
     this.state = {};
+
+    this.askBungie = this.askBungie.bind(this);
+    this.getStats = this.getStats.bind(this);
+  }
+
+  askBungie = (requests) => {
+
+    let fetches = requests.map(request => {
+      return fetch(request.path, {
+        headers: {
+          'X-API-Key': Globals.key.bungie
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(fetch => {
+          let object = {};
+          object[request.name] = fetch;
+          return object;
+        });
+    });
+
+    return Promise.all(fetches)
+      .then(promises => {
+        return assign(...promises);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  getStats = () => {
+
+    this.setState({
+      stats: false
+    });
+
+    let requests = [
+      {
+        name: 'activeCharacterStats',
+        path: `https://www.bungie.net/Platform/Destiny2/${this.props.route.match.params.membershipType}/Account/${this.props.route.match.params.membershipId}/Character/${this.props.route.match.params.characterId}/Stats/?groups=0&modes=4,5,7,63&periodType=0`
+      }
+    ];
+
+    this.askBungie(requests)
+      .then(responses => {
+
+        if (responses.activeCharacterStats.ErrorCode === 1) {
+          this.setState({
+            stats: responses.activeCharacterStats.Response
+          });
+        }
+        
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  }
+
+  componentDidMount() {
+    // this.getStats();
+  }
+
+  componentDidUpdate(prevProps) {
+
+    // if (prevProps.route.match.params.characterId !== this.props.route.match.params.characterId) {
+    //   this.getStats();
+    // }
+
   }
 
   render() {
     let props = this.props;
 
     const Almost = () => {
-      let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
+      let profileRecords = props.state.response.profile.profileRecords.data.records;
 
       let manifest = props.manifest;
 
@@ -120,10 +192,86 @@ class Summary extends React.Component {
       );
     };
 
+    const Activity = () => {
+      console.log(props);
+
+      let activeCharacter = props.state.response.profile.characters.data.filter(character => character.characterId === props.route.match.params.characterId)[0];
+      
+      if (this.state.stats) {
+        console.log(this.state.stats)
+
+
+        let pve = this.state.stats.allPvE.allTime;
+        let pvp = this.state.stats.allPvP.allTime;
+        let gambit = this.state.stats.pvecomp_gambit.allTime ? this.state.stats.pvecomp_gambit.allTime : false;
+        let raid = this.state.stats.raid.allTime ? this.state.stats.raid.allTime : false;
+
+        return (
+          <>
+            <div className='sub-header sub'>
+              <div>Status</div>
+            </div>
+            <ul className='activity'>
+              <li>
+                <ul>
+                  <li>Total</li>
+                  <li>{Math.ceil(parseInt(activeCharacter.minutesPlayedTotal, 10) / 1440)} days</li>
+                </ul>
+              </li>
+            </ul>
+            <div className='sub-header sub'>
+              <div>Playtime</div>
+            </div>
+            <ul className='activity'>
+              <li>
+                <ul>
+                  <li>Total</li>
+                  <li>{Math.ceil(parseInt(activeCharacter.minutesPlayedTotal, 10) / 1440)} days</li>
+                </ul>
+              </li>
+              <li>
+                <ul>
+                  <li>PvE</li>
+                  <li>{Math.ceil(parseInt(pve.secondsPlayed.basic.value, 10) / 86400)} days</li>
+                </ul>
+              </li>
+              <li>
+                <ul>
+                  <li>PvP</li>
+                  <li>{Math.ceil(parseInt(pvp.secondsPlayed.basic.value, 10) / 86400)} days</li>
+                </ul>
+              </li>
+              <li>
+                <ul>
+                  <li>Gambit</li>
+                  <li>{gambit ? Math.ceil(parseInt(gambit.secondsPlayed.basic.value, 10) / 86400) : 0} days</li>
+                </ul>
+              </li>
+              <li>
+                <ul>
+                  <li>Raids</li>
+                  <li>{raid ? Math.ceil(parseInt(raid.secondsPlayed.basic.value, 10) / 86400) : 0} days</li>
+                </ul>
+              </li>
+            </ul>
+          </>
+        );
+      }
+      else {
+        return (
+          <>
+            Fetching~~
+          </>
+        );
+      }
+
+      
+    };
+
     const Checklists = () => {
-      let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
-      let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-      let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
+      let characterProgressions = props.state.response.profile.characterProgressions.data;
+      let profileProgressions = props.state.response.profile.profileProgression.data;
+      let profileRecords = props.state.response.profile.profileRecords.data.records;
       let characterId = props.route.match.params.characterId;
 
       let progression = {
@@ -265,9 +413,9 @@ class Summary extends React.Component {
     };
 
     const Seals = () => {
-      let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
-      let profileProgressions = props.state.ProfileResponse.profileProgression.data;
-      let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
+      let characterProgressions = props.state.response.profile.characterProgressions.data;
+      let profileProgressions = props.state.response.profile.profileProgression.data;
+      let profileRecords = props.state.response.profile.profileRecords.data.records;
       let characterId = props.route.match.params.characterId;
 
       let progression = {
@@ -399,8 +547,8 @@ class Summary extends React.Component {
     };
 
     const Ranks = () => {
-      let profileRecords = props.state.ProfileResponse.profileRecords.data.records;
-      let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
+      let profileRecords = props.state.response.profile.profileRecords.data.records;
+      let characterProgressions = props.state.response.profile.characterProgressions.data;
       let characterId = props.route.match.params.characterId;
 
       let manifest = props.manifest;
@@ -517,10 +665,6 @@ class Summary extends React.Component {
     return (
       <div className='summary'>
         <div className='module activity-checklists-seals'>
-          <div className='sub-header'>
-            <div>Activity</div>
-          </div>
-          <div className='content'>{Checklists()}</div>
           <div className='sub-header'>
             <div>Checklists</div>
           </div>

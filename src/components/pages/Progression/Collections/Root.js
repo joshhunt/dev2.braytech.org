@@ -10,8 +10,8 @@ class Root extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.ProfileResponse.characterCollectibles.data;
-    let profileCollectibles = this.props.state.ProfileResponse.profileCollectibles.data;
+    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data;
     let characterId = this.props.route.match.params.characterId;
 
     let parent = manifest.DestinyPresentationNodeDefinition[3790247699];

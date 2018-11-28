@@ -10,8 +10,8 @@ class BadgeNode extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.ProfileResponse.characterCollectibles.data;
-    let profileCollectibles = this.props.state.ProfileResponse.profileCollectibles.data.collectibles;
+    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data.collectibles;
     let characterId = this.props.route.match.params.characterId;
 
     let badgeDefinition = manifest.DestinyPresentationNodeDefinition[this.props.route.match.params.secondary];
@@ -77,7 +77,9 @@ class BadgeNode extends React.Component {
 
       badgeChildren.push(
         <div key={nodeDefinition.hash} className='class'>
-          <h3>{nodeDefinition.displayProperties.name}</h3>
+          <div className='sub-header sub'>
+            <div>{nodeDefinition.displayProperties.name}</div>
+          </div>
           <ul className='list tertiary collection-items items'>{childItems}</ul>
         </div>
       );

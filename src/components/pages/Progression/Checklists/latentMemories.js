@@ -3,7 +3,7 @@ import cx from 'classnames'
 
 const latentMemories = (props) => {
 
-  let profileProgressions = props.state.ProfileResponse.profileProgression.data;
+  let profileProgressions = props.state.response.profile.profileProgression.data;
 
   let manifest = props.manifest;
 

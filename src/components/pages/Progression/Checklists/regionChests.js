@@ -5,7 +5,7 @@ import orderBy from 'lodash/orderBy';
 const regionChests = parent => {
   let props = parent.props;
 
-  let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
+  let characterProgressions = props.state.response.profile.characterProgressions.data;
   let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;

@@ -5,6 +5,7 @@ import 'moment-timezone';
 import Moment from 'react-moment';
 import { orderBy } from 'lodash/lodash';
 
+import ObservedImage from '../../ObservedImage';
 import Tooltip from '../../Tooltip/Tooltip';
 
 import '../Progression/PresentationNode.css';
@@ -64,8 +65,23 @@ class Vendors extends Component {
         },
         {
           name: 'weekly',
-          vendors: [1265988377, 863940356, 3361454721, 2190858386],
+          vendors: [1265988377, 863940356, 3361454721, 2190858386, 895295461],
           items: []
+        }
+      ];
+
+      let images = [
+        {
+          vendor: 69482069,
+          file: '01A3-0000044D_SD.PNG'
+        },
+        {
+          vendor: 3603221665,
+          file: '01A3-0000038C_SD.PNG'
+        },
+        {
+          vendor: 895295461,
+          file: '01A3-0000038B_SD.PNG'
         }
       ];
 
@@ -160,6 +176,7 @@ class Vendors extends Component {
 
       render = (
         <>
+          { images.filter(obj => obj.vendor === definition.hash)[0] ? <ObservedImage className='image bg' src={`/static/images/extracts/${images.filter(obj => obj.vendor === definition.hash)[0].file}`} /> : null }
           <div className='displayProperties'>
             <div className='sub-name'>{definition.displayProperties.subtitle}</div>
             <div className='name'>{definition.displayProperties.name}</div>

@@ -48,10 +48,10 @@ class Player extends React.Component {
 
     const manifest = props.manifest;
 
-    let profile = props.data.ProfileResponse.profile.data;
-    let characters = props.data.ProfileResponse.characters.data;
-    let characterActivities = props.data.ProfileResponse.characterActivities.data;
-    let characterProgressions = props.data.ProfileResponse.characterProgressions.data;
+    let profile = props.data.response.profile.profile.data;
+    let characters = props.data.response.profile.characters.data;
+    let characterActivities = props.data.response.profile.characterActivities.data;
+    let characterProgressions = props.data.response.profile.characterProgressions.data;
 
     let activeCharacter;
     let charactersRender = [];
@@ -180,16 +180,6 @@ class Player extends React.Component {
         >
           <ul className='list'>{charactersRender}</ul>
         </div>
-        {/* <div className='stats'>
-          <div>
-            <h4>Playtime</h4>
-            <div>{Math.ceil(parseInt(activeCharacter.minutesPlayedTotal, 10) / 1440)} days</div>
-          </div>
-          <div>
-            <h4>Activity</h4>
-            <div>{activity}</div>
-          </div>
-        </div> */}
         <div className='views'>
           <ul>
             {views.map(view => {

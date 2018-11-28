@@ -32,7 +32,7 @@ class SealNode extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
+    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
 
     const sealBars = {
       2588182977: {

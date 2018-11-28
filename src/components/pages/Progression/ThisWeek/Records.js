@@ -12,8 +12,8 @@ class Records extends React.Component {
    
     let manifest = this.props.manifest;
 
-    let characterRecords = this.props.state.ProfileResponse.characterRecords.data;
-    let profileRecords = this.props.state.ProfileResponse.profileRecords.data.records;
+    let characterRecords = this.props.state.response.profile.characterRecords.data;
+    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
     let characterId = this.props.route.match.params.characterId;
 
     let recordsRequested = this.props.hashes;

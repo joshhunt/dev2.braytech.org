@@ -11,6 +11,11 @@
   width: calc(100% - 4rem);
 }
 
+.summary .module .sub-header.sub {
+  margin: 0 0 1rem;
+  width: 100%;
+}
+
 .summary .module .content {
   margin: 0 0 3rem;
 }
@@ -24,6 +29,31 @@
 
 .summary .module.activity-checklists-seals .list li {
   height: unset;
+}
+
+/* .summary .module.activity-checklists-seals > div:nth-child(2) {
+  margin: 0 0 2rem;
+} */
+
+.summary ul.activity {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 0 1rem;
+}
+
+.summary ul.activity > li {
+  flex-basis: 20%;
+  margin: 0 0 1rem;
+}
+
+.summary .activity ul li {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.summary .activity ul li:first-child {
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .summary .module.ranks {
