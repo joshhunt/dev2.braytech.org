@@ -1,11 +1,7 @@
-
-
-
-
 #progression {
   display: flex;
   flex-flow: row wrap;
-  padding: 18rem 0 1.5rem;
+  padding: calc(12rem + 96px) 0 1.5rem;
   min-height: initial;
 }
 
@@ -19,32 +15,26 @@
   width: calc(100% - 4rem);
 }
 
-
 @media screen and (max-width: 1200px) {
+  #progression .presentation-node {
+    padding: 0 3rem 0;
+  }
 
-#progression {
-  padding: 0 0 1rem;
+  #progression > .header {
+    margin: 3rem 3rem 0;
+  }
 }
-
-#progression .presentation-node {
-  padding: 0 3rem 0;
-}
-
-#progression >.header {
-  margin: 3rem 3rem 0;
-}
-
-}
-
 
 @media screen and (max-width: 600px) {
+  #progression {
+    padding: 0;
+  }
 
-#progression .presentation-node {
-  padding: 0 2rem 0;
-}
+  #progression .presentation-node {
+    padding: 0 2rem 0;
+  }
 
-#progression .presentation-node .sub-header {
-  margin: 2rem 0 2rem;
-}
-
+  #progression .presentation-node .sub-header {
+    margin: 2rem 0 2rem;
+  }
 }

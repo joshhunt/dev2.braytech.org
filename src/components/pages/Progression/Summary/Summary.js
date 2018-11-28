@@ -83,12 +83,12 @@ class Summary extends React.Component {
                     complete: obj.progress >= obj.completionValue ? true : false
                   })}
                 >
-                  <div className="title">{objDef.progressDescription}</div>
-                  <div className="fraction">
+                  <div className='title'>{objDef.progressDescription}</div>
+                  <div className='fraction'>
                     {obj.progress}/{obj.completionValue}
                   </div>
                   <div
-                    className="bar"
+                    className='bar'
                     style={{
                       width: `${(obj.progress / obj.completionValue) * 100}%`
                     }}
@@ -145,6 +145,16 @@ class Summary extends React.Component {
               text: 'Adventures undertaken',
               total: Object.keys(characterProgressions[characterId].checklists[4178338182]).length,
               completed: Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length
+            },
+            corruptedEggs: {
+              text: 'Corrupted eggs destroyed',
+              total: Object.keys(profileProgressions.checklists[2609997025]).length,
+              completed: Object.values(profileProgressions.checklists[2609997025]).filter(value => value === true).length
+            },
+            catStatues: {
+              text: 'Feline friends satisfied',
+              total: Object.keys(profileProgressions.checklists[2726513366]).length,
+              completed: Object.values(profileProgressions.checklists[2726513366]).filter(value => value === true).length
             },
             sleeperNodes: {
               text: 'Sleeper nodes hacked',
@@ -221,15 +231,18 @@ class Summary extends React.Component {
       let list = [];
 
       for (const [key, value] of Object.entries(progression.checklists.values)) {
+        if (key === 'caydesJorunals' && Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length !== 4) {
+          continue;
+        }
         list.push(
           <li key={key}>
-            <div className="progress">
-              <div className="title">{value.text}</div>
-              <div className="fraction">
+            <div className='progress'>
+              <div className='title'>{value.text}</div>
+              <div className='fraction'>
                 {value.completed}/{value.total}
               </div>
               <div
-                className="bar"
+                className='bar'
                 style={{
                   width: `${(value.completed / value.total) * 100}%`,
                   backgroundColor: value.color ? value.color : ``
@@ -339,6 +352,13 @@ class Summary extends React.Component {
               recordHash: 2182090828,
               total: profileRecords[2182090828].objectives[0].completionValue,
               completed: profileRecords[2182090828].objectives[0].progress
+            },
+            armoury: {
+              text: 'Blacksmith',
+              nodeHash: 2039028930,
+              recordHash: 2053985130,
+              total: profileRecords[2053985130].objectives[0].completionValue,
+              completed: profileRecords[2053985130].objectives[0].progress
             }
           }
         }
@@ -349,13 +369,13 @@ class Summary extends React.Component {
       for (const [key, value] of Object.entries(progression.seals.values)) {
         list.push(
           <li key={key}>
-            <div className="progress">
-              <div className="title">{value.text}</div>
-              <div className="fraction">
+            <div className='progress'>
+              <div className='title'>{value.text}</div>
+              <div className='fraction'>
                 {value.completed}/{value.total}
               </div>
               <div
-                className="bar"
+                className='bar'
                 style={{
                   width: `${(value.completed / value.total) * 100}%`,
                   backgroundColor: value.color ? value.color : ``
@@ -449,38 +469,38 @@ class Summary extends React.Component {
       for (const [key, value] of Object.entries(progression.ranks.values)) {
         ranks.push(
           <div className={cx('rank', key)} key={key}>
-            <div className="mode">
-              <div className="icon">
+            <div className='mode'>
+              <div className='icon'>
                 <span className={value.icon} />
               </div>
-              <div className="name">{value.mode}</div>
-              {value.resets ? <div className="resets">{value.resets}x</div> : null}
+              <div className='name'>{value.mode}</div>
+              {value.resets ? <div className='resets'>{value.resets}x</div> : null}
             </div>
-            <div className="shallow">
-              <ReactMarkdown className="description" source={value.definition.displayProperties.description} />
-              <div className={cx(
-                'progress', {
-                  'disabled': value.step.currentProgress === value.total && key === "glory"
-                }
-              )}>
-                <div className="title">Next rank: {value.step.currentProgress === value.total && value.step.stepIndex === value.definition.steps.length ? value.definition.steps[0].stepName : (value.definition.steps[(value.step.stepIndex + 1) % (value.definition.steps.length)].stepName)}</div>
-                <div className="fraction">
+            <div className='shallow'>
+              <ReactMarkdown className='description' source={value.definition.displayProperties.description} />
+              <div
+                className={cx('progress', {
+                  disabled: value.step.currentProgress === value.total && key === 'glory'
+                })}
+              >
+                <div className='title'>Next rank: {value.step.currentProgress === value.total && value.step.stepIndex === value.definition.steps.length ? value.definition.steps[0].stepName : value.definition.steps[(value.step.stepIndex + 1) % value.definition.steps.length].stepName}</div>
+                <div className='fraction'>
                   {value.step.progressToNextLevel}/{value.step.nextLevelAt}
                 </div>
                 <div
-                  className="bar"
+                  className='bar'
                   style={{
                     width: `${(value.step.progressToNextLevel / value.step.nextLevelAt) * 100}%`
                   }}
                 />
               </div>
-              <div className="progress">
-                <div className="title">{value.text}</div>
-                <div className="fraction">
+              <div className='progress'>
+                <div className='title'>{value.text}</div>
+                <div className='fraction'>
                   {value.step.currentProgress}/{value.total}
                 </div>
                 <div
-                  className="bar"
+                  className='bar'
                   style={{
                     width: `${(value.step.currentProgress / value.total) * 100}%`
                   }}
@@ -495,28 +515,32 @@ class Summary extends React.Component {
     };
 
     return (
-      <div className="summary">
-        <div className="module checklists-seals">
-          <div className="sub-header">
+      <div className='summary'>
+        <div className='module activity-checklists-seals'>
+          <div className='sub-header'>
+            <div>Activity</div>
+          </div>
+          <div className='content'>{Checklists()}</div>
+          <div className='sub-header'>
             <div>Checklists</div>
           </div>
-          <div className="content">{Checklists()}</div>
-          <div className="sub-header">
+          <div className='content'>{Checklists()}</div>
+          <div className='sub-header'>
             <div>Seals</div>
           </div>
-          <div className="content">{Seals()}</div>
+          <div className='content'>{Seals()}</div>
         </div>
-        <div className="module ranks">
-          <div className="sub-header">
+        <div className='module ranks'>
+          <div className='sub-header'>
             <div>Ranks</div>
           </div>
-          <div className="content">{Ranks()}</div>
+          <div className='content'>{Ranks()}</div>
         </div>
-        <div className="module almost">
-          <div className="sub-header">
+        <div className='module almost'>
+          <div className='sub-header'>
             <div>Almost complete triumphs</div>
           </div>
-          <div className="content">{Almost()}</div>
+          <div className='content'>{Almost()}</div>
         </div>
       </div>
     );

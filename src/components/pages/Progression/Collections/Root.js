@@ -26,7 +26,7 @@ class Root extends React.Component {
 
       recentlyDiscovered.push(
         <li key={collectibleDefinition.hash} className={cx('item', 'tooltip')} data-itemhash={collectibleDefinition.itemHash}>
-          <div className="icon">
+          <div className='icon'>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
           </div>
         </li>
@@ -45,12 +45,24 @@ class Root extends React.Component {
             nodeChildNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChildNodeChild => {
               let nodeChildNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChildNodeChild.presentationNodeHash];
               nodeChildNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-                states.push(profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : characterCollectibles[characterId].collectibles[collectible.collectibleHash].state);
+                let state = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : false;
+                state = state ? state : characterCollectibles[characterId].collectibles[collectible.collectibleHash] ? characterCollectibles[characterId].collectibles[collectible.collectibleHash].state : false;
+                if (state) {
+                  states.push(state);
+                } else {
+                  console.log(`53 Undefined state for ${collectible.collectibleHash}`);
+                }
               });
             });
           } else {
             nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-              states.push(profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : characterCollectibles[characterId].collectibles[collectible.collectibleHash].state);
+              let state = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : false;
+              state = state ? state : characterCollectibles[characterId].collectibles[collectible.collectibleHash] ? characterCollectibles[characterId].collectibles[collectible.collectibleHash].state : false;
+              if (state) {
+                states.push(state);
+              } else {
+                console.log(`64 Undefined state for ${collectible.collectibleHash}`);
+              }
             });
           }
         });
@@ -59,9 +71,9 @@ class Root extends React.Component {
       nodes.push(
         <li key={node.hash}>
           <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
-          <div className="text">
+          <div className='text'>
             <div>{node.displayProperties.name}</div>
-            <div className="state">
+            <div className='state'>
               {states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
             </div>
           </div>
@@ -104,7 +116,7 @@ class Root extends React.Component {
         >
           <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/badge/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
-            <div className="text">
+            <div className='text'>
               <div>{node.displayProperties.name}</div>
             </div>
           </Link>
@@ -113,29 +125,29 @@ class Root extends React.Component {
     });
 
     return (
-      <div className="presentation-node collections">
-        <div className="nodes">
-          <div className="sub-header">
+      <div className='presentation-node collections'>
+        <div className='nodes'>
+          <div className='sub-header'>
             <div>Collections</div>
           </div>
-          <div className="node">
-            <div className="parent">
-              <ul className="list">{nodes}</ul>
+          <div className='node'>
+            <div className='parent'>
+              <ul className='list'>{nodes}</ul>
             </div>
           </div>
         </div>
-        <div className="sidebar">
-          <div className="sub-header">
+        <div className='sidebar'>
+          <div className='sub-header'>
             <div>Recently discovered</div>
           </div>
-          <div className="recently-discovered">
-            <ul className="list">{recentlyDiscovered}</ul>
+          <div className='recently-discovered'>
+            <ul className='list'>{recentlyDiscovered}</ul>
           </div>
-          <div className="sub-header">
+          <div className='sub-header'>
             <div>Badges</div>
           </div>
-          <div className="badges">
-            <ul className="list">{badges}</ul>
+          <div className='badges'>
+            <ul className='list'>{badges}</ul>
           </div>
         </div>
       </div>

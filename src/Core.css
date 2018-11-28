@@ -157,7 +157,7 @@ html.backdropfilter header {
 
 header .logo a {
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -198,7 +198,7 @@ header ul {
 header ul li {
   padding: 0 0.4rem;
   margin: 0 0.4rem;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
   height: 100%;

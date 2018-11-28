@@ -4,6 +4,8 @@ import cx from 'classnames';
 import regionChests from './regionChests';
 import lostSectors from './lostSectors';
 import adventures from './adventures';
+import corruptedEggs from './corruptedEggs';
+import catStatues from './catStatues';
 import sleeperNodes from './sleeperNodes';
 import ghostScans from './ghostScans';
 import latentMemories from './latentMemories';
@@ -39,7 +41,7 @@ class Checklists extends React.Component {
     const request = await fetch(`https://lowlidev.com.au/destiny/api/v2/map/supported`);
     const response = await request.json();
     return response;
-  }
+  };
 
   componentDidMount() {
     // this.lowlines().then(response => {
@@ -53,7 +55,6 @@ class Checklists extends React.Component {
   }
 
   render() {
-
     if (this.props.viewport.width >= 1600) {
       this.itemsPerPage = 5;
     }
@@ -73,41 +74,61 @@ class Checklists extends React.Component {
     const lists = [
       {
         name: 'Region Chests',
+        icon: 'destiny-region_chests',
         list: regionChests(this)
       },
       {
         name: 'Lost Sectors',
+        icon: 'destiny-lost_sectors',
         list: lostSectors(this.props)
       },
       {
         name: 'Adventures',
+        icon: 'destiny-adventure',
         list: adventures(this.props)
       },
       {
+        name: 'Corrupted Eggs',
+        icon: 'destiny-corrupted_eggs',
+        list: corruptedEggs(this.props)
+      },
+      {
+        name: 'Cat Statues',
+        icon: 'destiny-cat_statues',
+        list: catStatues(this.props)
+      },
+      {
         name: 'Sleeper Nodes',
+        icon: 'destiny-sleeper_nodes',
         list: sleeperNodes(this.props)
       },
       {
         name: 'Ghost Scans',
+        icon: 'destiny-ghost',
         list: ghostScans(this.props)
       },
       {
         name: 'Lost Memory Fragments',
+        icon: 'destiny-lost_memory_fragments',
         list: latentMemories(this.props)
-      },
-      {
-        name: "Cayde's Journals",
-        list: caydesJournals(this.props)
       }
     ];
+
+    if (Object.values(this.props.state.ProfileResponse.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
+      lists.push({
+        name: "Cayde's Journals",
+        icon: 'destiny-ace_of_spades',
+        list: caydesJournals(this.props)
+      });
+    }
 
     let sliceStart = parseInt(this.state.page, 10) * this.itemsPerPage;
     let sliceEnd = sliceStart + this.itemsPerPage;
 
     return (
       <>
-        <div className="checklistSelectors">
-          <ul>
+        <div className='selectors'>
+          <ul className='list'>
             {lists.map((list, index) => {
               let active = false;
 
@@ -118,14 +139,15 @@ class Checklists extends React.Component {
               return (
                 <li key={list.name}>
                   <a
-                    href="/"
+                    href='/'
                     className={cx({
                       active: active
                     })}
                     data-index={index}
                     onClick={this.changeSkip}
                   >
-                    {list.name}
+                    <div className={list.icon} />
+                    <div className='text'>{list.name}</div>
                   </a>
                 </li>
               );
@@ -135,7 +157,7 @@ class Checklists extends React.Component {
         <div className={cx('lists', 'col-' + this.itemsPerPage)}>
           {lists.slice(sliceStart, sliceEnd).map(list => {
             return (
-              <div className="col" key={list.name}>
+              <div className='col' key={list.name}>
                 {list.list}
               </div>
             );

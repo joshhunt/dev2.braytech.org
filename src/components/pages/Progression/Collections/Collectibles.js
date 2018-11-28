@@ -61,16 +61,12 @@ class Collectibles extends React.Component {
               })}
               data-itemhash={collectibleDefinition.itemHash}
             >
-              <div className="icon">
+              <div className='icon'>
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
               </div>
             </li>
           );
         });
-
-        // if (rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length && this.props.hideCompleted) {
-        //   return;
-        // }
 
         tertiaryChildren.push(
           <li
@@ -79,11 +75,11 @@ class Collectibles extends React.Component {
               completed: rowState.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === rowState.length
             })}
           >
-            <div className="set">
-              <ul className="list">{row}</ul>
+            <div className='set'>
+              <ul className='list'>{row}</ul>
             </div>
-            <div className="text">
-              <div className="name">{nodeDefinition.displayProperties.name}</div>
+            <div className='text'>
+              <div className='name'>{nodeDefinition.displayProperties.name}</div>
             </div>
           </li>
         );
@@ -104,33 +100,48 @@ class Collectibles extends React.Component {
         if (enumerateCollectibleState(state).invisible) {
           return;
         }
-
-        // if (!enumerateCollectibleState(state).notAcquired && this.props.hideCompleted) {
-        //   return;
-        // }
-
         // eslint-disable-next-line eqeqeq
         let ref = highlightHash == collectibleDefinition.hash ? this.scrollToRecordRef : null;
 
-        tertiaryChildren.push(
-          <li
-            key={collectibleDefinition.hash}
-            ref={ref}
-            className={cx('tooltip', {
-              completed: !enumerateCollectibleState(state).notAcquired,
-              // eslint-disable-next-line eqeqeq
-              highlight: highlightHash && highlightHash == collectibleDefinition.hash
-            })}
-            data-itemhash={collectibleDefinition.itemHash}
-          >
-            <div className="icon">
-              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
-            </div>
-            <div className="text">
-              <div className="name">{collectibleDefinition.displayProperties.name}</div>
-            </div>
-          </li>
-        );
+        if (collectibleDefinition.redacted) {
+          tertiaryChildren.push(
+            <li
+              key={collectibleDefinition.hash}
+              ref={ref}
+              className={cx('redacted', {
+                // eslint-disable-next-line eqeqeq
+                highlight: highlightHash && highlightHash == collectibleDefinition.hash
+              })}
+            >
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+              </div>
+              <div className='text'>
+                <div className='name'>Encrypted record</div>
+              </div>
+            </li>
+          );
+        } else {
+          tertiaryChildren.push(
+            <li
+              key={collectibleDefinition.hash}
+              ref={ref}
+              className={cx('tooltip', {
+                completed: !enumerateCollectibleState(state).notAcquired,
+                // eslint-disable-next-line eqeqeq
+                highlight: highlightHash && highlightHash == collectibleDefinition.hash
+              })}
+              data-itemhash={collectibleDefinition.itemHash}
+            >
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+              </div>
+              <div className='text'>
+                <div className='name'>{collectibleDefinition.displayProperties.name}</div>
+              </div>
+            </li>
+          );
+        }
       });
     }
 

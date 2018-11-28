@@ -60,13 +60,13 @@ const regionChests = parent => {
               completed: completed
             })}
           />
-          <div className="text">
+          <div className='text'>
             <p>{regionchest ? regionchest.displayProperties.name : `???`}</p>
             <p>{place.displayProperties.name}</p>
           </div>
-          <div className="lowlines">
-            <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
-              <i className="uniE1C4" />
+          <div className='lowlines'>
+            <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
+              <i className='uniE1C4' />
             </a>
           </div>
         </li>
@@ -78,27 +78,27 @@ const regionChests = parent => {
 
   return (
     <>
-      <div className="head">
+      <div className='head'>
         <h4>Region chests</h4>
-        <div className="binding">
+        <div className='binding'>
           <p>
             Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests
           </p>
         </div>
-        <div className="progress">
-          <div className="title">Region chests opened</div>
-          <div className="fraction">
+        <div className='progress'>
+          <div className='title'>Region chests opened</div>
+          <div className='fraction'>
             {Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[1697465175]).length}
           </div>
           <div
-            className="bar"
+            className='bar'
             style={{
               width: `${(Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[1697465175]).length) * 100}%`
             }}
           />
         </div>
       </div>
-      <ul className="list no-interaction">{list.map(obj => obj.element)}</ul>
+      <ul className='list no-interaction'>{list.map(obj => obj.element)}</ul>
     </>
   );
 };

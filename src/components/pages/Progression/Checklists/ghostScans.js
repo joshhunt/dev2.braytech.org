@@ -1,13 +1,12 @@
 import React from 'react';
-import cx from 'classnames'
+import cx from 'classnames';
 
-const ghostScans = (props) => {
-
+const ghostScans = props => {
   let profileProgressions = props.state.ProfileResponse.profileProgression.data;
 
   let manifest = props.manifest;
 
-  let list = []
+  let list = [];
 
   Object.entries(profileProgressions.checklists[2360931290]).forEach(([key, value]) => {
     let hash = parseInt(key, 10);
@@ -51,32 +50,33 @@ const ghostScans = (props) => {
     if (farmScans.includes(checklist.hash)) {
       scan = {
         displayProperties: {
-          name: "The Farm"
+          name: 'The Farm'
         }
-      }
+      };
     }
 
     let number = checklist.displayProperties.name.match(/([0-9]+)/)[0];
-    
+
     list.push(
-      <li key={checklist.hash} data-state={ completed ? `complete` : `incomplete` } data-sort={ number }>
-        <div className={cx(
-            "state",
-            {
-              "completed": completed
-            }
-          )}></div>
-        <div className="text">
-          <p>{ number } &mdash; { scan ? scan.displayProperties.name : `???` }</p>
-          <p>{ place.displayProperties.name }</p>
+      <li key={checklist.hash} data-state={completed ? `complete` : `incomplete`} data-sort={number}>
+        <div
+          className={cx('state', {
+            completed: completed
+          })}
+        />
+        <div className='text'>
+          <p>Scan {number}</p>
+          <p>
+            {scan ? scan.displayProperties.name : `???`}, {place.displayProperties.name}
+          </p>
         </div>
-        <div className="lowlines">
-          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
-            <i className="uniE1C4" />
+        <div className='lowlines'>
+          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
+            <i className='uniE1C4' />
           </a>
         </div>
       </li>
-    )
+    );
   });
 
   list.sort(function(a, b) {
@@ -87,25 +87,27 @@ const ghostScans = (props) => {
 
   return (
     <>
-      <div className="head">
+      <div className='head'>
         <h4>Ghost scans</h4>
-        <div className="binding">
+        <div className='binding'>
           <p>Profile bound</p>
         </div>
-        <div className="progress">
-          <div className="title">Ghost scans performed</div>
-          <div className="fraction">{Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2360931290]).length}</div>
-          <div className="bar" style={{
-            width: `${ Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2360931290]).length * 100 }%`
-          }}></div>
+        <div className='progress'>
+          <div className='title'>Ghost scans performed</div>
+          <div className='fraction'>
+            {Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2360931290]).length}
+          </div>
+          <div
+            className='bar'
+            style={{
+              width: `${(Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2360931290]).length) * 100}%`
+            }}
+          />
         </div>
       </div>
-      <ul className="list no-interaction">
-        {list}
-      </ul>
+      <ul className='list no-interaction'>{list}</ul>
     </>
-  )
-
-}
+  );
+};
 
 export default ghostScans;

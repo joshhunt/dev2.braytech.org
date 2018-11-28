@@ -33,7 +33,7 @@ const latentMemories = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>{ checklist.displayProperties.name }</p>
+          <p>Memory {number}</p>
         </div>
         <div className="lowlines">
           <a href={`https://lowlidev.com.au/destiny/maps/mars/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">

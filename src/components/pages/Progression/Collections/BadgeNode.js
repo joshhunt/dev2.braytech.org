@@ -38,29 +38,47 @@ class BadgeNode extends React.Component {
         }
 
         classState.push(state);
-
-        childItems.push(
-          <li
-            key={collectibleDefinition.hash}
-            className={cx('tooltip', {
-              completed: !enumerateCollectibleState(state).notAcquired
-            })}
-            data-itemhash={collectibleDefinition.itemHash}
-          >
-            <div className="icon">
-              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
-            </div>
-            <div className="text">
-              <div className="name">{collectibleDefinition.displayProperties.name}</div>
-            </div>
-          </li>
-        );
+        if (collectibleDefinition.redacted) {
+          childItems.push(
+            <li
+              key={collectibleDefinition.hash}
+              className={cx('redacted', {
+                completed: !enumerateCollectibleState(state).notAcquired
+              })}
+              data-itemhash={collectibleDefinition.itemHash}
+            >
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+              </div>
+              <div className='text'>
+                <div className='name'>Encrypted record</div>
+              </div>
+            </li>
+          );
+        } else {
+          childItems.push(
+            <li
+              key={collectibleDefinition.hash}
+              className={cx('tooltip', {
+                completed: !enumerateCollectibleState(state).notAcquired
+              })}
+              data-itemhash={collectibleDefinition.itemHash}
+            >
+              <div className='icon'>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
+              </div>
+              <div className='text'>
+                <div className='name'>{collectibleDefinition.displayProperties.name}</div>
+              </div>
+            </li>
+          );
+        }
       });
 
       badgeChildren.push(
-        <div key={nodeDefinition.hash} className="class">
+        <div key={nodeDefinition.hash} className='class'>
           <h3>{nodeDefinition.displayProperties.name}</h3>
-          <ul className="list tertiary collection-items items">{childItems}</ul>
+          <ul className='list tertiary collection-items items'>{childItems}</ul>
         </div>
       );
 
@@ -78,9 +96,9 @@ class BadgeNode extends React.Component {
         completed = true;
       }
       progress.push(
-        <div key={obj.class} className="progress">
-          <div className="title">{obj.class}</div>
-          <div className="fraction">
+        <div key={obj.class} className='progress'>
+          <div className='title'>{obj.class}</div>
+          <div className='fraction'>
             {obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
           </div>
           <div
@@ -96,25 +114,25 @@ class BadgeNode extends React.Component {
     });
 
     return (
-      <div className="presentation-node collections">
-        <div className="sub-header">
+      <div className='presentation-node collections'>
+        <div className='sub-header'>
           <div>Collections</div>
         </div>
-        <div className="node badge">
-          <div className="children">
-            <div className="icon">
+        <div className='node badge'>
+          <div className='children'>
+            <div className='icon'>
               <ObservedImage className={cx('image')} src={`https://www.bungie.net${badgeDefinition.displayProperties.icon}`} />
             </div>
-            <div className="text">
-              <div className="name">{badgeDefinition.displayProperties.name}</div>
-              <div className="description">{badgeDefinition.displayProperties.description}</div>
+            <div className='text'>
+              <div className='name'>{badgeDefinition.displayProperties.name}</div>
+              <div className='description'>{badgeDefinition.displayProperties.description}</div>
             </div>
-            <div className="until">
-              {completed ? <h4 className="completed">Badge completed</h4> : <h4>Badge progress</h4>}
+            <div className='until'>
+              {completed ? <h4 className='completed'>Badge completed</h4> : <h4>Badge progress</h4>}
               {progress}
             </div>
           </div>
-          <div className="records">{badgeChildren}</div>
+          <div className='records'>{badgeChildren}</div>
         </div>
       </div>
     );

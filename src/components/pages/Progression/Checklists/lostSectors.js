@@ -2,14 +2,13 @@ import React from 'react';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
-const lostSectors = (props) => {
-
+const lostSectors = props => {
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let characterId = props.route.match.params.characterId;
 
   let manifest = props.manifest;
 
-  let list = []
+  let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[3142056444]).forEach(([key, value]) => {
     let hash = parseInt(key, 10);
@@ -52,50 +51,52 @@ const lostSectors = (props) => {
       completed: completed ? 1 : 0,
       place: place.displayProperties.name,
       name: lostsector ? lostsector.displayProperties.name : `???`,
-      element: <li key={checklist.hash}>
-        <div className={cx(
-            "state",
-            {
-              "completed": completed
-            }
-          )}></div>
-        <div className="text">
-          <p>{ lostsector ? lostsector.displayProperties.name : `???` }</p>
-          <p>{ place.displayProperties.name }</p>
-        </div>
-        <div className="lowlines">
-          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
-            <i className="uniE1C4" />
-          </a>
-        </div>
-      </li>
-      })
-
+      element: (
+        <li key={checklist.hash}>
+          <div
+            className={cx('state', {
+              completed: completed
+            })}
+          />
+          <div className='text'>
+            <p>{lostsector ? lostsector.displayProperties.name : `???`}</p>
+            <p>{place.displayProperties.name}</p>
+          </div>
+          <div className='lowlines'>
+            <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
+              <i className='uniE1C4' />
+            </a>
+          </div>
+        </li>
+      )
+    });
   });
 
   list = orderBy(list, [item => item.completed, item => item.place, item => item.name], ['asc', 'asc', 'asc']);
 
   return (
     <>
-      <div className="head">
+      <div className='head'>
         <h4>Lost Sectors</h4>
-        <div className="binding">
+        <div className='binding'>
           <p>Character bound</p>
         </div>
-        <div className="progress">
-          <div className="title">Lost Sectors discovered</div>
-          <div className="fraction">{Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[3142056444]).length}</div>
-          <div className="bar" style={{
-            width: `${ Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[3142056444]).length * 100 }%`
-          }}></div>
+        <div className='progress'>
+          <div className='title'>Lost Sectors discovered</div>
+          <div className='fraction'>
+            {Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[3142056444]).length}
+          </div>
+          <div
+            className='bar'
+            style={{
+              width: `${(Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[3142056444]).length) * 100}%`
+            }}
+          />
         </div>
       </div>
-      <ul className="list no-interaction">
-        {list.map(obj => obj.element)}
-      </ul>
+      <ul className='list no-interaction'>{list.map(obj => obj.element)}</ul>
     </>
-  )
-
-}
+  );
+};
 
 export default lostSectors;

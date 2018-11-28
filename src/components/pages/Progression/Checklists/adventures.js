@@ -2,8 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
-const adventures = (props) => {
-
+const adventures = props => {
   let characterProgressions = props.state.ProfileResponse.characterProgressions.data;
   let characterId = props.route.match.params.characterId;
 
@@ -13,7 +12,7 @@ const adventures = (props) => {
 
   Object.entries(characterProgressions[characterId].checklists[4178338182]).forEach(([key, value]) => {
     let hash = parseInt(key, 10);
-    
+
     let completed = value;
 
     let checklist = false;
@@ -57,50 +56,54 @@ const adventures = (props) => {
       place: place.displayProperties.name,
       place2: adventure.displayProperties.name,
       name: activityDef.displayProperties.name,
-      element: <li key={checklist.hash}>
-        <div className={cx(
-            "state",
-            {
-              "completed": completed
-            }
-          )}></div>
-        <div className="text">
-          <p>{ activityDef.displayProperties.name }</p>
-          <p>{ adventure.displayProperties.name }, { place.displayProperties.name }</p>
-        </div>
-        <div className="lowlines">
-          <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
-            <i className="uniE1C4" />
-          </a>
-        </div>
-      </li>
-      })
-
+      element: (
+        <li key={checklist.hash}>
+          <div
+            className={cx('state', {
+              completed: completed
+            })}
+          />
+          <div className='text'>
+            <p>{activityDef.displayProperties.name}</p>
+            <p>
+              {adventure.displayProperties.name}, {place.displayProperties.name}
+            </p>
+          </div>
+          <div className='lowlines'>
+            <a href={`https://lowlidev.com.au/destiny/maps/${checklist.destinationHash}/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
+              <i className='uniE1C4' />
+            </a>
+          </div>
+        </li>
+      )
+    });
   });
 
   list = orderBy(list, [item => item.completed, item => item.place, item => item.place2, item => item.name], ['asc', 'asc', 'asc', 'asc']);
 
   return (
     <>
-      <div className="head">
+      <div className='head'>
         <h4>Adventures</h4>
-        <div className="binding">
+        <div className='binding'>
           <p>Character bound</p>
         </div>
-        <div className="progress">
-          <div className="title">Adventures undertaken</div>
-          <div className="fraction">{Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[4178338182]).length}</div>
-          <div className="bar" style={{
-            width: `${ Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[4178338182]).length * 100 }%`
-          }}></div>
+        <div className='progress'>
+          <div className='title'>Adventures undertaken</div>
+          <div className='fraction'>
+            {Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[4178338182]).length}
+          </div>
+          <div
+            className='bar'
+            style={{
+              width: `${(Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[4178338182]).length) * 100}%`
+            }}
+          />
         </div>
       </div>
-      <ul className="list no-interaction">
-        {list.map(obj => obj.element)}
-      </ul>
+      <ul className='list no-interaction'>{list.map(obj => obj.element)}</ul>
     </>
-  )
-
-}
+  );
+};
 
 export default adventures;
