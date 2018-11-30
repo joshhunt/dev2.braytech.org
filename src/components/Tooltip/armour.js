@@ -71,10 +71,10 @@ const armour = (manifest, item) => {
           }
         });
         traits.push(
-          <div key={plug.hash} className="plug trait">
+          <div key={plug.hash} className='plug trait'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
-            <div className="text">
-              <div className="name">{plug.displayProperties.name}</div>
+            <div className='text'>
+              <div className='name'>{plug.displayProperties.name}</div>
               {/* <div className="description">{plug.displayProperties.description}</div> */}
             </div>
           </div>
@@ -89,34 +89,34 @@ const armour = (manifest, item) => {
     let value = item.stats.stats[stat.hash] ? item.stats.stats[stat.hash].value : 0;
     let modifier = stat.modifier ? stat.modifier : 0;
     stats.push(
-      <div key={stat.hash} className="stat">
-        <div className="name">{stat.name}</div>
-        <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className="bar" data-value={value + modifier} style={{ width: `${((value + modifier) / 3) * 100}%` }} /> : value + modifier}</div>
+      <div key={stat.hash} className='stat'>
+        <div className='name'>{stat.name}</div>
+        <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className='bar' data-value={value + modifier} style={{ width: `${((value + modifier) / 3) * 100}%` }} /> : value + modifier}</div>
       </div>
     );
   });
 
   return (
     <>
-      <div className="damage armour">
+      <div className='damage armour'>
         <div className={cx('power')}>
-          <div className="text">600</div>
-          <div className="text">Defence</div>
+          <div className='text'>600</div>
+          <div className='text'>Defence</div>
         </div>
       </div>
       {sourceString ? (
-        <div className="source">
+        <div className='source'>
           <p>{sourceString}</p>
         </div>
       ) : null}
-      <div className="stats">{stats}</div>
+      <div className='stats'>{stats}</div>
       <div className={cx('sockets', { hasTraits: traits.length > 0 })}>
         {intrinsic ? (
-          <div className="plug intrinsic">
+          <div className='plug intrinsic'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
-            <div className="text">
-              <div className="name">{intrinsic.displayProperties.name}</div>
-              <div className="description">{intrinsic.displayProperties.description}</div>
+            <div className='text'>
+              <div className='name'>{intrinsic.displayProperties.name}</div>
+              <div className='description'>{intrinsic.displayProperties.description}</div>
             </div>
           </div>
         ) : null}

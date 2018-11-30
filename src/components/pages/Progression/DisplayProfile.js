@@ -11,6 +11,7 @@ import Player from './Player';
 import Summary from './Summary/Summary';
 import ThisWeek from './ThisWeek/ThisWeek';
 import Checklists from './Checklists/Checklists';
+import Equipment from './Equipment/Equipment';
 import './PresentationNode.css';
 import Triumphs from './Triumphs/Triumphs';
 import Collections from './Collections/Collections';
@@ -29,8 +30,12 @@ class DisplayProfile extends React.Component {
     let requests = [
       {
         name: 'profile',
-        path: `https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,800,900`
-      }
+        path: `https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,300,301,302,303,304,305,800,900`
+      },
+      // {
+      //   name: 'milestones',
+      //   path: `https://www.bungie.net/Platform/Destiny2/Milestones/`
+      // }
     ];
 
     let fetches = requests.map(request => {
@@ -65,8 +70,14 @@ class DisplayProfile extends React.Component {
         if (responses.profile.ErrorCode !== 1) {
           throw new SyntaxError(responses.profile.ErrorCode);
         }
-        if (!responses.profile.Response.characterProgressions.data) {
+        // else if (responses.milestones.ErrorCode !== 1) {
+        //   throw new SyntaxError(responses.milestones.ErrorCode);
+        // }
+        else if (!responses.profile.Response.characterProgressions.data) {
           throw new SyntaxError('privacy');
+        }
+        else {
+
         }
 
         // convert character response to an array
@@ -126,7 +137,8 @@ class DisplayProfile extends React.Component {
 
         this.setState({
           response: {
-            profile: responses.profile.Response
+            profile: responses.profile.Response,
+            // milestones: responses.milestones.Response
           }
         });
       })
@@ -174,6 +186,7 @@ class DisplayProfile extends React.Component {
                       </div>
                     )}
                   />
+                  <Route path='/progression/:membershipType/:membershipId/:characterId/equipment' exact render={() => <Equipment state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                   <Route path='/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                   <Route path='/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
                 </div>

@@ -12,12 +12,12 @@ const emblem = (manifest, item) => {
     <>
       <ObservedImage className={cx('image', 'emblem')} src={`https://www.bungie.net${item.secondaryIcon}`} />
       {description ? (
-        <div className="description">
+        <div className='description'>
           <pre>{description}</pre>
         </div>
       ) : null}
       {sourceString ? (
-        <div className="source">
+        <div className='source'>
           <p>{sourceString}</p>
         </div>
       ) : null}

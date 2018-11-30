@@ -88,8 +88,6 @@ class Vendors extends Component {
       vendorResponses.forEach(response => {
         let vendor = response.Response;
 
-        console.log(vendor);
-
         let definition = manifest.DestinyVendorDefinition[vendor.vendor.data.vendorHash];
 
         let isActive = (match, location) => {
@@ -144,7 +142,7 @@ class Vendors extends Component {
         1576276905: [2],
         3603221665: [6],
         1062861569: [2],
-        3361454721: [3, 21, 2]
+        3361454721: [3, 21, 22, 2]
       };
 
       let categories = [];
@@ -172,11 +170,34 @@ class Vendors extends Component {
             </div>
           )
         });
+
+        if (vendor.vendor.data.vendorHash === 672118013) {
+          let allMods = [];
+          definition.itemList.forEach(item => {
+            if (item.inventoryBucketHash === 3313201758 || item.inventoryBucketHash === 3313201758) {
+              allMods.push(item.itemHash)
+            }
+          });
+          categories.push({
+            sales: 99,
+            element: (
+              <div key='610365472610365472' className='category'>
+                <div className='category-header'>
+                  <div>All possible mods</div>
+                </div>
+                <ul className='items'>
+                  <Items manifest={manifest} sales={allMods} />
+                </ul>
+              </div>
+            )
+          });
+        }
+
       });
 
       render = (
         <>
-          { images.filter(obj => obj.vendor === definition.hash)[0] ? <ObservedImage className='image bg' src={`/static/images/extracts/${images.filter(obj => obj.vendor === definition.hash)[0].file}`} /> : null }
+          { images.filter(obj => obj.vendor === definition.hash)[0] ? <ObservedImage className='image bg' src={`/static/images/extracts/npc/${images.filter(obj => obj.vendor === definition.hash)[0].file}`} /> : null }
           <div className='displayProperties'>
             <div className='sub-name'>{definition.displayProperties.subtitle}</div>
             <div className='name'>{definition.displayProperties.name}</div>

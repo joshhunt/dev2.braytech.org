@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 
+import packageJSON from '../package.json';
 import Globals from './components/Globals';
 import db from './components/db';
 import ObservedImage from './components/ObservedImage';
@@ -76,7 +77,7 @@ class App extends Component {
   };
 
   getManifest = () => {
-    const tables = ['DestinyDestinationDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
+    const tables = ['DestinyDestinationDefinition', 'DestinyStatDefinition', 'DestinyInventoryBucketDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
 
     let state = this.state;
     state.manifest.state = 'fetching';
@@ -162,7 +163,7 @@ class App extends Component {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinyVendorDefinition) {
+                  if (!manifest[0].value.DestinyStatDefinition) {
                     console.log('missing table! lol.');
                     this.getManifest();
                   } else {
@@ -193,7 +194,7 @@ class App extends Component {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
+          <h4>Braytech {packageJSON.version}</h4>
           <div className="download">CHECKING DATA</div>
         </div>
       );
@@ -201,7 +202,7 @@ class App extends Component {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
+          <h4>Braytech {packageJSON.version}</h4>
           <div className="download">FETCHING {Math.ceil((this.state.manifest.progress.completed / this.state.manifest.progress.total) * 100)}%</div>
         </div>
       );
@@ -209,7 +210,7 @@ class App extends Component {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
+          <h4>Braytech {packageJSON.version}</h4>
           <div className="download">SO CLOSE</div>
         </div>
       );
@@ -303,7 +304,7 @@ class App extends Component {
       return (
         <div className="view" id="loading">
           <ObservedImage className={cx('image')} src="/static/images/braytech.png" />
-          <h4>Braytech</h4>
+          <h4>Braytech {packageJSON.version}</h4>
           <div className="download">PREPARING</div>
         </div>
       );

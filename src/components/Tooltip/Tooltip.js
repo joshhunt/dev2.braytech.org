@@ -9,6 +9,7 @@ import weapon from './weapon';
 import armour from './armour';
 import emblem from './emblem';
 import bounty from './bounty';
+import mod from './mod';
 
 class Tooltip extends React.Component {
   constructor(props) {
@@ -86,7 +87,6 @@ class Tooltip extends React.Component {
   };
 
   componentDidUpdate(prevProps) {
-
     if (prevProps !== this.props) {
       this.setState({
         hash: false
@@ -145,6 +145,10 @@ class Tooltip extends React.Component {
           kind = 'bounty';
           render = bounty(manifest, item);
           break;
+        case 19:
+          kind = 'mod';
+          render = mod(manifest, item);
+          break;
         default:
           kind = '';
           render = fallback(manifest, item);
@@ -153,17 +157,17 @@ class Tooltip extends React.Component {
       let tier = item.inventory.tierTypeName.toLowerCase() === 'basic' ? 'common' : item.inventory.tierTypeName.toLowerCase();
 
       return (
-        <div id="tooltip" ref={this.tooltip}>
-          <div className="acrylic" />
+        <div id='tooltip' ref={this.tooltip}>
+          <div className='acrylic' />
           <div className={cx('frame', tier, kind)}>
-            <div className="header">
-              <div className="name">{item.displayProperties.name}</div>
+            <div className='header'>
+              <div className='name'>{item.displayProperties.name}</div>
               <div>
-                <div className="kind">{item.itemTypeDisplayName}</div>
-                <div className="rarity">{item.inventory.tierTypeName}</div>
+                <div className='kind'>{item.itemTypeDisplayName}</div>
+                <div className='rarity'>{item.inventory.tierTypeName}</div>
               </div>
             </div>
-            <div className="black">{render}</div>
+            <div className='black'>{render}</div>
           </div>
         </div>
       );

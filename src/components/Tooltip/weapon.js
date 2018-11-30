@@ -102,7 +102,6 @@ const weaponsStats = [
 ];
 
 const weapon = (manifest, item) => {
-
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
   let socketIndexes;
@@ -122,7 +121,6 @@ const weapon = (manifest, item) => {
       return;
     }
     socket.reusablePlugItems.forEach(reusablePlug => {
-
       let plug = manifest.DestinyInventoryItemDefinition[reusablePlug.plugItemHash];
 
       if (plug.itemCategoryHashes.includes(2237038328)) {
@@ -137,16 +135,15 @@ const weapon = (manifest, item) => {
           }
         });
         traits.push(
-          <div key={plug.hash} className="plug trait">
+          <div key={plug.hash} className='plug trait'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
-            <div className="text">
-              <div className="name">{plug.displayProperties.name}</div>
+            <div className='text'>
+              <div className='name'>{plug.displayProperties.name}</div>
               {/* <div className="description">{plug.displayProperties.description}</div> */}
             </div>
           </div>
         );
       }
-      
     });
   });
 
@@ -159,39 +156,39 @@ const weapon = (manifest, item) => {
     if (Object.keys(item.stats.stats).includes(stat.hash.toString())) {
       let modifier = stat.modifier ? stat.modifier : 0;
       stats.push(
-        <div key={stat.hash} className="stat">
-          <div className="name">{stat.name}</div>
-          <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className="bar" data-value={item.stats.stats[stat.hash].value + modifier} style={{ width: `${item.stats.stats[stat.hash].value + modifier}%` }} /> : item.stats.stats[stat.hash].value + modifier}</div>
+        <div key={stat.hash} className='stat'>
+          <div className='name'>{stat.name}</div>
+          <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className='bar' data-value={item.stats.stats[stat.hash].value + modifier} style={{ width: `${item.stats.stats[stat.hash].value + modifier}%` }} /> : item.stats.stats[stat.hash].value + modifier}</div>
         </div>
       );
     }
   });
-  
+
   return (
     <>
-      <div className="damage weapon">
+      <div className='damage weapon'>
         <div className={cx('power', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())}>
           <div className={cx('icon', damageTypeToString(item.damageTypeHashes[0]).toLowerCase())} />
-          <div className="text">600</div>
+          <div className='text'>600</div>
         </div>
-        <div className="slot">
+        <div className='slot'>
           <div className={cx('icon', ammoTypeToString(item.equippingBlock.ammoType).toLowerCase())} />
-          <div className="text">{ammoTypeToString(item.equippingBlock.ammoType)}</div>
+          <div className='text'>{ammoTypeToString(item.equippingBlock.ammoType)}</div>
         </div>
       </div>
       {sourceString ? (
-        <div className="source">
+        <div className='source'>
           <p>{sourceString}</p>
         </div>
       ) : null}
-      <div className="stats">{stats}</div>
+      <div className='stats'>{stats}</div>
       <div className={cx('sockets', { hasTraits: traits.length > 0 })}>
         {intrinsic ? (
-          <div className="plug intrinsic">
+          <div className='plug intrinsic'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
-            <div className="text">
-              <div className="name">{intrinsic.displayProperties.name}</div>
-              <div className="description">{intrinsic.displayProperties.description}</div>
+            <div className='text'>
+              <div className='name'>{intrinsic.displayProperties.name}</div>
+              <div className='description'>{intrinsic.displayProperties.description}</div>
             </div>
           </div>
         ) : null}

@@ -115,6 +115,22 @@ class BadgeNode extends React.Component {
       );
     });
 
+    let hires = {
+      3241617029: '01E3-00000278.PNG',
+      1419883649: '01E3-00000280.PNG',
+      3333531796: '01E3-0000027C.PNG',
+      2904806741: '01E3-00000244.PNG',
+      1331476689: '01E3-0000024C.PNG',
+      2881240068: '01E3-00000248.PNG',
+      3642989833: '01E3-00000266.PNG',
+      2399267278: '037E-00001D4C.PNG',
+      701100740: '01A3-0000189C.PNG',
+      1420354007: '01E3-0000032C.PNG',
+      1086048586: '01E3-00000377.PNG'
+    }
+
+    //`https://www.bungie.net${badgeDefinition.displayProperties.icon}`
+
     return (
       <div className='presentation-node collections'>
         <div className='sub-header'>
@@ -123,7 +139,7 @@ class BadgeNode extends React.Component {
         <div className='node badge'>
           <div className='children'>
             <div className='icon'>
-              <ObservedImage className={cx('image')} src={`https://www.bungie.net${badgeDefinition.displayProperties.icon}`} />
+              <ObservedImage className={cx('image')} src={`/static/images/extracts/badges/${hires[badgeDefinition.hash]}`} />
             </div>
             <div className='text'>
               <div className='name'>{badgeDefinition.displayProperties.name}</div>

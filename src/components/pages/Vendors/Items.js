@@ -10,34 +10,47 @@ class Items extends React.Component {
     let sales = this.props.sales;
 
     let items = [];
-    
+
     sales.forEach(sale => {
-      let itemDefinition = manifest.DestinyInventoryItemDefinition[sale.itemHash];
+      if (sale.costs !== undefined) {
+        let itemDefinition = manifest.DestinyInventoryItemDefinition[sale.itemHash];
 
-      let costs = [];
-      sale.costs.forEach(cost => {
-        let costDefinition = manifest.DestinyInventoryItemDefinition[cost.itemHash];
-        costs.push(
-          <li key={costDefinition.hash} className="tooltip" data-itemhash={costDefinition.hash}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${costDefinition.displayProperties.icon}`} />
-            <div className="value">{cost.quantity}</div>
+        let costs = [];
+        sale.costs.forEach(cost => {
+          let costDefinition = manifest.DestinyInventoryItemDefinition[cost.itemHash];
+          costs.push(
+            <li key={costDefinition.hash} className='tooltip' data-itemhash={costDefinition.hash}>
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${costDefinition.displayProperties.icon}`} />
+              <div className='value'>{cost.quantity}</div>
+            </li>
+          );
+        });
+
+        items.push(
+          <li key={itemDefinition.hash + '-' + Math.random()}>
+            <div className='icon item tooltip' data-itemhash={itemDefinition.hash}>
+              <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${itemDefinition.displayProperties.icon}`} />
+              {sale.quantity > 1 ? <div className='quantity'>{sale.quantity}</div> : null}
+            </div>
+            <div className='costs'>
+              <ul>{costs}</ul>
+            </div>
           </li>
-        )
-      });
-
-      items.push(
-        <li key={itemDefinition.hash + '-' + Math.random()}>
-          <div className="icon item tooltip" data-itemhash={itemDefinition.hash}>
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${itemDefinition.displayProperties.icon}`} />
-            {sale.quantity > 1 ? <div className="quantity">{sale.quantity}</div> : null}
-          </div>
-          <div className="costs">
-            <ul>
-              {costs}
-            </ul>
-          </div>
-        </li>
-      );
+        );
+      } else {
+        let itemDefinition = manifest.DestinyInventoryItemDefinition[sale];
+        if (itemDefinition) {
+          items.push(
+            <li key={itemDefinition.hash + '-' + Math.random()}>
+              <div className='icon item tooltip' data-itemhash={itemDefinition.hash}>
+                <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${itemDefinition.displayProperties.icon}`} />
+              </div>
+            </li>
+          );
+        } else {
+          console.log(sale);
+        }
+      }
     });
 
     return items;

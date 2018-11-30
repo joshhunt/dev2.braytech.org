@@ -14,13 +14,13 @@ const bounty = (manifest, item) => {
     let definition = manifest.DestinyObjectiveDefinition[element];
 
     objectives.push(
-      <div key={definition.hash} className="progress">
-        <div className="title">{definition.progressDescription}</div>
-        <div className="fraction">
+      <div key={definition.hash} className='progress'>
+        <div className='title'>{definition.progressDescription}</div>
+        <div className='fraction'>
           {0}/{definition.completionValue}
         </div>
         <div
-          className="bar"
+          className='bar'
           style={{
             width: `0%`
           }}
@@ -35,26 +35,27 @@ const bounty = (manifest, item) => {
       rewards.push(
         <li key={value.itemHash}>
           <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${definition.displayProperties.icon}`} />
-          <div className="text">{definition.displayProperties.name}{value.quantity > 1 ? <> +{value.quantity}</> : null}</div>
+          <div className='text'>
+            {definition.displayProperties.name}
+            {value.quantity > 1 ? <> +{value.quantity}</> : null}
+          </div>
         </li>
-      )
+      );
     }
   });
 
   return (
     <>
-      <div className="objective">{objective}</div>
-      {objectives ? <div className="objectives">{objectives}</div> : null}
+      <div className='objective'>{objective}</div>
+      {objectives ? <div className='objectives'>{objectives}</div> : null}
       {description ? (
-        <div className="description">
+        <div className='description'>
           <pre>{description}</pre>
         </div>
       ) : null}
       {rewards.length ? (
-        <div className="rewards">
-          <ul>
-            {rewards}
-          </ul>
+        <div className='rewards'>
+          <ul>{rewards}</ul>
         </div>
       ) : null}
     </>

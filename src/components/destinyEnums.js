@@ -119,3 +119,10 @@ export const enumerateCollectibleState = state => ({
   uniquenessViolation: flagEnum(state, 32),
   purchaseDisabled: flagEnum(state, 64)
 });
+
+export const enumerateItemState = state => ({
+  none: flagEnum(state, 0),
+  locked: flagEnum(state, 1),
+  tracked: flagEnum(state, 2),
+  masterworked: flagEnum(state, 4)
+});

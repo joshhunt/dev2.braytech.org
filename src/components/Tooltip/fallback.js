@@ -10,12 +10,12 @@ const fallback = (manifest, item) => {
   return (
     <>
       {description ? (
-        <div className="description">
+        <div className='description'>
           <pre>{description}</pre>
         </div>
       ) : null}
       {sourceString ? (
-        <div className="source">
+        <div className='source'>
           <p>{sourceString}</p>
         </div>
       ) : null}

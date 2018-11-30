@@ -69,6 +69,10 @@ class PresentationNode extends React.Component {
     secondaryDefinition.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
+      if (node.redacted) {
+        return;
+      }
+
       let isActive = (match, location) => {
         if (this.props.route.match.params.tertiary === undefined && secondaryDefinition.children.presentationNodes.indexOf(child) === 0) {
           return true;
