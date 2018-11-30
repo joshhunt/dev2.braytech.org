@@ -108,16 +108,17 @@ class Collectibles extends React.Component {
             <li
               key={collectibleDefinition.hash}
               ref={ref}
-              className={cx('redacted', {
+              className={cx('redacted', 'tooltip', {
                 // eslint-disable-next-line eqeqeq
                 highlight: highlightHash && highlightHash == collectibleDefinition.hash
               })}
+              data-itemhash='343'
             >
               <div className='icon'>
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
               </div>
               <div className='text'>
-                <div className='name'>Encrypted record</div>
+                <div className='name'>Classified</div>
               </div>
             </li>
           );

@@ -115,8 +115,8 @@ class Records extends React.Component {
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${recordDefinition.displayProperties.icon}`} />
               </div>
               <div className='text'>
-                <div className='name'>Encrypted record</div>
-                <div className='description'>This record is encrypted and may be revealed at a later time.</div>
+                <div className='name'>Classified record</div>
+                <div className='description'>This record is classified and may be revealed at a later time.</div>
               </div>
             </div>
           </li>

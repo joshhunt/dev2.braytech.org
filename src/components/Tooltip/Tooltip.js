@@ -124,7 +124,35 @@ class Tooltip extends React.Component {
   render() {
     let manifest = this.props.manifest;
     if (this.state.hash) {
-      let item = manifest.DestinyInventoryItemDefinition[this.state.hash];
+      let item;
+      if (this.state.hash === 343) {
+        item = {
+          redacted: true
+        };
+      } else {
+        item = manifest.DestinyInventoryItemDefinition[this.state.hash];
+      }
+
+      if (item.redacted) {
+        return (
+          <div id='tooltip' ref={this.tooltip}>
+            <div className='acrylic' />
+            <div className='frame common'>
+              <div className='header'>
+                <div className='name'>Classified</div>
+                <div>
+                  <div className='kind'>Insufficient clearance</div>
+                </div>
+              </div>
+              <div className='black'>
+                <div className='description'>
+                  <pre>Keep it clean.</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
 
       let kind;
       let render;
@@ -154,7 +182,7 @@ class Tooltip extends React.Component {
           render = fallback(manifest, item);
       }
 
-      let tier = item.inventory.tierTypeName.toLowerCase() === 'basic' ? 'common' : item.inventory.tierTypeName.toLowerCase();
+      let tier = item.inventory.tierTypeName && item.inventory.tierTypeName === 'basic' ? 'common' : item.inventory.tierTypeName ? item.inventory.tierTypeName.toLowerCase() : 'common';
 
       return (
         <div id='tooltip' ref={this.tooltip}>

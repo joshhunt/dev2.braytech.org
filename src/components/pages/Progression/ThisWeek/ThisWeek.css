@@ -25,6 +25,20 @@
   grid-template-columns: 1fr;
 }
 
+.this-week .module .collection-items li {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.this-week .module .collection-items li.completed {
+  background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.this-week .module .collection-items li:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+}
 
 @media screen and (max-width: 1200px) {
 
