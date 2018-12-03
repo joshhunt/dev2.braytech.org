@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'destiny';
   src:
-    url('destiny.ttf?jv4k0') format('truetype'),
-    url('destiny.woff?jv4k0') format('woff'),
-    url('destiny.svg?jv4k0#destiny') format('svg');
+    url('destiny.ttf?4te6eu') format('truetype'),
+    url('destiny.woff?4te6eu') format('woff'),
+    url('destiny.svg?4te6eu#destiny') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -326,6 +326,9 @@
 }
 .destiny-cat_statues:before {
   content: "\e9dd";
+}
+.destiny-ahamkara_bones:before {
+  content: "\e9df";
 }
 .destiny-corrupted_eggs:before {
   content: "\e9de";

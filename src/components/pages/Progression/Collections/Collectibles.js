@@ -23,9 +23,9 @@ class Collectibles extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
-    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data.collectibles;
-    let characterId = this.props.route.match.params.characterId;
+    let characterCollectibles = this.props.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.response.profile.profileCollectibles.data.collectibles;
+    let characterId = this.props.match.params.characterId;
 
     let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.tertiaryHash];
 

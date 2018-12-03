@@ -10,11 +10,11 @@ class BadgeNode extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
-    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data.collectibles;
-    let characterId = this.props.route.match.params.characterId;
+    let characterCollectibles = this.props.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.response.profile.profileCollectibles.data.collectibles;
+    let characterId = this.props.match.params.characterId;
 
-    let badgeDefinition = manifest.DestinyPresentationNodeDefinition[this.props.route.match.params.secondary];
+    let badgeDefinition = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
 
     let badgeChildren = [];
     let classStates = [];
@@ -42,16 +42,16 @@ class BadgeNode extends React.Component {
           childItems.push(
             <li
               key={collectibleDefinition.hash}
-              className={cx('redacted', {
+              className={cx('redacted', 'tooltip', {
                 completed: !enumerateCollectibleState(state).notAcquired
               })}
-              data-itemhash={collectibleDefinition.itemHash}
+              data-itemhash='343'
             >
               <div className='icon'>
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
               </div>
               <div className='text'>
-                <div className='name'>Encrypted record</div>
+                <div className='name'>Classiefied</div>
               </div>
             </li>
           );
@@ -127,7 +127,7 @@ class BadgeNode extends React.Component {
       701100740: '01A3-0000189C.PNG',
       1420354007: '01E3-0000032C.PNG',
       1086048586: '01E3-00000377.PNG'
-    }
+    };
 
     //`https://www.bungie.net${badgeDefinition.displayProperties.icon}`
 

@@ -15,6 +15,7 @@ import Equipment from './Equipment/Equipment';
 import './PresentationNode.css';
 import Triumphs from './Triumphs/Triumphs';
 import Collections from './Collections/Collections';
+import LoreBook from './LoreBook/LoreBook';
 
 class DisplayProfile extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class DisplayProfile extends React.Component {
       {
         name: 'profile',
         path: `https://www.bungie.net/Platform/Destiny2/${this.props.match.params.membershipType}/Profile/${this.props.match.params.membershipId}/?components=100,104,200,202,204,205,300,301,302,303,304,305,800,900`
-      },
+      }
       // {
       //   name: 'milestones',
       //   path: `https://www.bungie.net/Platform/Destiny2/Milestones/`
@@ -66,7 +67,6 @@ class DisplayProfile extends React.Component {
   componentDidMount() {
     this.askBungie()
       .then(responses => {
-
         if (responses.profile.ErrorCode !== 1) {
           throw new SyntaxError(responses.profile.ErrorCode);
         }
@@ -75,9 +75,7 @@ class DisplayProfile extends React.Component {
         // }
         else if (!responses.profile.Response.characterProgressions.data) {
           throw new SyntaxError('privacy');
-        }
-        else {
-
+        } else {
         }
 
         // convert character response to an array
@@ -120,24 +118,17 @@ class DisplayProfile extends React.Component {
         let route = this.props;
         let characterId = responses.profile.Response.characters.data.filter(character => character.characterId === route.match.params.characterId).length === 1 ? route.match.params.characterId : responses.profile.Response.characters.data[0].characterId;
 
-        let view = route.match.params.view;
-        if (!route.match.params.characterId || responses.profile.Response.characters.data.filter(character => character.characterId === route.match.params.characterId).length < 1) {
-          if (route.match.params.characterId) {
-            view = route.match.params.characterId;
-          }
+        let characterIds = responses.profile.Response.characters.data.map(character => character.characterId);
+        if (characterIds.indexOf(route.match.params.characterId) < 0) {
+          let breakApart = route.location.pathname.split(route.match.params.membershipId);
+          let newRoute = `${breakApart[0]}${route.match.params.membershipId}/${characterId}${breakApart[1]}`;
+
+          route.history.replace(newRoute);
         }
-
-        let primary = route.match.params.primary;
-        let secondary = route.match.params.secondary;
-        let tertiary = route.match.params.tertiary;
-        let quaternary = route.match.params.quaternary;
-
-        // i hate this
-        route.history.replace(`/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${characterId}${view ? `/${view}` : ``}${primary ? `/${primary}` : ``}${secondary ? `/${secondary}` : ``}${tertiary ? `/${tertiary}` : ``}${quaternary ? `/${quaternary}` : ``}`);
 
         this.setState({
           response: {
-            profile: responses.profile.Response,
+            profile: responses.profile.Response
             // milestones: responses.milestones.Response
           }
         });
@@ -166,34 +157,19 @@ class DisplayProfile extends React.Component {
       return (
         <>
           <GA.RouteTracker />
-          <Route
-            path='/progression/:membershipType/:membershipId/:characterId/:view?/:primary?/:secondary?/:tertiary?/:quaternary?'
-            render={route => (
-              <>
-                <div className='view' id='progression'>
-                  <Player data={this.state} manifest={this.props.manifest} route={route} goToProgression={this.goToProgression} />
-                  <Route path='/progression/:membershipType/:membershipId/:characterId' exact render={() => <Summary state={this.state} manifest={this.props.manifest} route={route} />} />
-                  <Route path='/progression/:membershipType/:membershipId/:characterId/this-week' exact render={() => <ThisWeek state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                  <Route
-                    path='/progression/:membershipType/:membershipId/:characterId/checklists'
-                    exact
-                    render={() => (
-                      <div className='checklists'>
-                        <div className='sub-header'>
-                          <div>Checklists</div>
-                        </div>
-                        <Checklists state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />
-                      </div>
-                    )}
-                  />
-                  <Route path='/progression/:membershipType/:membershipId/:characterId/equipment' exact render={() => <Equipment state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                  <Route path='/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Triumphs state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                  <Route path='/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Collections state={this.state} manifest={this.props.manifest} viewport={this.props.viewport} route={route} />} />
-                </div>
-                <Tooltip manifest={this.props.manifest} route={route} />
-              </>
-            )}
-          />
+          <div className='view' id='progression'>
+            <Player {...this.props} {...this.state} />
+            <Switch>
+              <Route path='/progression/:membershipType/:membershipId/:characterId' exact render={() => <Summary {...this.props} {...this.state} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/this-week' exact render={() => <ThisWeek {...this.props} {...this.state} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/checklists' exact render={() => <Checklists {...this.props} {...this.state} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/equipment' exact render={() => <Equipment {...this.props} {...this.state} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/triumphs/:primary/:secondary/:tertiary/read/:recordHash?' render={(route) => <LoreBook {...this.props} {...this.state} {...route} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Triumphs {...this.props} {...this.state} />} />
+              <Route path='/progression/:membershipType/:membershipId/:characterId/collections/:primary?/:secondary?/:tertiary?/:quaternary?' render={() => <Collections {...this.props} {...this.state} />} />
+            </Switch>
+          </div>
+          <Tooltip manifest={this.props.manifest} />
         </>
       );
     }

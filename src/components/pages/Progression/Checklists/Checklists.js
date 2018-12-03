@@ -5,6 +5,7 @@ import regionChests from './regionChests';
 import lostSectors from './lostSectors';
 import adventures from './adventures';
 import corruptedEggs from './corruptedEggs';
+import ahamkaraBones from './ahamkaraBones';
 import catStatues from './catStatues';
 import sleeperNodes from './sleeperNodes';
 import ghostScans from './ghostScans';
@@ -93,6 +94,11 @@ class Checklists extends React.Component {
         list: corruptedEggs(this.props)
       },
       {
+        name: 'Ahamkara Bones ',
+        icon: 'destiny-ahamkara_bones',
+        list: ahamkaraBones(this.props)
+      },
+      {
         name: 'Cat Statues',
         icon: 'destiny-cat_statues',
         list: catStatues(this.props)
@@ -114,7 +120,7 @@ class Checklists extends React.Component {
       }
     ];
 
-    if (Object.values(this.props.state.response.profile.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
+    if (Object.values(this.props.response.profile.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
       lists.push({
         name: "Cayde's Journals",
         icon: 'destiny-ace_of_spades',
@@ -126,7 +132,10 @@ class Checklists extends React.Component {
     let sliceEnd = sliceStart + this.itemsPerPage;
 
     return (
-      <>
+      <div className='checklists'>
+        <div className='sub-header'>
+          <div>Checklists</div>
+        </div>
         <div className='selectors'>
           <ul className='list'>
             {lists.map((list, index) => {
@@ -137,7 +146,7 @@ class Checklists extends React.Component {
               }
 
               return (
-                <li key={list.name}>
+                <li key={list.name} className='linked'>
                   <a
                     href='/'
                     className={cx({
@@ -163,7 +172,7 @@ class Checklists extends React.Component {
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 }

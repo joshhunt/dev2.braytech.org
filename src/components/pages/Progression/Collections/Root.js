@@ -10,9 +10,9 @@ class Root extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
-    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data;
-    let characterId = this.props.route.match.params.characterId;
+    let characterCollectibles = this.props.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.response.profile.profileCollectibles.data;
+    let characterId = this.props.match.params.characterId;
 
     let parent = manifest.DestinyPresentationNodeDefinition[3790247699];
     let parentBadges = manifest.DestinyPresentationNodeDefinition[498211331];
@@ -69,7 +69,7 @@ class Root extends React.Component {
       });
 
       nodes.push(
-        <li key={node.hash}>
+        <li key={node.hash} className='linked'>
           <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
           <div className='text'>
             <div>{node.displayProperties.name}</div>
@@ -77,7 +77,7 @@ class Root extends React.Component {
               {states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
             </div>
           </div>
-          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/${node.hash}`} />
+          <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${characterId}/collections/${node.hash}`} />
         </li>
       );
     });
@@ -110,11 +110,11 @@ class Root extends React.Component {
       badges.push(
         <li
           key={node.hash}
-          className={cx('badge', {
+          className={cx('badge', 'linked', {
             completed: completed
           })}
         >
-          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${characterId}/collections/badge/${node.hash}`}>
+          <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${characterId}/collections/badge/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             <div className='text'>
               <div>{node.displayProperties.name}</div>

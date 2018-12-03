@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
@@ -23,9 +24,9 @@ class Records extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterRecords = this.props.state.response.profile.characterRecords.data;
-    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
-    let characterId = this.props.route.match.params.characterId;
+    let characterRecords = this.props.response.profile.characterRecords.data;
+    let profileRecords = this.props.response.profile.profileRecords.data.records;
+    let characterId = this.props.match.params.characterId;
 
     let tertiaryDefinition = manifest.DestinyPresentationNodeDefinition[this.props.tertiaryHash];
 
@@ -122,15 +123,24 @@ class Records extends React.Component {
           </li>
         );
       } else {
+        console.log(recordDefinition)
+        
+        let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
+        description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 32) + '...' : description;
+
+        let link = false;
+        link = recordDefinition.loreHash ? `${this.props.location.pathname}/read/${recordDefinition.hash}` : false;
+
         tertiaryChildren.push(
           <li
             key={recordDefinition.hash}
             ref={ref}
             className={cx({
               completed: enumerateRecordState(state).recordRedeemed,
+              linked: link,
               // eslint-disable-next-line eqeqeq
               highlight: highlightHash && highlightHash == recordDefinition.hash,
-              'no-description': recordDefinition.displayProperties.description === ''
+              'no-description': !description
             })}
           >
             <div className='properties'>
@@ -140,10 +150,11 @@ class Records extends React.Component {
               <div className='text'>
                 <div className='name'>{recordDefinition.displayProperties.name}</div>
                 {recordDefinition.completionInfo.ScoreValue && recordDefinition.completionInfo.ScoreValue !== 0 ? <div className='score'>{recordDefinition.completionInfo.ScoreValue}</div> : null}
-                <div className='description'>{recordDefinition.displayProperties.description}</div>
+                <div className='description'>{description ? description : null}</div>
               </div>
             </div>
             <div className='objectives'>{objectives}</div>
+            {link ? <Link to={link} /> : null}
           </li>
         );
       }

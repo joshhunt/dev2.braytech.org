@@ -10,9 +10,9 @@ class Collectibles extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterCollectibles = this.props.state.response.profile.characterCollectibles.data;
-    let profileCollectibles = this.props.state.response.profile.profileCollectibles.data.collectibles;
-    let characterId = this.props.route.match.params.characterId;
+    let characterCollectibles = this.props.response.profile.characterCollectibles.data;
+    let profileCollectibles = this.props.response.profile.profileCollectibles.data.collectibles;
+    let characterId = this.props.match.params.characterId;
 
     let collectiblesRequested = this.props.hashes;
 
@@ -56,7 +56,7 @@ class Collectibles extends React.Component {
           reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
         }
 
-        link = `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
+        link = `/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/collections/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
       } catch (e) {
         console.log(e);
       }
@@ -80,15 +80,16 @@ class Collectibles extends React.Component {
         <li
           key={collectibleDefinition.hash}
           className={cx('tooltip', {
+            linked: link && this.props.selfLink,
             completed: !enumerateCollectibleState(state).notAcquired
           })}
           data-itemhash={collectibleDefinition.itemHash}
         >
-          <div className="icon">
+          <div className='icon'>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
           </div>
-          <div className="text">
-            <div className="name">{collectibleDefinition.displayProperties.name}</div>
+          <div className='text'>
+            <div className='name'>{collectibleDefinition.displayProperties.name}</div>
           </div>
           {link && this.props.selfLink ? <Link to={link} /> : null}
         </li>

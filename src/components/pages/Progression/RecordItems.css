@@ -101,11 +101,11 @@
   background-color: #bcad71;
 }
 
-.list.record-items:not(.no-interaction) li.completed:hover {
+.list.record-items li.linked.completed:hover {
   background-color: rgba(207, 191, 124, 0.4);
 }
 
-.list.record-items:not(.no-interaction) li.completed:hover .text .description {
+.list.record-items li.linked.completed:hover .text .description {
   color: rgba(207, 191, 124, 1);
 }
 

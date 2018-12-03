@@ -3,8 +3,8 @@ import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
 const lostSectors = props => {
-  let characterProgressions = props.state.response.profile.characterProgressions.data;
-  let characterId = props.route.match.params.characterId;
+  let characterProgressions = props.response.profile.characterProgressions.data;
+  let characterId = props.match.params.characterId;
 
   let manifest = props.manifest;
 

@@ -3,7 +3,7 @@ import cx from 'classnames';
 import ReactMarkdown from 'react-markdown';
 
 const caydesJournals = props => {
-  let profileProgressions = props.state.response.profile.profileProgression.data;
+  let profileProgressions = props.response.profile.profileProgression.data;
 
   let manifest = props.manifest;
 

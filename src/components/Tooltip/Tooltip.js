@@ -182,7 +182,7 @@ class Tooltip extends React.Component {
           render = fallback(manifest, item);
       }
 
-      let tier = item.inventory.tierTypeName && item.inventory.tierTypeName === 'basic' ? 'common' : item.inventory.tierTypeName ? item.inventory.tierTypeName.toLowerCase() : 'common';
+      let tier = item.inventory.tierTypeName && item.inventory.tierTypeName.toLowerCase() === 'basic' ? 'common' : item.inventory.tierTypeName ? item.inventory.tierTypeName.toLowerCase() : 'common';
 
       return (
         <div id='tooltip' ref={this.tooltip}>

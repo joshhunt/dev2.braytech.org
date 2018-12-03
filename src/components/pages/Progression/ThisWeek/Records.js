@@ -11,9 +11,9 @@ class Records extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterRecords = this.props.state.response.profile.characterRecords.data;
-    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
-    let characterId = this.props.route.match.params.characterId;
+    let characterRecords = this.props.response.profile.characterRecords.data;
+    let profileRecords = this.props.response.profile.profileRecords.data.records;
+    let characterId = this.props.match.params.characterId;
 
     let recordsRequested = this.props.hashes;
 
@@ -53,7 +53,7 @@ class Records extends React.Component {
           reverse3 = manifest.DestinyPresentationNodeDefinition[reverse2.parentNodeHashes[0]];
         }
 
-        link = `/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
+        link = `/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs/${reverse3.hash}/${reverse2.hash}/${reverse1.hash}/${hash}`;
       } catch (e) {
         console.log(e);
       }
@@ -122,6 +122,7 @@ class Records extends React.Component {
           <li
             key={recordDefinition.hash}
             className={cx({
+              linked: link && this.props.selfLink,
               completed: enumerateRecordState(state).recordRedeemed,
               'no-description': recordDefinition.displayProperties.description === ''
             })}

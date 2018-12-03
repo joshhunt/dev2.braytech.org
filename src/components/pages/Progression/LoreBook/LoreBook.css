@@ -1,0 +1,163 @@
+
+
+
+#lore-book.presentation-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 6rem);
+  min-height: calc(100vh - 12rem);
+  background-color: #737373;
+  z-index: 21;
+  display: block;
+  flex-flow: unset;
+  flex-basis: unset;
+  padding: 9rem 3rem 3rem;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewbox='0 0 24 24'><circle cx='1.5' cy='1.5' r='1.5' fill='rgba(255,255,255,0.2)' ></circle></svg>");
+}
+
+#lore-book.presentation-node::before {
+  content: " ";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(to right, rgba(115, 115, 115, 0), #737373 40%);
+}
+
+#lore-book .wrapper {
+  position: relative;
+  display: grid;
+  max-width: 1280px;
+  width: 100%;
+  margin: 3rem auto 0;
+  padding: 0 0 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  grid-template-columns: 359px 1fr;
+  grid-gap: 3rem;
+}
+
+#lore-book .top {
+  grid-column: 1/3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#lore-book .properties .name {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 38px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(255, 255, 255, 1);
+}
+
+#lore-book .properties .sub-title {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+#lore-book .cover .image {
+  position: relative;
+  width: 100%;
+  height: unset;
+  padding-bottom: calc(460/359*100%);
+}
+
+
+
+
+#lore-book .pages .pages-list .list {
+  display: grid;
+  grid-gap: 7px;
+  grid-template-columns: 1fr 1fr;
+}
+
+#lore-book .pages .pages-list .list li {
+  margin: 0;
+}
+
+
+
+#lore-book .page .contents-link {
+  margin: 3rem 0 0;
+}
+
+#lore-book .page .contents-link .list li {
+  margin: 0;
+}
+
+#lore-book .page .text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#lore-book .page .text p {
+  line-height: 2;
+}
+
+#lore-book .page .text ol {
+  list-style-type: decimal;
+}
+
+#lore-book .page .text ol li {
+  margin: 0 0 0.4rem;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1200px) {
+
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+#lore-book.presentation-node {
+  padding: 6rem 2rem 2rem;
+  width: calc(100% - 4rem);
+}
+
+#lore-book .top {
+  grid-column: 1/1;
+}
+
+#lore-book .properties .name {
+  font-size: 24px;
+}
+
+#lore-book .wrapper {
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+}
+
+#lore-book .page .cover {
+  display: none;
+}
+
+#lore-book .page .contents-link {
+  margin: 0;
+}
+
+#lore-book .pages .pages-list .list {
+  grid-template-columns: 1fr;
+  grid-gap: 3px;
+}
+
+}

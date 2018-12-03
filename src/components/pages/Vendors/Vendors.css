@@ -202,6 +202,15 @@
 }
 
 
+
+
+#vendors .display.vendor-2190858386 .image.bg.dl {
+  opacity: 0.8;
+  background-size: initial;
+  background-position: 80% 20%;
+}
+
+
 @media screen and (max-width: 600px) {
 
 #vendors {
@@ -234,6 +243,11 @@
 
 #vendors .items li .costs ul li .value {
   font-size: 10px;
+}
+
+#vendors .display.vendor-2190858386 .image.bg.dl {
+  background-size: 50%;
+  background-position: 80% 20%;
 }
 
 }

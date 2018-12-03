@@ -28,9 +28,11 @@ class ObservedImage extends React.Component {
       entries.forEach(entry => {
         const { isIntersecting } = entry;
 
+        
+
         if (isIntersecting) {
-          const loadImage = new window.Image();
-          loadImage.onload = bmp => {
+          this.image = new window.Image();
+          this.image.onload = bmp => {
             let ratio = bmp.target.height / bmp.target.width;
 
             if (this.props.className.includes('padding')) {
@@ -51,9 +53,10 @@ class ObservedImage extends React.Component {
             }
 
             this.observer = this.observer.disconnect();
+            
           };
 
-          loadImage.src = src;
+          this.image.src = src;
         }
       });
     });
@@ -63,6 +66,15 @@ class ObservedImage extends React.Component {
 
   componentDidMount() {
     this.observe();
+  }
+
+  componentWillUnmount() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+    if (this.image) {
+      this.image.src = '';
+    }
   }
 
   componentDidUpdate(prevProps) {

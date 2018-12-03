@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment-timezone';
@@ -73,15 +74,19 @@ class Vendors extends Component {
       let images = [
         {
           vendor: 69482069,
-          file: '01A3-0000044D_SD.PNG'
+          file: '/static/images/extracts/npc/01A3-0000044D_SD.PNG'
         },
         {
           vendor: 3603221665,
-          file: '01A3-0000038C_SD.PNG'
+          file: '/static/images/extracts/npc/01A3-0000038C_SD.PNG'
         },
         {
           vendor: 895295461,
-          file: '01A3-0000038B_SD.PNG'
+          file: '/static/images/extracts/npc/01A3-0000038B_SD.PNG'
+        },
+        {
+          vendor: 2190858386,
+          file: '/static/images/extracts/items/037e-00001834.png'
         }
       ];
 
@@ -105,7 +110,7 @@ class Vendors extends Component {
             name: definition.displayProperties.name,
             reset: moment(vendor.vendor.data.nextRefreshDate).unix(),
             element: (
-              <li key={vendor.vendor.data.vendorHash}>
+              <li key={vendor.vendor.data.vendorHash} className='linked'>
                 <NavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
                   {definition.displayProperties.name}
                 </NavLink>
@@ -117,7 +122,7 @@ class Vendors extends Component {
             name: definition.displayProperties.name,
             reset: moment(vendor.vendor.data.nextRefreshDate).unix(),
             element: (
-              <li key={vendor.vendor.data.vendorHash}>
+              <li key={vendor.vendor.data.vendorHash} className='linked'>
                 <NavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
                   {definition.displayProperties.name}
                 </NavLink>
@@ -175,7 +180,7 @@ class Vendors extends Component {
           let allMods = [];
           definition.itemList.forEach(item => {
             if (item.inventoryBucketHash === 3313201758 || item.inventoryBucketHash === 3313201758) {
-              allMods.push(item.itemHash)
+              allMods.push(item.itemHash);
             }
           });
           categories.push({
@@ -192,12 +197,11 @@ class Vendors extends Component {
             )
           });
         }
-
       });
 
       render = (
         <>
-          { images.filter(obj => obj.vendor === definition.hash)[0] ? <ObservedImage className='image bg' src={`/static/images/extracts/npc/${images.filter(obj => obj.vendor === definition.hash)[0].file}`} /> : null }
+          {images.filter(obj => obj.vendor === definition.hash)[0] ? <ObservedImage className='image bg' src={images.filter(obj => obj.vendor === definition.hash)[0].file} /> : null}
           <div className='displayProperties'>
             <div className='sub-name'>{definition.displayProperties.subtitle}</div>
             <div className='name'>{definition.displayProperties.name}</div>
@@ -238,7 +242,7 @@ class Vendors extends Component {
               </div>
               <ul className='list secondary'>{groups[0].items.map(obj => obj.element)}</ul>
             </div>
-            <div className='display'>{render}</div>
+            <div className={cx('display', `vendor-${vendor.vendor.data.vendorHash}`)}>{render}</div>
           </div>
           <Tooltip manifest={this.props.manifest} route={this.props} />
         </>

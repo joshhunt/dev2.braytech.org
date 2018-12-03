@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 
 const sleeperNodes = props => {
-  let profileProgressions = props.state.response.profile.profileProgression.data;
+  let profileProgressions = props.response.profile.profileProgression.data;
 
   let manifest = props.manifest;
 

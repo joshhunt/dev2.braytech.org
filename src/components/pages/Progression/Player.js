@@ -16,7 +16,7 @@ class Player extends React.Component {
 
     this.state = {
       expandCharacters: false,
-      activeCharacterId: this.props.route.match.params.characterId
+      activeCharacterId: this.props.match.params.characterId
     };
 
     this.expandCharacters = this.expandCharacters.bind(this);
@@ -36,9 +36,9 @@ class Player extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.route.match.params.characterId !== this.props.route.match.params.characterId) {
+    if (prevProps.match.params.characterId !== this.props.match.params.characterId) {
       this.setState({
-        activeCharacterId: this.props.route.match.params.characterId
+        activeCharacterId: this.props.match.params.characterId
       });
     }
   }
@@ -48,10 +48,10 @@ class Player extends React.Component {
 
     const manifest = props.manifest;
 
-    let profile = props.data.response.profile.profile.data;
-    let characters = props.data.response.profile.characters.data;
-    let characterActivities = props.data.response.profile.characterActivities.data;
-    let characterProgressions = props.data.response.profile.characterProgressions.data;
+    let profile = props.response.profile.profile.data;
+    let characters = props.response.profile.characters.data;
+    let characterActivities = props.response.profile.characterActivities.data;
+    let characterProgressions = props.response.profile.characterProgressions.data;
 
     let activeCharacter;
     let charactersRender = [];
@@ -107,7 +107,7 @@ class Player extends React.Component {
               }}
             />
           </div>
-          <Link onClick={this.expandCharacters} to={`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${character.characterId}${props.route.match.params.view ? `/${props.route.match.params.view}` : ``}${props.route.match.params.primary ? `/${props.route.match.params.primary}` : ``}${props.route.match.params.secondary ? `/${props.route.match.params.secondary}` : ``}${props.route.match.params.tertiary ? `/${props.route.match.params.tertiary}` : ``}`} />
+          <Link onClick={this.expandCharacters} to={`/progression/${props.match.params.membershipType}/${props.match.params.membershipId}/${character.characterId}${props.match.params.view ? `/${props.match.params.view}` : ``}${props.match.params.primary ? `/${props.match.params.primary}` : ``}${props.match.params.secondary ? `/${props.match.params.secondary}` : ``}${props.match.params.tertiary ? `/${props.match.params.tertiary}` : ``}`} />
         </li>
       );
     });
@@ -183,7 +183,7 @@ class Player extends React.Component {
         <div className='views'>
           <ul>
             {views.map(view => {
-              let route = this.props.route;
+              let route = this.props;
               let to = `/progression/${route.match.params.membershipType}/${route.match.params.membershipId}/${route.match.params.characterId}${view.slug}`;
               return (
                 <li key={view.slug}>

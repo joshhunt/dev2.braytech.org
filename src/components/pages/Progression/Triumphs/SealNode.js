@@ -32,7 +32,7 @@ class SealNode extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
+    let profileRecords = this.props.response.profile.profileRecords.data.records;
 
     const sealBars = {
       2588182977: {
@@ -86,8 +86,8 @@ class SealNode extends React.Component {
       }
     };
 
-    let sealDefinition = manifest.DestinyPresentationNodeDefinition[this.props.route.match.params.secondary];
-    let tertiaryHash = this.props.route.match.params.secondary;
+    let sealDefinition = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
+    let tertiaryHash = this.props.match.params.secondary;
 
     return (
       <div className='presentation-node triumphs'>
@@ -104,7 +104,7 @@ class SealNode extends React.Component {
             <div className='options'>
               <ul>
                 <li>
-                  <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs`}>Go to root</Link>
+                  <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs`}>Go to root</Link>
                 </li>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li>

@@ -15,14 +15,14 @@ class Collections extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.route.match.params.quaternary) {
+    if (!this.props.match.params.quaternary) {
       window.scrollTo(0, 0);
     }
   }
   
   render() {
 
-    let primaryHash = this.props.route.match.params.primary ? this.props.route.match.params.primary : false;
+    let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
     
     if (!primaryHash) {
       return (

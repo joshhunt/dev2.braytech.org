@@ -93,7 +93,7 @@ class Summary extends React.Component {
     let props = this.props;
 
     const Almost = () => {
-      let profileRecords = props.state.response.profile.profileRecords.data.records;
+      let profileRecords = props.response.profile.profileRecords.data.records;
 
       let manifest = props.manifest;
 
@@ -269,10 +269,10 @@ class Summary extends React.Component {
     };
 
     const Checklists = () => {
-      let characterProgressions = props.state.response.profile.characterProgressions.data;
-      let profileProgressions = props.state.response.profile.profileProgression.data;
-      let profileRecords = props.state.response.profile.profileRecords.data.records;
-      let characterId = props.route.match.params.characterId;
+      let characterProgressions = props.response.profile.characterProgressions.data;
+      let profileProgressions = props.response.profile.profileProgression.data;
+      let profileRecords = props.response.profile.profileRecords.data.records;
+      let characterId = props.match.params.characterId;
 
       let progression = {
         checklists: {
@@ -298,6 +298,11 @@ class Summary extends React.Component {
               text: 'Corrupted eggs destroyed',
               total: Object.keys(profileProgressions.checklists[2609997025]).length,
               completed: Object.values(profileProgressions.checklists[2609997025]).filter(value => value === true).length
+            },
+            ahamkaraBones: {
+              text: 'Ahamkara bones found',
+              total: Object.keys(profileProgressions.checklists[1297424116]).length,
+              completed: Object.values(profileProgressions.checklists[1297424116]).filter(value => value === true).length
             },
             catStatues: {
               text: 'Feline friends satisfied',
@@ -413,48 +418,12 @@ class Summary extends React.Component {
     };
 
     const Seals = () => {
-      let characterProgressions = props.state.response.profile.characterProgressions.data;
-      let profileProgressions = props.state.response.profile.profileProgression.data;
-      let profileRecords = props.state.response.profile.profileRecords.data.records;
-      let characterId = props.route.match.params.characterId;
+      let characterProgressions = props.response.profile.characterProgressions.data;
+      let profileProgressions = props.response.profile.profileProgression.data;
+      let profileRecords = props.response.profile.profileRecords.data.records;
+      let characterId = props.match.params.characterId;
 
       let progression = {
-        checklists: {
-          text: 'Checklists',
-          noInteraction: true,
-          values: {
-            regionChests: {
-              text: 'Region chests opened',
-              total: Object.keys(characterProgressions[characterId].checklists[1697465175]).length,
-              completed: Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length
-            },
-            lostSectors: {
-              text: 'Lost Sectors discovered',
-              total: Object.keys(characterProgressions[characterId].checklists[3142056444]).length,
-              completed: Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length
-            },
-            adventures: {
-              text: 'Adventures undertaken',
-              total: Object.keys(characterProgressions[characterId].checklists[4178338182]).length,
-              completed: Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length
-            },
-            sleeperNodes: {
-              text: 'Sleeper nodes hacked',
-              total: Object.keys(profileProgressions.checklists[365218222]).length,
-              completed: Object.values(profileProgressions.checklists[365218222]).filter(value => value === true).length
-            },
-            ghostScans: {
-              text: 'Ghost scans performed',
-              total: Object.keys(profileProgressions.checklists[2360931290]).length,
-              completed: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
-            },
-            caydesJorunals: {
-              text: "Cayde's journals recovered",
-              total: 4,
-              completed: Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length
-            }
-          }
-        },
         seals: {
           text: 'Triumph Seals',
           noInteraction: false,
@@ -516,7 +485,7 @@ class Summary extends React.Component {
 
       for (const [key, value] of Object.entries(progression.seals.values)) {
         list.push(
-          <li key={key}>
+          <li key={key} className='linked'>
             <div className='progress'>
               <div className='title'>{value.text}</div>
               <div className='fraction'>
@@ -530,7 +499,7 @@ class Summary extends React.Component {
                 }}
               />
             </div>
-            <Link to={`/progression/${props.route.match.params.membershipType}/${props.route.match.params.membershipId}/${props.route.match.params.characterId}/triumphs/seal/${value.nodeHash}`} />
+            <Link to={`/progression/${props.match.params.membershipType}/${props.match.params.membershipId}/${props.match.params.characterId}/triumphs/seal/${value.nodeHash}`} />
           </li>
         );
       }
@@ -547,9 +516,9 @@ class Summary extends React.Component {
     };
 
     const Ranks = () => {
-      let profileRecords = props.state.response.profile.profileRecords.data.records;
-      let characterProgressions = props.state.response.profile.characterProgressions.data;
-      let characterId = props.route.match.params.characterId;
+      let profileRecords = props.response.profile.profileRecords.data.records;
+      let characterProgressions = props.response.profile.characterProgressions.data;
+      let characterId = props.match.params.characterId;
 
       let manifest = props.manifest;
 

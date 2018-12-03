@@ -36,18 +36,18 @@ class PresentationNode extends React.Component {
 
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
-    let secondaryHash = this.props.route.match.params.secondary ? this.props.route.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
-    let tertiaryHash = this.props.route.match.params.tertiary ? this.props.route.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
-    let quaternaryHash = this.props.route.match.params.quaternary ? this.props.route.match.params.quaternary : false;
+    let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
+    let quaternaryHash = this.props.match.params.quaternary ? this.props.match.params.quaternary : false;
 
     let primaryChildren = [];
     primaryDefinition.children.presentationNodes.forEach(child => {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       let isActive = (match, location) => {
-        if (this.props.route.match.params.secondary === undefined && primaryDefinition.children.presentationNodes.indexOf(child) === 0) {
+        if (this.props.match.params.secondary === undefined && primaryDefinition.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
           return true;
@@ -57,8 +57,8 @@ class PresentationNode extends React.Component {
       };
 
       primaryChildren.push(
-        <li key={node.hash}>
-          <NavLink isActive={isActive} to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections/${primaryHash}/${node.hash}`}>
+        <li key={node.hash} className='linked'>
+          <NavLink isActive={isActive} to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/collections/${primaryHash}/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.displayProperties.icon}`} />
           </NavLink>
         </li>
@@ -70,7 +70,7 @@ class PresentationNode extends React.Component {
       let node = manifest.DestinyPresentationNodeDefinition[child.presentationNodeHash];
 
       let isActive = (match, location) => {
-        if (this.props.route.match.params.tertiary === undefined && secondaryDefinition.children.presentationNodes.indexOf(child) === 0) {
+        if (this.props.match.params.tertiary === undefined && secondaryDefinition.children.presentationNodes.indexOf(child) === 0) {
           return true;
         } else if (match) {
           return true;
@@ -80,8 +80,8 @@ class PresentationNode extends React.Component {
       };
 
       secondaryChildren.push(
-        <li key={node.hash}>
-          <NavLink isActive={isActive} to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
+        <li key={node.hash} className='linked'>
+          <NavLink isActive={isActive} to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
             {node.displayProperties.name}
           </NavLink>
         </li>
@@ -94,7 +94,7 @@ class PresentationNode extends React.Component {
           <div className="options">
             <ul>
               <li>
-                <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/collections`}>Go to root</Link>
+                <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/collections`}>Contents</Link>
               </li>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               {/* <li><a onClick={this.toggleCompleted}>{ this.state.hideCompleted ? <>Show collected</> : <>Hide collected</> }</a></li> */}

@@ -73,7 +73,8 @@ p:last-child {
   transition: color 0.25s, background-color 0.25s, box-shadow 0.25s;
 }
 
-.list:not(.no-interaction) li {
+.list li.linked,
+.list li.tooltip {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -103,17 +104,20 @@ p:last-child {
   transition: box-shadow 0.25s;
 }
 
-.list:not(.no-interaction) li:hover {
+.list li.linked:hover,
+.list li.tooltip:hover {
   background-color: rgba(255, 255, 255, 0.4);
   color: rgba(255, 255, 255, 1);
   z-index: 2;
 }
 
-.list:not(.no-interaction) li:hover::before {
+.list li.linked:hover::before,
+.list li.tooltip:hover::before {
   box-shadow: inset 0 0 0 1px #d6d6d6;
 }
 
-.list:not(.no-interaction) li:hover::after {
+.list li.linked:hover::after,
+.list li.tooltip:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
 }
 
@@ -142,12 +146,14 @@ p:last-child {
   box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
 }
 
-.list:not(.no-interaction) li.item:hover::before {
+.list li.linked.item:hover::before,
+.list li.linked.tooltip:hover::before {
   box-shadow: inset 0 0 0 2px #fff;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.list:not(.no-interaction) li.item:hover::after {
+.list li.linked.item:hover::after,
+.list li.linked.tooltip:hover::after {
   box-shadow: 0 0 0 2px #d6d6d6;
 }
 

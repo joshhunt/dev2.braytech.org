@@ -10,8 +10,8 @@ class Root extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
-    let characterRecords = this.props.state.response.profile.characterRecords.data;
-    let profileRecords = this.props.state.response.profile.profileRecords.data.records;
+    let characterRecords = this.props.response.profile.characterRecords.data;
+    let profileRecords = this.props.response.profile.profileRecords.data.records;
 
     const sealBars = {
       2588182977: {
@@ -84,7 +84,7 @@ class Root extends React.Component {
           }
           nodeChildNodeChildNode.children.records.forEach(record => {
             let state = profileRecords[record.recordHash] ? profileRecords[record.recordHash].state : false;
-            state = state ? state : characterRecords[this.props.route.match.params.characterId].records[record.recordHash] ? characterRecords[this.props.route.match.params.characterId].records[record.recordHash].state : false;
+            state = state ? state : characterRecords[this.props.match.params.characterId].records[record.recordHash] ? characterRecords[this.props.match.params.characterId].records[record.recordHash].state : false;
             if (state) {
               states.push(state);
             } else {
@@ -96,7 +96,7 @@ class Root extends React.Component {
 
       nodes.push(
         <div key={node.hash} className='node'>
-          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/${node.hash}`}>
+          <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             {node.displayProperties.name}
           </Link>
@@ -112,7 +112,7 @@ class Root extends React.Component {
       let states = [];
 
       node.children.records.forEach(record => {
-        states.push(profileRecords[record.recordHash] ? profileRecords[record.recordHash].state : characterRecords[this.props.route.match.params.characterId].records[record.recordHash].state);
+        states.push(profileRecords[record.recordHash] ? profileRecords[record.recordHash].state : characterRecords[this.props.match.params.characterId].records[record.recordHash].state);
       });
 
       sealNodes.push(
@@ -122,7 +122,7 @@ class Root extends React.Component {
             completed: sealBars[node.hash].completed === sealBars[node.hash].total
           })}
         >
-          <Link to={`/progression/${this.props.route.match.params.membershipType}/${this.props.route.match.params.membershipId}/${this.props.route.match.params.characterId}/triumphs/seal/${node.hash}`}>
+          <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs/seal/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             {node.displayProperties.name}
           </Link>

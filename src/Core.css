@@ -264,6 +264,10 @@ footer a {
   color: rgba(255, 255, 255, 0.8);
 }
 
+footer a:last-child {
+  white-space: nowrap;
+}
+
 
 
 @media screen and (max-width: 600px) {
