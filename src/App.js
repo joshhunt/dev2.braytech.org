@@ -77,7 +77,7 @@ class App extends Component {
   };
 
   getManifest = () => {
-    const tables = ['DestinyDestinationDefinition', 'DestinyLoreDefinition', 'DestinyStatDefinition', 'DestinyInventoryBucketDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
+    const tables = ['DestinyDestinationDefinition', 'DestinyLoreDefinition', 'DestinyStatDefinition', 'DestinyInventoryBucketDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinyStatGroupDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
 
     let state = this.state;
     state.manifest.state = 'fetching';
@@ -163,7 +163,7 @@ class App extends Component {
               db.table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinyLoreDefinition) {
+                  if (!manifest[0].value.DestinyStatGroupDefinition) {
                     console.log('missing table! lol.');
                     this.getManifest();
                   } else {

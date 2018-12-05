@@ -20,6 +20,8 @@ class Root extends React.Component {
     let nodes = [];
     let recentlyDiscovered = [];
     let badges = [];
+    let collectionsStates = [];
+    let badgesStates = [];
 
     profileCollectibles.recentCollectibleHashes.forEach(child => {
       let collectibleDefinition = manifest.DestinyCollectibleDefinition[child];
@@ -45,23 +47,23 @@ class Root extends React.Component {
             nodeChildNodeChildNode.children.presentationNodes.forEach(nodeChildNodeChildNodeChild => {
               let nodeChildNodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChildNodeChild.presentationNodeHash];
               nodeChildNodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-                let state = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : false;
-                state = state ? state : characterCollectibles[characterId].collectibles[collectible.collectibleHash] ? characterCollectibles[characterId].collectibles[collectible.collectibleHash].state : false;
-                if (state) {
-                  states.push(state);
+                let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
+                if (scope) {
+                  states.push(scope.state);
+                  collectionsStates.push(scope.state);
                 } else {
-                  console.log(`53 Undefined state for ${collectible.collectibleHash}`);
+                  console.log(`55 Undefined state for ${collectible.collectibleHash}`);
                 }
               });
             });
           } else {
             nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
-              let state = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash].state : false;
-              state = state ? state : characterCollectibles[characterId].collectibles[collectible.collectibleHash] ? characterCollectibles[characterId].collectibles[collectible.collectibleHash].state : false;
-              if (state) {
-                states.push(state);
+              let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
+                if (scope) {
+                  states.push(scope.state);
+                  collectionsStates.push(scope.state);
               } else {
-                console.log(`64 Undefined state for ${collectible.collectibleHash}`);
+                console.log(profileCollectibles.collectibles[collectible.collectibleHash], characterCollectibles[characterId].collectibles[collectible.collectibleHash], `66 Undefined state for ${collectible.collectibleHash}`);
               }
             });
           }
@@ -107,6 +109,10 @@ class Root extends React.Component {
         }
       });
 
+      if (completed) {
+        badgesStates.push(node.displayProperties.name);
+      }
+
       badges.push(
         <li
           key={node.hash}
@@ -129,6 +135,7 @@ class Root extends React.Component {
         <div className='nodes'>
           <div className='sub-header'>
             <div>Collections</div>
+            <div>{collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}</div>
           </div>
           <div className='node'>
             <div className='parent'>
@@ -145,6 +152,7 @@ class Root extends React.Component {
           </div>
           <div className='sub-header'>
             <div>Badges</div>
+            <div>{badgesStates.length}/{parentBadges.children.presentationNodes.length}</div>
           </div>
           <div className='badges'>
             <ul className='list'>{badges}</ul>

@@ -123,7 +123,6 @@ class Records extends React.Component {
           </li>
         );
       } else {
-        console.log(recordDefinition)
         
         let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
         description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 32) + '...' : description;

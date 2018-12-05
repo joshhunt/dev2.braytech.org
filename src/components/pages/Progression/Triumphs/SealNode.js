@@ -104,7 +104,7 @@ class SealNode extends React.Component {
             <div className='options'>
               <ul>
                 <li>
-                  <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs`}>Go to root</Link>
+                  <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/triumphs`}>Contents</Link>
                 </li>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <li>

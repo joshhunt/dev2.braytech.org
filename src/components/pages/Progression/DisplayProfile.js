@@ -158,7 +158,7 @@ class DisplayProfile extends React.Component {
         <>
           <GA.RouteTracker />
           <div className='view' id='progression'>
-            <Player {...this.props} {...this.state} />
+            <Player {...this.props} {...this.state} goToProgression={this.goToProgression} />
             <Switch>
               <Route path='/progression/:membershipType/:membershipId/:characterId' exact render={() => <Summary {...this.props} {...this.state} />} />
               <Route path='/progression/:membershipType/:membershipId/:characterId/this-week' exact render={() => <ThisWeek {...this.props} {...this.state} />} />

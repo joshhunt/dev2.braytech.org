@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../../ObservedImage';
@@ -51,7 +52,7 @@ class BadgeNode extends React.Component {
                 <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${collectibleDefinition.displayProperties.icon}`} />
               </div>
               <div className='text'>
-                <div className='name'>Classiefied</div>
+                <div className='name'>Classified</div>
               </div>
             </li>
           );
@@ -140,6 +141,13 @@ class BadgeNode extends React.Component {
           <div className='children'>
             <div className='icon'>
               <ObservedImage className={cx('image')} src={`/static/images/extracts/badges/${hires[badgeDefinition.hash]}`} />
+            </div>
+            <div className='options'>
+              <ul>
+                <li>
+                  <Link to={`/progression/${this.props.match.params.membershipType}/${this.props.match.params.membershipId}/${this.props.match.params.characterId}/collections`}>Contents</Link>
+                </li>
+              </ul>
             </div>
             <div className='text'>
               <div className='name'>{badgeDefinition.displayProperties.name}</div>

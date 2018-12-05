@@ -219,8 +219,12 @@
   padding-bottom: calc(126/208*100%);
 }
 
+.collections .node.badge .children .options {
+  margin: 2rem 0 0.4rem;
+}
+
 .collections .node.badge .children .text .name {
-  margin: 2rem 0 2rem;
+  margin: 0 0 2rem;
   font-size: 36px;
   text-transform: uppercase;
   font-weight: 500;
