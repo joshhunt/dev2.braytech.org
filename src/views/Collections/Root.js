@@ -61,9 +61,9 @@ class Root extends React.Component {
           } else {
             nodeChildNodeChildNode.children.collectibles.forEach(collectible => {
               let scope = profileCollectibles.collectibles[collectible.collectibleHash] ? profileCollectibles.collectibles[collectible.collectibleHash] : characterCollectibles[characterId].collectibles[collectible.collectibleHash];
-                if (scope) {
-                  states.push(scope.state);
-                  collectionsStates.push(scope.state);
+              if (scope) {
+                states.push(scope.state);
+                collectionsStates.push(scope.state);
               } else {
                 console.log(profileCollectibles.collectibles[collectible.collectibleHash], characterCollectibles[characterId].collectibles[collectible.collectibleHash], `68 Undefined state for ${collectible.collectibleHash}`);
               }
@@ -73,16 +73,18 @@ class Root extends React.Component {
       });
 
       nodes.push(
-        <li key={node.hash} className='linked'>
-          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+        <div key={node.hash} className='node'>
+          <div className='images'>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
+          </div>
           <div className='text'>
             <div>{node.displayProperties.name}</div>
             <div className='state'>
-              {states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
+              <span>{states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}</span> / {states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
             </div>
           </div>
           <Link to={`/collections/${node.hash}`} />
-        </li>
+        </div>
       );
     });
 
@@ -146,7 +148,9 @@ class Root extends React.Component {
         <div className='nodes'>
           <div className='sub-header'>
             <div>Items</div>
-            <div>{collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}</div>
+            <div>
+              {collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{collectionsStates.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
+            </div>
           </div>
           <div className='node'>
             <div className='parent'>
@@ -163,7 +167,9 @@ class Root extends React.Component {
           </div>
           <div className='sub-header'>
             <div>Badges</div>
-            <div>{badgesStates.length}/{parentBadges.children.presentationNodes.length}</div>
+            <div>
+              {badgesStates.length}/{parentBadges.children.presentationNodes.length}
+            </div>
           </div>
           <div className='badges'>
             <ul className='list'>{badges}</ul>

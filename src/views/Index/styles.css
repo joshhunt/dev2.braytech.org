@@ -66,22 +66,22 @@
   }
   
   #index .logo-feature {
-    font-size: 64px;
+    font-size: 50px;
     font-weight: 500;
   }
   
   #index .logo-feature .device {
     position: relative;
-    font-size: 64px;
-    line-height: 55px;
-    margin: 0;
+    font-size: 50px;
+    line-height: 44px;
+    margin: 0 1rem 0 0;
   }
   
   #index .logo-feature .device::before,
   #index .logo-feature .device::after {
     top: -20px;
     left: -20px;
-    width: 104px;
-    height: 104px;
+    width: 90px;
+    height: 90px;
   }
 }

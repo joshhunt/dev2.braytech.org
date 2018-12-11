@@ -124,6 +124,10 @@ html.backdropfilter #header.profile-header .braytech {
   height: 11px;
 }
 
+.wrapper.light #header.profile-header .characters .list li .progress {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 #header.profile-header .characters .list li .progress .bar {
   background-color: #5aa366;
 }
@@ -231,14 +235,15 @@ html.backdropfilter #header.profile-header .braytech {
   #header.profile-header .characters {
     /* margin: 2rem 0 0; */
   }
-  #header.profile-header .characters .list li {
+
+  /* #header.profile-header .characters .list li {
     padding: 0 0 0 calc(48px + 1rem);
   }
 
   #header.profile-header .characters .list li .image.secondaryOverlay {
     width: 48px;
     height: 48px;
-  }
+  } */
 
   #header.profile-header .characters .list li .displayName {
     font-size: 20px;
@@ -255,7 +260,11 @@ html.backdropfilter #header.profile-header .braytech {
     font-size: 12px;
   }
 
-  #header.profile-header .characters .list li .progress {
+  /* #header.profile-header .characters .list li .progress {
     display: none;
+  } */
+
+  #header.profile-header .characters .list li .progress {
+    height: 7px;
   }
 }

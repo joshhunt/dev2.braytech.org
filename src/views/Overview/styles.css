@@ -3,7 +3,7 @@
   padding: 3rem 3rem 0;
   display: grid;
   grid-gap: 3rem;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.4fr 1.4fr;
 }
 
 #overview .module .sub-header {
@@ -162,6 +162,12 @@
 
 #overview .module.almost .list.record-items {
   grid-template-columns: 1fr;
+}
+
+@media screen and (max-width: 1600px) {
+  #overview {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 1200px) {

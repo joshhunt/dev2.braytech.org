@@ -147,7 +147,7 @@ class ProfileHeader extends React.Component {
                   />
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
-                    Level {character.baseCharacterLevel} {classTypeToString(character.classType)} / <span className='light'>{character.light}</span>
+                    {character.baseCharacterLevel} / {classTypeToString(character.classType)} / <span className='light'>{character.light}</span>
                   </div>
                   <div className='progress'>
                     <div

@@ -6,6 +6,8 @@ import ObservedImage from '../../components/ObservedImage';
 
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
+import RecordsAlmost from '../../components/RecordsAlmost';
+
 class Root extends React.Component {
   render() {
     const manifest = this.props.manifest;
@@ -103,7 +105,7 @@ class Root extends React.Component {
             {node.displayProperties.name}
           </Link>
           <div className='state'>
-            {states.filter(record => enumerateRecordState(record).recordRedeemed).length}/{states.filter(record => !enumerateRecordState(record).invisible).length}
+            <span>{states.filter(record => enumerateRecordState(record).recordRedeemed).length}</span> / {states.filter(record => !enumerateRecordState(record).invisible).length}
           </div>
         </div>
       );
@@ -135,36 +137,44 @@ class Root extends React.Component {
             {node.displayProperties.name}
           </Link>
           <div className='state'>
-            {sealBars[node.hash].completed}/{sealBars[node.hash].total}
+            <span>{sealBars[node.hash].completed}</span> / {sealBars[node.hash].total}
           </div>
         </div>
       );
     });
 
-    return (<>
-      <div className='nodes'>
-        <div className='sub-header'>
-          <div>Triumphs</div>
-          <div>{recordsStates.filter(collectible => enumerateRecordState(collectible).recordRedeemed).length}/{recordsStates.filter(collectible => !enumerateRecordState(collectible).invisible).length}</div>
-        </div>
-        <div className='node'>
-          <div className='parent'>{nodes}</div>
-        </div>
-        <div className='node'>
+    return (
+      <>
+        <div className='nodes'>
           <div className='sub-header'>
-            <div>Seals</div>
+            <div>Triumphs</div>
+            <div>
+              {recordsStates.filter(collectible => enumerateRecordState(collectible).recordRedeemed).length}/{recordsStates.filter(collectible => !enumerateRecordState(collectible).invisible).length}
+            </div>
           </div>
-          <div className='parent seals'>{sealNodes}</div>
+          <div className='node'>
+            <div className='parent'>{nodes}</div>
+          </div>
+          <div className='node'>
+            <div className='sub-header'>
+              <div>Seals</div>
+            </div>
+            <div className='parent seals'>{sealNodes}</div>
+          </div>
         </div>
-      </div>
         <div className='sidebar'>
           <div className='sub-header'>
             <div>Total score</div>
           </div>
-          <div className='total-score'>
-            {this.props.response.profile.profileRecords.data.score}
+          <div className='total-score'>{this.props.response.profile.profileRecords.data.score}</div>
+          <div className='sub-header'>
+            <div>Almost complete &mdash; next 3</div>
           </div>
-        </div></>
+          <div className='almost-complete'>
+            <RecordsAlmost {...this.props} limit='3' />
+          </div>
+        </div>
+      </>
     );
   }
 }

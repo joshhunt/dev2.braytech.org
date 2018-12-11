@@ -28,8 +28,6 @@ class ObservedImage extends React.Component {
       entries.forEach(entry => {
         const { isIntersecting } = entry;
 
-        
-
         if (isIntersecting) {
           this.image = new window.Image();
           this.image.onload = bmp => {

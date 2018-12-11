@@ -1,5 +1,4 @@
 import React from 'react';
-import cx from 'classnames';
 import '../../utils/destinyEnums';
 
 const fallback = (manifest, item) => {
