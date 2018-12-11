@@ -115,8 +115,6 @@ class CharacterSelect extends React.Component {
       loading: false,
       error: false
     });
-
-    //this.props.setUserReponse(membershipType, membershipId, characterId, response);
   };
 
   CharacterSelectHandler = characterId => {
@@ -124,7 +122,7 @@ class CharacterSelect extends React.Component {
   };
 
   componentDidMount() {
-    this.props.setPageDefault('character-select');
+    this.props.setPageDefault('light');
     if (this.props.user.response) {
       this.setState({ profile: this.props.user.response, loading: false });
     } else if (this.props.user.membershipId && !this.state.profile) {

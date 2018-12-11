@@ -1,17 +1,5 @@
 
-.wrapper.character-select {
-  background-color: #f1f1f1;
-  color: #000;
-}
 
-.wrapper.character-select #footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.wrapper.character-select #footer ul li:last-child a {
-  color: rgba(0, 0, 0, 0.8);
-}
 
 #get-profile {
   margin: 0 auto;

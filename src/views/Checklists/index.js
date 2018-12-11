@@ -132,7 +132,7 @@ class Checklists extends React.Component {
     let sliceEnd = sliceStart + this.itemsPerPage;
 
     return (
-      <div className='checklists'>
+      <div className='view' id='checklists'>
         <div className='sub-header'>
           <div>Checklists</div>
         </div>

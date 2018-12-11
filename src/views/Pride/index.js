@@ -9,6 +9,14 @@ class Pride extends React.Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    this.props.setPageDefault('light');
+  }
+
+  componentWillUnmount() {
+    this.props.setPageDefault(false);
+  }
+
   render() {
     
 

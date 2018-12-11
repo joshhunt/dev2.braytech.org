@@ -25,6 +25,11 @@ class Footer extends React.Component {
           </div>
           <ul>
             <li>
+              <Link to='/credits'>
+                Credits
+              </Link>
+            </li>
+            <li>
               <a href='https://twitter.com/justrealmilk' target='_blank' rel='noopener noreferrer'>
                 Twitter
               </a>
@@ -32,11 +37,6 @@ class Footer extends React.Component {
             <li>
               <a href='https://www.reddit.com/user/xhtmlvalid' target='_blank' rel='noopener noreferrer'>
                 Reddit
-              </a>
-            </li>
-            <li>
-              <a href='https://github.com/justrealmilk/dev2.braytech.org/issues' target='_blank' rel='noopener noreferrer'>
-                Issues?
               </a>
             </li>
             <li>
