@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
-import '../destinyEnums';
-import { damageTypeToString, ammoTypeToString } from '../destinyUtils';
+import '../../utils/destinyEnums';
+import { damageTypeToString, ammoTypeToString } from '../../utils/destinyUtils';
 
 const round = number => {
   const floor = Math.floor(number);
