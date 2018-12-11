@@ -127,7 +127,7 @@ class CharacterSelect extends React.Component {
     this.props.setPageDefault('character-select');
     if (this.props.user.response) {
       this.setState({ profile: this.props.user.response, loading: false });
-    } else if (this.props.user && !this.state.profile) {
+    } else if (this.props.user.membershipId && !this.state.profile) {
       this.ResultHandler(this.props.user.membershipType, this.props.user.membershipId, this.props.user.characterId);
     } else {
       this.setState({ loading: false });
