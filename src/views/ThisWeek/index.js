@@ -12,6 +12,9 @@ class ThisWeek extends React.Component {
   }
 
   render() {
+    const manifest = this.props.manifest;
+    const milestones = this.props.response.milestones;
+
     const resetTime = '17:00 UTC';
 
     const cycleInfo = {
@@ -229,6 +232,14 @@ class ThisWeek extends React.Component {
 
     // console.log(cycleInfo.week);
     // console.log(consolidatedInfo.curse[cycleInfo.week.curse], consolidatedInfo.ascendant[cycleInfo.week.ascendant], consolidatedInfo.ep[cycleInfo.week.ep]);
+
+    // flashpoint
+    console.log(manifest.DestinyInventoryItemDefinition[milestones[463010297].availableQuests[0].questItemHash])
+
+    // scored nightfall strikes
+    milestones[2171429505].activities.filter(activity => activity.modifierHashes).forEach(activity => {
+      console.log(manifest.DestinyActivityDefinition[activity.activityHash])
+    });
 
     return (
       <div className='view' id='this-week'>

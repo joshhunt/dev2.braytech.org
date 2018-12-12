@@ -90,8 +90,8 @@
 }
 
 .list.record-items li.completed .text .description {
-  color: rgba(207, 191, 124, 0.6);
-  border-top: 1px solid rgba(207, 191, 124, 0.2);
+  color: rgba(207, 191, 124, 0.8);
+  border-top: 1px solid rgba(207, 191, 124, 0.4);
 }
 
 .list.record-items li.completed .progress {
@@ -99,7 +99,8 @@
 }
 
 .list.record-items li.completed .progress .bar {
-  background-color: #bcad71;
+  box-shadow: inset 0 0 0px 1px rgba(207, 191, 124, 1);
+  background-color: rgba(188, 173, 113, 0.2);
 }
 
 .list.record-items li.linked.completed:hover {
