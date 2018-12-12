@@ -133,7 +133,7 @@ class Records extends React.Component {
           });
         } else {
           let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
-          description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 32) + '...' : description;
+          description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 48) + '...' : description;
 
           records.push({
             completed: enumerateRecordState(state).recordRedeemed,
@@ -286,7 +286,7 @@ class Records extends React.Component {
               >
                 <div className='properties'>
                   <div className='icon'>
-                    <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${recordDefinition.displayProperties.icon}`} />
+                    <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${manifest.settings.destiny2CoreSettings.undiscoveredCollectibleImage}`} />
                   </div>
                   <div className='text'>
                     <div className='name'>Classified record</div>

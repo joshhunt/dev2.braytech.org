@@ -23,7 +23,7 @@ class PresentationNode extends React.Component {
 
     let primaryDefinition = manifest.DestinyPresentationNodeDefinition[primaryHash];
 
-    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash; // crucible -> lifetime
+    let secondaryHash = this.props.match.params.secondary ? this.props.match.params.secondary : primaryDefinition.children.presentationNodes[0].presentationNodeHash;
     let secondaryDefinition = manifest.DestinyPresentationNodeDefinition[secondaryHash];
 
     let tertiaryHash = this.props.match.params.tertiary ? this.props.match.params.tertiary : secondaryDefinition.children.presentationNodes[0].presentationNodeHash;
@@ -75,7 +75,7 @@ class PresentationNode extends React.Component {
       secondaryChildren.push(
         <li key={node.hash} className='linked'>
           <NavLink isActive={isActive} to={`/triumphs/${primaryHash}/${secondaryHash}/${node.hash}`}>
-            {node.displayProperties.name}
+            {node.displayProperties.name.length > 24 ? node.displayProperties.name.slice(0, 24) + '...' : node.displayProperties.name}
           </NavLink>
         </li>
       );

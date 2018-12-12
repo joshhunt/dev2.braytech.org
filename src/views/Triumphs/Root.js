@@ -68,8 +68,8 @@ class Root extends React.Component {
       }
     };
 
-    let parent = manifest.DestinyPresentationNodeDefinition[1024788583];
-    let sealsParent = manifest.DestinyPresentationNodeDefinition[1652422747];
+    let parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.recordsRootNode];
+    let sealsParent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.medalsRootNode];
 
     let nodes = [];
     let sealNodes = [];
@@ -84,6 +84,7 @@ class Root extends React.Component {
         nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
           let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
           if (nodeChildNodeChildNode.redacted) {
+            console.log(nodeChildNodeChildNode)
             return;
           }
           nodeChildNodeChildNode.children.records.forEach(record => {

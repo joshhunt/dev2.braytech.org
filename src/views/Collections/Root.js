@@ -14,8 +14,8 @@ class Root extends React.Component {
     const characterCollectibles = this.props.response.profile.characterCollectibles.data;
     const profileCollectibles = this.props.response.profile.profileCollectibles.data;
 
-    const parent = manifest.DestinyPresentationNodeDefinition[3790247699];
-    const parentBadges = manifest.DestinyPresentationNodeDefinition[498211331];
+    const parent = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.collectionRootNode];
+    const parentBadges = manifest.DestinyPresentationNodeDefinition[manifest.settings.destiny2CoreSettings.badgesRootNode];
 
     let nodes = [];
     let recentlyDiscovered = [];

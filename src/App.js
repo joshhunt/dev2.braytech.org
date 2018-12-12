@@ -40,7 +40,8 @@ class App extends Component {
       },
       manifest: {
         state: false,
-        version: false
+        version: false,
+        settings: false
       },
       pageDefaut: false
     };
@@ -48,9 +49,10 @@ class App extends Component {
     this.updateViewport = this.updateViewport.bind(this);
     this.setUserReponse = this.setUserReponse.bind(this);
     this.viewCharacters = this.viewCharacters.bind(this);
-    this.getManifestVersion = this.getManifestVersion.bind(this);
+    this.getVersionAndSettings = this.getVersionAndSettings.bind(this);
     this.getManifest = this.getManifest.bind(this);
-    this.manifest = null;
+    this.manifest = {};
+    this.bungieSettings = {};
   }
 
   setPageDefault = className => {
@@ -92,22 +94,58 @@ class App extends Component {
     this.setState(state);
   };
 
-  getManifestVersion = async () => {
-    let state = this.state;
-    state.manifest.state = 'version';
-    this.setState(state);
-
-    const request = await fetch(`https://www.bungie.net/Platform/Destiny2/Manifest/`, {
-      headers: {
-        'X-API-Key': globals.key.bungie
+  getVersionAndSettings = () => {
+    const paths = [
+      {
+        name: 'manifest',
+        url: 'https://www.bungie.net/Platform/Destiny2/Manifest/'
+      },
+      {
+        name: 'settings',
+        url: 'https://www.bungie.net/Platform/Settings/'
       }
+    ];
+
+    let requests = paths.map(path => {
+      return fetch(path.url, {
+        headers: {
+          'X-API-Key': globals.key.bungie
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(response => {
+          if (response.ErrorCode === 1) {
+            let object = {};
+            object[path.name] = response.Response;
+            return object;
+          }
+        });
     });
-    const response = await request.json();
-    return response.Response.jsonWorldContentPaths.en;
+
+    return Promise.all(requests)
+      .then(responses => {
+        const response = assign(...responses);
+        
+        // console.log(response)
+
+        // let state = this.state;
+        // state.manifest.settings = response.settings;
+        // this.setState(state);
+
+        this.bungieSettings = response.settings;
+
+        return response.manifest.jsonWorldContentPaths.en;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   getManifest = version => {
     let state = this.state;
+    state.manifest.version = version;
     state.manifest.state = 'fetching';
     this.setState(state);
 
@@ -137,6 +175,7 @@ class App extends Component {
               .toArray()
               .then(manifest => {
                 this.manifest = manifest[0].value;
+                this.manifest.settings = this.bungieSettings;
                 let state = this.state;
                 state.manifest.state = 'ready';
                 this.setState(state);
@@ -163,12 +202,9 @@ class App extends Component {
         }
       })
       .then(() => {
-        this.getManifestVersion()
+        this.getVersionAndSettings()
           .then(version => {
             if (version !== this.state.manifest.version) {
-              let state = this.state;
-              state.manifest.version = version;
-              this.setState(state);
               this.getManifest(version);
             } else {
               dexie
@@ -177,6 +213,7 @@ class App extends Component {
                 .then(manifest => {
                   if (manifest.length > 0) {
                     this.manifest = manifest[0].value;
+                    this.manifest.settings = this.bungieSettings;
                     let state = this.state;
                     state.manifest.state = 'ready';
                     this.setState(state);
@@ -225,7 +262,7 @@ class App extends Component {
       />
     );
 
-    if (this.manifest === null) {
+    if (this.state.manifest.state !== 'ready') {
       if (this.state.manifest.state === 'error') {
         return (
           <div className='view' id='loading'>
@@ -400,7 +437,7 @@ class App extends Component {
                   <Route
                     path='/this-week'
                     exact
-                    render={(route) => (
+                    render={route => (
                       <Redirect
                         to={{
                           pathname: '/character-select',
