@@ -15,7 +15,7 @@ class Collections extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.match.params.quaternary && prevProps !== this.props) {
+    if (!this.props.match.params.quaternary && prevProps.location.pathname !== this.props.location.pathname) {
       window.scrollTo(0, 0);
     }
   }
