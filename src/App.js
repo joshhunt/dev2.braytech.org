@@ -40,10 +40,6 @@ class App extends Component {
       },
       manifest: {
         state: false,
-        progress: {
-          total: 0,
-          completed: 0
-        },
         version: false
       },
       pageDefaut: false
@@ -101,53 +97,31 @@ class App extends Component {
     state.manifest.state = 'version';
     this.setState(state);
 
-    const request = await fetch(`https://api.braytech.org/?request=manifest&get=version`, {
+    const request = await fetch(`https://www.bungie.net/Platform/Destiny2/Manifest/`, {
       headers: {
-        'X-API-Key': globals.key.braytech
+        'X-API-Key': globals.key.bungie
       }
     });
     const response = await request.json();
-    return response.response.version;
+    return response.Response.jsonWorldContentPaths.en;
   };
 
   getManifest = version => {
-    const tables = ['DestinyDestinationDefinition', 'DestinyLoreDefinition', 'DestinyStatDefinition', 'DestinyInventoryBucketDefinition', 'DestinyPlaceDefinition', 'DestinyVendorDefinition', 'DestinyPresentationNodeDefinition', 'DestinyRecordDefinition', 'DestinyProgressionDefinition', 'DestinyCollectibleDefinition', 'DestinyChecklistDefinition', 'DestinyObjectiveDefinition', 'DestinyActivityDefinition', 'DestinyActivityModeDefinition', 'DestinySocketTypeDefinition', 'DestinyStatGroupDefinition', 'DestinySocketCategoryDefinition', 'DestinyInventoryItemDefinition', 'DestinySandboxPerkDefinition'];
-
     let state = this.state;
     state.manifest.state = 'fetching';
-    state.manifest.progress.total = tables.length;
     this.setState(state);
 
-    let fetches = tables.map(table => {
-      return fetch(`https://api.braytech.org/cache/json/manifest/${table}.json`, {
-        headers: {
-          'X-API-Key': globals.key.braytech
-        }
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(fetch => {
-          let state = this.state;
-          state.manifest.progress.completed += 1;
-          this.setState(state);
+    let manifest = async () => {
+      const request = await fetch(`https://www.bungie.net${version}`);
+      const response = await request.json();
+      return response;
+    }
 
-          let object = {};
-          object[table] = fetch;
-          return object;
-        });
-    });
-
-    Promise.all(fetches)
-      .then(promises => {
-        const manifest = assign(...promises);
-
-        console.log(manifest);
-
+    manifest()
+      .then(manifest => {
         let state = this.state;
         state.manifest.state = 'almost';
         this.setState(state);
-
         dexie
           .table('manifest')
           .clear()
@@ -201,14 +175,13 @@ class App extends Component {
                 .table('manifest')
                 .toArray()
                 .then(manifest => {
-                  if (!manifest[0].value.DestinyStatGroupDefinition) {
-                    console.log('missing table! lol.');
-                    this.getManifest();
-                  } else {
+                  if (manifest.length > 0) {
                     this.manifest = manifest[0].value;
                     let state = this.state;
                     state.manifest.state = 'ready';
                     this.setState(state);
+                  } else {
+                    console.log('something is wrong')
                   }
                 });
             }
@@ -228,7 +201,7 @@ class App extends Component {
       GoogleAnalytics.init();
     }
 
-    const PrivateRoute = ({ render: Component, ...rest }) => (
+    const ProfileRoute = ({ render: Component, ...rest }) => (
       <Route
         {...rest}
         render={props =>
@@ -268,7 +241,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>FETCHING {Math.ceil((this.state.manifest.progress.completed / this.state.manifest.progress.total) * 100)}%</div>
+            <div className='download'>FETCHING</div>
           </div>
         );
       } else if (this.state.manifest.state === 'almost') {
@@ -305,10 +278,10 @@ class App extends Component {
               <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
               <Switch>
                 <Route path='/character-select' render={route => <CharacterSelect location={route.location} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
-                <PrivateRoute path='/overview' exact render={() => <Overview {...this.state.user} manifest={this.manifest} />} />
-                <PrivateRoute path='/clan' exact render={() => <Clan {...this.state.user} manifest={this.manifest} />} />
-                <PrivateRoute path='/checklists' exact render={() => <Checklists {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
-                <PrivateRoute
+                <ProfileRoute path='/overview' exact render={() => <Overview {...this.state.user} manifest={this.manifest} />} />
+                <ProfileRoute path='/clan' exact render={() => <Clan {...this.state.user} manifest={this.manifest} />} />
+                <ProfileRoute path='/checklists' exact render={() => <Checklists {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
+                <ProfileRoute
                   path='/collections/:primary?/:secondary?/:tertiary?/:quaternary?'
                   render={route => (
                     <>
@@ -317,8 +290,8 @@ class App extends Component {
                     </>
                   )}
                 />
-                <PrivateRoute path='/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' render={route => <Triumphs {...route} {...this.state.user} manifest={this.manifest} />} />
-                <PrivateRoute
+                <ProfileRoute path='/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' render={route => <Triumphs {...route} {...this.state.user} manifest={this.manifest} />} />
+                <ProfileRoute
                   path='/this-week'
                   exact
                   render={() => (

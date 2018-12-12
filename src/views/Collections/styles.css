@@ -402,6 +402,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  #collections .parent .list .node::before {
+    width: 5px;
+  }
+
   #collections .parent .list .node .text {
     bottom: 1.4rem;
   }

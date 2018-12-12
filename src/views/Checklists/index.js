@@ -34,7 +34,7 @@ class Checklists extends React.Component {
     let index = e.currentTarget.dataset.index;
 
     this.setState({
-      page: Math.floor(index / this.itemsPerPage) // credit: elviswolcott
+      page: Math.floor(index / this.itemsPerPage)
     });
   };
 
