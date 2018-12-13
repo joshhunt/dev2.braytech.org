@@ -1,0 +1,36 @@
+#pride {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+#pride .message {
+  margin: 6rem 0 3rem;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  max-width: 1024px;
+  width: 100%;
+}
+
+#pride .message .name {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0 0 2rem;
+}
+
+#pride .message .description p {
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 500px) {
+  #pride {
+    padding: 2rem;
+    width: calc(100% - 4rem);
+  }
+  #pride .message {
+    margin: 0 0 3rem;
+  }
+}

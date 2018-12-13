@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
-import '../destinyEnums';
+import '../../utils/destinyEnums';
 
 const emblem = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;

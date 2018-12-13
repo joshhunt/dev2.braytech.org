@@ -1,6 +1,5 @@
 import React from 'react';
-import cx from 'classnames';
-import '../destinyEnums';
+import '../../utils/destinyEnums';
 
 const fallback = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;

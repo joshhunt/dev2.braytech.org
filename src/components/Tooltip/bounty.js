@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
-import '../destinyEnums';
+import '../../utils/destinyEnums';
 
 const bounty = (manifest, item) => {
   let description = item.displaySource !== '' ? item.displaySource : false;

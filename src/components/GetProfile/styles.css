@@ -1,0 +1,49 @@
+
+#get-profile {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem;
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-rows: 1fr;
+  grid-template-columns: 3fr 7fr;
+  color: #000;
+}
+
+#get-profile .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #999;
+}
+
+#get-profile .sub-header {
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 2rem;
+  width: calc(100% - 4rem);
+}
+
+#get-profile .form {
+  margin: 0 0 1rem;
+}
+
+#get-profile .results {
+  margin: 1rem 0 3rem;
+}
+
+#get-profile .results .list li {
+  padding: 0 1rem;
+}
+
+#get-profile .results .list li span {
+  margin: 0 10px 0 0;
+}
+
+@media screen and (max-width: 600px) {
+
+
+
+}

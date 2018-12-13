@@ -1,132 +1,189 @@
 import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
-import '../destinyEnums';
-import { damageTypeToString, ammoTypeToString } from '../destinyUtils';
+import '../../utils/destinyEnums';
+import { damageTypeToString, ammoTypeToString } from '../../utils/destinyUtils';
 
-const weaponsStats = [
-  {
-    hash: 2837207746,
-    name: 'Swing Speed',
-    type: 'bar'
-  },
-  {
-    hash: 3614673599,
-    name: 'Blast Radius',
-    type: 'bar'
-  },
-  {
-    hash: 2523465841,
-    name: 'Velocity',
-    type: 'bar'
-  },
-  {
-    hash: 4043523819,
-    name: 'Impact',
-    type: 'bar'
-  },
-  {
-    hash: 1240592695,
-    name: 'Range',
-    type: 'bar'
-  },
-  {
-    hash: 2762071195,
-    name: 'Efficiency',
-    type: 'bar'
-  },
-  {
-    hash: 209426660,
-    name: 'Defence',
-    type: 'bar'
-  },
-  {
-    hash: 155624089,
-    name: 'Stability',
-    type: 'bar'
-  },
-  {
-    hash: 943549884,
-    name: 'Handling',
-    type: 'bar'
-  },
-  {
-    hash: 4188031367,
-    name: 'Reload Speed',
-    type: 'bar'
-  },
-  {
-    hash: 1345609583,
-    name: 'Aim Assistance',
-    type: 'bar',
-    hidden: true
-  },
-  {
-    hash: 2715839340,
-    name: 'Recoil Direction',
-    type: 'bar',
-    hidden: true
-  },
-  {
-    hash: 3555269338,
-    name: 'Zoom',
-    type: 'bar',
-    hidden: true
-  },
-  {
-    hash: 1931675084,
-    name: 'Inventory Size',
-    type: 'bar',
-    hidden: true
-  },
-  {
-    hash: 925767036,
-    name: 'Ammo Capacity',
-    type: 'int'
-  },
-  {
-    hash: 4284893193,
-    name: 'Rounds Per Minute',
-    type: 'int'
-  },
-  {
-    hash: 2961396640,
-    name: 'Charge Time',
-    type: 'int'
-  },
-  {
-    hash: 3871231066,
-    name: 'Magazine',
-    type: 'int'
+const round = number => {
+  const floor = Math.floor(number);
+
+  if (number - floor > 0.5) {
+    return Math.ceil(number);
+  } else {
+    return floor;
   }
+};
+
+const interpolate = (investmentValue, displayInterpolation) => {
+  const interpolation = [...displayInterpolation].sort((a, b) => a.value - b.value);
+
+  const upperBound = interpolation.find(point => point.value >= investmentValue);
+  const lowerBound = [...interpolation].reverse().find(point => point.value <= investmentValue);
+
+  if (!upperBound && !lowerBound) {
+    console.log('Invalid displayInterpolation');
+  }
+
+  if (!upperBound || !lowerBound) {
+    if (upperBound) {
+      return upperBound.weight;
+    } else if (lowerBound) {
+      return lowerBound.weight;
+    } else {
+      console.log('Invalid displayInterpolation');
+    }
+  }
+
+  const range = upperBound.value - lowerBound.value;
+  const factor = range > 0 ? (investmentValue - lowerBound.value) / 100 : 1;
+
+  const displayValue = lowerBound.weight + (upperBound.weight - lowerBound.weight) * factor;
+  return round(displayValue);
+};
+
+const badSockets = [
+  4248210736, // Shaders
+  236077174, // Y1 Masterworks
+  2285418970, // Y2 Masterwork Trackers
+  2323986101, // Mod Sockets
+  2931483505, // Ornaments
+  1959648454 // ornmanets
 ];
 
 const weapon = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
-  let socketIndexes;
-  Object.keys(item.sockets.socketCategories).forEach(key => {
-    if (item.sockets.socketCategories[key].socketCategoryHash === 4241085061) {
-      socketIndexes = item.sockets.socketCategories[key].socketIndexes;
-      return;
+  let weaponsStats = [
+    {
+      hash: 2837207746,
+      name: 'Swing Speed',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 3614673599,
+      name: 'Blast Radius',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 2523465841,
+      name: 'Velocity',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 4043523819,
+      name: 'Impact',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 1240592695,
+      name: 'Range',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 2762071195,
+      name: 'Efficiency',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 209426660,
+      name: 'Defence',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 155624089,
+      name: 'Stability',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 943549884,
+      name: 'Handling',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 4188031367,
+      name: 'Reload Speed',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 1345609583,
+      name: 'Aim Assistance',
+      type: 'bar',
+      modifier: 0,
+      hidden: true
+    },
+    {
+      hash: 2715839340,
+      name: 'Recoil Direction',
+      type: 'bar',
+      modifier: 0,
+      hidden: true
+    },
+    {
+      hash: 3555269338,
+      name: 'Zoom',
+      type: 'bar',
+      modifier: 0,
+      hidden: true
+    },
+    {
+      hash: 1931675084,
+      name: 'Inventory Size',
+      type: 'bar',
+      modifier: 0,
+      hidden: true
+    },
+    {
+      hash: 925767036,
+      name: 'Ammo Capacity',
+      type: 'int',
+      modifier: 0
+    },
+    {
+      hash: 4284893193,
+      name: 'Rounds Per Minute',
+      type: 'int',
+      modifier: 0
+    },
+    {
+      hash: 2961396640,
+      name: 'Charge Time',
+      type: 'int',
+      modifier: 0
+    },
+    {
+      hash: 3871231066,
+      name: 'Magazine',
+      type: 'int',
+      modifier: 0
     }
-  });
+  ];
+
+  let statGroup = manifest.DestinyStatGroupDefinition[item.stats.statGroupHash];
 
   let intrinsic = false;
   let traits = [];
-  Object.values(socketIndexes).forEach(index => {
-    let socket = item.sockets.socketEntries[index];
-
-    if (socket.socketTypeHash === 1282012138) {
+  item.sockets.socketEntries.forEach(socket => {
+    if (badSockets.includes(socket.singleInitialItemHash) || socket.socketTypeHash === 2218962841) {
       return;
     }
+
     socket.reusablePlugItems.forEach(reusablePlug => {
       let plug = manifest.DestinyInventoryItemDefinition[reusablePlug.plugItemHash];
 
       if (plug.itemCategoryHashes.includes(2237038328)) {
         intrinsic = manifest.DestinySandboxPerkDefinition[plug.perks[0].perkHash];
-        return;
       }
+
       if (plug.hash === socket.singleInitialItemHash) {
         plug.investmentStats.forEach(modifier => {
           let index = weaponsStats.findIndex(stat => stat.hash === modifier.statTypeHash);
@@ -134,6 +191,10 @@ const weapon = (manifest, item) => {
             weaponsStats[index].modifier = modifier.value;
           }
         });
+
+        if (plug.itemCategoryHashes.includes(2237038328)) {
+          return;
+        }
         traits.push(
           <div key={plug.hash} className='plug trait'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
@@ -155,10 +216,24 @@ const weapon = (manifest, item) => {
     }
     if (Object.keys(item.stats.stats).includes(stat.hash.toString())) {
       let modifier = stat.modifier ? stat.modifier : 0;
+      if (stat.hash === 3871231066) {
+        modifier = 0;
+      }
+
+      let investmentStat = item.investmentStats.find(investment => investment.statTypeHash === stat.hash);
+      let scaledStats = statGroup.scaledStats.find(scale => scale.statHash === stat.hash);
+
+      let interpolatatedModifier = scaledStats ? interpolate(investmentStat.value + modifier, scaledStats.displayInterpolation) : modifier;
+
+      let value = interpolatatedModifier;
+      if (stat.hash === 3871231066) {
+        value = value < 1 ? 1 : value;
+      }
+
       stats.push(
         <div key={stat.hash} className='stat'>
           <div className='name'>{stat.name}</div>
-          <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className='bar' data-value={item.stats.stats[stat.hash].value + modifier} style={{ width: `${item.stats.stats[stat.hash].value + modifier}%` }} /> : item.stats.stats[stat.hash].value + modifier}</div>
+          <div className={cx('value', stat.type)}>{stat.type === 'bar' ? <div className='bar' data-value={value} style={{ width: `${value}%` }} /> : value}</div>
         </div>
       );
     }

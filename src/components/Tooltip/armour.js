@@ -1,37 +1,33 @@
 import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
-import '../destinyEnums';
-
-const armourStats = [
-  {
-    hash: 2996146975,
-    name: 'Mobility',
-    type: 'bar',
-    modifier: 0
-  },
-  {
-    hash: 392767087,
-    name: 'Resilience',
-    type: 'bar',
-    modifier: 0
-  },
-  {
-    hash: 1943323491,
-    name: 'Recovery',
-    type: 'bar',
-    modifier: 0
-  }
-];
+import '../../utils/destinyEnums';
 
 const armour = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
 
   let socketIndexes = [];
 
-  armourStats.forEach(stat => {
-    stat.modifier = 0;
-  });
+  let armourStats = [
+    {
+      hash: 2996146975,
+      name: 'Mobility',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 392767087,
+      name: 'Resilience',
+      type: 'bar',
+      modifier: 0
+    },
+    {
+      hash: 1943323491,
+      name: 'Recovery',
+      type: 'bar',
+      modifier: 0
+    }
+  ];
 
   if (item.sockets) {
     Object.keys(item.sockets.socketCategories).forEach(key => {
