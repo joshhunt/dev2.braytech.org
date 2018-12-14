@@ -22,6 +22,14 @@
   grid-template-columns: 1fr;
 }
 
+#this-week .module .content + .content{
+  margin: 2rem 0 0;
+}
+
+#this-week .module .list + .list{
+  margin: 7px 0 0;
+}
+
 #this-week .module .collection-items li {
   background-color: rgba(0, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.4);
