@@ -1,13 +1,186 @@
 
 
 #clan {
-  letter-spacing: 0.5px;
-  min-height: 60vh;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  font-style: italic;
+  display: grid;
+  padding: 4rem 3rem 3rem;
+  grid-gap: 3rem;
+  grid-template-columns: 1.6fr 3fr 1.6fr;
 }
+
+#clan .sub-header {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  width: calc(100% - 0rem);
+  background-color: transparent;
+}
+
+#clan .banner .canvas canvas {
+  width: 100%;
+}
+
+#clan .overview .properties {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 2rem;
+}
+
+#clan .overview .properties .name {
+  position: relative;
+  font-size: 38px;
+  font-weight: 600;
+  margin: 0 0 7px;
+  color: rgba(255, 255, 255, 1);
+}
+
+#clan .overview .properties .name::before {
+  content: ' ';
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 1.3rem;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .properties .name .tag {
+  font-size: 25px;
+  font-weight: 400;
+  display: inline-block;
+  margin: 0 0 0 7px;
+  vertical-align: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .properties .memberCount {
+  position: relative;
+  text-transform: uppercase;
+  margin: 0 0 32px;
+}
+
+#clan .overview .properties .memberCount::before {
+  content: ' ';
+  position: absolute;
+  bottom: -17px;
+  left: 0;
+  width: 0.5rem;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .properties .motto {
+  font-style: italic;
+  letter-spacing: 1px;
+  margin: 0 0 21px;
+}
+
+#clan .overview .properties .bio {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#clan .overview .progression .clanLevel {
+  margin: 0 0 21px;
+}
+
+#clan .overview .progression .clanLevel .text {
+  position: relative;
+  text-transform: uppercase;
+  text-align: right;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 2rem 0 10px;
+}
+
+#clan .overview .progression .clanLevel .text::before {
+  content: ' ';
+  position: absolute;
+  top: -10px;
+  right: 0;
+  width: 0.7rem;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .progression .personalContribution {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  font-size: 14px;
+}
+
+#clan .overview .progression .personalContribution .text {
+  flex-basis: 100%;
+  text-align: right;
+  margin: 0 0 7px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .progression li {
+  display: inline-flex;
+}
+
+#clan .overview .progression li .text {
+  flex-basis: calc(100% - 2.8rem - 10px);
+  margin: 0;
+}
+
+#clan .overview .progression li .state {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 5px 1rem 0 3px;
+  flex-shrink: 0;
+}
+
+#clan .overview .progression li .state::before {
+  content: ' ';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .progression li .state.completed {
+  background-color: #78ba82;
+}
+
+#clan .overview .progression li .state.completed + .text {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#clan .overview .details {
+  font-size: 14px;
+}
+
+#clan .overview .details .weeklyRewardState > .text {
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 1rem;
+}
+
+#clan .overview .details .weeklyRewardState ul li {
+  display: flex;
+  position: relative;
+  padding: 0;
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
+  align-items: flex-start;
+}
+
+#clan .roster .sub-header {
+  margin-top: 0;
+}
+
 
 
 
@@ -20,6 +193,15 @@
 
 @media screen and (max-width: 600px) {
 
+  #clan {
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
+    width: calc(100% - 4rem);
+    grid-template-columns: 1fr;
+  }
 
+  #clan .banner {
+    display: none;
+  }
 
 }

@@ -14,7 +14,7 @@ class Header extends React.Component {
   render() {
     const views = [
       {
-        name: 'Clan',
+        name: 'Clan (preview)',
         desc: 'Activity and statistics',
         slug: '/clan',
         exact: false
