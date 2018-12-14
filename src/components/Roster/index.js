@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 import globals from '../../utils/globals';
 import rgbToHsl from '../../utils/rgbToHsl';
+import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 
 import './styles.css';
@@ -130,7 +131,7 @@ class Roster extends React.Component {
       return <ul className='list roster'>{members.map(member => member.element)}</ul>;
     }
     else {
-      return null;
+      return <Spinner />;
     }
 
     

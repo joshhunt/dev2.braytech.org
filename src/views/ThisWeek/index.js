@@ -43,27 +43,26 @@ class ThisWeek extends React.Component {
     }
 
     const guidedGameHashes = {
-      2258250028: "3145298904", // The Arms Dealer
-      2491790989: "3108813009", // Warden of Nothing
-      3447375316: "3034843176", // The Corrupted
-      3815730356: "3280234344", // Savathûn's Song
-      562078030: "3289589202", // The Pyramidion
-      3326586101: "3718330161", // Tree of Probabilities
-      1503474689: "3372160277", // Lake of Shadows
-      3692509130: "1391780798", // Broodhold
-      1465939129: "3701132453", // The Hollowed Lair
-      3907468134: "272852450", // Will of the Thousands
-      48090081: "4259769141", // The Inverted Spire
-      18699611: "522318687", // Strange Terrain
-      322277826: "1282886582", // Exodus Crash
-      411726442: "936308438", // A Garden World
-      927394522: "1034003646", // The Insight Terminus
+      2258250028: '3145298904', // The Arms Dealer
+      2491790989: '3108813009', // Warden of Nothing
+      3447375316: '3034843176', // The Corrupted
+      3815730356: '3280234344', // Savathûn's Song
+      562078030: '3289589202', // The Pyramidion
+      3326586101: '3718330161', // Tree of Probabilities
+      1503474689: '3372160277', // Lake of Shadows
+      3692509130: '1391780798', // Broodhold
+      1465939129: '3701132453', // The Hollowed Lair
+      3907468134: '272852450', // Will of the Thousands
+      48090081: '4259769141', // The Inverted Spire
+      18699611: '522318687', // Strange Terrain
+      322277826: '1282886582', // Exodus Crash
+      411726442: '936308438', // A Garden World
+      927394522: '1034003646' // The Insight Terminus
     };
 
     const consolidatedInfo = {
       curse: {
         1: {
-          intensity: 'Pestersome',
           triumphs: [
             // DestinyRecordDefinition.Hashes
             2144075646, // The Scorn Champion (Heroic Blind Well)
@@ -75,7 +74,6 @@ class ThisWeek extends React.Component {
           collectibles: [] // DestinyCollectableDefinition.Hashes
         },
         2: {
-          intensity: 'Obstructive',
           triumphs: [
             2144075647, // The Hive Champion (Heroic Blind Well)
             3675740699, // Bolder Fortunes (Ascendant Chests)
@@ -87,7 +85,6 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         3: {
-          intensity: 'Deadly',
           triumphs: [
             2144075645, // The Taken Champion (Heroic Blind Well)
             3675740698, // War Chests (Ascendant Chests)
@@ -247,7 +244,8 @@ class ThisWeek extends React.Component {
         }
       },
       nightfall: {
-        3145298904: { // The Arms Dealer
+        3145298904: {
+          // The Arms Dealer
           triumphs: [
             3340846443, // The Arms Dealer
             4267516859 // Trash the Thresher
@@ -258,7 +256,8 @@ class ThisWeek extends React.Component {
             3490589921 // The Arms Dealer (Emblem)
           ]
         },
-        3108813009: { // Warden of Nothing
+        3108813009: {
+          // Warden of Nothing
           triumphs: [
             2836924866, // Warden of Nothing
             1469598452 // Solar Dance
@@ -269,7 +268,8 @@ class ThisWeek extends React.Component {
             2263264048 // Warden of Nothing (Emblem)
           ]
         },
-        3034843176: { // The Corrupted
+        3034843176: {
+          // The Corrupted
           triumphs: [
             3951275509, // The Corrupted
             3641166665 // Relic Rumble
@@ -280,7 +280,8 @@ class ThisWeek extends React.Component {
             1410290331 // The Corrupted (Emblem)
           ]
         },
-        3280234344: { // Savathûn's Song
+        3280234344: {
+          // Savathûn's Song
           triumphs: [
             2099501667, // Savathûn's Song
             1442950315 // The Best Defense
@@ -291,7 +292,8 @@ class ThisWeek extends React.Component {
             3490589926 // Savathûn's Song (Emblem)
           ]
         },
-        3289589202: { // The Pyramidion
+        3289589202: {
+          // The Pyramidion
           triumphs: [
             1060780635, // The Pyramidion
             1142177491 // Siege Engine
@@ -302,7 +304,8 @@ class ThisWeek extends React.Component {
             3490589930 // The Pyramidion (Emblem)
           ]
         },
-        3718330161: { // Tree of Probabilities
+        3718330161: {
+          // Tree of Probabilities
           triumphs: [
             2282894388, // Tree of Probabilities
             3636866482 // Laser Dodger
@@ -313,7 +316,8 @@ class ThisWeek extends React.Component {
             3490589924 // Tree of Probabilities (Emblem)
           ]
         },
-        3372160277: { // Lake of Shadows
+        3372160277: {
+          // Lake of Shadows
           triumphs: [
             1329556468, // Lake of Shadows
             413743786 // Tether Time
@@ -329,7 +333,8 @@ class ThisWeek extends React.Component {
         //  items: [],
         //  collectibles: []
         //},
-        3701132453: { // The Hollowed Lair
+        3701132453: {
+          // The Hollowed Lair
           triumphs: [
             3450793480, // The Hollowed Lair
             3847579126 // Arc Avoidance
@@ -340,7 +345,8 @@ class ThisWeek extends React.Component {
             3314387486 // The Hollowed Lair (Emblem)
           ]
         },
-        272852450: { // Will of the Thousands
+        272852450: {
+          // Will of the Thousands
           triumphs: [
             1039797865, // Will of the Thousands
             3013611925 // Three and Out
@@ -351,7 +357,8 @@ class ThisWeek extends React.Component {
             1766893928 // Will of the Thousands (Emblem)
           ]
         },
-        4259769141: { // The Inverted Spire
+        4259769141: {
+          // The Inverted Spire
           triumphs: [
             3973165904, // The Inverted Spire
             1498229894 //The Floor Is Lava
@@ -362,7 +369,8 @@ class ThisWeek extends React.Component {
             3490589925 //The Inverted SPire (Emblem)
           ]
         },
-        522318687: { // Strange Terrain
+        522318687: {
+          // Strange Terrain
           triumphs: [
             165166474, // Strange Terrain
             1871570556 // Don't Take Five
@@ -373,7 +381,8 @@ class ThisWeek extends React.Component {
             1766893929 // Strange Terrain (Emblem)
           ]
         },
-        1282886582: { // Exodus Crash
+        1282886582: {
+          // Exodus Crash
           triumphs: [
             1526865549, // Exodus Crash
             2140068897 // Faster than Lightning
@@ -384,7 +393,8 @@ class ThisWeek extends React.Component {
             3490589927 // Exodus Crash (Emblem)
           ]
         },
-        936308438: { // A Garden World
+        936308438: {
+          // A Garden World
           triumphs: [
             2692332187, // A Garden World
             1398454187 // The Quickening
@@ -395,7 +405,8 @@ class ThisWeek extends React.Component {
             3490589931 // A Garden World (Emblem)
           ]
         },
-        1034003646: { // The Insight Terminus
+        1034003646: {
+          // The Insight Terminus
           triumphs: [
             3399168111, // The Insight Terminus
             599303591 // Capture Completionist
@@ -458,7 +469,7 @@ class ThisWeek extends React.Component {
     // console.log(cycleInfo.week);
     // console.log(consolidatedInfo.curse[cycleInfo.week.curse], consolidatedInfo.ascendant[cycleInfo.week.ascendant], consolidatedInfo.ep[cycleInfo.week.ep]);
 
-    // flashpoint
+    // flashpoint    
     const flashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     let nightfalls = [];
     // scored nightfall strikes
@@ -469,25 +480,27 @@ class ThisWeek extends React.Component {
       let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
       let hash;
 
-      if (typeof nightfall.guidedGame === "undefined") {
-        hash = nightfall.hash
+      if (typeof nightfall.guidedGame === 'undefined') {
+        hash = nightfall.hash;
       } else {
         hash = guidedGameHashes[activity.activityHash];
       }
 
       nightfalls.push(
         <div className='content'>
-          <div
-            className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
-          <h3>{nightfall.selectionScreenDisplayProperties.name}{nightfall.guidedGame ? " (Guided Game)" : ""}</h3>
+          <div className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
+          <h3>
+            {nightfall.selectionScreenDisplayProperties.name}
+            {nightfall.guidedGame ? ' (Guided Game)' : null}
+          </h3>
           <ul className='list collection-items'>
-            <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].collectibles}/>
+            <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].collectibles} />
           </ul>
           <ul className='list record-items'>
-            <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].triumphs} ordered/>
+            <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].triumphs} ordered />
           </ul>
         </div>
-      )
+      );
     });
 
     return (
@@ -500,7 +513,7 @@ class ThisWeek extends React.Component {
             <div className='sub-title'>The Dreaming City</div>
             <h3>Cycle week {cycleInfo.week.curse}</h3>
             <ul className='list record-items'>
-              <Records selfLink {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered/>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
             </ul>
           </div>
         </div>
@@ -512,8 +525,7 @@ class ThisWeek extends React.Component {
             <div className='sub-title'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
             <h3>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].challenge}</h3>
             <ul className='list record-items'>
-              <Records selfLink {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs}
-                       ordered/>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
             </ul>
           </div>
         </div>
@@ -525,7 +537,7 @@ class ThisWeek extends React.Component {
             <div className='sub-title'>Mars</div>
             <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
             <ul className='list collection-items'>
-              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles}/>
+              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
             </ul>
           </div>
           <div className='sub-header'>

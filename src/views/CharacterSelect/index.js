@@ -9,6 +9,7 @@ import * as responseUtils from '../../utils/responseUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
 import * as ls from '../../utils/localStorage';
 import errorHandler from '../../utils/errorHandler';
+import Spinner from '../../components/Spinner';
 
 import './styles.css';
 
@@ -213,7 +214,12 @@ class CharacterSelect extends React.Component {
 
     return (
       <div className={cx('view', { loading: this.state.loading })} id='get-profile'>
-        {reverse ? <div className='profile'>{profileElement}</div> : null}
+        {reverse ? (
+          <div className='profile'>
+            {this.state.loading ? <Spinner dark /> : null}
+            {profileElement}
+          </div>
+        ) : null}
         <div className='search'>
           {errorNotices}
           <div className='sub-header'>
@@ -249,7 +255,12 @@ class CharacterSelect extends React.Component {
             </>
           ) : null}
         </div>
-        {!reverse ? <div className='profile'>{profileElement}</div> : null}
+        {!reverse ? (
+          <div className='profile'>
+            {this.state.loading ? <Spinner dark /> : null}
+            {profileElement}
+          </div>
+        ) : null}
       </div>
     );
   }
