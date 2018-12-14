@@ -417,14 +417,60 @@ class ThisWeek extends React.Component {
             465974149 // Insight Terminus (Emblem)
           ]
         }
+      },
+      flashpoint: {
+        538154339: {// FLASHPOINT: TITAN
+          triumphs: [
+            2542531058, // Flashpoint
+            1632551190 // Heroically Adventurous
+          ]
+        },
+        794779273: { //FLASHPOINT: IO
+          triumphs: [
+            2163667980, // Flashpoint
+            3686586344 // Heroically Adventurous
+          ]
+        },
+        905940422: { //FLASHPOINT: MERCURY
+          triumphs: [
+            2548580601, // Flashpoint
+            3632308741 // Heroically Adventurous
+          ]
+        },
+        2332272114: { //FLASHPOINT: EDZ
+          triumphs: [
+            855929237, // Flashpoint
+            1683000545 // Heroically Adventurous
+          ]
+        },
+        3232202236: { //FLASHPOINT: TANGLED SHORE
+          triumphs: [
+            2070013491 // Flashpoint
+            // Has no 'Heroically Adventurous'
+
+          ]
+        },
+        3588655854: { //FLASHPOINT: NESSUS
+          triumphs: [
+            1652021369, // Flashpoint
+            633055621 // Heroically Adventurous
+          ]
+        },
+        3929972810: { //FLASHPOINT: MARS
+          triumphs: [
+            1414820429, // Flashpoint
+            1417930213 // Heroically Adventurous
+          ]
+        }
+
       }
     };
 
     // console.log(cycleInfo.week);
     // console.log(consolidatedInfo.curse[cycleInfo.week.curse], consolidatedInfo.ascendant[cycleInfo.week.ascendant], consolidatedInfo.ep[cycleInfo.week.ep]);
 
-    // flashpoint
-    console.log(manifest.DestinyInventoryItemDefinition[milestones[463010297].availableQuests[0].questItemHash]);
+    // flashpoint    
+    const flashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     let nightfalls = [];
     // scored nightfall strikes
     //milestones[2171429505].activities.filter(activity => activity.modifierHashes).forEach(activity => {
@@ -492,6 +538,18 @@ class ThisWeek extends React.Component {
             <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
             <ul className='list collection-items'>
               <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+            </ul>
+          </div>
+          <div className='sub-header'>
+            <div>Flashpoint</div>
+          </div>
+          <div className='content'>
+            <div
+              className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
+            <h3>{flashpoint.displayProperties.name}</h3>
+            <ul className='list record-items'>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs}
+                       ordered/>
             </ul>
           </div>
         </div>
