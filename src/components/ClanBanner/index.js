@@ -3,6 +3,7 @@ import assign from 'lodash/assign';
 import cx from 'classnames';
 import globals from '../../utils/globals';
 import rgbToHsl from '../../utils/rgbToHsl';
+import Spinner from '../../components/Spinner';
 
 import clanBannerManifestJson from '../../data/clanBannerManifest';
 
@@ -15,8 +16,6 @@ class ClanBanner extends React.Component {
     this.state = {
       loaded: 0
     };
-
-    this.canvas = React.createRef();
 
     this.bannerConfig = {
       DecalBgImage: {
@@ -185,6 +184,7 @@ class ClanBanner extends React.Component {
     }
     return (
       <div className='canvas'>
+        {this.state.loaded !== 6 ? <Spinner /> : null}
         <canvas ref='canvas' width={canvasWidth} height={canvasHeight} />
       </div>
     );

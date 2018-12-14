@@ -113,11 +113,14 @@
 
 #get-profile .profile {
   position: relative;
-  transition: opacity 0.25s;
+}
+
+#get-profile .profile .spinner {
+  position: absolute;
 }
 
 #get-profile .profile .user {
-  
+  transition: opacity 0.25s;
 }
 
 #get-profile .profile .info {
@@ -151,7 +154,7 @@
 }
 
 #get-profile.loading .list li a,
-#get-profile.loading .profile {
+#get-profile.loading .profile .user {
   opacity: 0;
 }
 

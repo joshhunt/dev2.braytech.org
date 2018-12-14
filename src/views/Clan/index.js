@@ -1,7 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import globals from '../../utils/globals';
 import assign from 'lodash/assign';
+import ObservedImage from '../../components/ObservedImage';
 import ClanBanner from '../../components/ClanBanner';
 import Roster from '../../components/Roster';
 
@@ -158,6 +160,22 @@ class Clan extends React.Component {
             </div>
           </div>
           <div className='roster'>
+            <div className='sub-header'>
+              <div>Views</div>
+            </div>
+            <div className='views'>
+              <ul className='list'>
+                <li className='linked'>
+                  <NavLink to='/clan'>About</NavLink>
+                </li>
+                <li className='linked'>
+                  <NavLink to='/clan/roster'>Roster</NavLink>
+                </li>
+                <li className='linked'>
+                  <NavLink to='/clan/stats'>Stats</NavLink>
+                </li>
+              </ul>
+            </div>
             <div className='sub-header'>
               <div>Clan roster</div>
               {this.state.membersResponse ? <div>{this.state.membersResponse.Response.results.filter(member => member.isOnline).length} online</div> : null}
