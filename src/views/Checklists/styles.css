@@ -162,8 +162,8 @@
     flex-basis: calc(100% - 1rem - 10px);
   }
 
-  #checklists .lists .list li .lowlines {
-    display: none;
+  #checklists .lists .list li .lowlines a {
+    opacity: 0.8;
   }
 }
 

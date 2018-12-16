@@ -1,0 +1,40 @@
+
+#clan > .roster {
+  display: grid;
+  padding: 4rem 3rem 3rem;
+  grid-gap: 3rem;
+  grid-template-columns: 1.6fr 5.6fr;
+}
+
+#clan > .roster .list.roster li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 3px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 1200px) {
+
+
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+  #clan > .roster {
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
+    width: calc(100% - 4rem);
+    grid-template-columns: 1fr;
+  }
+  
+  #clan > .roster .list.roster li:nth-child(2) {
+    padding-top: 3px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+}

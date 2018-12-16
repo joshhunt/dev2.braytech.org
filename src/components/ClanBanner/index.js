@@ -66,35 +66,31 @@ class ClanBanner extends React.Component {
     const clanBannerManifest = clanBannerManifestJson._embedded;
     const clanBannerData = this.props.bannerData;
 
-    console.log(clanBannerManifest, clanBannerData);
-
     let decals = clanBannerManifest.Decals.find(decal => decal.imageHash === clanBannerData.decalId);
     let decalPrimaryColor = clanBannerManifest.DecalPrimaryColors.find(color => color.colorHash === clanBannerData.decalColorId);
     let decalSecondaryColor = clanBannerManifest.DecalSecondaryColors.find(color => color.colorHash === clanBannerData.decalBackgroundColorId);
     this.bannerConfig.DecalFgImage.src = decals.foregroundImagePath;
-    this.bannerConfig.DecalFgImage.color = `${decalPrimaryColor.red}, ${decalPrimaryColor.green}, ${decalPrimaryColor.blue}, 1`;
+    this.bannerConfig.DecalFgImage.color = `${decalPrimaryColor.red}, ${decalPrimaryColor.green}, ${decalPrimaryColor.blue}, ${Math.min(decalPrimaryColor.alpha, 1)}`;
     this.bannerConfig.DecalBgImage.src = decals.backgroundImagePath;
-    this.bannerConfig.DecalBgImage.color = `${decalSecondaryColor.red}, ${decalSecondaryColor.green}, ${decalSecondaryColor.blue}, 1`;
+    this.bannerConfig.DecalBgImage.color = `${decalSecondaryColor.red}, ${decalSecondaryColor.green}, ${decalSecondaryColor.blue}, ${Math.min(decalSecondaryColor.alpha, 1)}`;
 
     let gonfalon = clanBannerManifest.Gonfalons.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonId);
     let gonfalonColor = clanBannerManifest.GonfalonColors.find(color => color.colorHash === clanBannerData.gonfalonColorId);
     this.bannerConfig.GonfalonImage.src = gonfalon.foregroundImagePath;
-    this.bannerConfig.GonfalonImage.color = `${gonfalonColor.red}, ${gonfalonColor.green}, ${gonfalonColor.blue}, 1`;
+    this.bannerConfig.GonfalonImage.color = `${gonfalonColor.red}, ${gonfalonColor.green}, ${gonfalonColor.blue}, ${Math.min(gonfalonColor.alpha, 1)}`;
 
     let gonfalonDetail = clanBannerManifest.GonfalonDetails.find(gonfalon => gonfalon.imageHash === clanBannerData.gonfalonDetailId);
     let gonfalonDetailColor = clanBannerManifest.GonfalonDetailColors.find(color => color.colorHash === clanBannerData.gonfalonDetailColorId);
     this.bannerConfig.GonfalonDetailImage.src = gonfalonDetail.foregroundImagePath;
-    this.bannerConfig.GonfalonDetailImage.color = `${gonfalonDetailColor.red}, ${gonfalonDetailColor.green}, ${gonfalonDetailColor.blue}, 1`;
+    this.bannerConfig.GonfalonDetailImage.color = `${gonfalonDetailColor.red}, ${gonfalonDetailColor.green}, ${gonfalonDetailColor.blue}, ${Math.min(gonfalonDetailColor.alpha, 1)}`;
 
-    console.log(this.bannerConfig);
+    console.log(this.bannerConfig)
 
     Object.keys(this.bannerConfig).forEach(key => {
       let image = this.bannerConfig[key];
-      console.log(image);
       let cache = new Image();
       image.el = cache;
       cache.onload = () => {
-        console.log('loaded!');
         let state = this.state.loaded + 1;
         this.setState({
           loaded: state

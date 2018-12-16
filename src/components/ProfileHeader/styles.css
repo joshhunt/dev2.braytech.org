@@ -51,7 +51,7 @@ html.backdropfilter #header.profile-header .braytech {
 #header.profile-header .characters .list li {
   padding: 0 0 0 calc(96px + 2rem);
   margin: 0;
-  height: unset;
+  height: 96px;
   display: flex;
   flex-flow: row wrap;
   user-select: none;
@@ -217,8 +217,10 @@ html.backdropfilter #header.profile-header .braytech {
     width: 100%;
     max-width: 27rem;
   }
+  
   #header.profile-header .characters .list li {
     padding: 0 0 0 calc(64px + 1rem);
+    height: unset;
   }
 
   #header.profile-header .characters .list li .image.secondaryOverlay {

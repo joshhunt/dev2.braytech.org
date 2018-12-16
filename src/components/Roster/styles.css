@@ -1,13 +1,68 @@
-
 .list.roster {
+}
 
+.list.roster li {
+  display: grid;
+  grid-template-columns: calc(36px + 1rem) 10rem 8rem 8rem 7rem 1fr 0.5fr;
+}
+
+.list.roster.mini li {
+  grid-template-columns: calc(36px + 1rem) 1fr;
+}
+
+.list.roster li.grid-header div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.list.roster li.error .error {
+  grid-column: 3/6;
+}
+
+.list.roster li.blueberry:not(.linked)::before,
+.list.roster li.blueberry:not(.linked)::after {
+  content: ' ';
+  position: absolute;
+  top: 15px;
+  left: -1rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #5c92e0;
+  pointer-events: none;
+}
+
+.list.roster li.blueberry:not(.linked)::before {
+  animation: animation-berry-pop 3s linear infinite;
+}
+
+@keyframes animation-berry-pop {
+  0%,
+  40% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(10);
+  }
 }
 
 .list.roster li .icon {
   position: relative;
-  height: 38px;
-  width: 38px;
-  margin: 0 1rem 0 0;
+  height: 32px;
+  width: 32px;
+  margin: 3px 1rem 3px 3px;
+}
+
+.list.roster li .icon.dl {
+  opacity: 0.4;
+}
+
+.list.roster li.isOnline .icon.dl {
+  opacity: 1;
 }
 
 .list.roster li .displayName {
@@ -15,17 +70,132 @@
   font-size: 16px;
 }
 
-.list.roster li.view-all {
-  padding: 0 1rem 0 calc(38px + 1rem);
-  font-size: 16px;
+.list.roster li div:not(.displayName) {
+  font-size: 14px;
+  line-height: 16px;
 }
 
+.list.roster li .clanXp {
+  color: rgba(255, 255, 255, 0.4);
+}
 
+.list.roster li .clanXp span {
+  color: rgba(255, 255, 255, 0.8);
+}
 
+.list.roster li .light {
+  position: relative;
+  margin: 0 10px 0 14px;
+  font-weight: 500;
+  color: #2ed1c9;
+  display: inline-block;
+  width: 25px;
+}
 
+.list.roster li .light::before {
+  content: 'l';
+  position: absolute;
+  top: 3px;
+  left: -10px;
+  font-family: 'destiny' !important;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.list.roster li [class^='destiny-'] {
+  display: inline-block;
+  font-size: 16px;
+  vertical-align: -2px;
+}
+
+/* .list.roster li .destiny-class_titan {
+  color: #c94436;
+}
+
+.list.roster li .destiny-class_hunter {
+  color: #5e93a0;
+}
+
+.list.roster li .destiny-class_warlock {
+  color: #d5a52a;
+} */
+
+.list.roster li .activity time {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.list.roster li.isOnline .activity time {
+  margin: 0 0 0 10px;
+}
+
+.list.roster li.view-all {
+  padding: 0 1rem 0 calc(38px + 1rem);
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.list.roster li.view-all::before {
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.4);
+}
+
+.list.roster li.view-all.linked:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+
+.list.roster li.view-all a.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
+  color: #fff;
+}
+
+.list.roster li.view-all a:hover {
+  color: #fff;
+}
+
+.list.roster li .icon.black {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.list.roster li.no-character {
+  /* background-color: #222; */
+}
 
 @media screen and (max-width: 1200px) {
 }
 
 @media screen and (max-width: 600px) {
+  .list.roster:not(.mini) li {
+    grid-template-columns: calc(36px + 1rem) 1fr;
+    height: unset;
+  }
+  .list.roster:not(.mini) li.grid-header {
+    display: none;
+  }
+  .list.roster:not(.mini) li .triumphScore,
+  .list.roster li .clanXp,
+  .list.roster li .character,
+  .list.roster li .historicalStats {
+    display: none;
+  }
+  .list.roster:not(.mini) li .activity {
+    grid-column: 2/3;
+  }
+  .list.roster:not(.mini) li .activity time {
+    display: block;
+    margin: 0 0 4px;
+  }
+  .list.roster:not(.mini) li.isOnline .activity time {
+    margin: 7px 0 4px;
+  }
 }

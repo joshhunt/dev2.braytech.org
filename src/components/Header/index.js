@@ -14,7 +14,7 @@ class Header extends React.Component {
   render() {
     const views = [
       {
-        name: 'Clan (preview)',
+        name: 'Clan',
         desc: 'Activity and statistics',
         slug: '/clan',
         exact: false
@@ -57,7 +57,9 @@ class Header extends React.Component {
       }
     ];
 
-    if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && this.props.route.location.pathname !== '/character-select') {
+    let standard = ['/character-select', '/pride', '/credits']
+
+    if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && !standard.includes(this.props.route.location.pathname)) {
       return <ProfileHeader {...this.props.route} {...this.props.user} viewport={this.props.viewport} manifest={this.props.manifest} views={views} />;
     } else {
       return <StandardHeader {...this.props.user} viewport={this.props.viewport} views={views} />;
