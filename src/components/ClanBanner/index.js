@@ -84,7 +84,7 @@ class ClanBanner extends React.Component {
     this.bannerConfig.GonfalonDetailImage.src = gonfalonDetail.foregroundImagePath;
     this.bannerConfig.GonfalonDetailImage.color = `${gonfalonDetailColor.red}, ${gonfalonDetailColor.green}, ${gonfalonDetailColor.blue}, ${Math.min(gonfalonDetailColor.alpha, 1)}`;
 
-    console.log(this.bannerConfig)
+    // console.log(this.bannerConfig)
 
     Object.keys(this.bannerConfig).forEach(key => {
       let image = this.bannerConfig[key];

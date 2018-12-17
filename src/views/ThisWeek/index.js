@@ -42,24 +42,6 @@ class ThisWeek extends React.Component {
       cycleInfo.week[cycle] = Math.floor((cycleInfo.elapsed[cycle] / msPerWk) % cycleInfo.cycle[cycle]) + 1;
     }
 
-    const guidedGameHashes = {
-      2258250028: '3145298904', // The Arms Dealer
-      2491790989: '3108813009', // Warden of Nothing
-      3447375316: '3034843176', // The Corrupted
-      3815730356: '3280234344', // Savathûn's Song
-      562078030: '3289589202', // The Pyramidion
-      3326586101: '3718330161', // Tree of Probabilities
-      1503474689: '3372160277', // Lake of Shadows
-      3692509130: '1391780798', // Broodhold
-      1465939129: '3701132453', // The Hollowed Lair
-      3907468134: '272852450', // Will of the Thousands
-      48090081: '4259769141', // The Inverted Spire
-      18699611: '522318687', // Strange Terrain
-      322277826: '1282886582', // Exodus Crash
-      411726442: '936308438', // A Garden World
-      927394522: '1034003646' // The Insight Terminus
-    };
-
     const consolidatedInfo = {
       curse: {
         1: {
@@ -473,31 +455,18 @@ class ThisWeek extends React.Component {
     const flashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     let nightfalls = [];
     // scored nightfall strikes
-    //milestones[2171429505].activities.filter(activity => activity.modifierHashes).forEach(activity => {
-
-    // nightfall strikes
-    milestones[2171429505].activities.forEach(activity => {
+    milestones[2171429505].activities.filter(activity => activity.modifierHashes).forEach(activity => {
       let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
-      let hash;
-
-      if (typeof nightfall.guidedGame === 'undefined') {
-        hash = nightfall.hash;
-      } else {
-        hash = guidedGameHashes[activity.activityHash];
-      }
 
       nightfalls.push(
-        <div className='content'>
+        <div key={nightfall.hash} className='content'>
           <div className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
-          <h3>
-            {nightfall.selectionScreenDisplayProperties.name}
-            {nightfall.guidedGame ? ' (Guided Game)' : null}
-          </h3>
+          <h3>{nightfall.selectionScreenDisplayProperties.name}</h3>
           <ul className='list collection-items'>
-            <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].collectibles} />
+            <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
           </ul>
           <ul className='list record-items'>
-            <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[hash].triumphs} ordered />
+            <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
           </ul>
         </div>
       );
@@ -505,6 +474,35 @@ class ThisWeek extends React.Component {
 
     return (
       <div className='view' id='this-week'>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Flashpoint</div>
+          </div>
+          <div className='content'>
+            <div
+              className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
+            <h3>{flashpoint.displayProperties.name}</h3>
+            <ul className='list record-items'>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered/>
+            </ul>
+          </div>
+          <div className='sub-header'>
+            <div>Escalation Protocol</div>
+          </div>
+          <div className='content'>
+            <div className='sub-title'>Mars</div>
+            <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
+            <ul className='list collection-items'>
+              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
+            </ul>
+          </div>
+        </div>
+        <div className='module'>
+          <div className='sub-header'>
+            <div>Nightfalls</div>
+          </div>
+          {nightfalls}
+        </div>
         <div className='module curse'>
           <div className='sub-header'>
             <div>The Curse</div>
@@ -528,36 +526,6 @@ class ThisWeek extends React.Component {
               <Records selfLink {...this.props} hashes={consolidatedInfo.ascendant[cycleInfo.week.ascendant].triumphs} ordered />
             </ul>
           </div>
-        </div>
-        <div className='module'>
-          <div className='sub-header'>
-            <div>Escalation Protocol</div>
-          </div>
-          <div className='content'>
-            <div className='sub-title'>Mars</div>
-            <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
-            <ul className='list collection-items'>
-              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
-            </ul>
-          </div>
-          <div className='sub-header'>
-            <div>Flashpoint</div>
-          </div>
-          <div className='content'>
-            <div
-              className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
-            <h3>{flashpoint.displayProperties.name}</h3>
-            <ul className='list record-items'>
-              <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs}
-                       ordered/>
-            </ul>
-          </div>
-        </div>
-        <div className='module'>
-          <div className='sub-header'>
-            <div>Nightfalls</div>
-          </div>
-          {nightfalls}
         </div>
       </div>
     );

@@ -161,6 +161,11 @@
 }
 
 @media screen and (max-width: 1200px) {
+
+  #header.navOpen {
+    position: fixed !important;
+  }
+
   #header .braytech {
     height: 3rem;
     font-size: 12px;

@@ -195,6 +195,9 @@ const weapon = (manifest, item) => {
         if (plug.itemCategoryHashes.includes(2237038328)) {
           return;
         }
+        if (plug.hash === 3876796314) { // base radiance thing
+          return;
+        }
         traits.push(
           <div key={plug.hash} className='plug trait'>
             <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
@@ -260,7 +263,7 @@ const weapon = (manifest, item) => {
       <div className={cx('sockets', { hasTraits: traits.length > 0 })}>
         {intrinsic ? (
           <div className='plug intrinsic'>
-            <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
             <div className='text'>
               <div className='name'>{intrinsic.displayProperties.name}</div>
               <div className='description'>{intrinsic.displayProperties.description}</div>

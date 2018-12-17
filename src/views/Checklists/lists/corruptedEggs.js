@@ -33,11 +33,11 @@ const corruptedEggs = props => {
         <div className='text'>
           <p>Egg {number}</p>
         </div>
-        {/* <div className='lowlines'>
+        <div className='lowlines'>
           <a href={`https://lowlidev.com.au/destiny/maps/2779202173/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
             <i className='uniE1C4' />
           </a>
-        </div> */}
+        </div>
       </li>
     );
   });

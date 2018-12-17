@@ -147,6 +147,10 @@
   height: unset;
 }
 
+#get-profile .characters-list .list li {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 #get-profile.loading .form .field,
 #get-profile.loading .form .field input,
 #get-profile.loading .list li,

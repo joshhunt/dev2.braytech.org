@@ -102,6 +102,7 @@ class Tooltip extends React.Component {
         this.touchMovement = true;
       });
       this.tooltip.current.addEventListener('touchend', e => {
+        e.preventDefault();
         if (!this.touchMovement) {
           this.setState({
             hash: false

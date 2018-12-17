@@ -68,7 +68,7 @@ const armour = (manifest, item) => {
         });
         traits.push(
           <div key={plug.hash} className='plug trait'>
-            <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
             <div className='text'>
               <div className='name'>{plug.displayProperties.name}</div>
               {/* <div className="description">{plug.displayProperties.description}</div> */}
@@ -109,7 +109,7 @@ const armour = (manifest, item) => {
       <div className={cx('sockets', { hasTraits: traits.length > 0 })}>
         {intrinsic ? (
           <div className='plug intrinsic'>
-            <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${intrinsic.displayProperties.icon}`} />
             <div className='text'>
               <div className='name'>{intrinsic.displayProperties.name}</div>
               <div className='description'>{intrinsic.displayProperties.description}</div>

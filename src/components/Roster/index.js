@@ -4,6 +4,7 @@ import assign from 'lodash/assign';
 import cx from 'classnames';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
+import _filter from 'lodash/filter';
 import globals from '../../utils/globals';
 import rgbToHsl from '../../utils/rgbToHsl';
 import Spinner from '../../components/Spinner';
@@ -146,11 +147,35 @@ class Roster extends React.Component {
           return;
         }
 
-        let lastCharacterActivity = Object.entries(member.profile.characterActivities.data)
-          .filter(character => (character[1].currentActivityHash !== 0 ? character[0] : member.profile.characterActivities.data[0]))
-          .sort((character1, character2) => (new Date(character1.dateActivityStarted).getTime() > new Date(character2.dateActivityStarted).getTime() ? 1 : -1))[0];
+        let lastCharacterActivity = Object.entries(member.profile.characterActivities.data);
+        lastCharacterActivity = orderBy(
+          lastCharacterActivity, 
+          [
+            character => character[1].dateActivityStarted, 
+          ], 
+          ['desc']
+        );
+        // lastCharacterActivity = _filter(
+        //   lastCharacterActivity, 
+        //   [
+        //     character => character.currentActivityHash !== 0
+        //   ]
+        // );
 
-        let lastCharacterTime = Object.entries(member.profile.characterActivities.data).sort((character1, character2) => (new Date(character1.dateActivityStarted).getTime() > new Date(character2.dateActivityStarted).getTime() ? 1 : -1))[0];
+        lastCharacterActivity = lastCharacterActivity.length > 0 ? lastCharacterActivity[0] : false;
+
+        let lastCharacterTime = Object.entries(member.profile.characterActivities.data);
+        lastCharacterTime = orderBy(
+          lastCharacterTime, 
+          [
+            character => character[1].dateActivityStarted, 
+          ], 
+          ['desc']
+        );
+
+        // console.log(lastCharacterActivity, lastCharacterTime)
+
+        // console.log(lastCharacterTime, member.profile.characterActivities.data);
 
         // console.log(member,, lastCharacterActivity);
 
@@ -228,7 +253,7 @@ class Roster extends React.Component {
                 }
               }
 
-              console.log(member, collated)
+              // console.log(member, collated)
               
               if (activity.directActivityModeType) {
                 switch (activity.directActivityModeType) {
@@ -276,7 +301,7 @@ class Roster extends React.Component {
               lastActive: lastActivity && member.member.isOnline ? new Date(lastActivity.dateActivityStarted).getTime() : new Date(member.profile.profile.data.dateLastPlayed).getTime(),
               lastActivity: lastActivity && member.member.isOnline ? lastActivity.currentActivityHash : 0,
               element: (
-                <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry })}>
+                <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry, thisIsYou: member.member.destinyUserInfo.membershipId == this.props.membershipId })}>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${lastCharacter.emblemPath}`} />
                   <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
                   <div className='triumphScore'>{member.profile.profileRecords.data.score}</div>
@@ -339,7 +364,7 @@ class Roster extends React.Component {
           lastActivity: 0,
           element: (
             <li key='i_am_unqiue' className='linked view-all'>
-              <Link to='/clan/roster'>View all members</Link>
+              <Link to='/clan/roster'>View full roster</Link>
             </li>
           )
         });

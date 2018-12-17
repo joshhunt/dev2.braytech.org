@@ -15,7 +15,7 @@
 }
 
 #this-week .module .sub-header ~ .sub-header{
-  margin: 2rem 0;
+  margin: 3rem 0 2rem;
 }
 
 #this-week .module .record-items {
@@ -65,6 +65,19 @@
   padding: 2rem;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
+}
+
+#this-week .module .sub-header {
+  margin: 0 0 1rem;
+  width: calc(100% - 4rem);
+}
+
+#this-week .module .sub-header ~ .sub-header{
+  margin: 2rem 0 1rem;
+}
+
+#this-week h3 {
+  margin: 0 0 1rem;
 }
 
 }

@@ -102,7 +102,7 @@ class AboutView extends React.Component {
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                 <div className='memberCount'>// {clan.memberCount} members</div>
                 <div className='motto'>{clan.motto}</div>
-                <ReactMarkdown className='bio' escapeHtml disallowedTypes={['link', 'linkReference', 'image', 'imageReference']} source={clan.about} />
+                <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={clan.about} />
               </div>
               <div className='sub-header'>
                 <div>Season 5</div>

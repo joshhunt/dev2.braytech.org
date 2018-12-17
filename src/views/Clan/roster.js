@@ -107,7 +107,7 @@ class RosterView extends React.Component {
                 </ul>
               </div>
             </div>
-            <div className='members'>{this.state.membersResponse ? <Roster members={this.state.membersResponse} manifest={manifest} /> : <Spinner />}</div>
+            <div className='members'>{this.state.membersResponse ? <Roster {...this.props} members={this.state.membersResponse} /> : <Spinner />}</div>
           </div>
         </div>
       );
