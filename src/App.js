@@ -26,6 +26,7 @@ import ThisWeek from './views/ThisWeek';
 import Vendors from './views/Vendors';
 import Pride from './views/Pride';
 import Credits from './views/Credits';
+import ClanBannerBuilder from './views/Tools/ClanBannerBuilder';
 
 class App extends Component {
   constructor() {
@@ -360,6 +361,7 @@ class App extends Component {
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} {...this.state.user} manifest={this.manifest} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
                   <Route path='/' exact render={() => <Index />} />
                 </Switch>
               </div>
@@ -449,6 +451,7 @@ class App extends Component {
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} manifest={this.manifest} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
                   <Route path='/' exact render={() => <Index />} />
                 </Switch>
               </div>

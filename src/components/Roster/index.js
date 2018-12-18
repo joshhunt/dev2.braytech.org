@@ -207,7 +207,7 @@ class Roster extends React.Component {
             let stats = null;
             if (lastActivity && member.member.isOnline) {
               let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
-              let mode = activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash];
+              let mode = activity ? activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash] : false;
               
               // console.log(lastActivity);
 

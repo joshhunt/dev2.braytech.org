@@ -61,6 +61,8 @@ class RosterView extends React.Component {
   componentDidMount() {
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
+    
+    window.scrollTo(0, 0);
 
     if (clan) {
       this.groupFetch(clan.groupId).then(response => {

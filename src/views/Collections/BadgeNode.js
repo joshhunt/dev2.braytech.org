@@ -27,17 +27,12 @@ class BadgeNode extends React.Component {
       let classState = [];
 
       nodeDefinition.children.collectibles.forEach(child => {
-
-        let state;
-        if (profileCollectibles[child.collectibleHash]) {
-          state = profileCollectibles[child.collectibleHash] ? profileCollectibles[child.collectibleHash].state : 0;
-        } else if (characterCollectibles[characterId].collectibles[child.collectibleHash]) {
-          state = characterCollectibles[characterId].collectibles[child.collectibleHash] ? characterCollectibles[characterId].collectibles[child.collectibleHash].state : 0;
+        let scope = profileCollectibles.collectibles[child.collectibleHash] ? profileCollectibles.collectibles[child.collectibleHash] : characterCollectibles[characterId].collectibles[child.collectibleHash];
+        if (scope) {
+          classState.push(scope.state);
         } else {
-          state = 0;
+          console.log(`34 Undefined state for ${child.collectibleHash}`);
         }
-
-        classState.push(state);
       });
 
       badgeChildren.push(
@@ -59,7 +54,7 @@ class BadgeNode extends React.Component {
 
     let completed = false;
     let progress = [];
-
+console.log(classStates)
     classStates.forEach(obj => {
       if (obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) {
         completed = true;
