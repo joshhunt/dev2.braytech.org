@@ -11,7 +11,7 @@
 
 #this-week .module .sub-header {
   margin: 0 0 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
 }
 
 #this-week .module .sub-header ~ .sub-header{
@@ -61,7 +61,6 @@
 @media screen and (max-width: 600px) {
 
 #this-week {
-  width: calc(100% - 4rem);
   padding: 2rem;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
@@ -69,7 +68,6 @@
 
 #this-week .module .sub-header {
   margin: 0 0 1rem;
-  width: calc(100% - 4rem);
 }
 
 #this-week .module .sub-header ~ .sub-header{

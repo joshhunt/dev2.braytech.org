@@ -1,5 +1,6 @@
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 html, body, div, span, applet, object, iframe,

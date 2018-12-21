@@ -1,11 +1,10 @@
 #collections {
   padding: 3rem;
-  width: calc(100% - 6rem);
 }
 
 #collections .sub-header {
   margin: 0 0 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
 }
 
 #collections .sidebar {
@@ -140,8 +139,8 @@
   position: absolute;
   bottom: 3rem;
   left: 0;
+  width: 100%;
   padding: 0 2rem;
-  width: calc(100% - 4rem);
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -382,7 +381,6 @@
 @media screen and (max-width: 500px) {
   #collections {
     padding: 2rem;
-    width: calc(100% - 4rem);
   }
 
   #collections .header .name {
@@ -464,7 +462,7 @@
   }
 
   #collections .list.tertiary li.is-set .text {
-    flex-basis: calc(100% - 2rem);
+    flex-basis: 100%;
     padding: 0.5rem 0;
   }
 }

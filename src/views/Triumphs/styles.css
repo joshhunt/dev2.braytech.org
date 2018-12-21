@@ -1,11 +1,10 @@
 #triumphs {
   padding: 3rem;
-  width: calc(100% - 6rem);
 }
 
 #triumphs .sub-header {
   margin: 0 0 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
 }
 
 #triumphs .sidebar {
@@ -226,7 +225,6 @@
 @media screen and (max-width: 500px) {
   #triumphs {
     padding: 2rem;
-    width: calc(100% - 4rem);
   }
 
   #triumphs .nodes {

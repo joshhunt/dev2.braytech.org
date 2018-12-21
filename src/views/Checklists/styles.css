@@ -1,14 +1,13 @@
 #checklists {
   display: block;
-  width: calc(100% - 3rem);
   padding: 0 1.5rem;
 }
 
 #checklists .sub-header {
+  width: calc(100% - 3rem);
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   margin-bottom: 2rem;
-  width: calc(100% - 7rem);
 }
 
 #checklists .lists {
@@ -18,24 +17,24 @@
 }
 
 #checklists .lists .col {
-  flex-basis: calc(20% - 3rem);
+  flex-basis: 20%;
   padding: 0 1.5rem;
 }
 
 #checklists .lists.col-4 .col {
-  flex-basis: calc(25% - 3rem);
+  flex-basis: 25%;
 }
 
 #checklists .lists.col-3 .col {
-  flex-basis: calc(100% / 3 - 3rem);
+  flex-basis: calc(100% / 3);
 }
 
 #checklists .lists.col-2 .col {
-  flex-basis: calc(50% - 3rem);
+  flex-basis: 50%;
 }
 
 #checklists .lists.col-1 .col {
-  flex-basis: calc(100% - 3rem);
+  flex-basis: 100%;
 }
 
 #checklists .lists .col .head {
@@ -178,7 +177,7 @@
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 2rem;
-    width: calc(100% - 8rem);
+    width: calc(100% - 4rem);
   }
 
   #checklists .selectors ul {
@@ -193,7 +192,11 @@
   }
 
   #checklists .lists {
-    padding: 2rem 0.5rem 0;
+    padding: 2rem 2rem 0;
+  }
+
+  #checklists .lists .col {
+    padding: 0;
   }
 
   #checklists .lists .col .head .binding {

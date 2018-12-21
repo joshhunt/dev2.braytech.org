@@ -128,22 +128,24 @@ class Roster extends React.Component {
         let blueberry = new Date().getTime() - new Date(member.member.joinDate).getTime() < 1209600000 ? true : false;
 
         if (!member.profile.characterActivities.data) {
-          members.push({
-            isOnline: member.member.isOnline,
-            lastActive: new Date(member.profile.profile.data.dateLastPlayed).getTime(),
-            lastActivity: 0,
-            element: (
-              <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry }, 'no-character', 'error')}>
-                <div className='icon black' />
-                <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
-                <div className='error'>Private profile</div>
-                <div className='activity'>
-                  <Moment fromNow>{member.profile.profile.data.dateLastPlayed}</Moment>
-                </div>
-                <div className='historicalStats'></div>
-              </li>
-            )
-          });
+          if (!mini) {
+            members.push({
+              isOnline: member.member.isOnline,
+              lastActive: new Date(member.profile.profile.data.dateLastPlayed).getTime(),
+              lastActivity: 0,
+              element: (
+                <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry }, 'no-character', 'error')}>
+                  <div className='icon black' />
+                  <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
+                  <div className='error'>Private profile</div>
+                  <div className='activity'>
+                    <Moment fromNow>{member.profile.profile.data.dateLastPlayed}</Moment>
+                  </div>
+                  <div className='historicalStats'></div>
+                </li>
+              )
+            });
+          }
           return;
         }
 
@@ -155,12 +157,6 @@ class Roster extends React.Component {
           ], 
           ['desc']
         );
-        // lastCharacterActivity = _filter(
-        //   lastCharacterActivity, 
-        //   [
-        //     character => character.currentActivityHash !== 0
-        //   ]
-        // );
 
         lastCharacterActivity = lastCharacterActivity.length > 0 ? lastCharacterActivity[0] : false;
 
@@ -173,10 +169,8 @@ class Roster extends React.Component {
           ['desc']
         );
 
-        // console.log(lastCharacterActivity, lastCharacterTime)
-
+        // console.log(member, lastCharacterActivity, lastCharacterTime)
         // console.log(lastCharacterTime, member.profile.characterActivities.data);
-
         // console.log(member,, lastCharacterActivity);
 
         if (lastCharacterActivity || lastCharacterTime) {
@@ -215,11 +209,11 @@ class Roster extends React.Component {
                 <>
                   {mode.displayProperties.name}: {activity.displayProperties.name}
                 </>
-              ) : activity.placeHash === 2961497387 ? (
+              ) : activity ? activity.placeHash === 2961497387 ? (
                 'Orbit'
               ) : (
                 activity.displayProperties.name
-              );
+              ) : null;
 
               let collated = {
                 patrol: {
@@ -255,7 +249,7 @@ class Roster extends React.Component {
 
               // console.log(member, collated)
               
-              if (activity.directActivityModeType) {
+              if (activity && activity.directActivityModeType) {
                 switch (activity.directActivityModeType) {
 
                   case 3: // strikes
@@ -310,7 +304,7 @@ class Roster extends React.Component {
                   </div>
                   <div className='character'>{character}</div>
                   <div className='activity'>
-                    {activityDisplay}
+                    {activityDisplay ? <div className='name'>{activityDisplay}</div> : null}
                     <Moment fromNow>{lastActivity && member.member.isOnline ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed}</Moment>
                   </div>
                   <div className='historicalStats'>{stats}</div>
@@ -351,8 +345,8 @@ class Roster extends React.Component {
         members, 
         [
           member => member.isOnline, 
-          member => (member.lastActivity !== 0 ? member.lastActivity : member.lastActive),
-          member => (member.lastActivity !== 0 ? member.lastActive : false)
+          member => member.lastActivity, 
+          member => member.lastActive
         ], 
         ['desc', 'desc', 'desc']
       );

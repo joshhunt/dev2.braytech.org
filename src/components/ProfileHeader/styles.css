@@ -21,8 +21,8 @@ html.backdropfilter #header.profile-header .braytech {
 
 #header.profile-header .profile {
   position: relative;
-  padding: 2rem 0 0;
-  height: 7rem;
+  padding: 3rem 0 0;
+  height: 9rem;
   width: 100%;
   flex-basis: 100%;
 }
@@ -43,7 +43,7 @@ html.backdropfilter #header.profile-header .braytech {
 
 #header.profile-header .characters {
   position: relative;
-  margin: 3rem 0 0;
+  margin: 2rem 0 0;
   width: 27rem;
   z-index: 10;
 }
@@ -173,7 +173,7 @@ html.backdropfilter #header.profile-header .braytech {
 #header.profile-header .views ul li a {
   position: relative;
   padding: 2rem 0.3rem 0;
-  height: 5rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   color: rgba(255, 255, 255, 0.4);
