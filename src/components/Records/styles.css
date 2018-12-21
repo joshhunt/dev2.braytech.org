@@ -20,7 +20,7 @@
 }
 
 .list.record-items li .properties {
-  flex-basis: calc(100% - 2rem);
+  flex-basis: 100%;
   padding: 1rem;  
   display: grid;
   grid-template-columns: 48px 1fr;
@@ -63,7 +63,7 @@
 }
 
 .list.record-items li .objectives {
-  flex-basis: calc(100% - 2rem);
+  flex-basis: 100%;
   padding: 0 1rem 1rem;
 }
 

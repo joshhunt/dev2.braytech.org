@@ -4,6 +4,7 @@
 .list.roster li {
   display: grid;
   grid-template-columns: calc(36px + 1rem) 10rem 8rem 8rem 7rem 1fr 0.5fr;
+  box-sizing: content-box;
 }
 
 .list.roster.mini li {
@@ -58,20 +59,27 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
-  z-index: -1;
+  box-shadow: 0 0 0 1px #fff;
+  z-index: 2;
   pointer-events: none;
-  animation: animation-thisIsYou 1.2s linear infinite;
+  animation: animation-thisIsYou 2.2s linear infinite;
 }
 
 .list.roster:not(.mini) li.thisIsYou .icon::after {
-  animation: animation-thisIsYou 1.2s linear .6s infinite;
+  animation: animation-thisIsYou 2.2s linear infinite;
+  animation-delay: 1s;
 }
 
 @keyframes animation-thisIsYou {
   0% {
-    opacity: 1;
-    transform: scale(0);
+    opacity: 0;
+    transform: scale(1);
+  }
+  10% {
+    opacity: 0.2;
+  }
+  70% {
+    opacity: 0.4;
   }
   100% {
     opacity: 0;
@@ -81,9 +89,9 @@
 
 .list.roster li .icon {
   position: relative;
-  height: 32px;
-  width: 32px;
-  margin: 3px 1rem 3px 3px;
+  height: 34px;
+  width: 34px;
+  margin: 2px 1rem 2px 2px;
 }
 
 .list.roster li .icon.dl {
@@ -160,8 +168,9 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-.list.roster li.isOnline .activity time {
-  margin: 0 0 0 10px;
+.list.roster li .activity .name {
+  display: inline-block;
+  margin: 0 10px 0 0;
 }
 
 .list.roster li.view-all {

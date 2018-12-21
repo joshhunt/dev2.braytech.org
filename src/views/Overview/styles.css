@@ -1,5 +1,5 @@
 #overview {
-  flex-basis: calc(100% - 6rem);
+  flex-basis: 100%;
   padding: 3rem 3rem 0;
   display: grid;
   grid-gap: 3rem;
@@ -8,7 +8,7 @@
 
 #overview .module .sub-header {
   margin: 0 0 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
 }
 
 #overview .module .sub-header.sub {
@@ -188,7 +188,6 @@
 
 @media screen and (max-width: 600px) {
   #overview {
-    width: calc(100% - 4rem);
     grid-template-columns: 1fr;
     padding: 2rem 2rem 0;
     grid-gap: 2rem;

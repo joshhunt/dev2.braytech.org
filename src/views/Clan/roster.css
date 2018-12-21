@@ -28,7 +28,6 @@
   #clan > .roster {
     padding: 3rem 2rem 2rem;
     grid-gap: 2rem;
-    width: calc(100% - 4rem);
     grid-template-columns: 1fr;
   }
   

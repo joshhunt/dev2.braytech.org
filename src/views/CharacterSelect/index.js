@@ -45,8 +45,14 @@ class CharacterSelect extends React.Component {
           return response.json();
         })
         .then(SearchResponse => {
+          if (SearchResponse.ErrorCode !== 1) {
+            console.log(SearchResponse);
+            this.setState({ error: SearchResponse.ErrorCode });
+            return;
+          }
           this.setState({
-            results: SearchResponse.Response
+            results: SearchResponse.Response,
+            error: false
           });
         })
         .catch(error => {

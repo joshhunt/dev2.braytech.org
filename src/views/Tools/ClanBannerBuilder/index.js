@@ -22,12 +22,12 @@ class ClanBannerBuilder extends React.Component {
 
     this.clanBannerManifest = clanBannerManifestJson._embedded;
     this.clanBannerDefault = {
-      decalBackgroundColorId: 3551971198,
-      decalColorId: 3345832527,
-      decalId: 4142223378,
-      gonfalonColorId: 2124081031,
-      gonfalonDetailColorId: 4128900505,
-      gonfalonDetailId: 1664476151,
+      decalBackgroundColorId: 3568748755,
+      decalColorId: 3379387794,
+      decalId: 4125445800,
+      gonfalonColorId: 2174413913,
+      gonfalonDetailColorId: 4112122941,
+      gonfalonDetailId: 1681253713,
       gonfalonId: 1473910866
     };
     this.clanBannerManifestFetch = this.clanBannerManifestFetch.bind(this);
@@ -67,7 +67,6 @@ class ClanBannerBuilder extends React.Component {
         })
       : this.clanBannerDefault;
 
-
     const buildLink = object => {
       let potentialData = assign({}, bannerData, object);
       return `/tools/clan-banner-builder/${Object.values(potentialData).join('/')}/`;
@@ -76,15 +75,18 @@ class ClanBannerBuilder extends React.Component {
     let configOptions = [];
     if (this.clanBannerManifest) {
       let clanBannerManifest = this.clanBannerManifest;
-      
+
       let decals = [];
 
       clanBannerManifest.Decals.forEach(decal => {
         let link = buildLink({ decalId: decal.imageHash });
         decals.push(
-          <div key={decal.imageHash} className={cx('option', 'decal', {
-            active: bannerData.decalId === decal.imageHash
-          })}>
+          <div
+            key={decal.imageHash}
+            className={cx('option', 'decal', {
+              active: bannerData.decalId === decal.imageHash
+            })}
+          >
             <ObservedImage className='image' src={`https://www.bungie.net${decal.backgroundImagePath}`} />
             <ObservedImage className='image' src={`https://www.bungie.net${decal.foregroundImagePath}`} />
             <Link to={link} />
@@ -105,12 +107,17 @@ class ClanBannerBuilder extends React.Component {
         let link = buildLink({ decalColorId: color.colorHash });
         decalPrimaryColors.push({
           sortValue: color.colorHash,
-          element: <div key={color.colorHash} className={cx('option', 'color', {
-            active: bannerData.decalColorId === color.colorHash
-          })}>
-            <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }}></div>
-            <Link to={link} />
-          </div>
+          element: (
+            <div
+              key={color.colorHash}
+              className={cx('option', 'color', {
+                active: bannerData.decalColorId === color.colorHash
+              })}
+            >
+              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
+              <Link to={link} />
+            </div>
+          )
         });
       });
 
@@ -129,12 +136,17 @@ class ClanBannerBuilder extends React.Component {
         let link = buildLink({ decalBackgroundColorId: color.colorHash });
         decalSecondaryColors.push({
           sortValue: color.colorHash,
-          element: <div key={color.colorHash} className={cx('option', 'color', {
-            active: bannerData.decalBackgroundColorId === color.colorHash
-          })}>
-            <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }}></div>
-            <Link to={link} />
-          </div>
+          element: (
+            <div
+              key={color.colorHash}
+              className={cx('option', 'color', {
+                active: bannerData.decalBackgroundColorId === color.colorHash
+              })}
+            >
+              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
+              <Link to={link} />
+            </div>
+          )
         });
       });
 
@@ -147,21 +159,23 @@ class ClanBannerBuilder extends React.Component {
         </React.Fragment>
       );
 
-
-
-
       let gonfalonColors = [];
 
       clanBannerManifest.GonfalonColors.forEach(color => {
         let link = buildLink({ gonfalonColorId: color.colorHash });
         gonfalonColors.push({
           sortValue: color.colorHash,
-          element: <div key={color.colorHash} className={cx('option', 'color', {
-            active: bannerData.gonfalonColorId === color.colorHash
-          })}>
-            <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }}></div>
-            <Link to={link} />
-          </div>
+          element: (
+            <div
+              key={color.colorHash}
+              className={cx('option', 'color', {
+                active: bannerData.gonfalonColorId === color.colorHash
+              })}
+            >
+              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
+              <Link to={link} />
+            </div>
+          )
         });
       });
 
@@ -169,7 +183,7 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='gonfalonColors'>
-          <h3>Banner Detail Color</h3>
+          <h3>Banner Color</h3>
           <div className='optionSet colors gonfalonColors'>{gonfalonColors.map(object => object.element)}</div>
         </React.Fragment>
       );
@@ -179,9 +193,12 @@ class ClanBannerBuilder extends React.Component {
       clanBannerManifest.GonfalonDetails.forEach(detail => {
         let link = buildLink({ gonfalonDetailId: detail.imageHash });
         gonfalonDetails.push(
-          <div key={detail.imageHash} className={cx('option', 'decal', {
-            active: bannerData.gonfalonDetailId === detail.imageHash
-          })}>
+          <div
+            key={detail.imageHash}
+            className={cx('option', 'decal', {
+              active: bannerData.gonfalonDetailId === detail.imageHash
+            })}
+          >
             <ObservedImage className='image' src={`https://www.bungie.net${detail.foregroundImagePath}`} />
             <Link to={link} />
           </div>
@@ -201,12 +218,17 @@ class ClanBannerBuilder extends React.Component {
         let link = buildLink({ gonfalonDetailColorId: color.colorHash });
         gonfalonDetailColors.push({
           sortValue: color.colorHash,
-          element: <div key={color.colorHash} className={cx('option', 'color', {
-            active: bannerData.gonfalonDetailColorId === color.colorHash
-          })}>
-            <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }}></div>
-            <Link to={link} />
-          </div>
+          element: (
+            <div
+              key={color.colorHash}
+              className={cx('option', 'color', {
+                active: bannerData.gonfalonDetailColorId === color.colorHash
+              })}
+            >
+              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
+              <Link to={link} />
+            </div>
+          )
         });
       });
 

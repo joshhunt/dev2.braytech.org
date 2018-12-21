@@ -12,7 +12,7 @@
 
 #get-profile .sub-header {
   margin: 0 0 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
   border-bottom: 2px solid #848484;
   background-color: rgba(0, 0, 0, 0.05);
   color: #848484;
@@ -167,11 +167,19 @@
   color: transparent !important;
 }
 
+@media screen and (max-width: 1200px) {
+
+  #get-profile {
+    grid-template-columns: 1fr 474px;
+  }
+
+}
+
 @media screen and (max-width: 500px) {
   #get-profile {
     grid-gap: 2rem;
     padding: 2rem;
-    width: calc(100% - 4rem);
+    width: 100%;
     grid-template-columns: 1fr;
   }
 
