@@ -6,6 +6,7 @@ import ObservedImage from '../../components/ObservedImage';
 import * as ls from '../../utils/localStorage';
 
 import Records from '../../components/Records';
+import { withNamespaces } from 'react-i18next';
 
 class SealNode extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class SealNode extends React.Component {
   };
 
   render() {
+    const {t} = this.props;
     const manifest = this.props.manifest;
 
     const profileRecords = this.props.response.profile.profileRecords.data.records;
@@ -101,7 +103,7 @@ class SealNode extends React.Component {
             <div className='description'>{sealDefinition.displayProperties.description}</div>
           </div>
           <div className='until'>
-            <h4>Seal progress</h4>
+            <h4>{t('Seal progress')}</h4>
             <div className='progress'>
               <div className='title'>{sealBars[sealDefinition.hash].text}</div>
               <div className='fraction'>
@@ -127,4 +129,4 @@ class SealNode extends React.Component {
   }
 }
 
-export default SealNode;
+export default withNamespaces()(SealNode);

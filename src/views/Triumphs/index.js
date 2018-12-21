@@ -6,6 +6,7 @@ import SealNode from './SealNode';
 import PresentationNode from './PresentationNode';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Triumphs extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class Triumphs extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     let toggleCompletedLink = (
@@ -47,12 +49,13 @@ class Triumphs extends React.Component {
         {this.state.hideCompleted ? (
           <>
             <i className='uniE0522' />
-            Show acquired
+            {t('Show acquired')}
           </>
         ) : (
           <>
             <i className='uniE0522' />
-            Hide acquired
+            {t('Hide acquired')}
+            
           </>
         )}
       </a>
@@ -76,7 +79,7 @@ class Triumphs extends React.Component {
               <li>
                 <Link to='/triumphs'>
                   <i className='uniE742' />
-                  Triumphs
+                  {t('Triumphs')}
                 </Link>
               </li>
             </ul>
@@ -96,7 +99,7 @@ class Triumphs extends React.Component {
               <li>
                 <Link to='/triumphs'>
                   <i className='uniE742' />
-                  Triumphs
+                  {t('Triumphs')}
                 </Link>
               </li>
             </ul>
@@ -107,4 +110,4 @@ class Triumphs extends React.Component {
   }
 }
 
-export default Triumphs;
+export default withNamespaces()(Triumphs);

@@ -24,12 +24,15 @@ import Checklists from './views/Checklists';
 import Overview from './views/Overview';
 import ThisWeek from './views/ThisWeek';
 import Vendors from './views/Vendors';
+import Settings from './views/Settings';
 import Pride from './views/Pride';
 import Credits from './views/Credits';
 import ClanBannerBuilder from './views/Tools/ClanBannerBuilder';
+import i18n from './utils/i18n';
+import { withNamespaces } from 'react-i18next';
 
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super();
     let user = ls.get('setting.user') ? ls.get('setting.user') : false;
     this.state = {
@@ -54,6 +57,7 @@ class App extends Component {
     this.getManifest = this.getManifest.bind(this);
     this.manifest = {};
     this.bungieSettings = {};
+    this.currentLanguage = props.i18n.getCurrentLanguage();
   }
 
   setPageDefault = className => {
@@ -124,7 +128,7 @@ class App extends Component {
           }
         });
     });
-
+    
     return Promise.all(requests)
       .then(responses => {
         const response = assign(...responses);
@@ -134,10 +138,14 @@ class App extends Component {
         // let state = this.state;
         // state.manifest.settings = response.settings;
         // this.setState(state);
-
         this.bungieSettings = response.settings;
 
-        return response.manifest.jsonWorldContentPaths.en;
+        let availableLanguages = [];
+        for(var i in response.manifest.jsonWorldContentPaths){
+          availableLanguages.push(i);  
+        }
+        this.availableLanguages = availableLanguages;
+        return response.manifest.jsonWorldContentPaths[this.currentLanguage];
       })
       .catch(error => {
         console.log(error);
@@ -241,6 +249,7 @@ class App extends Component {
   }
 
   render() {
+    const {t} = this.props;
     if (!window.ga) {
       GoogleAnalytics.init();
     }
@@ -273,7 +282,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>ERROR</div>
+            <div className='download'>{t('ERROR')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'version') {
@@ -285,7 +294,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>CHECKING DATA</div>
+            <div className='download'>{t('CHECKING DATA')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'fetching') {
@@ -297,7 +306,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>FETCHING</div>
+            <div className='download'>{t('FETCHING')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'almost') {
@@ -309,7 +318,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>SO CLOSE</div>
+            <div className='download'>{t('SO CLOSE')}</div>
           </div>
         );
       } else {
@@ -321,7 +330,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>PREPARING</div>
+            <div className='download'>{t('PREPARING')}</div>
           </div>
         );
       }
@@ -359,6 +368,7 @@ class App extends Component {
                     )}
                   />
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} {...this.state.user} manifest={this.manifest} />} />
+                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
@@ -449,6 +459,7 @@ class App extends Component {
                     )}
                   />
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} manifest={this.manifest} />} />
+                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
@@ -464,4 +475,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withNamespaces()(App);

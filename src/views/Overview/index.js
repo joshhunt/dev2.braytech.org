@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import RecordsAlmost from '../../components/RecordsAlmost';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Overview extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
@@ -27,102 +29,102 @@ class Overview extends React.Component {
     const Checklists = () => {
       let progression = {
         checklists: {
-          text: 'Checklists',
+          text: t('Checklists'),
           noInteraction: true,
           values: {
             regionChests: {
-              text: 'Region chests opened',
+              text: t('Region chests opened'),
               total: Object.keys(characterProgressions[characterId].checklists[1697465175]).length,
               completed: Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length
             },
             lostSectors: {
-              text: 'Lost sectors discovered',
+              text: t('Lost sectors discovered'),
               total: Object.keys(characterProgressions[characterId].checklists[3142056444]).length,
               completed: Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length
             },
             adventures: {
-              text: 'Adventures undertaken',
+              text: t('Adventures undertaken'),
               total: Object.keys(characterProgressions[characterId].checklists[4178338182]).length,
               completed: Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length
             },
             corruptedEggs: {
-              text: 'Corrupted eggs destroyed',
+              text: t('Corrupted eggs destroyed'),
               total: Object.keys(profileProgressions.checklists[2609997025]).length,
               completed: Object.values(profileProgressions.checklists[2609997025]).filter(value => value === true).length
             },
             ahamkaraBones: {
-              text: 'Ahamkara bones found',
+              text: t('Ahamkara bones found'),
               total: Object.keys(profileProgressions.checklists[1297424116]).length,
               completed: Object.values(profileProgressions.checklists[1297424116]).filter(value => value === true).length
             },
             catStatues: {
-              text: 'Feline friends satisfied',
+              text: t('Feline friends satisfied'),
               total: Object.keys(profileProgressions.checklists[2726513366]).length,
               completed: Object.values(profileProgressions.checklists[2726513366]).filter(value => value === true).length
             },
             sleeperNodes: {
-              text: 'Sleeper nodes hacked',
+              text: t('Sleeper nodes hacked'),
               total: Object.keys(profileProgressions.checklists[365218222]).length,
               completed: Object.values(profileProgressions.checklists[365218222]).filter(value => value === true).length
             },
             ghostScans: {
-              text: 'Ghost scans performed',
+              text: t('Ghost scans performed'),
               total: Object.keys(profileProgressions.checklists[2360931290]).length,
               completed: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
             },
             latentMemories: {
-              text: 'Lost memory fragments destroyed',
+              text: t('Lost memory fragments destroyed'),
               total: Object.keys(profileProgressions.checklists[2955980198]).length,
               completed: Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length
             },
             caydesJorunals: {
-              text: "Cayde's journals recovered",
+              text: t("Cayde's journals recovered"),
               total: 4,
               completed: Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length
             }
           }
         },
         seals: {
-          text: 'Triumph Seals',
+          text: t('Triumph Seals'),
           noInteraction: false,
           values: {
             destinations: {
-              text: 'Wayfarer',
+              text: t('Wayfarer'),
               nodeHash: 2588182977,
               recordHash: 2757681677,
               total: profileRecords[2757681677].objectives[0].completionValue,
               completed: profileRecords[2757681677].objectives[0].progress
             },
             gambit: {
-              text: 'Dredgen',
+              text: t('Dredgen'),
               nodeHash: 3481101973,
               recordHash: 3798931976,
               total: profileRecords[3798931976].objectives[0].completionValue,
               completed: profileRecords[3798931976].objectives[0].progress
             },
             crucible: {
-              text: 'Unbroken',
+              text: t('Unbroken'),
               nodeHash: 147928983,
               recordHash: 3369119720,
               total: profileRecords[3369119720].objectives[0].completionValue,
               completed: profileRecords[3369119720].objectives[0].progress
             },
             lore: {
-              text: 'Chronicler',
+              text: t('Chronicler'),
               nodeHash: 2693736750,
               recordHash: 1754983323,
               total: profileRecords[1754983323].objectives[0].completionValue,
               completed: profileRecords[1754983323].objectives[0].progress
             },
             dreamingCity: {
-              text: 'Cursebreaker',
+              text: t('Cursebreaker'),
               nodeHash: 2516503814,
               recordHash: 1693645129,
               total: profileRecords[1693645129].objectives[0].completionValue,
               completed: profileRecords[1693645129].objectives[0].progress
             },
             raids: {
-              text: 'Rivensbane',
+              text: t('Rivensbane'),
               nodeHash: 1162218545,
               recordHash: 2182090828,
               total: profileRecords[2182090828].objectives[0].completionValue,
@@ -171,53 +173,53 @@ class Overview extends React.Component {
     const Seals = () => {
       let progression = {
         seals: {
-          text: 'Triumph Seals',
+          text: t('Triumph Seals'),
           noInteraction: false,
           values: {
             destinations: {
-              text: 'Wayfarer',
+              text: t('Wayfarer'),
               nodeHash: 2588182977,
               recordHash: 2757681677,
               total: profileRecords[2757681677].objectives[0].completionValue,
               completed: profileRecords[2757681677].objectives[0].progress
             },
             gambit: {
-              text: 'Dredgen',
+              text: t('Dredgen'),
               nodeHash: 3481101973,
               recordHash: 3798931976,
               total: profileRecords[3798931976].objectives[0].completionValue,
               completed: profileRecords[3798931976].objectives[0].progress
             },
             crucible: {
-              text: 'Unbroken',
+              text: t('Unbroken'),
               nodeHash: 147928983,
               recordHash: 3369119720,
               total: profileRecords[3369119720].objectives[0].completionValue,
               completed: profileRecords[3369119720].objectives[0].progress
             },
             lore: {
-              text: 'Chronicler',
+              text: t('Chronicler'),
               nodeHash: 2693736750,
               recordHash: 1754983323,
               total: profileRecords[1754983323].objectives[0].completionValue,
               completed: profileRecords[1754983323].objectives[0].progress
             },
             dreamingCity: {
-              text: 'Cursebreaker',
+              text: t('Cursebreaker'),
               nodeHash: 2516503814,
               recordHash: 1693645129,
               total: profileRecords[1693645129].objectives[0].completionValue,
               completed: profileRecords[1693645129].objectives[0].progress
             },
             raids: {
-              text: 'Rivensbane',
+              text: t('Rivensbane'),
               nodeHash: 1162218545,
               recordHash: 2182090828,
               total: profileRecords[2182090828].objectives[0].completionValue,
               completed: profileRecords[2182090828].objectives[0].progress
             },
             armoury: {
-              text: 'Blacksmith',
+              text: t('Blacksmith'),
               nodeHash: 2039028930,
               recordHash: 2053985130,
               total: profileRecords[2053985130].objectives[0].completionValue,
@@ -284,14 +286,14 @@ class Overview extends React.Component {
 
       let progression = {
         ranks: {
-          text: 'Ranks',
+          text: t('Ranks'),
           noInteraction: true,
           values: {
             infamy: {
               definition: infamyDefinition,
               mode: 'Gambit',
               icon: 'destiny-gambit',
-              text: 'Infamy',
+              text: t('Infamy'),
               color: '#25986e',
               total: infamyProgressTotal,
               step: infamyProgression,
@@ -301,7 +303,7 @@ class Overview extends React.Component {
               definition: valorDefinition,
               mode: 'Quickplay',
               icon: 'destiny-faction_crucible_valor',
-              text: 'Valor',
+              text: t('Valor'),
               color: '#ed792c',
               total: valorProgressTotal,
               step: valorProgression,
@@ -311,7 +313,7 @@ class Overview extends React.Component {
               definition: gloryDefinition,
               mode: 'Competitive',
               icon: 'destiny-faction_crucible_glory',
-              text: 'Glory',
+              text: t('Glory'),
               color: '#b52422',
               total: gloryProgressTotal,
               step: gloryProgression,
@@ -377,23 +379,23 @@ class Overview extends React.Component {
       <div className='view' id='overview'>
         <div className='module activity-checklists-seals'>
           <div className='sub-header'>
-            <div>Checklists</div>
+            <div>{t('Checklists')}</div>
           </div>
           <div className='content'>{Checklists()}</div>
           <div className='sub-header'>
-            <div>Seals</div>
+            <div>{t('Seals')}</div>
           </div>
           <div className='content'>{Seals()}</div>
         </div>
         <div className='module ranks'>
           <div className='sub-header'>
-            <div>Ranks</div>
+            <div>{t('Ranks')}</div>
           </div>
           <div className='content'>{Ranks()}</div>
         </div>
         <div className='module almost'>
           <div className='sub-header'>
-            <div>Almost complete triumphs</div>
+            <div>{t('Almost complete triumphs')}</div>
           </div>
           <div className='content'>
             <RecordsAlmost {...this.props} />
@@ -404,4 +406,4 @@ class Overview extends React.Component {
   }
 }
 
-export default Overview;
+export default withNamespaces()(Overview);

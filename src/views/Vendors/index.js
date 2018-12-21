@@ -12,6 +12,7 @@ import Tooltip from '../../components/Tooltip';
 import '../../components/PresentationNode.css';
 import './styles.css';
 import Items from './Items';
+import { withNamespaces } from 'react-i18next';
 
 class Vendors extends Component {
   constructor() {
@@ -46,6 +47,7 @@ class Vendors extends Component {
   }
 
   render() {
+    const {t}= this.props;
     let manifest = this.props.manifest;
 
     if (this.state.vendors.length === 0) {
@@ -225,10 +227,10 @@ class Vendors extends Component {
           <div className='view' id='vendors'>
             <div className='presentation-node vendors'>
               <div className='sub-header'>
-                <div>Vendors</div>
+                <div>{t('Vendors')}</div>
               </div>
               <div className='category-header'>
-                <div>Weekly</div>
+                <div>{t('Weekly')}</div>
                 <div>
                   <Moment tz='Europe/London' fromNow>
                     {weeklyEnd}
@@ -237,7 +239,7 @@ class Vendors extends Component {
               </div>
               <ul className='list secondary'>{groups[1].items.map(obj => obj.element)}</ul>
               <div className='category-header'>
-                <div>Daily</div>
+                <div>{t('Daily')}</div>
                 <div>
                   <Moment tz='Europe/London' fromNow>
                     {dailyEnd}
@@ -255,4 +257,4 @@ class Vendors extends Component {
   }
 }
 
-export default Vendors;
+export default withNamespaces()(Vendors);

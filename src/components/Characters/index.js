@@ -6,17 +6,17 @@ import ObservedImage from '../../components/ObservedImage';
 import * as utils from '../../utils/destinyUtils';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Characters extends React.Component {
   constructor(props) {
     super(props);
-
+    this.manifest = props.manifest;
     this.state = {};
   }
 
   render() {
-    // console.log(this);
-
+    const {t} = this.props;
     let characters = this.props.response.profile.characters.data;
     let characterProgressions = this.props.response.profile.characterProgressions.data;
 
@@ -35,10 +35,10 @@ class Characters extends React.Component {
             })}
             src={`https://www.bungie.net${character.emblemBackgroundPath ? character.emblemBackgroundPath : `/img/misc/missing_icon_d2.png`}`}
           />
-          <div className='class'>{utils.classTypeToString(character.classType)}</div>
-          <div className='species'>{utils.raceTypeToString(character.raceType)} {utils.genderTypeToString(character.genderType)}</div>
+          <div className='class'>{utils.classHashToString(character.classHash, this.manifest, character.genderType)}</div>
+          <div className='species'>{utils.raceHashToString(character.raceHash, this.manifest, character.genderType)}</div>
           <div className='light'>{character.light}</div>
-          <div className='level'>Level {character.baseCharacterLevel}</div>
+          <div className='level'>{t('Level')} {character.baseCharacterLevel}</div>
           <div className='progress'>
             <div
               className={cx('bar', {
@@ -62,4 +62,4 @@ class Characters extends React.Component {
   }
 }
 
-export default Characters;
+export default withNamespaces()(Characters);

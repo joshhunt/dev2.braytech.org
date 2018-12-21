@@ -13,6 +13,7 @@ import ObservedImage from '../../components/ObservedImage';
 import { classTypeToString } from '../../utils/destinyUtils';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Roster extends React.Component {
   constructor(props) {
@@ -115,6 +116,7 @@ class Roster extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     const manifest = this.props.manifest;
     const mini = this.props.mini;
     const linked = this.props.linked;
@@ -136,7 +138,7 @@ class Roster extends React.Component {
               <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry }, 'no-character', 'error')}>
                 <div className='icon black' />
                 <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
-                <div className='error'>Private profile</div>
+                <div className='error'>{t('Private profile')}</div>
                 <div className='activity'>
                   <Moment fromNow>{member.profile.profile.data.dateLastPlayed}</Moment>
                 </div>
@@ -259,27 +261,27 @@ class Roster extends React.Component {
                 switch (activity.directActivityModeType) {
 
                   case 3: // strikes
-                    stats = <>{collated.strikes.activitiesCleared} strikes cleared</>;
+                    stats = <>{collated.strikes.activitiesCleared} {t('strikes cleared')}</>;
                     break;
 
                   case 16: // nightfalls
-                    stats = <>{collated.nightfalls.activitiesCleared} nightfalls cleared</>;
+                    stats = <>{collated.nightfalls.activitiesCleared} {t('nightfalls cleared')}</>;
                     break;
 
                   case 5: // gambit
-                    stats = <>{collated.gambit.efficiency} efficiency</>;
+                    stats = <>{collated.gambit.efficiency} {t('efficiency')}</>;
                     break;
 
                   case 48: // quickplay
-                    stats = <>{collated.crucible.efficiency} efficiency</>;
+                    stats = <>{collated.crucible.efficiency} {t('efficiency')}</>;
                     break;
 
                   case 10: // comp
-                    stats = <>{collated.crucible.efficiency} efficiency</>;
+                    stats = <>{collated.crucible.efficiency} {t('efficiency')}</>;
                     break;
 
                   case 6: // patrol
-                    stats = <>{collated.patrol.kills} kills on patrol</>;
+                    stats = <>{collated.patrol.kills} {t('kills on patrol')}</>;
                     break;
 
                   default: 
@@ -364,7 +366,7 @@ class Roster extends React.Component {
           lastActivity: 0,
           element: (
             <li key='i_am_unqiue' className='linked view-all'>
-              <Link to='/clan/roster'>View full roster</Link>
+              <Link to='/clan/roster'>{t('View full roster')}</Link>
             </li>
           )
         });
@@ -377,11 +379,11 @@ class Roster extends React.Component {
             <li key='i_am_unqiue' className='grid-header'>
               <div className='icon' />
               <div className='displayName' />
-              <div className='triumphScore'>Triumph score</div>
-              <div className='clanXp'>Clan XP weekly</div>
-              <div className='character'>Character</div>
-              <div className='activity'>Activity</div>
-              <div className='historicalStats'>Historical stats</div>
+              <div className='triumphScore'>{t('Triumph score')}</div>
+              <div className='clanXp'>{t('Clan XP weekly')}</div>
+              <div className='character'>{t('Character')}</div>
+              <div className='activity'>{t('Activity')}</div>
+              <div className='historicalStats'>{t('Historical stats')}</div>
             </li>
           )
         });
@@ -394,4 +396,4 @@ class Roster extends React.Component {
   }
 }
 
-export default Roster;
+export default withNamespaces()(Roster);

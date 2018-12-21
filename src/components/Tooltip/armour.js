@@ -2,6 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
 import '../../utils/destinyEnums';
+import { getDefName } from '../../utils/destinyUtils';
 
 const armour = (manifest, item) => {
   let sourceString = item.collectibleHash ? (manifest.DestinyCollectibleDefinition[item.collectibleHash] ? manifest.DestinyCollectibleDefinition[item.collectibleHash].sourceString : false) : false;
@@ -11,19 +12,19 @@ const armour = (manifest, item) => {
   let armourStats = [
     {
       hash: 2996146975,
-      name: 'Mobility',
+      name: getDefName(2996146975, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 392767087,
-      name: 'Resilience',
+      name: getDefName(392767087, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 1943323491,
-      name: 'Recovery',
+      name: getDefName(1943323491, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     }
@@ -97,7 +98,7 @@ const armour = (manifest, item) => {
       <div className='damage armour'>
         <div className={cx('power')}>
           <div className='text'>600</div>
-          <div className='text'>Defence</div>
+          <div className='text'>{getDefName(3897883278, manifest, 'DestinyStatDefinition')}</div>
         </div>
       </div>
       {sourceString ? (

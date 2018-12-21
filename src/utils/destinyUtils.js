@@ -45,6 +45,32 @@ export function raceTypeToString(str) {
   
 }
 
+export function classHashToString(hash, manifest, gender){
+  let classDef = manifest.DestinyClassDefinition[hash];
+  if(!classDef) return 'uh oh';
+  if(classDef.genderedClassNames){
+    return classDef.genderedClassNames[gender == 1 ? 'Female' : 'Male'];
+  }
+  return classDef.displayProperties.name;
+}
+
+export function raceHashToString(hash, manifest, gender){
+  let raceDef = manifest.DestinyRaceDefinition[hash];
+  if(!raceDef) return 'uh oh';
+  if(raceDef.genderedRaceNames){
+    return raceDef.genderedRaceNames[gender == 1 ? 'Female' : 'Male'];
+  }
+  return raceDef.displayProperties.name;
+}
+
+export function getDefName(hash, manifest, defType="DestinyInventoryItemDefinition"){
+  try{
+    return manifest[defType][hash].displayProperties.name;
+  }catch(e){
+  }
+  return 'uh oh';
+}
+
 export function classTypeToString(str) {
   
   let string;
