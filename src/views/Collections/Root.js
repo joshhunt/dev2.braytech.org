@@ -9,7 +9,7 @@ import { withNamespaces } from 'react-i18next';
 
 class Root extends React.Component {
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 

@@ -22,7 +22,7 @@ class Collections extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     if (!primaryHash) {

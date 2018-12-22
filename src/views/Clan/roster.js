@@ -16,9 +16,23 @@ class RosterView extends React.Component {
     super(props);
 
     this.state = {
-      membersResponse: false
+      membersResponse: false,
+      rosterKeepFresh: false
     };
     this.groupFetch = this.groupFetch.bind(this);
+    this.turnOnKeepFresh = this.turnOnKeepFresh.bind(this);
+  }
+
+  turnOnKeepFresh = () => {
+    if (this.state.rosterKeepFresh) {
+      this.setState({
+        rosterKeepFresh: false
+      });
+    } else {
+      this.setState({
+        rosterKeepFresh: true
+      });
+    }
   }
 
   groupFetch = async groupId => {
@@ -57,7 +71,7 @@ class RosterView extends React.Component {
   componentDidMount() {
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
-    
+
     window.scrollTo(0, 0);
 
     if (clan) {
@@ -107,8 +121,16 @@ class RosterView extends React.Component {
               <div className='info'>
                 <p>Pulsing blueberries are freshly acquired clan members who've been members for less than 2 weeks.</p>
               </div>
+              <div className='freshness'>
+                <ul className='list'>
+                  <li className={cx('linked', { selected: this.state.rosterKeepFresh })} onClick={this.turnOnKeepFresh}>
+                    <div className='bg' />
+                    <div className='name'>{this.state.rosterKeepFresh ? <>Auto-update on</> : <>Auto-update off</>}</div>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className='members'>{this.state.membersResponse ? <Roster {...this.props} members={this.state.membersResponse} keepFresh /> : <Spinner />}</div>
+            <div className='members'>{this.state.membersResponse ? <Roster {...this.props} members={this.state.membersResponse} keepFresh={this.state.rosterKeepFresh} /> : <Spinner />}</div>
           </div>
         </div>
       );

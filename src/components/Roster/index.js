@@ -75,7 +75,7 @@ class Roster extends React.Component {
   rollCall = (members = this.props.members, updateOnly = false) => {
     if (members) {
       members.Response.results.forEach(member => {
-        if (updateOnly && !member.isOnline) {
+        if ((updateOnly && !member.isOnline) || (this.props.mini && !member.isOnline)) {
           this.setState(prevState => ({
             membersFetched: this.state.membersFetched + 1,
             freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
@@ -194,18 +194,18 @@ class Roster extends React.Component {
     // console.log(`Shibuya Roll Call: ${this.state.freshnessCycles + 1}`);
     let groups = this.props.response.groups;
     let clan = groups.results.length > 0 ? groups.results[0].group : false;
-    this.groupFetch(clan.groupId).then(response => {
-      this.setState({ freshnessCycles: this.state.freshnessCycles + 1 });
-      this.rollCall(response.members, true);
-    })
-    .catch(error => {
-      console.log(error);
-      this.setState(prevState => ({
-        membersFetched: this.props.members.Response.results.length,
-        freshnessTimeout: false
-      }));
-    });
-    
+    this.groupFetch(clan.groupId)
+      .then(response => {
+        this.setState({ freshnessCycles: this.state.freshnessCycles + 1 });
+        this.rollCall(response.members, true);
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState(prevState => ({
+          membersFetched: this.props.members.Response.results.length,
+          freshnessTimeout: false
+        }));
+      });
   };
 
   componentDidUpdate() {
@@ -217,7 +217,7 @@ class Roster extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const manifest = this.props.manifest;
     const mini = this.props.mini;
     const linked = this.props.linked;
@@ -305,7 +305,6 @@ class Roster extends React.Component {
                   activity.displayProperties.name
                 )
               ) : null;
-
             }
 
             let character = (

@@ -368,7 +368,7 @@ class App extends Component {
                     )}
                   />
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} {...this.state.user} manifest={this.manifest} />} />
-                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} />} />
+                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} setPageDefault={this.setPageDefault} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
@@ -459,7 +459,7 @@ class App extends Component {
                     )}
                   />
                   <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} manifest={this.manifest} />} />
-                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} />} />
+                  <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} setPageDefault={this.setPageDefault} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
