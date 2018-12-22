@@ -10,6 +10,7 @@ import Roster from '../../components/Roster';
 import Spinner from '../../components/Spinner';
 
 import './about.css';
+import { withNamespaces } from 'react-i18next';
 
 class AboutView extends React.Component {
   constructor(props) {
@@ -76,6 +77,7 @@ class AboutView extends React.Component {
     const manifest = this.props.manifest;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
+    const {t} = this.props;
 
     if (clan) {
       const clanLevel = clan.clanInfo.d2ClanProgressions[584850370];
@@ -100,18 +102,18 @@ class AboutView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} members</div>
+                <div className='memberCount'>// {clan.memberCount} {t('members')}</div>
                 <div className='motto'>{clan.motto}</div>
                 <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={clan.about} />
               </div>
               <div className='sub-header'>
-                <div>Season 5</div>
+                <div>{t('Season')} 5</div>
               </div>
               <div className='progression'>
                 <div className='clanLevel'>
-                  <div className='text'>Clan level</div>
+                  <div className='text'>{t('Clan level')}</div>
                   <div className='progress'>
-                    <div className='title'>Level {clanLevel.level}</div>
+                    <div className='title'>{t('Level')} {clanLevel.level}</div>
                     <div className='fraction'>
                       {clanLevel.progressToNextLevel}/{clanLevel.nextLevelAt}
                     </div>
@@ -124,7 +126,7 @@ class AboutView extends React.Component {
                   </div>
                 </div>
                 <div className='personalContribution'>
-                  <div className='text'>Weekly Personal Contribution</div>
+                  <div className='text'>{t('Weekly Personal Contribution')}</div>
                   <ul>
                     <li>
                       <div className={cx('state', { completed: weeklyPersonalContribution.weeklyProgress === 5000 })} />
@@ -138,11 +140,11 @@ class AboutView extends React.Component {
                 </div>
               </div>
               <div className='sub-header'>
-                <div>Clan details</div>
+                <div>{t('Clan details')}</div>
               </div>
               <div className='progression details'>
                 <div className='weeklyRewardState'>
-                  <div className='text'>Weekly Clan Engrams</div>
+                  <div className='text'>{t('Weekly Clan Engrams')}</div>
                   <ul>
                     {rewardState ? (
                       rewardState.map(reward => (
@@ -166,25 +168,25 @@ class AboutView extends React.Component {
             </div>
             <div className='roster'>
               <div className='sub-header'>
-                <div>Views</div>
+                <div>{t('Views')}</div>
               </div>
               <div className='views'>
                 <ul className='list'>
                   <li className='linked'>
                     <NavLink to='/clan' exact>
-                      About
+                      {t('About')}
                     </NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/roster'>Roster</NavLink>
+                    <NavLink to='/clan/roster'>{t('Roster')}</NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/stats'>Stats</NavLink>
+                    <NavLink to='/clan/stats'>{t('Stats')}</NavLink>
                   </li>
                 </ul>
               </div>
               <div className='sub-header'>
-                <div>Clan roster</div>
+                <div>{t('Clan roster')}</div>
                 {this.state.membersResponse ? <div>{this.state.membersResponse.Response.results.filter(member => member.isOnline).length} online</div> : null}
               </div>
               {this.state.membersResponse ? <Roster mini linked isOnline members={this.state.membersResponse} manifest={manifest} /> : <Spinner />}
@@ -197,10 +199,10 @@ class AboutView extends React.Component {
         <div className='view' id='clan'>
           <div className='no-clan'>
             <div className='properties'>
-              <div className='name'>No clan affiliation</div>
+              <div className='name'>{t('No clan affiliation')}</div>
               <div className='description'>
-                <p>Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.</p>
-                <p>Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.</p>
+                <p>{t('Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.')}</p>
+                <p>{t("Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.")}</p>
               </div>
             </div>
           </div>
@@ -210,4 +212,4 @@ class AboutView extends React.Component {
   }
 }
 
-export default AboutView;
+export default withNamespaces()(AboutView);

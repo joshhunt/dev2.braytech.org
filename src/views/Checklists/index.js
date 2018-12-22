@@ -12,6 +12,7 @@ import ghostScans from './lists/ghostScans';
 import latentMemories from './lists/latentMemories';
 import caydesJournals from './lists/caydesJournals';
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Checklists extends React.Component {
   constructor(props) {
@@ -56,6 +57,7 @@ class Checklists extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     if (this.props.viewport.width >= 1600) {
       this.itemsPerPage = 5;
     }
@@ -74,47 +76,47 @@ class Checklists extends React.Component {
 
     const lists = [
       {
-        name: 'Region Chests',
+        name: t('Region Chests'),
         icon: 'destiny-region_chests',
         list: regionChests(this)
       },
       {
-        name: 'Lost Sectors',
+        name: t('Lost Sectors'),
         icon: 'destiny-lost_sectors',
         list: lostSectors(this.props)
       },
       {
-        name: 'Adventures',
+        name: t('Adventures'),
         icon: 'destiny-adventure',
         list: adventures(this.props)
       },
       {
-        name: 'Corrupted Eggs',
+        name: t('Corrupted Eggs'),
         icon: 'destiny-corrupted_eggs',
         list: corruptedEggs(this.props)
       },
       {
-        name: 'Ahamkara Bones ',
+        name: t('Ahamkara Bones '),
         icon: 'destiny-ahamkara_bones',
         list: ahamkaraBones(this.props)
       },
       {
-        name: 'Cat Statues',
+        name: t('Cat Statues'),
         icon: 'destiny-cat_statues',
         list: catStatues(this.props)
       },
       {
-        name: 'Sleeper Nodes',
+        name: t('Sleeper Nodes'),
         icon: 'destiny-sleeper_nodes',
         list: sleeperNodes(this.props)
       },
       {
-        name: 'Ghost Scans',
+        name: t('Ghost Scans'),
         icon: 'destiny-ghost',
         list: ghostScans(this.props)
       },
       {
-        name: 'Lost Memory Fragments',
+        name: t('Lost Memory Fragments'),
         icon: 'destiny-lost_memory_fragments',
         list: latentMemories(this.props)
       }
@@ -122,7 +124,7 @@ class Checklists extends React.Component {
 
     if (Object.values(this.props.response.profile.profileProgression.data.checklists[2448912219]).filter(value => value === true).length === 4) {
       lists.push({
-        name: "Cayde's Journals",
+        name: t("Cayde's Journals"),
         icon: 'destiny-ace_of_spades',
         list: caydesJournals(this.props)
       });
@@ -134,7 +136,7 @@ class Checklists extends React.Component {
     return (
       <div className='view' id='checklists'>
         <div className='sub-header'>
-          <div>Checklists</div>
+          <div>{t('Checklists')}</div>
         </div>
         <div className='selectors'>
           <ul className='list'>
@@ -177,4 +179,4 @@ class Checklists extends React.Component {
   }
 }
 
-export default Checklists;
+export default withNamespaces()(Checklists);

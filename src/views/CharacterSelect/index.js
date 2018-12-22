@@ -12,6 +12,7 @@ import errorHandler from '../../utils/errorHandler';
 import Spinner from '../../components/Spinner';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class CharacterSelect extends React.Component {
   constructor(props) {
@@ -144,6 +145,7 @@ class CharacterSelect extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     let profileHistory = ls.get('history.profiles') ? ls.get('history.profiles') : [];
     let resultsElement = null;
     let profileElement = null;
@@ -166,7 +168,7 @@ class CharacterSelect extends React.Component {
                 </li>
               ))
             ) : (
-              <li className='no-profiles'>No profiles found</li>
+              <li className='no-profiles'>{t('No profiles found')}</li>
             )}
           </ul>
         </div>
@@ -190,7 +192,7 @@ class CharacterSelect extends React.Component {
               return sum + parseInt(this.state.profile.profile.characters.data[key].minutesPlayedTotal);
             }, 0) / 1440
           )}{' '}
-          days on the grind
+          {t('days on the grind')}
         </div>
       );
 
@@ -229,18 +231,18 @@ class CharacterSelect extends React.Component {
         <div className='search'>
           {errorNotices}
           <div className='sub-header'>
-            <div>Search for player</div>
+            <div>{t('Search for player')}</div>
           </div>
           <div className='form'>
             <div className='field'>
-              <input onInput={this.SearchDestinyPlayer} type='text' placeholder='insert gamertag' spellCheck='false' />
+              <input onInput={this.SearchDestinyPlayer} type='text' placeholder={t('insert gamertag')} spellCheck='false' />
             </div>
           </div>
           <div className='results'>{resultsElement}</div>
           {profileHistory.length > 0 ? (
             <>
               <div className='sub-header'>
-                <div>Previous</div>
+                <div>{t('Previous')}</div>
               </div>
               <div className='results'>
                 <ul className='list'>
@@ -272,4 +274,4 @@ class CharacterSelect extends React.Component {
   }
 }
 
-export default CharacterSelect;
+export default withNamespaces()(CharacterSelect);

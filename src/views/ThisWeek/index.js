@@ -3,6 +3,7 @@ import React from 'react';
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class ThisWeek extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class ThisWeek extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     const manifest = this.props.manifest;
     const milestones = this.props.response.milestones;
 
@@ -93,8 +95,8 @@ class ThisWeek extends React.Component {
       },
       ascendant: {
         1: {
-          challenge: 'Ouroborea',
-          region: "Aphelion's Rest",
+          challenge: t('Ouroborea'),
+          region: t("Aphelion's Rest"),
           triumphs: [
             3024450470, // Nigh II (Eggs)
             1842255608, // Imponent I (Bones)
@@ -104,8 +106,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         2: {
-          challenge: 'Forfeit Shrine',
-          region: 'Gardens of Esila',
+          challenge: t('Forfeit Shrine'),
+          region: t('Gardens of Esila'),
           triumphs: [
             2974117611, // Imponent II (Eggs)
             1842255611, // Heresiology (Bones)
@@ -115,8 +117,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         3: {
-          challenge: 'Shattered Ruins',
-          region: 'Spine of Keres',
+          challenge: t('Shattered Ruins'),
+          region: t('Spine of Keres'),
           triumphs: [
             3024450469, // Imponent V (Eggs)
             1859033176, // Ecstasiate I (Bones)
@@ -126,8 +128,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         4: {
-          challenge: 'Keep of Honed Edges',
-          region: "Harbinger's Seclude",
+          challenge: t('Keep of Honed Edges'),
+          region: t("Harbinger's Seclude"),
           triumphs: [
             2974117605, // Imponent IV (Eggs)
             1842255614, // Ecstasiate II (Bones)
@@ -137,8 +139,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         5: {
-          challenge: 'Agonarch Abyss',
-          region: 'Bay of Drowned Wishes',
+          challenge: t('Agonarch Abyss'),
+          region: t('Bay of Drowned Wishes'),
           triumphs: [
             3024450465, // Palingenesis I (Eggs)
             1859033177, // Cosmogyre IV (Bones)
@@ -148,8 +150,8 @@ class ThisWeek extends React.Component {
           collectibles: []
         },
         6: {
-          challenge: 'Cimmerian Garrison',
-          region: 'Chamber of Starlight',
+          challenge: t('Cimmerian Garrison'),
+          region: t('Chamber of Starlight'),
           triumphs: [
             3024450471, // Nigh I (Eggs)
             1859033173, // Brephos III (Bones)
@@ -476,7 +478,7 @@ class ThisWeek extends React.Component {
       <div className='view' id='this-week'>
         <div className='module'>
           <div className='sub-header'>
-            <div>Flashpoint</div>
+            <div>{t('Flashpoint')}</div>
           </div>
           <div className='content'>
             <div
@@ -487,10 +489,10 @@ class ThisWeek extends React.Component {
             </ul>
           </div>
           <div className='sub-header'>
-            <div>Escalation Protocol</div>
+            <div>{t('Escalation Protocol')}</div>
           </div>
           <div className='content'>
-            <div className='sub-title'>Mars</div>
+            <div className='sub-title'>{t('Mars')}</div>
             <h3>{consolidatedInfo.ep[cycleInfo.week.ep].boss}</h3>
             <ul className='list collection-items'>
               <Collectibles selfLink {...this.props} hashes={consolidatedInfo.ep[cycleInfo.week.ep].collectibles} />
@@ -499,17 +501,17 @@ class ThisWeek extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>Nightfalls</div>
+            <div>{t('Nightfalls')}</div>
           </div>
           {nightfalls}
         </div>
         <div className='module curse'>
           <div className='sub-header'>
-            <div>The Curse</div>
+            <div>{t('The Curse')}</div>
           </div>
           <div className='content'>
-            <div className='sub-title'>The Dreaming City</div>
-            <h3>Cycle week {cycleInfo.week.curse}</h3>
+            <div className='sub-title'>{t('The Dreaming City')}</div>
+            <h3>{t('Cycle week')} {cycleInfo.week.curse}</h3>
             <ul className='list record-items'>
               <Records selfLink {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
             </ul>
@@ -517,7 +519,7 @@ class ThisWeek extends React.Component {
         </div>
         <div className='module'>
           <div className='sub-header'>
-            <div>Ascendant challenge</div>
+            <div>{t('Ascendant challenge')}</div>
           </div>
           <div className='content'>
             <div className='sub-title'>{consolidatedInfo.ascendant[cycleInfo.week.ascendant].region}</div>
@@ -532,4 +534,4 @@ class ThisWeek extends React.Component {
   }
 }
 
-export default ThisWeek;
+export default withNamespaces()(ThisWeek);

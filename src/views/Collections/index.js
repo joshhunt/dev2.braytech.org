@@ -6,6 +6,7 @@ import BadgeNode from './BadgeNode';
 import PresentationNode from './PresentationNode';
 
 import './styles.css';
+import { withNamespaces } from 'react-i18next';
 
 class Collections extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Collections extends React.Component {
   }
 
   render() {
+    const {t} = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     if (!primaryHash) {
@@ -60,7 +62,7 @@ class Collections extends React.Component {
               <li>
                 <Link to='/collections'>
                   <i className='uniE742' />
-                  Collections
+                  {t('Collections')}
                 </Link>
               </li>
             </ul>
@@ -71,4 +73,4 @@ class Collections extends React.Component {
   }
 }
 
-export default Collections;
+export default withNamespaces()(Collections);

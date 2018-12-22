@@ -4,6 +4,7 @@ import './styles.css';
 
 import StandardHeader from '../StandardHeader';
 import ProfileHeader from '../ProfileHeader';
+import { withNamespaces } from 'react-i18next';
 
 class Header extends React.Component {
   constructor(props) {
@@ -12,49 +13,55 @@ class Header extends React.Component {
     this.state = {};
   }
   render() {
+    const {t} = this.props;
     const views = [
       {
-        name: 'Clan',
-        desc: 'Activity and statistics',
+        name: t('Clan'),
+        desc: t('Activity and statistics'),
         slug: '/clan',
         exact: false
       },
       {
-        name: 'Collections',
-        desc: 'Items your Guardian has acquired',
+        name: t('Collections'),
+        desc: t('Items your Guardian has acquired'),
         slug: '/collections',
         exact: false
       },
       {
-        name: 'Triumphs',
-        desc: "Records of your Guardian's achievements",
+        name: t('Triumphs'),
+        desc: t("Records of your Guardian's achievements"),
         slug: '/triumphs',
         exact: false
       },
       {
-        name: 'Checklists',
-        desc: 'Made a list, check it twice',
+        name: t('Checklists'),
+        desc: t('Made a list, check it twice'),
         slug: '/checklists',
         exact: true
       },
       {
-        name: 'Overview',
-        desc: "Bird's eye view of your progress",
+        name: t('Overview'),
+        desc: t("Bird's eye view of your progress"),
         slug: '/overview',
         exact: true
       },
       {
-        name: 'This Week',
-        desc: 'Prestigious records and valued items up for grabs this week',
+        name: t('This Week'),
+        desc: t('Prestigious records and valued items up for grabs this week'),
         slug: '/this-week',
         exact: true
       },
       {
-        name: 'Vendors',
-        desc: "Tracking what's in stock across the Jovians",
+        name: t('Vendors'),
+        desc: t("Tracking what's in stock across the Jovians"),
         slug: '/vendors',
         exact: false
-      }
+      },{
+        name: t('Settings'),
+        desc: "",
+        slug: '/settings',
+        exact: true
+      },
     ];
 
     let standard = ['/character-select', '/pride', '/credits']
@@ -67,4 +74,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+export default withNamespaces()(Header);

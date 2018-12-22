@@ -4,14 +4,14 @@ import cx from 'classnames';
 import packageJSON from '../../../package.json';
 import ObservedImage from '../../components/ObservedImage';
 
-import { classTypeToString } from '../../utils/destinyUtils';
+import { classTypeToString, classHashToString } from '../../utils/destinyUtils';
 
 import './styles.css';
 
 class ProfileHeader extends React.Component {
   constructor(props) {
     super(props);
-
+    this.manifest = props.manifest;
     this.state = {
       mobileNavOpen: false
     };
@@ -147,7 +147,7 @@ class ProfileHeader extends React.Component {
                   />
                   <div className='displayName'>{profile.userInfo.displayName}</div>
                   <div className='basics'>
-                    {character.baseCharacterLevel} / {classTypeToString(character.classType)} / <span className='light'>{character.light}</span>
+                    {character.baseCharacterLevel} / {classHashToString(character.classHash, this.manifest, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
                   <div className='progress'>
                     <div

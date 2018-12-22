@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import ObservedImage from '../ObservedImage';
 import '../../utils/destinyEnums';
-import { damageTypeToString, ammoTypeToString } from '../../utils/destinyUtils';
+import { damageTypeToString, ammoTypeToString, getDefName} from '../../utils/destinyUtils';
 
 const round = number => {
   const floor = Math.floor(number);
@@ -56,113 +56,113 @@ const weapon = (manifest, item) => {
   let weaponsStats = [
     {
       hash: 2837207746,
-      name: 'Swing Speed',
+      name: getDefName(2837207746, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 3614673599,
-      name: 'Blast Radius',
+      name: getDefName(3614673599, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 2523465841,
-      name: 'Velocity',
+      name: getDefName(2523465841, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 4043523819,
-      name: 'Impact',
+      name: getDefName(4043523819, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 1240592695,
-      name: 'Range',
+      name: getDefName(1240592695, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 2762071195,
-      name: 'Efficiency',
+      name: getDefName(2762071195, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 209426660,
-      name: 'Defence',
+      name: getDefName(209426660, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 155624089,
-      name: 'Stability',
+      name: getDefName(155624089, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 943549884,
-      name: 'Handling',
+      name: getDefName(943549884, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 4188031367,
-      name: 'Reload Speed',
+      name: getDefName(4188031367, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0
     },
     {
       hash: 1345609583,
-      name: 'Aim Assistance',
+      name: getDefName(1345609583, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0,
       hidden: true
     },
     {
       hash: 2715839340,
-      name: 'Recoil Direction',
+      name: getDefName(2715839340, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0,
       hidden: true
     },
     {
       hash: 3555269338,
-      name: 'Zoom',
+      name: getDefName(3555269338, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0,
       hidden: true
     },
     {
       hash: 1931675084,
-      name: 'Inventory Size',
+      name: getDefName(1931675084, manifest, 'DestinyStatDefinition'),
       type: 'bar',
       modifier: 0,
       hidden: true
     },
     {
       hash: 925767036,
-      name: 'Ammo Capacity',
+      name: getDefName(925767036, manifest, 'DestinyStatDefinition'),
       type: 'int',
       modifier: 0
     },
     {
       hash: 4284893193,
-      name: 'Rounds Per Minute',
+      name: getDefName(4284893193, manifest, 'DestinyStatDefinition'),
       type: 'int',
       modifier: 0
     },
     {
       hash: 2961396640,
-      name: 'Charge Time',
+      name: getDefName(2961396640, manifest, 'DestinyStatDefinition'),
       type: 'int',
       modifier: 0
     },
     {
       hash: 3871231066,
-      name: 'Magazine',
+      name: getDefName(3871231066, manifest, 'DestinyStatDefinition'),
       type: 'int',
       modifier: 0
     }
