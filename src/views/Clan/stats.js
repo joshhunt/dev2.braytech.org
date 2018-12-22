@@ -238,7 +238,7 @@ class StatsView extends React.Component {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.orbsDropped.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.deaths.basic.value], ['desc']).map(member => {
+            ordered: orderBy(raw, [member => member.allPvE.orbsDropped.basic.value], ['desc']).map(member => {
               return { membershipId: member.membershipId, orbsDropped: member.allPvE.orbsDropped.basic.value };
             })
           },
@@ -869,6 +869,10 @@ class StatsView extends React.Component {
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.medals_pvecomp_medal_tags_denied_15.ordered)}</ul>
               </div>
             </div>
+            <div className='flair-gambit'>
+              <div className='l1 destiny-gambit_dazzle'></div>
+              <div className='l2 destiny-gambit_dazzle'></div>
+            </div>
           </>
         );
       } else if (subView === 'iron-banner') {
@@ -953,7 +957,7 @@ class StatsView extends React.Component {
         collation = (
           <>
             <div className='sub-header'>
-              <div>Gambit</div>
+              <div>Crucible</div>
             </div>
             <div className='data'>
               <div className='point'>

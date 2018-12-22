@@ -4,7 +4,6 @@ import assign from 'lodash/assign';
 import cx from 'classnames';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
-import _filter from 'lodash/filter';
 import globals from '../../utils/globals';
 import rgbToHsl from '../../utils/rgbToHsl';
 import Spinner from '../../components/Spinner';
@@ -19,7 +18,10 @@ class Roster extends React.Component {
     super(props);
 
     this.state = {
-      members: []
+      members: [],
+      membersFetched: 0,
+      freshnessCycles: 0,
+      freshnessTimeout: false
     };
 
     this.ProfileResponse = this.ProfileResponse.bind(this);
@@ -39,11 +41,11 @@ class Roster extends React.Component {
         {
           name: 'profile',
           path: `https://www.bungie.net/Platform/Destiny2/${member.destinyUserInfo.membershipType}/Profile/${member.destinyUserInfo.membershipId}/?components=100,200,202,204,900`
-        },
-        {
-          name: 'stats',
-          path: `https://www.bungie.net/Platform/Destiny2/${member.destinyUserInfo.membershipType}/Account/${member.destinyUserInfo.membershipId}/Character/0/Stats/?groups=0,0&modes=3,4,5,6,16,19,63&periodType=0`
         }
+        // {
+        //   name: 'stats',
+        //   path: `https://www.bungie.net/Platform/Destiny2/${member.destinyUserInfo.membershipType}/Account/${member.destinyUserInfo.membershipId}/Character/0/Stats/?groups=0,0&modes=3,4,5,6,16,19,63&periodType=0`
+        // }
       ];
     }
 
@@ -69,18 +71,32 @@ class Roster extends React.Component {
     }
   };
 
-  componentDidMount() {
-    const members = this.props.members;
+  rollCall = (members = this.props.members, updateOnly = false) => {
     if (members) {
       members.Response.results.forEach(member => {
+        if (updateOnly && !member.isOnline) {
+          this.setState(prevState => ({
+            membersFetched: this.state.membersFetched + 1,
+            freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
+          }));
+          return;
+        }
         this.ProfileResponse(member)
           .then(response => {
             if (response.profile && response.profile.ErrorCode !== 1) {
               console.warn(member.destinyUserInfo.membershipType + '/' + member.destinyUserInfo.membershipId + ' - ' + response.profile.Message);
+              this.setState(prevState => ({
+                membersFetched: this.state.membersFetched + 1,
+                freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
+              }));
               return;
             }
             if (response.stats && response.stats.ErrorCode !== 1) {
               console.warn(member.destinyUserInfo.membershipType + '/' + member.destinyUserInfo.membershipId + ' - ' + response.stats.Message);
+              this.setState(prevState => ({
+                membersFetched: this.state.membersFetched + 1,
+                freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
+              }));
               return;
             }
 
@@ -103,14 +119,99 @@ class Roster extends React.Component {
               };
             }
 
-            this.setState(prevState => ({
-              members: [...prevState.members, response]
-            }));
+            this.setState(prevState => {
+              let updatedMembers = [...prevState.members];
+
+              let index = updatedMembers.length > 0 ? updatedMembers.findIndex(prevMember => prevMember.member.destinyUserInfo.membershipId === member.destinyUserInfo.membershipId) : -1;
+              if (index > -1) {
+                updatedMembers[index] = response;
+                // console.log(`${member.destinyUserInfo.displayName} updated`);
+              } else {
+                updatedMembers.push(response);
+              }
+
+              return {
+                members: updatedMembers,
+                membersFetched: this.state.membersFetched + 1,
+                freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
+              };
+            });
           })
           .catch(error => {
             console.log(error);
+            this.setState(prevState => ({
+              membersFetched: this.state.membersFetched + 1,
+              freshnessTimeout: this.props.members.Response.results.length === this.state.membersFetched + 1 ? false : this.state.freshnessTimeout
+            }));
           });
       });
+    }
+  };
+
+  groupFetch = async groupId => {
+    let requests = [
+      {
+        name: 'members',
+        path: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/`
+      }
+    ];
+
+    let fetches = requests.map(request => {
+      return fetch(request.path, {
+        headers: {
+          'X-API-Key': globals.key.bungie
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(fetch => {
+          let object = {};
+          object[request.name] = fetch;
+          return object;
+        });
+    });
+
+    return Promise.all(fetches)
+      .then(promises => {
+        return assign(...promises);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  componentDidMount() {
+    this.rollCall();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.state.freshnessTimeout);
+  }
+
+  increaseFreshness = () => {
+    // console.log(`Shibuya Roll Call: ${this.state.freshnessCycles + 1}`);
+    let groups = this.props.response.groups;
+    let clan = groups.results.length > 0 ? groups.results[0].group : false;
+    this.groupFetch(clan.groupId).then(response => {
+      this.setState({ freshnessCycles: this.state.freshnessCycles + 1 });
+      this.rollCall(response.members, true);
+    })
+    .catch(error => {
+      console.log(error);
+      this.setState(prevState => ({
+        membersFetched: this.props.members.Response.results.length,
+        freshnessTimeout: false
+      }));
+    });
+    
+  };
+
+  componentDidUpdate() {
+    if (this.props.keepFresh && !this.state.freshnessTimeout && this.props.members.Response.results.length === this.state.membersFetched) {
+      // console.log('See you in 30s');
+      let timeout = setTimeout(this.increaseFreshness, 30000);
+      this.setState({ freshnessTimeout: timeout, membersFetched: 0 });
     }
   }
 
@@ -141,7 +242,6 @@ class Roster extends React.Component {
                   <div className='activity'>
                     <Moment fromNow>{member.profile.profile.data.dateLastPlayed}</Moment>
                   </div>
-                  <div className='historicalStats'></div>
                 </li>
               )
             });
@@ -150,24 +250,12 @@ class Roster extends React.Component {
         }
 
         let lastCharacterActivity = Object.entries(member.profile.characterActivities.data);
-        lastCharacterActivity = orderBy(
-          lastCharacterActivity, 
-          [
-            character => character[1].dateActivityStarted, 
-          ], 
-          ['desc']
-        );
+        lastCharacterActivity = orderBy(lastCharacterActivity, [character => character[1].dateActivityStarted], ['desc']);
 
         lastCharacterActivity = lastCharacterActivity.length > 0 ? lastCharacterActivity[0] : false;
 
         let lastCharacterTime = Object.entries(member.profile.characterActivities.data);
-        lastCharacterTime = orderBy(
-          lastCharacterTime, 
-          [
-            character => character[1].dateActivityStarted, 
-          ], 
-          ['desc']
-        );
+        lastCharacterTime = orderBy(lastCharacterTime, [character => character[1].dateActivityStarted], ['desc']);
 
         // console.log(member, lastCharacterActivity, lastCharacterTime)
         // console.log(lastCharacterTime, member.profile.characterActivities.data);
@@ -198,89 +286,23 @@ class Roster extends React.Component {
             // console.log(lastActivity);
 
             let activityDisplay = null;
-            let stats = null;
             if (lastActivity && member.member.isOnline) {
               let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
-              let mode = activity ? activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash] : false;
-              
+              let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
+
               // console.log(lastActivity);
 
               activityDisplay = mode ? (
                 <>
                   {mode.displayProperties.name}: {activity.displayProperties.name}
                 </>
-              ) : activity ? activity.placeHash === 2961497387 ? (
-                'Orbit'
-              ) : (
-                activity.displayProperties.name
+              ) : activity ? (
+                activity.placeHash === 2961497387 ? (
+                  'Orbit'
+                ) : (
+                  activity.displayProperties.name
+                )
               ) : null;
-
-              let collated = {
-                patrol: {
-                  kills: member.stats.patrol.allTime ? member.stats.patrol.allTime.kills.basic.displayValue : null
-                },
-                crucible: {
-                  secondsPlayed: member.stats.allPvP.allTime ? member.stats.allPvP.allTime.secondsPlayed.basic.displayValue : null,
-                  efficiency: member.stats.allPvP.allTime ? member.stats.allPvP.allTime.efficiency.basic.displayValue : null
-                },
-                ironBanner: {
-                  secondsPlayed: member.stats.ironBanner.allTime ? member.stats.ironBanner.allTime.secondsPlayed.basic.displayValue : null,
-                  efficiency: member.stats.ironBanner.allTime ? member.stats.ironBanner.allTime.efficiency.basic.displayValue : null
-                },
-                raids: {
-                  secondsPlayed: member.stats.raid.allTime ? member.stats.raid.allTime.secondsPlayed.basic.displayValue : null,
-                  activitiesCleared: member.stats.raid.allTime ? member.stats.raid.allTime.activitiesCleared.basic.displayValue : null
-                },
-                strikes: {
-                  secondsPlayed: member.stats.strike.allTime ? member.stats.strike.allTime.secondsPlayed.basic.displayValue : null,
-                  activitiesCleared: member.stats.strike.allTime ? member.stats.strike.allTime.activitiesCleared.basic.displayValue : null,
-                  longestKillSpree: member.stats.strike.allTime ? member.stats.strike.allTime.longestKillSpree.basic.displayValue : null
-                },
-                nightfalls: {
-                  secondsPlayed: member.stats.nightfall.allTime ? member.stats.nightfall.allTime.secondsPlayed.basic.displayValue : null,
-                  activitiesCleared: member.stats.nightfall.allTime ? member.stats.nightfall.allTime.activitiesCleared.basic.displayValue : null,
-                  longestKillSpree: member.stats.nightfall.allTime ? member.stats.nightfall.allTime.longestKillSpree.basic.displayValue : null
-                },
-                gambit: {
-                  secondsPlayed: member.stats.pvecomp_gambit.allTime ? member.stats.pvecomp_gambit.allTime.secondsPlayed.basic.displayValue : null,
-                  efficiency: member.stats.pvecomp_gambit.allTime ? member.stats.pvecomp_gambit.allTime.efficiency.basic.displayValue : null
-                }
-              }
-
-              // console.log(member, collated)
-              
-              if (activity && activity.directActivityModeType) {
-                switch (activity.directActivityModeType) {
-
-                  case 3: // strikes
-                    stats = <>{collated.strikes.activitiesCleared} strikes cleared</>;
-                    break;
-
-                  case 16: // nightfalls
-                    stats = <>{collated.nightfalls.activitiesCleared} nightfalls cleared</>;
-                    break;
-
-                  case 5: // gambit
-                    stats = <>{collated.gambit.efficiency} efficiency</>;
-                    break;
-
-                  case 48: // quickplay
-                    stats = <>{collated.crucible.efficiency} efficiency</>;
-                    break;
-
-                  case 10: // comp
-                    stats = <>{collated.crucible.efficiency} efficiency</>;
-                    break;
-
-                  case 6: // patrol
-                    stats = <>{collated.patrol.kills} kills on patrol</>;
-                    break;
-
-                  default: 
-                    stats = null;
-                }
-              }
-
             }
 
             let character = (
@@ -307,7 +329,6 @@ class Roster extends React.Component {
                     {activityDisplay ? <div className='name'>{activityDisplay}</div> : null}
                     <Moment fromNow>{lastActivity && member.member.isOnline ? lastActivity.dateActivityStarted : member.profile.profile.data.dateLastPlayed}</Moment>
                   </div>
-                  <div className='historicalStats'>{stats}</div>
                 </li>
               )
             });
@@ -341,15 +362,7 @@ class Roster extends React.Component {
         }
       });
 
-      members = orderBy(
-        members, 
-        [
-          member => member.isOnline, 
-          member => member.lastActivity, 
-          member => member.lastActive
-        ], 
-        ['desc', 'desc', 'desc']
-      );
+      members = orderBy(members, [member => member.isOnline, member => member.lastActivity, member => member.lastActive], ['desc', 'desc', 'desc']);
 
       if (this.props.mini) {
         members.push({
@@ -375,7 +388,6 @@ class Roster extends React.Component {
               <div className='clanXp'>Clan XP weekly</div>
               <div className='character'>Character</div>
               <div className='activity'>Activity</div>
-              <div className='historicalStats'>Historical stats</div>
             </li>
           )
         });
