@@ -97,6 +97,13 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+#clan .summary .info {
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem;
+}
 
 @media screen and (max-width: 1200px) {
 

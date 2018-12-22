@@ -26,10 +26,6 @@ class RosterView extends React.Component {
       {
         name: 'members',
         path: `https://www.bungie.net/Platform/GroupV2/${groupId}/Members/`
-      },
-      {
-        name: 'weeklyRewardState',
-        path: `https://www.bungie.net/Platform/Destiny2/Clan/${groupId}/WeeklyRewardState/`
       }
     ];
 
@@ -90,7 +86,7 @@ class RosterView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} members {this.state.membersResponse ? <>/ {this.state.membersResponse.Response.results.filter(member => member.isOnline).length} online</> : null}</div>
+                <div className='memberCount'>// {clan.memberCount} members</div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>
@@ -108,8 +104,11 @@ class RosterView extends React.Component {
                   </li>
                 </ul>
               </div>
+              <div className='info'>
+                <p>Pulsing blueberries are freshly acquired clan members who've been members for less than 2 weeks.</p>
+              </div>
             </div>
-            <div className='members'>{this.state.membersResponse ? <Roster {...this.props} members={this.state.membersResponse} /> : <Spinner />}</div>
+            <div className='members'>{this.state.membersResponse ? <Roster {...this.props} members={this.state.membersResponse} keepFresh /> : <Spinner />}</div>
           </div>
         </div>
       );

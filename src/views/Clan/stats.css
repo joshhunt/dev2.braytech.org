@@ -16,7 +16,7 @@
   padding-left: 0;
   padding-right: 0;
   padding-top: 0;
-  width: calc(100% - 0rem);
+  width: 100%;
   background-color: transparent;
 }
 
@@ -138,6 +138,32 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
+.flair-gambit {
+  position: fixed;
+  right: -10vw;
+  top: calc(50vh - 55vw / 2);
+  width: 55vw;
+  height: 55vw;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in-logo-feature 7s linear forwards, rotate-logo-feature 130s linear infinite reverse;
+}
+
+.flair-gambit .destiny-gambit_dazzle {
+  position: absolute;
+  opacity: 0.1;
+}
+
+.flair-gambit .l1 {
+  font-size: 55vw;
+}
+
+.flair-gambit .l2 {
+  font-size: 50vw;
+}
+
 @media screen and (max-width: 1200px) {
 }
 
@@ -154,5 +180,20 @@
 
   #clan .stats .collation .data .point .header .value {
     font-size: 28px;
+  }
+
+  .flair-gambit {
+    right: -30vh;
+    top: calc(50vh - 70vh / 2);
+    width: 70vh;
+    height: 70vh;
+  }
+
+  .flair-gambit .l1 {
+    font-size: 70vh;
+  }
+
+  .flair-gambit .l2 {
+    font-size: 65vh;
   }
 }
