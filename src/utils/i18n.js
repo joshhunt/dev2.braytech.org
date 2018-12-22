@@ -24,6 +24,10 @@ i18n
     lng: getCurrentLanguage(),
     fallbackLng: _defaultLanguage,
 
+    backend: {
+      loadPath: '/static/locales/{{lng}}/{{ns}}.json',
+    },
+
     keySeparator: false,
 
     interpolation: {
