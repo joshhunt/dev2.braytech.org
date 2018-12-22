@@ -150,7 +150,7 @@ class Root extends React.Component {
       <>
         <div className='nodes'>
           <div className='sub-header'>
-            <div>Triumphs</div>
+            <div>{t('Triumphs')}</div>
             <div>
               {recordsStates.filter(collectible => enumerateRecordState(collectible).recordRedeemed).length}/{recordsStates.filter(collectible => !enumerateRecordState(collectible).invisible).length}
             </div>
@@ -160,7 +160,7 @@ class Root extends React.Component {
           </div>
           <div className='node'>
             <div className='sub-header'>
-              <div>Seals</div>
+              <div>{t('Seals')}</div>
             </div>
             <div className='parent seals'>{sealNodes}</div>
           </div>
