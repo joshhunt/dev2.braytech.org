@@ -58,16 +58,22 @@ class Header extends React.Component {
         exact: false
       },
       {
-        name: t('Settings'),
+        name: t('Tools'),
+        desc: t('Assorted Destiny-related tools'),
+        slug: '/tools',
+        exact: true
+      },
+      {
+        name: <span className='destiny-settings' />,
         desc: 'Select a different language',
         slug: '/settings',
         exact: true
       }
     ];
 
-    let standard = ['/character-select', '/pride', '/credits', '/settings'];
+    let standard = ['character-select', 'pride', 'credits', 'settings', 'tools'];
 
-    if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && !standard.includes(this.props.route.location.pathname)) {
+    if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && !standard.includes(this.props.route.location.pathname.split('/')[1])) {
       return <ProfileHeader {...this.props.route} {...this.props.user} viewport={this.props.viewport} manifest={this.props.manifest} views={views} />;
     } else {
       return <StandardHeader {...this.props.user} viewport={this.props.viewport} views={views} />;

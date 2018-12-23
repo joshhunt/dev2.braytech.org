@@ -1157,7 +1157,7 @@ class StatsView extends React.Component {
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                 <div className='memberCount'>
-                  // {clan.memberCount} members {this.state.membersResponse ? <>/ {this.state.membersResponse.Response.results.filter(member => member.isOnline).length} online</> : null}
+                  // {clan.memberCount} members
                 </div>
                 <div className='motto'>{clan.motto}</div>
               </div>

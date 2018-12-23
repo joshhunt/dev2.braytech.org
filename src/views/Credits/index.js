@@ -19,10 +19,6 @@ class Credits extends React.Component {
   }
 
   render() {
-    
-    // <a href='https://github.com/justrealmilk/dev2.braytech.org/issues' target='_blank' rel='noopener noreferrer'>
-    //         Issues?
-    //       </a>
 
     return (
       <div className='view' id='credits'>
@@ -30,8 +26,15 @@ class Credits extends React.Component {
           <div className='name'>Credits</div>
           <div className='description'>
             <p>Thanks to Bungie in general for a great game and a great API. Thanks to vthornheart, the boys in the DIM Slack, and for everyone who's excitement motivates me.</p>
-            <p>The repo is at <a href='https://github.com/justrealmilk/dev2.braytech.org' target='_blank' rel='noopener noreferrer'>justrealmilk/dev2.braytech.org</a> and issues can be filed <a href='https://github.com/justrealmilk/dev2.braytech.org/issues' target='_blank' rel='noopener noreferrer'>here.</a></p>
+            <p>The repo is at <a href='https://github.com/justrealmilk/dev2.braytech.org' target='_blank' rel='noopener noreferrer'>justrealmilk/dev2.braytech.org</a>. <a href='https://github.com/justrealmilk/dev2.braytech.org/issues' target='_blank' rel='noopener noreferrer'>Issues?</a></p>
             <ul>
+              <li>
+                <strong>Translations</strong>
+                <ul>
+                  <li><a href='https://github.com/marquesinijatinha' target='_blank' rel='noopener noreferrer'>João Paulo (Português Brasileiro)</a></li>
+                  <li><a href='https://github.com/koenigderluegner' target='_blank' rel='noopener noreferrer'>Alex Niersmann (Deutsch)</a></li>
+                </ul>
+              </li>
               <li>
                 <strong>Index</strong>
                 <ul>

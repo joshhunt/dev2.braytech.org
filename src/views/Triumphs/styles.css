@@ -1,5 +1,5 @@
 #triumphs {
-  padding: 3rem;
+  padding: 4rem 3rem 3rem;
 }
 
 #triumphs .sub-header {
@@ -224,7 +224,7 @@
 
 @media screen and (max-width: 500px) {
   #triumphs {
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
   }
 
   #triumphs .nodes {

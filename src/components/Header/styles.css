@@ -111,7 +111,7 @@
   height: 100%;
   padding: 3rem;
   z-index: 17;
-  background-color: #dc241e;
+  background-color: #f1f1f1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
@@ -131,7 +131,7 @@
   padding: unset;
   display: inline-block;
   margin: 0 0 0.6rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(0, 0, 0, 0.9);
   font-size: 14px;
 }
 
@@ -142,7 +142,7 @@
   height: 1px;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(0, 0, 0, 1);
   transition: transform 0.2s;
   transform: scaleX(0);
 }
@@ -152,12 +152,12 @@
 }
 
 #header .nav ul li a.active {
-  color: #fff;
+  color: #000;
 }
 
 #header .nav ul li .description {
   display: block;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (max-width: 1200px) {

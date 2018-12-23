@@ -3,7 +3,7 @@
 
 
 #this-week {
-  padding: 3rem;
+  padding: 4rem 3rem 3rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 3rem;
@@ -61,7 +61,7 @@
 @media screen and (max-width: 600px) {
 
 #this-week {
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
 }

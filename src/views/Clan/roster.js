@@ -119,7 +119,7 @@ class RosterView extends React.Component {
                 </ul>
               </div>
               <div className='info'>
-                <p>Pulsing blueberries are freshly acquired clan members who've been members for less than 2 weeks.</p>
+                <p>Pulsing blueberries are freshly acquired members from the last 2 weeks.</p>
               </div>
               <div className='freshness'>
                 <ul className='list'>

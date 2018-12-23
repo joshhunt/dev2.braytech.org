@@ -67,6 +67,10 @@
   pointer-events: none;
 }
 
+#settings .module.language .list:last-child {
+  margin: 2rem 0 0;
+}
+
 @media screen and (max-width: 1500px) {
   #settings {
     grid-template-columns: repeat(4, 1fr);

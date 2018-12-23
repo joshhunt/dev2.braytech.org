@@ -27,6 +27,7 @@ import Vendors from './views/Vendors';
 import Settings from './views/Settings';
 import Pride from './views/Pride';
 import Credits from './views/Credits';
+import Tools from './views/Tools';
 import ClanBannerBuilder from './views/Tools/ClanBannerBuilder';
 import i18n from './utils/i18n';
 import { withNamespaces } from 'react-i18next';
@@ -128,11 +129,11 @@ class App extends Component {
           }
         });
     });
-    
+
     return Promise.all(requests)
       .then(responses => {
         const response = assign(...responses);
-        
+
         // console.log(response)
 
         // let state = this.state;
@@ -141,8 +142,8 @@ class App extends Component {
         this.bungieSettings = response.settings;
 
         let availableLanguages = [];
-        for(var i in response.manifest.jsonWorldContentPaths){
-          availableLanguages.push(i);  
+        for (var i in response.manifest.jsonWorldContentPaths) {
+          availableLanguages.push(i);
         }
         this.availableLanguages = availableLanguages;
         return response.manifest.jsonWorldContentPaths[this.currentLanguage];
@@ -249,28 +250,28 @@ class App extends Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     if (!window.ga) {
       GoogleAnalytics.init();
     }
 
-    const ProfileRoute = ({ render: Component, ...rest }) => (
-      <Route
-        {...rest}
-        render={props =>
-          this.state.user.response && this.state.user.characterId ? (
-            <Component {...props} />
-          ) : (
-            <Redirect
-              to={{
-                pathname: '/character-select',
-                state: { from: props.location }
-              }}
-            />
-          )
-        }
-      />
-    );
+    // const ProfileRoute = ({ render: Component, ...rest }) => (
+    //   <Route
+    //     {...rest}
+    //     render={props =>
+    //       this.state.user.response && this.state.user.characterId ? (
+    //         <Component {...props} />
+    //       ) : (
+    //         <Redirect
+    //           to={{
+    //             pathname: '/character-select',
+    //             state: { from: props.location }
+    //           }}
+    //         />
+    //       )
+    //     }
+    //   />
+    // );
 
     if (this.state.manifest.state !== 'ready') {
       if (this.state.manifest.state === 'error') {
@@ -306,7 +307,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('FETCHING')}</div>
+            <div className='download'>{t('DOWNLOADING MANIFEST DATA')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'almost') {
@@ -345,7 +346,7 @@ class App extends Component {
                 <Switch>
                   <Route path='/character-select' render={route => <CharacterSelect location={route.location} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route path='/overview' exact render={() => <Overview {...this.state.user} manifest={this.manifest} />} />
-                  <Route path='/clan/:view?/:subView?' exact render={(route) => <Clan {...this.state.user} manifest={this.manifest} view={route.match.params.view} subView={route.match.params.subView} />} />
+                  <Route path='/clan/:view?/:subView?' exact render={route => <Clan {...this.state.user} manifest={this.manifest} view={route.match.params.view} subView={route.match.params.subView} />} />
                   <Route path='/checklists' exact render={() => <Checklists {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route
                     path='/collections/:primary?/:secondary?/:tertiary?/:quaternary?'
@@ -367,11 +368,12 @@ class App extends Component {
                       </>
                     )}
                   />
-                  <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} {...this.state.user} manifest={this.manifest} />} />
+                  <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} {...this.state.user} setPageDefault={this.setPageDefault} manifest={this.manifest} />} />
                   <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} setPageDefault={this.setPageDefault} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
-                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
                   <Route path='/' exact render={() => <Index />} />
                 </Switch>
               </div>
@@ -458,11 +460,12 @@ class App extends Component {
                       />
                     )}
                   />
-                  <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} manifest={this.manifest} />} />
+                  <Route path='/vendors/:hash?' exact render={route => <Vendors vendorHash={route.match.params.hash} setPageDefault={this.setPageDefault} manifest={this.manifest} />} />
                   <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} setPageDefault={this.setPageDefault} />} />
                   <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
-                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={(route) => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
+                  <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
                   <Route path='/' exact render={() => <Index />} />
                 </Switch>
               </div>
