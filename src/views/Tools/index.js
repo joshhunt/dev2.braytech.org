@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
 
 import './styles.css';
 
@@ -20,14 +21,15 @@ class Tools extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div className='view' id='tools'>
         <div className='tool'>
           <div className='name'>
-            <Link to='/tools/clan-banner-builder'>Clan Banner Builder</Link>
+            <Link to='/tools/clan-banner-builder'>{t('Clan Banner Builder')}</Link>
           </div>
           <div className='description'>
-            <p>Collaborate with clan members on a new clan banner.</p>
+            <p>{t('Collaborate with clan members on a new clan banner.')}</p>
           </div>
         </div>
       </div>
@@ -35,4 +37,4 @@ class Tools extends React.Component {
   }
 }
 
-export default Tools;
+export default withNamespaces()(Tools);
