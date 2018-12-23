@@ -9,6 +9,15 @@ class Index extends React.Component {
 
     this.state = {};
   }
+  
+  componentDidMount() {
+    this.props.setPageDefault('light');
+    window.scrollTo(0, 0);
+  }
+
+  componentWillUnmount() {
+    this.props.setPageDefault(false);
+  }
 
   render() {
     

@@ -374,7 +374,7 @@ class App extends Component {
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
-                  <Route path='/' exact render={() => <Index />} />
+                  <Route path='/' exact render={() => <Index setPageDefault={this.setPageDefault} />} />
                 </Switch>
               </div>
               <Route path='/' render={route => <Footer route={route} />} />
@@ -466,7 +466,7 @@ class App extends Component {
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
-                  <Route path='/' exact render={() => <Index />} />
+                  <Route path='/' exact render={() => <Index setPageDefault={this.setPageDefault} />} />
                 </Switch>
               </div>
               <Route path='/' render={route => <Footer route={route} />} />
