@@ -8,6 +8,7 @@
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   margin-bottom: 2rem;
+  margin-top: 4rem;
 }
 
 #checklists .lists {
@@ -177,6 +178,7 @@
     margin-left: 2rem;
     margin-right: 2rem;
     margin-bottom: 2rem;
+    margin-top: 3rem;
     width: calc(100% - 4rem);
   }
 

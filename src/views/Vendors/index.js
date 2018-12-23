@@ -6,6 +6,7 @@ import 'moment-timezone';
 import Moment from 'react-moment';
 import { orderBy } from 'lodash/lodash';
 
+import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import Tooltip from '../../components/Tooltip';
 
@@ -23,6 +24,11 @@ class Vendors extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.response) {
+      this.props.setPageDefault('light');
+    }
+    window.scrollTo(0, 0);
+
     const vendors = ['396892126', '3982706173', '1062861569', '1576276905', '3347378076', '672118013', '1265988377', '69482069', '3603221665', '2398407866', '1735426333', '863940356', '248695599', '3361454721', '895295461', '2190858386', '2917531897'];
 
     let fetches = vendors.map(vendor => {
@@ -46,14 +52,20 @@ class Vendors extends Component {
       });
   }
 
+  componentWillUnmount() {
+    if (!this.props.response) {
+      this.props.setPageDefault(false);
+    }
+  }
+
   render() {
     const {t}= this.props;
     let manifest = this.props.manifest;
 
     if (this.state.vendors.length === 0) {
       return (
-        <div className='view' id='loading'>
-          <h4>Loading vendors</h4>
+        <div className='view' id='vendors'>
+          <Spinner dark={!this.props.response ? true : false} />
         </div>
       );
     } else {
@@ -172,7 +184,7 @@ class Vendors extends Component {
           sales: sales.length,
           element: (
             <div key={definition.hash + '-' + category.displayCategoryIndex} className='category'>
-              <div className='category-header'>
+              <div className='sub-header'>
                 <div>{categoryDefinition.displayProperties.name}</div>
               </div>
               <ul className='items'>
@@ -193,7 +205,7 @@ class Vendors extends Component {
             sales: 99,
             element: (
               <div key='610365472610365472' className='category'>
-                <div className='category-header'>
+                <div className='sub-header'>
                   <div>All possible mods</div>
                 </div>
                 <ul className='items'>
@@ -224,12 +236,9 @@ class Vendors extends Component {
 
       return (
         <>
-          <div className='view' id='vendors'>
+          <div className={cx('view', { dark: !this.props.response })} id='vendors'>
             <div className='presentation-node vendors'>
               <div className='sub-header'>
-                <div>{t('Vendors')}</div>
-              </div>
-              <div className='category-header'>
                 <div>{t('Weekly')}</div>
                 <div>
                   <Moment tz='Europe/London' fromNow>
@@ -238,7 +247,7 @@ class Vendors extends Component {
                 </div>
               </div>
               <ul className='list secondary'>{groups[1].items.map(obj => obj.element)}</ul>
-              <div className='category-header'>
+              <div className='sub-header'>
                 <div>{t('Daily')}</div>
                 <div>
                   <Moment tz='Europe/London' fromNow>

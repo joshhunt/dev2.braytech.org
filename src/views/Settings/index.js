@@ -8,7 +8,7 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     const { i18n } = this.props;
-    let initLanguage = i18n.getCurrentLanguage()
+    let initLanguage = i18n.getCurrentLanguage();
     this.state = {
       current: initLanguage,
       selected: initLanguage
@@ -58,16 +58,16 @@ class Settings extends React.Component {
 
     let applyButtons =
       this.state.current !== this.state.selected ? (
-        <div className='buttons'>
-          <div
-            className='button'
+        <ul className='list'>
+          <li
+            className='linked'
             onClick={() => {
               this.saveAndRestart();
             }}
           >
-            {t('Save and Restart')}
-          </div>
-        </div>
+            <div className='name'>{t('Save and Restart')}</div>
+          </li>
+        </ul>
       ) : null;
 
     return (

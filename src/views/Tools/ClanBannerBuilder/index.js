@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import assign from 'lodash/assign';
 import cx from 'classnames';
 import mapValues from 'lodash/mapValues';
+import { withNamespaces } from 'react-i18next';
 
 import ObservedImage from '../../../components/ObservedImage';
 import Spinner from '../../../components/Spinner';
@@ -61,6 +62,7 @@ class ClanBannerBuilder extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     let bannerData = this.props.match.params.decalId
       ? mapValues(this.props.match.params, value => {
           return parseInt(value, 10);
@@ -96,7 +98,7 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='decals'>
-          <h3>Banner Emblem</h3>
+          <h3>{t('Banner Emblem')}</h3>
           <div className='optionSet decals'>{decals}</div>
         </React.Fragment>
       );
@@ -125,7 +127,7 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='decalPrimaryColors'>
-          <h3>Emblem Foreground Color</h3>
+          <h3>{t('Emblem Foreground Color')}</h3>
           <div className='optionSet colors decalPrimaryColors'>{decalPrimaryColors.map(object => object.element)}</div>
         </React.Fragment>
       );
@@ -154,37 +156,8 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='decalSecondaryColors'>
-          <h3>Emblem Background Color</h3>
+          <h3>{t('Emblem Background Color')}</h3>
           <div className='optionSet colors decalSecondaryColors'>{decalSecondaryColors.map(object => object.element)}</div>
-        </React.Fragment>
-      );
-
-      let gonfalonColors = [];
-
-      clanBannerManifest.GonfalonColors.forEach(color => {
-        let link = buildLink({ gonfalonColorId: color.colorHash });
-        gonfalonColors.push({
-          sortValue: color.colorHash,
-          element: (
-            <div
-              key={color.colorHash}
-              className={cx('option', 'color', {
-                active: bannerData.gonfalonColorId === color.colorHash
-              })}
-            >
-              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
-              <Link to={link} />
-            </div>
-          )
-        });
-      });
-
-      gonfalonColors.sort((b, a) => a.sortValue - b.sortValue);
-
-      configOptions.push(
-        <React.Fragment key='gonfalonColors'>
-          <h3>Banner Color</h3>
-          <div className='optionSet colors gonfalonColors'>{gonfalonColors.map(object => object.element)}</div>
         </React.Fragment>
       );
 
@@ -207,7 +180,7 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='gonfalonDetails'>
-          <h3>Banner Detail</h3>
+          <h3>{t('Banner Detail')}</h3>
           <div className='optionSet gonfalonDetails'>{gonfalonDetails}</div>
         </React.Fragment>
       );
@@ -236,8 +209,37 @@ class ClanBannerBuilder extends React.Component {
 
       configOptions.push(
         <React.Fragment key='gonfalonDetailColors'>
-          <h3>Banner Detail Color</h3>
+          <h3>{t('Banner Detail Color')}</h3>
           <div className='optionSet colors gonfalonDetailColors'>{gonfalonDetailColors.map(object => object.element)}</div>
+        </React.Fragment>
+      );
+
+      let gonfalonColors = [];
+
+      clanBannerManifest.GonfalonColors.forEach(color => {
+        let link = buildLink({ gonfalonColorId: color.colorHash });
+        gonfalonColors.push({
+          sortValue: color.colorHash,
+          element: (
+            <div
+              key={color.colorHash}
+              className={cx('option', 'color', {
+                active: bannerData.gonfalonColorId === color.colorHash
+              })}
+            >
+              <div className='box' style={{ backgroundColor: `rgba(${color.red}, ${color.green}, ${color.blue}, ${Math.min(color.alpha, 1)})` }} />
+              <Link to={link} />
+            </div>
+          )
+        });
+      });
+
+      gonfalonColors.sort((b, a) => a.sortValue - b.sortValue);
+
+      configOptions.push(
+        <React.Fragment key='gonfalonColors'>
+          <h3>{t('Banner Color')}</h3>
+          <div className='optionSet colors gonfalonColors'>{gonfalonColors.map(object => object.element)}</div>
         </React.Fragment>
       );
     }
@@ -249,7 +251,10 @@ class ClanBannerBuilder extends React.Component {
         </div>
         <div className='options'>
           <div className='header'>
-            <h2>Clan Banner Builder</h2>
+            <div className='name'>{t('Clan Banner Builder')}</div>
+            <div className='description'>
+              <p>{t("Collaborate with clan members on a new clan banner. Selecting different options instantly updates the page's URL, which allows you to easily share your customisations.")}</p>
+            </div>
           </div>
           <div className='config'>{this.state.clanBannerManifest ? configOptions : <Spinner dark />}</div>
         </div>
@@ -258,4 +263,4 @@ class ClanBannerBuilder extends React.Component {
   }
 }
 
-export default ClanBannerBuilder;
+export default withNamespaces()(ClanBannerBuilder);

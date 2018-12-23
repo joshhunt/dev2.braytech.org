@@ -1,6 +1,6 @@
 #overview {
   flex-basis: 100%;
-  padding: 3rem 3rem 0;
+  padding: 4rem 3rem 0;
   display: grid;
   grid-gap: 3rem;
   grid-template-columns: 1fr 1.4fr 1.4fr;
@@ -189,7 +189,7 @@
 @media screen and (max-width: 600px) {
   #overview {
     grid-template-columns: 1fr;
-    padding: 2rem 2rem 0;
+    padding: 3rem 2rem 0;
     grid-gap: 2rem;
   }
 

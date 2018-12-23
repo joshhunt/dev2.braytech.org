@@ -50,7 +50,7 @@
   background-color: rgba(0, 0, 0, 0.1);
   color: #222;
   z-index: 2;
-  box-shadow: inset 0 0 0 1px #848484;
+  box-shadow: inset 0 0 0 1px #000;
 }
 
 #get-profile .form .field input:focus,
@@ -59,7 +59,7 @@
 }
 
 #get-profile .form .field:hover::after {
-  box-shadow: 0 0 0 2px #848484;
+  box-shadow: 0 0 0 2px #000;
 }
 
 #get-profile .results {
@@ -100,11 +100,11 @@
 }
 
 #get-profile .results .list li.linked:hover::before {
-  box-shadow: inset 0 0 0 1px #848484;
+  box-shadow: inset 0 0 0 1px #000;
 }
 
 #get-profile .results .list li.linked:hover::after {
-  box-shadow: 0 0 0 2px #848484;
+  box-shadow: 0 0 0 2px #000;
 }
 
 #get-profile .results .list li.no-profiles {

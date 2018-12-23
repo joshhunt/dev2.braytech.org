@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.wrapper {
+  background-color: #737373;
+}
+
 .wrapper.light {
   background-color: #f1f1f1;
   color: #000;

@@ -324,7 +324,7 @@ class Roster extends React.Component {
                   <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
                   <div className='triumphScore'>{member.profile.profileRecords.data.score}</div>
                   <div className='clanXp'>
-                    <span>{member.profile.characterProgressions.data[lastCharacterId].progressions[540048094].weeklyProgress}</span> / 5000
+                    <span>{Object.values(member.profile.characterProgressions.data).reduce((sum, member) => { return sum + member.progressions[540048094].weeklyProgress }, 0)}</span> / {Object.values(member.profile.characterProgressions.data).reduce((sum, member) => { return sum + 5000 }, 0)}
                   </div>
                   <div className='character'>{character}</div>
                   <div className='activity'>
