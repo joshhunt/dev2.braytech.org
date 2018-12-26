@@ -76,7 +76,7 @@ class Header extends React.Component {
     if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && !standard.includes(this.props.route.location.pathname.split('/')[1])) {
       return <ProfileHeader {...this.props.route} {...this.props.user} viewport={this.props.viewport} manifest={this.props.manifest} views={views} />;
     } else {
-      return <StandardHeader {...this.props.user} viewport={this.props.viewport} views={views} />;
+      return <StandardHeader {...this.props.user} viewport={this.props.viewport} views={views} isIndex={this.props.route.location.pathname === '/' ? true : false} />;
     }
   }
 }

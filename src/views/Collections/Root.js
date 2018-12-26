@@ -132,7 +132,7 @@ class Root extends React.Component {
           key={node.hash}
           className={cx('badge', 'linked', {
             semiComplete: semiComplete,
-            fullComplete: fullComplete
+            fullComplete: fullComplete === 3
           })}
         >
           <Link to={`/collections/badge/${node.hash}`}>

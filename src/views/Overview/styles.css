@@ -176,12 +176,12 @@
   }
 
   #overview .module.ranks {
-    grid-row: 1/3;
+    grid-row: unset;
     grid-column: 2/3;
   }
 
   #overview .module.almost {
-    grid-row: 2/2;
+    grid-row: unset;
     grid-column: 1/3;
   }
 }
@@ -198,12 +198,10 @@
   }
 
   #overview .module.activity-checklists-seals {
-    grid-row: 1/2;
     grid-column: 1/2;
   }
 
   #overview .module.ranks {
-    grid-row: 2/3;
     grid-column: 1/2;
   }
 
@@ -212,7 +210,6 @@
   }
 
   #overview .module.almost {
-    grid-row: 3/4;
     grid-column: 1/2;
   }
 

@@ -1,28 +1,20 @@
-
 #index {
-  position: fixed;
-  top: 3rem;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  padding: 3rem;
-  grid-gap: 3rem;
-  grid-template-columns: 2fr 4fr;
-  overflow-x: hidden;
-  color: #ffffff;
+  
 }
 
 #index .image.bg {
+  position: fixed;
   background-size: cover;
 }
 
 #index .logo-feature {
-  position: relative;
+  position: fixed;
+  bottom: 3rem;
+  left: 3rem;
   font-size: 96px;
   font-weight: 500;
   align-self: flex-end;
-  margin: 0 0 6rem;
+  color: #ffffff;
 }
 
 #index .logo-feature .device {
@@ -50,6 +42,69 @@
   animation: fade-in-logo-feature 7s linear forwards, rotate-logo-feature 10s linear infinite;
 }
 
+#index .changelog {
+  position: absolute;
+  top: 80vh;
+  right: 3rem;
+  padding: 2rem;
+  width: 40rem;
+  margin: 0 0 3rem;
+  color: rgba(0, 0, 0, 0.8);
+  background-color: #fff;
+}
+
+#index .changelog .header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+#index .changelog .version {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  margin: 0 0 0.5rem;
+  font-size: 16px;
+}
+
+#index .changelog time {
+  margin: 0 0 1rem;
+  display: block;
+  justify-self: end;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+}
+
+#index .changelog .content p {
+  margin: 0 0 0.5rem;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#index .changelog .content p:last-child {
+  margin: 0;
+}
+
+#index .changelog .content h2 {
+  margin: 0 0 0.5rem;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+#index .changelog .content h2:not(:first-child) {
+  margin: 1rem 0 0.5rem;
+}
+
+#index .changelog .content ul {
+  list-style-type: disc;
+  padding: 0 0 0 2rem;
+}
+
+#index .changelog .content ul li {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
 
 
 
@@ -62,24 +117,57 @@
     grid-gap: 2rem;
     grid-template-columns: 1fr;
   }
-  
+
   #index .logo-feature {
+    bottom: unset;
+    left: 2rem;
+    top: 60vh;
     font-size: 50px;
     font-weight: 500;
   }
-  
+
   #index .logo-feature .device {
     position: relative;
     font-size: 50px;
     line-height: 44px;
     margin: 0 1rem 0 0;
   }
-  
+
   #index .logo-feature .device::before,
   #index .logo-feature .device::after {
     top: -20px;
     left: -20px;
     width: 90px;
     height: 90px;
+  }
+
+  #index .changelog {
+    position: absolute;
+    top: calc(60vh + 50px + 3rem);
+    right: 0;
+    padding: 2rem;
+    width: 100%;
+    margin: 0;
+  }
+
+  #index .changelog .content p {
+    margin: 0 0 0.5rem;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  #index .changelog .content p:last-child {
+    margin: 0;
+  }
+  
+  #index .changelog .content h2 {
+    margin: 0 0 0.5rem;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  #index .changelog .content ul li {
+    font-size: 14px;
+    line-height: 1.6;
   }
 }
