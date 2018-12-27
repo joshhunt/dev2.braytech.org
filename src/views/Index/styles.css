@@ -4,6 +4,7 @@
 
 #index .image.bg {
   position: fixed;
+  height: 100vh;
   background-size: cover;
 }
 
@@ -51,6 +52,10 @@
   margin: 0 0 3rem;
   color: rgba(0, 0, 0, 0.8);
   background-color: #fff;
+}
+
+#index .changelog .entry:not(:last-child) {
+  margin: 0 0 2rem;
 }
 
 #index .changelog .header {

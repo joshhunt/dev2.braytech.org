@@ -33,9 +33,9 @@ class Index extends React.Component {
           Braytech
         </div>
         <div className='changelog'>
-          {captainsLog.reverse().map(entry => {
+          {captainsLog.map(entry => {
             return (
-              <div className='entry'>
+              <div key={entry.version} className='entry'>
                 <div className='header'>
                   <div className='version'>{entry.version}</div>
                   <Moment fromNow>{entry.date}</Moment>
@@ -43,7 +43,7 @@ class Index extends React.Component {
                 <ReactMarkdown className='content' source={entry.content} />
               </div>
             );
-          })}
+          }).reverse()}
         </div>
       </div>
     );
