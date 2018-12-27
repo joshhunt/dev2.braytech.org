@@ -1,9 +1,9 @@
 {
-  "ERROR": "FEHLER",
-  "CHECKING DATA": "DATEN PRÜFEN",
-  "FETCHING": "ABHOLEN",
-  "SO CLOSE": "FAST FERTIG",
-  "PREPARING": "VORBEREITEN",
+  "Error": "FEHLER",
+  "Checking data": "DATEN PRÜFEN",
+  "Downloading manifest data": "ABHOLEN",
+  "So close": "FAST FERTIG",
+  "Preparing": "VORBEREITEN",
   "Clan": "Clan",
   "Activity and statistics": "Aktivitäten und Statistiken",
   "Collections": "Sammlungen",
@@ -115,5 +115,9 @@
   "Cycle week": "Zykluswoche",
   "Weekly": "Wöchentlich",
   "Daily": "Täglich",
-  "Seals": "Siegel"
+  "Seals": "Siegel",
+  "Language": "Language",
+  "Save and restart": "Save and restart",
+  "Update available": "Update available",
+  "An update is available. You can activate it by closing all instances of Braytech.": "An update is available. You can activate it by closing all instances of Braytech."
 }
