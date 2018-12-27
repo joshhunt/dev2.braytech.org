@@ -65,7 +65,7 @@ class Settings extends React.Component {
               this.saveAndRestart();
             }}
           >
-            <div className='name'>{t('Save and Restart')}</div>
+            <div className='name'>{t('Save and restart')}</div>
           </li>
         </ul>
       ) : null;

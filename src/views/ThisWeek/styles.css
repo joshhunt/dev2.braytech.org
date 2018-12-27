@@ -18,6 +18,11 @@
   margin: 3rem 0 2rem;
 }
 
+#this-week .module .sub-title,
+#this-week .module h3 {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 #this-week .module .record-items {
   grid-template-columns: 1fr;
 }

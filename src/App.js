@@ -266,7 +266,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('ERROR')}</div>
+            <div className='download'>{t('Error')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'version') {
@@ -278,7 +278,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('CHECKING DATA')}</div>
+            <div className='download'>{t('Checking data')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'fetching') {
@@ -290,7 +290,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('DOWNLOADING MANIFEST DATA')}</div>
+            <div className='download'>{t('Downloading manifest data')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'almost') {
@@ -302,7 +302,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('SO CLOSE')}</div>
+            <div className='download'>{t('So close')}</div>
           </div>
         );
       } else {
@@ -314,7 +314,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('PREPARING')}</div>
+            <div className='download'>{t('Preparing')}</div>
           </div>
         );
       }
