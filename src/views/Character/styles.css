@@ -1,0 +1,97 @@
+#character .wrapper {
+  width: 1024px;
+  margin: 3rem auto;
+  display: grid;
+  grid-template-columns: 72px 128px 1fr 128px 72px;
+}
+
+#character .column {
+  position: relative;
+}
+
+#character .column.weapons,
+#character .column.armours {
+  width: 72px;
+}
+
+#character .column .items li {
+  margin: 0 0 10px;
+}
+
+#character .column .items li .item {
+  position: relative;
+  height: unset;
+  padding-bottom: 100%;
+}
+
+#character .column .items li .item::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2px #d6d6d6;
+  transition: box-shadow 0.25s;
+}
+
+#character .column .items li .item::after {
+  content: ' ';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 0 2px rgba(214, 214, 214, 0);
+  transition: box-shadow 0.25s;
+}
+
+#character .column .items li .item:hover::before {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#character .column .items li .item:hover::after {
+  box-shadow: 0 0 0 2px #d6d6d6;
+}
+
+#character .column .items li .item.masterworked::before {
+  box-shadow: inset 0 0 0 2px #ceae33;
+}
+
+#character .column .items li .item.masterworked:hover::after {
+  box-shadow: 0 0 0 2px #ceae33;
+}
+
+#character .column.weapons {
+  padding: 128px 0 0;
+}
+
+#character .column.armours {
+  padding: 46px 0 0;
+}
+
+#character .column.weapons .items li:first-child {
+  position: absolute;
+  top: 0;
+  left: -6px;
+  transform: rotate(45deg);
+  width: 72px;
+}
+
+#character .column.weapons .items li:first-child .image {
+  transform: rotate(45deg) scale(1.42);
+}
+
+@media screen and (max-width: 1200px) {
+  #character {
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #character {
+  }
+}

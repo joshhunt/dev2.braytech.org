@@ -503,6 +503,7 @@ button.square.active {
   font-size: 14px;
   letter-spacing: 2px;
   color: rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
 }
 
 #loading .logo-feature {

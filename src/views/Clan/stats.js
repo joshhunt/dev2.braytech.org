@@ -198,7 +198,7 @@ class StatsView extends React.Component {
         Object.keys(stats[rootKey]).forEach(childKey => stats[rootKey][childKey] === undefined && delete stats[rootKey][childKey]);
       });
 
-      // console.log(this.state.members, stats);
+      console.log(this.state.members, stats);
 
       let collated = {
         allPvE: {
@@ -206,24 +206,24 @@ class StatsView extends React.Component {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.secondsPlayed.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.allPvE.secondsPlayed.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.secondsPlayed.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, secondsPlayed: member.allPvE ? member.allPvE.secondsPlayed.basic.value : false };
             })
           },
           kills: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.kills.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.kills.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.allPvE.kills.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.kills.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, kills: member.allPvE ? member.allPvE.kills.basic.value : false };
             })
           },
           deaths: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.deaths.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.deaths.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.allPvE.deaths.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.deaths.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, deaths: member.allPvE ? member.allPvE.deaths.basic.value : false };
             })
           },
           killsDeathsRatio: {
@@ -232,32 +232,32 @@ class StatsView extends React.Component {
                 return sum + member.killsDeathsRatio.basic.value;
               }, 0) / stats.allPvE.length
             ).toFixed(2),
-            ordered: orderBy(raw, [member => member.allPvE.killsDeathsRatio.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, killsDeathsRatio: member.allPvE.killsDeathsRatio.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, killsDeathsRatio: member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false };
             })
           },
           orbsDropped: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.orbsDropped.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.orbsDropped.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.allPvE.orbsDropped.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.orbsDropped.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, orbsDropped: member.allPvE ? member.allPvE.orbsDropped.basic.value : false };
             })
           },
           publicEvents: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.publicEventsCompleted.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.publicEventsCompleted.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, publicEvents: member.allPvE.publicEventsCompleted.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, publicEvents: member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false };
             })
           },
           adventures: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.adventuresCompleted.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE.adventuresCompleted.basic.value], ['desc']).map(member => {
-              return { membershipId: member.membershipId, adventures: member.allPvE.adventuresCompleted.basic.value };
+            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false], ['desc']).map(member => {
+              return { membershipId: member.membershipId, adventures: member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false };
             })
           }
         },
