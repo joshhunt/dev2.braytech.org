@@ -21,6 +21,12 @@
   display: inline-block;
 }
 
+@media screen and (max-width: 1200px) {
+  #notifications {
+    font-size: 12px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   #notifications {
     height: unset;
