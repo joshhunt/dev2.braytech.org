@@ -117,5 +117,7 @@
   "Daily": "Daily",
   "Seals": "Seals",
   "Language":"Language",
-  "Save and restart":"Save and restart"
+  "Save and restart":"Save and restart",
+  "Update available":"Update available",
+  "An update is available. You can activate it by closing all instances of Braytech.":"An update is available. You can activate it by closing all instances of Braytech."
 }
