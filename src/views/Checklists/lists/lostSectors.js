@@ -8,6 +8,8 @@ const lostSectors = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[3142056444]).forEach(([key, value]) => {
@@ -77,12 +79,12 @@ const lostSectors = props => {
   return (
     <>
       <div className='head'>
-        <h4>Lost Sectors</h4>
+        <h4>{t('Lost Sectors')}</h4>
         <div className='binding'>
-          <p>Character bound</p>
+          <p>{t('Character bound')}</p>
         </div>
         <div className='progress'>
-          <div className='title'>Lost Sectors discovered</div>
+          <div className='title'>{t('Lost Sectors discovered')}</div>
           <div className='fraction'>
             {Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[3142056444]).length}
           </div>

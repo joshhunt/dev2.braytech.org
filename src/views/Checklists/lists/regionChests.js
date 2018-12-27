@@ -10,6 +10,8 @@ const regionChests = parent => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[1697465175]).forEach(([key, value]) => {
@@ -79,14 +81,14 @@ const regionChests = parent => {
   return (
     <>
       <div className='head'>
-        <h4>Region chests</h4>
+        <h4>{t('Region Chests')}</h4>
         <div className='binding'>
           <p>
-            Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests
+        Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests
           </p>
         </div>
         <div className='progress'>
-          <div className='title'>Region chests opened</div>
+          <div className='title'>{t('Region chests opened')}</div>
           <div className='fraction'>
             {Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[1697465175]).length}
           </div>

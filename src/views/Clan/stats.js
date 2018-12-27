@@ -10,6 +10,7 @@ import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/Spinner';
 
 import './stats.css';
+import {withNamespaces} from "react-i18next";
 
 class StatsView extends React.Component {
   constructor(props) {
@@ -164,6 +165,7 @@ class StatsView extends React.Component {
 
   render() {
     const manifest = this.props.manifest;
+    const {t} = this.props;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
 
@@ -713,7 +715,7 @@ class StatsView extends React.Component {
 
           let stat;
           if (keys[1] === 'secondsPlayed') {
-            stat = <>{Math.ceil(moment.duration(rank[keys[1]], 'seconds').as('days'))} days</>;
+            stat = <>{Math.ceil(moment.duration(rank[keys[1]], 'seconds').as('days'))} {t('days')}</>;
           } else if (keys[1] === 'killsDeathsRatio') {
             stat = rank[keys[1]] ? Number(rank[keys[1]]).toFixed(2) : null;
           } else if (keys[1] === 'winRatio') {
@@ -742,24 +744,24 @@ class StatsView extends React.Component {
         collation = (
           <>
             <div className='sub-header'>
-              <div>Gambit</div>
+              <div>{t('Gambit')}</div>
             </div>
             <div className='data'>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Total time played</div>
+                  <div className='name'>{t('Total time played')}</div>
                   <div className='value'>
                     {timePlayed.years() < 1 ? (
                       timePlayed.months() < 1 ? (
-                        <>{timePlayed.days()} days </>
+                        <>{timePlayed.days()} {t('days')} </>
                       ) : (
                         <>
-                          {timePlayed.months()} months, {timePlayed.days()} days
+                          {timePlayed.months()} {t('months')}, {timePlayed.days()} {t('days')}'
                         </>
                       )
                     ) : (
                       <>
-                        {timePlayed.years()} years, {timePlayed.months()} months
+                        {timePlayed.years()} {t('years')}, {timePlayed.months()} {t('months')}
                       </>
                     )}
                   </div>
@@ -768,70 +770,70 @@ class StatsView extends React.Component {
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Primeval damage</div>
+                  <div className='name'>{t('Primeval damage')}</div>
                   <div className='value'>{collated.gambit.primevalDamage.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.primevalDamage.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. win rate</div>
+                  <div className='name'>{t('Av. win rate')}</div>
                   <div className='value'>{Math.round(collated.gambit.winRatio.value * 100)}%</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.winRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Kills</div>
+                  <div className='name'>{t('Kills')}</div>
                   <div className='value'>{collated.gambit.kills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.kills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Deaths</div>
+                  <div className='name'>{t('Deaths')}</div>
                   <div className='value'>{collated.gambit.deaths.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.deaths.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Blocker kills</div>
+                  <div className='name'>{t('Blocker kills')}</div>
                   <div className='value'>{collated.gambit.blockerKills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.blockerKills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Motes deposited</div>
+                  <div className='name'>{t('Motes deposited')}</div>
                   <div className='value'>{collated.gambit.motesDeposited.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.motesDeposited.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Motes lost</div>
+                  <div className='name'>{t('Motes lost')}</div>
                   <div className='value'>{collated.gambit.motesLost.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.motesLost.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Motes denied</div>
+                  <div className='name'>{t('Motes denied')}</div>
                   <div className='value'>{collated.gambit.motesDenied.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.motesDenied.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Invasion kills</div>
+                  <div className='name'>{t('Invasion kills')}</div>
                   <div className='value'>{collated.gambit.invasionKills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.invasionKills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Invader kills</div>
+                  <div className='name'>{t('Invader kills')}</div>
                   <div className='value'>{collated.gambit.invaderKills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.invaderKills.ordered)}</ul>
@@ -839,7 +841,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src={`https://www.bungie.net${manifest.DestinyRecordDefinition[1261302732].displayProperties.icon}`} />
-                  <div className='name'>Fast Fill</div>
+                  <div className='name'>{t('Fast Fill')}</div>
                   <div className='value'>{collated.gambit.medals_pvecomp_medal_fast_fill.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.medals_pvecomp_medal_fast_fill.ordered)}</ul>
@@ -847,7 +849,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src={`https://www.bungie.net${manifest.DestinyRecordDefinition[2507615350].displayProperties.icon}`} />
-                  <div className='name'>Overkillmonger</div>
+                  <div className='name'>{t('Overkillmonger')}</div>
                   <div className='value'>{collated.gambit.medals_pvecomp_medal_overkillmonger.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.medals_pvecomp_medal_overkillmonger.ordered)}</ul>
@@ -855,7 +857,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src={`https://www.bungie.net${manifest.DestinyRecordDefinition[1071663279].displayProperties.icon}`} />
-                  <div className='name'>Army of one</div>
+                  <div className='name'>{t('Army of one')}</div>
                   <div className='value'>{collated.gambit.medals_pvecomp_medal_invader_kill_four.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.medals_pvecomp_medal_invader_kill_four.ordered)}</ul>
@@ -863,7 +865,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src={`https://www.bungie.net${manifest.DestinyRecordDefinition[1298112482].displayProperties.icon}`} />
-                  <div className='name'>Mote Have Been</div>
+                  <div className='name'>{t('Mote Have Been')}</div>
                   <div className='value'>{collated.gambit.medals_pvecomp_medal_tags_denied_15.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.gambit.medals_pvecomp_medal_tags_denied_15.ordered)}</ul>
@@ -886,19 +888,19 @@ class StatsView extends React.Component {
             <div className='data'>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Total time played</div>
+                  <div className='name'>{t('Total time played')}</div>
                   <div className='value'>
                     {timePlayed.years() < 1 ? (
                       timePlayed.months() < 1 ? (
-                        <>{timePlayed.days()} days </>
+                        <>{timePlayed.days()} {t('days')} </>
                       ) : (
                         <>
-                          {timePlayed.months()} months, {timePlayed.days()} days
+                          {timePlayed.months()} {t('months')}, {timePlayed.days()} {t('days')}'
                         </>
                       )
                     ) : (
                       <>
-                        {timePlayed.years()} years, {timePlayed.months()} months
+                        {timePlayed.years()} {t('years')}, {timePlayed.months()} {t('months')}
                       </>
                     )}
                   </div>
@@ -907,35 +909,35 @@ class StatsView extends React.Component {
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. win rate</div>
+                  <div className='name'>{t('Av. win rate')}</div>
                   <div className='value'>{Math.round(collated.ironBanner.winRatio.value * 100)}%</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.ironBanner.winRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. K/D</div>
+                  <div className='name'>{t('Av. K/D')}</div>
                   <div className='value'>{collated.ironBanner.killsDeathsRatio.value}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.ironBanner.killsDeathsRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Kills</div>
+                  <div className='name'>{t('Kills')}</div>
                   <div className='value'>{collated.ironBanner.kills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.ironBanner.kills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Deaths</div>
+                  <div className='name'>{t('Deaths')}</div>
                   <div className='value'>{collated.ironBanner.deaths.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.ironBanner.deaths.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Most single game kills</div>
+                  <div className='name'>{t('Most single game kills')}</div>
                   <div className='value'>{collated.ironBanner.bestSingleGameKills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.ironBanner.bestSingleGameKills.ordered)}</ul>
@@ -943,7 +945,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src='/static/images/extracts/medals/medalStreak7x.png' />
-                  <div className='name'>Seventh Column</div>
+                  <div className='name'>{t('Seventh Column')}</div>
                   <div className='value'>{collated.allPvP.medalStreak7x.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.medalStreak7x.ordered)}</ul>
@@ -962,19 +964,19 @@ class StatsView extends React.Component {
             <div className='data'>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Total time played</div>
+                  <div className='name'>{t('Total time played')}</div>
                   <div className='value'>
                     {timePlayed.years() < 1 ? (
                       timePlayed.months() < 1 ? (
-                        <>{timePlayed.days()} days </>
+                        <>{timePlayed.days()} {t('days')} </>
                       ) : (
                         <>
-                          {timePlayed.months()} months, {timePlayed.days()} days
+                          {timePlayed.months()} {t('months')}, {timePlayed.days()} {t('days')}
                         </>
                       )
                     ) : (
                       <>
-                        {timePlayed.years()} years, {timePlayed.months()} months
+                        {timePlayed.years()} {t('years')}, {timePlayed.months()} {t('months')}
                       </>
                     )}
                   </div>
@@ -983,35 +985,35 @@ class StatsView extends React.Component {
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. win rate</div>
+                  <div className='name'>{t('Av. win rate')}</div>
                   <div className='value'>{Math.round(collated.allPvP.winRatio.value * 100)}%</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.winRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. K/D</div>
+                  <div className='name'>{t('Av. K/D')}</div>
                   <div className='value'>{collated.allPvP.killsDeathsRatio.value}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.killsDeathsRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Kills</div>
+                  <div className='name'>{t('Kills')}</div>
                   <div className='value'>{collated.allPvP.kills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.kills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Deaths</div>
+                  <div className='name'>{t('Deaths')}</div>
                   <div className='value'>{collated.allPvP.deaths.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.deaths.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Most single game kills</div>
+                  <div className='name'>{t('Most single game kills')}</div>
                   <div className='value'>{collated.allPvP.bestSingleGameKills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.bestSingleGameKills.ordered)}</ul>
@@ -1019,7 +1021,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src='/static/images/extracts/medals/medalStreak7x.png' />
-                  <div className='name'>Seventh Column</div>
+                  <div className='name'>{t('Seventh Column')}</div>
                   <div className='value'>{collated.allPvP.medalStreak7x.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.medalStreak7x.ordered)}</ul>
@@ -1027,7 +1029,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src='/static/images/extracts/medals/medalStreakAbsurd.png' />
-                  <div className='name'>We Ran Out of Medals</div>
+                  <div className='name'>{t('We Ran Out of Medals')}</div>
                   <div className='value'>{collated.allPvP.medalStreakAbsurd.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.medalStreakAbsurd.ordered)}</ul>
@@ -1035,7 +1037,7 @@ class StatsView extends React.Component {
               <div className='point hasIcon'>
                 <div className='header'>
                   <ObservedImage className='image' src='/static/images/extracts/medals/medalAbilityVoidwalkerDistance.png' />
-                  <div className='name'>From Downtown</div>
+                  <div className='name'>{t('From Downtown')}</div>
                   <div className='value'>{collated.allPvP.medalAbilityVoidwalkerDistance.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvP.medalAbilityVoidwalkerDistance.ordered)}</ul>
@@ -1057,19 +1059,19 @@ class StatsView extends React.Component {
               <div className='point'>
                 <div className='header'>
                   {' '}
-                  <div className='name'>Total time played</div>
+                  <div className='name'>{t('Total time played')}</div>
                   <div className='value'>
                     {timePlayed.years() < 1 ? (
                       timePlayed.months() < 1 ? (
-                        <>{timePlayed.days()} days </>
+                        <>{timePlayed.days()} {t('days')} </>
                       ) : (
                         <>
-                          {timePlayed.months()} months, {timePlayed.days()} days
+                          {timePlayed.months()} {t('months')}, {timePlayed.days()} {t('days')}
                         </>
                       )
                     ) : (
                       <>
-                        {timePlayed.years()} years, {timePlayed.months()} months
+                        {timePlayed.years()} {t('years')}, {timePlayed.months()} {t('months')}
                       </>
                     )}
                   </div>
@@ -1078,63 +1080,63 @@ class StatsView extends React.Component {
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Public events</div>
+                  <div className='name'>{t('Public events')}</div>
                   <div className='value'>{collated.allPvE.publicEvents.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.publicEvents.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Adventures</div>
+                  <div className='name'>{t('Adventures')}</div>
                   <div className='value'>{collated.allPvE.adventures.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.adventures.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Strikes</div>
+                  <div className='name'>{t('Strikes')}</div>
                   <div className='value'>{collated.strikes.activitiesCleared.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.strikes.activitiesCleared.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Nightfalls</div>
+                  <div className='name'>{t('Nightfalls')}</div>
                   <div className='value'>{collated.nightfalls.activitiesCleared.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.nightfalls.activitiesCleared.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Raids</div>
+                  <div className='name'>{t('Raids')}</div>
                   <div className='value'>{collated.raids.activitiesCleared.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.raids.activitiesCleared.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Kills</div>
+                  <div className='name'>{t('Kills')}</div>
                   <div className='value'>{collated.allPvE.kills.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.kills.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Deaths</div>
+                  <div className='name'>{t('Deaths')}</div>
                   <div className='value'>{collated.allPvE.deaths.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.deaths.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Av. K/D</div>
+                  <div className='name'>{t('Av. K/D')}</div>
                   <div className='value'>{collated.allPvE.killsDeathsRatio.value}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.killsDeathsRatio.ordered)}</ul>
               </div>
               <div className='point'>
                 <div className='header'>
-                  <div className='name'>Orbs created</div>
+                  <div className='name'>{t('Orbs created')}</div>
                   <div className='value'>{collated.allPvE.orbsDropped.value.toLocaleString()}</div>
                 </div>
                 <ul className='list roster mini leaderboard'>{getTopThree(collated.allPvE.orbsDropped.ordered)}</ul>
@@ -1157,33 +1159,29 @@ class StatsView extends React.Component {
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                 <div className='memberCount'>
-                  // {clan.memberCount} members
+                  // {clan.memberCount} {t('members')}
                 </div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>
                 <ul className='list'>
                   <li className='linked'>
-                    <NavLink to='/clan' exact>
-                      About
-                    </NavLink>
+                    <NavLink to='/clan' exact>{t('About')}</NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/roster'>Roster</NavLink>
+                    <NavLink to='/clan/roster'>{t('Roster')}</NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/stats'>Stats</NavLink>
+                    <NavLink to='/clan/stats'>{t('Stats')}</NavLink>
                   </li>
                   <li className='linked child'>
-                    <NavLink to='/clan/stats' exact>
-                      Vanguard
-                    </NavLink>
+                    <NavLink to='/clan/stats' exact>{t('Vanguard')}</NavLink>
                   </li>
                   <li className='linked child'>
-                    <NavLink to='/clan/stats/crucible'>Crucible</NavLink>
+                    <NavLink to='/clan/stats/crucible'>{t('Crucible')}</NavLink>
                   </li>
                   <li className='linked child'>
-                    <NavLink to='/clan/stats/gambit'>Gambit</NavLink>
+                    <NavLink to='/clan/stats/gambit'>{t('Gambit')}</NavLink>
                   </li>
                 </ul>
               </div>
@@ -1197,10 +1195,10 @@ class StatsView extends React.Component {
         <div className='view' id='clan'>
           <div className='no-clan'>
             <div className='properties'>
-              <div className='name'>No clan affiliation</div>
+              <div className='name'>{t('No clan affiliation')}</div>
               <div className='description'>
-                <p>Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.</p>
-                <p>Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.</p>
+                <p>{t('Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.')}</p>
+                <p>{t("Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.")}</p>
               </div>
             </div>
           </div>
@@ -1210,4 +1208,4 @@ class StatsView extends React.Component {
   }
 }
 
-export default StatsView;
+export default withNamespaces()(StatsView);

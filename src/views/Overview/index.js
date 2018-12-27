@@ -38,7 +38,7 @@ class Overview extends React.Component {
               completed: Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length
             },
             lostSectors: {
-              text: t('Lost sectors discovered'),
+              text: t('Lost Sectors discovered'),
               total: Object.keys(characterProgressions[characterId].checklists[3142056444]).length,
               completed: Object.values(characterProgressions[characterId].checklists[3142056444]).filter(value => value === true).length
             },
@@ -291,7 +291,7 @@ class Overview extends React.Component {
           values: {
             infamy: {
               definition: infamyDefinition,
-              mode: 'Gambit',
+              mode: t('Gambit'),
               icon: 'destiny-gambit',
               text: t('Infamy'),
               color: '#25986e',
@@ -301,7 +301,7 @@ class Overview extends React.Component {
             },
             valor: {
               definition: valorDefinition,
-              mode: 'Quickplay',
+              mode: t('Quickplay'),
               icon: 'destiny-faction_crucible_valor',
               text: t('Valor'),
               color: '#ed792c',
@@ -311,7 +311,7 @@ class Overview extends React.Component {
             },
             glory: {
               definition: gloryDefinition,
-              mode: 'Competitive',
+              mode: t('Competitive'),
               icon: 'destiny-faction_crucible_glory',
               text: t('Glory'),
               color: '#b52422',

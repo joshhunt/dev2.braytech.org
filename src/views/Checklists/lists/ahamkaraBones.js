@@ -6,6 +6,8 @@ const ahamkaraBones = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[1297424116]).forEach(([key, value]) => {
@@ -31,7 +33,7 @@ const ahamkaraBones = props => {
           })}
         />
         <div className='text'>
-          <p>Bones {number}</p>
+          <p>{t('Bones')} {number}</p>
         </div>
         <div className='lowlines'>
           <a href={`https://lowlidev.com.au/destiny/maps/2779202173/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
@@ -51,12 +53,12 @@ const ahamkaraBones = props => {
   return (
     <>
       <div className='head'>
-        <h4>Ahamkara Bones</h4>
+        <h4>{t('Ahamkara Bones')}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <div className='progress'>
-          <div className='title'>Bones found</div>
+          <div className='title'>{t('Bones found')}</div>
           <div className='fraction'>
             {Object.values(profileProgressions.checklists[1297424116]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[1297424116]).length}
           </div>

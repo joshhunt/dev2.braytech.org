@@ -13,6 +13,8 @@ class BadgeNode extends React.Component {
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
+    const { t } = this.props;
+
     const characterCollectibles = this.props.response.profile.characterCollectibles.data;
     const profileCollectibles = this.props.response.profile.profileCollectibles.data;
 
@@ -104,7 +106,7 @@ console.log(classStates)
             <div className='description'>{badgeDefinition.displayProperties.description}</div>
           </div>
           <div className='until'>
-            {completed ? <h4 className='completed'>Badge completed</h4> : <h4>Badge progress</h4>}
+            {completed ? <h4 className='completed'>{t('Badge completed')}</h4> : <h4>{t('Badge progress')}</h4>}
             {progress}
           </div>
         </div>

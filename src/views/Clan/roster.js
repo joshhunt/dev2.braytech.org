@@ -8,13 +8,14 @@ import assign from 'lodash/assign';
 import ClanBanner from '../../components/ClanBanner';
 import Roster from '../../components/Roster';
 import Spinner from '../../components/Spinner';
+import { withNamespaces } from 'react-i18next';
 
 import './roster.css';
 
 class RosterView extends React.Component {
   constructor(props) {
     super(props);
-
+    const {t} = this.props;
     this.state = {
       membersResponse: false,
       rosterKeepFresh: false
@@ -86,6 +87,7 @@ class RosterView extends React.Component {
 
   render() {
     const manifest = this.props.manifest;
+    const {t} = this.props;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
 
@@ -100,32 +102,30 @@ class RosterView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} members</div>
+                <div className='memberCount'>// {clan.memberCount} {t('members')}</div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>
                 <ul className='list'>
                   <li className='linked'>
-                    <NavLink to='/clan' exact>
-                      About
-                    </NavLink>
+                    <NavLink to='/clan' exact> {t('About')}</NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/roster'>Roster</NavLink>
+                    <NavLink to='/clan/roster'> {t('Roster')}</NavLink>
                   </li>
                   <li className='linked'>
-                    <NavLink to='/clan/stats'>Stats</NavLink>
+                    <NavLink to='/clan/stats'> {t('Stats')}</NavLink>
                   </li>
                 </ul>
               </div>
               <div className='info'>
-                <p>Pulsing blueberries are freshly acquired members from the last 2 weeks.</p>
+                <p>{t('Pulsing blueberries are freshly acquired members from the last 2 weeks.')}</p>
               </div>
               <div className='freshness'>
                 <ul className='list'>
                   <li className={cx('linked', { selected: this.state.rosterKeepFresh })} onClick={this.turnOnKeepFresh}>
                     <div className='bg' />
-                    <div className='name'>{this.state.rosterKeepFresh ? <>Auto-update on</> : <>Auto-update off</>}</div>
+                    <div className='name'>{this.state.rosterKeepFresh ? <>{t('Auto-update on')}</> : <>{t('Auto-update off')}</>}</div>
                   </li>
                 </ul>
               </div>
@@ -139,10 +139,10 @@ class RosterView extends React.Component {
         <div className='view' id='clan'>
           <div className='no-clan'>
             <div className='properties'>
-              <div className='name'>No clan affiliation</div>
+              <div className='name'>{t('No clan affiliation')}</div>
               <div className='description'>
-                <p>Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.</p>
-                <p>Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.</p>
+                <p>{t('Clans are optional groups of friends that enhance your online gaming experience. Coordinate with your clanmates to take on co-op challenges or just simply represent them in your solo play to earn extra rewards.')}</p>
+                <p>{t("Join your friend's clan, meet some new friends, or create your own on the companion app or at bungie.net.")}</p>
               </div>
             </div>
           </div>
@@ -152,4 +152,4 @@ class RosterView extends React.Component {
   }
 }
 
-export default RosterView;
+export default withNamespaces()(RosterView);

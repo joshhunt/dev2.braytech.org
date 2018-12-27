@@ -7,6 +7,8 @@ const latentMemories = (props) => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = []
 
   Object.entries(profileProgressions.checklists[2955980198]).forEach(([key, value]) => {
@@ -33,7 +35,7 @@ const latentMemories = (props) => {
             }
           )}></div>
         <div className="text">
-          <p>Memory {number}</p>
+          <p>{t('Memory')} {number}</p>
         </div>
         <div className="lowlines">
           <a href={`https://lowlidev.com.au/destiny/maps/mars/${checklist.hash}?origin=BRAYTECH`} target="_blank" rel="noopener noreferrer">
@@ -53,12 +55,12 @@ const latentMemories = (props) => {
   return (
     <>
       <div className="head">
-        <h4>Lost Memory Fragments</h4>
+        <h4>{t('Lost Memory Fragments')}</h4>
         <div className="binding">
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <div className="progress">
-          <div className="title">Memories destroyed</div>
+          <div className="title">{t('Memories destroyed')}</div>
           <div className="fraction">{Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2955980198]).length}</div>
           <div className="bar" style={{
             width: `${ Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2955980198]).length * 100 }%`

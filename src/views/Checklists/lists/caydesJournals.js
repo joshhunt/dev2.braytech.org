@@ -7,6 +7,8 @@ const caydesJournals = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[2448912219]).forEach(([key, value]) => {
@@ -45,12 +47,12 @@ const caydesJournals = props => {
   return (
     <>
       <div className='head'>
-        <h4>Cayde's Journals</h4>
+        <h4>{t("Cayde's Journals")}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <div className='progress'>
-          <div className='title'>Journals recovered</div>
+          <div className='title'>{t('Journals recovered')}</div>
           <div className='fraction'>{Object.values(profileProgressions.checklists[2448912219]).filter(value => value === true).length}/4</div>
           <div
             className='bar'

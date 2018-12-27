@@ -6,6 +6,8 @@ const sleeperNodes = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[365218222]).forEach(([key, value]) => {
@@ -60,12 +62,12 @@ const sleeperNodes = props => {
   return (
     <>
       <div className='head'>
-        <h4>Sleeper nodes</h4>
+        <h4>{t('Sleeper Nodes')}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <div className='progress'>
-          <div className='title'>Sleeper nodes hacked</div>
+          <div className='title'>{t('Sleeper nodes hacked')}</div>
           <div className='fraction'>
             {Object.values(profileProgressions.checklists[365218222]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[365218222]).length}
           </div>
