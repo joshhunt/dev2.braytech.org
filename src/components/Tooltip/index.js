@@ -156,7 +156,9 @@ class Tooltip extends React.Component {
       }
 
       let kind;
+      let tier;
       let render;
+
       switch (item.itemType) {
         case 3:
           kind = 'weapon';
@@ -183,7 +185,25 @@ class Tooltip extends React.Component {
           render = fallback(manifest, item);
       }
 
-      let tier = item.inventory.tierTypeName && item.inventory.tierTypeName.toLowerCase() === 'basic' ? 'common' : item.inventory.tierTypeName ? item.inventory.tierTypeName.toLowerCase() : 'common';
+      switch (item.inventory.tierType) {
+        case 6:
+          tier = 'exotic';
+          break;
+        case 5:
+          tier = 'legendary';
+          break;
+        case 4:
+          tier = 'rare';
+          break;
+        case 3:
+          tier = 'uncommon';
+          break;
+        case 2:
+          tier = 'basic';
+          break;
+        default:
+          tier = 'basic';
+      }
 
       return (
         <div id='tooltip' ref={this.tooltip}>

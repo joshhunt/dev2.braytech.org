@@ -14,7 +14,7 @@ class Header extends React.Component {
   }
   render() {
     const { t } = this.props;
-    const views = [
+    let views = [
       {
         name: t('Clan'),
         desc: t('Activity and statistics'),
@@ -34,15 +34,22 @@ class Header extends React.Component {
         exact: false
       },
       {
-        name: t('Checklists'),
-        desc: t('Made a list, check it twice'),
-        slug: '/checklists',
-        exact: true
+        name: t('Character'),
+        desc: t('Character (dev only)'),
+        slug: '/character',
+        exact: true,
+        dev: true
       },
       {
         name: t('Overview'),
         desc: t("Bird's eye view of your progress"),
         slug: '/overview',
+        exact: true
+      },
+      {
+        name: t('Checklists'),
+        desc: t('Made a list, check it twice'),
+        slug: '/checklists',
         exact: true
       },
       {
@@ -70,6 +77,8 @@ class Header extends React.Component {
         exact: true
       }
     ];
+
+    views = process.env.NODE_ENV !== 'development' ? views.filter(view => !view.dev) : views;
 
     let standard = ['character-select', 'pride', 'credits', 'settings', 'tools'];
 

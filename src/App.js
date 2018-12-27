@@ -25,6 +25,7 @@ import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
 import Overview from './views/Overview';
+import Character from './views/Character';
 import ThisWeek from './views/ThisWeek';
 import Vendors from './views/Vendors';
 import Settings from './views/Settings';
@@ -331,6 +332,7 @@ class App extends Component {
                   <Route path='/character-select' render={route => <CharacterSelect location={route.location} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route path='/overview' exact render={() => <Overview {...this.state.user} manifest={this.manifest} />} />
                   <Route path='/clan/:view?/:subView?' exact render={route => <Clan {...this.state.user} manifest={this.manifest} view={route.match.params.view} subView={route.match.params.subView} />} />
+                  <Route path='/character' exact render={() => <Character {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route path='/checklists' exact render={() => <Checklists {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route
                     path='/collections/:primary?/:secondary?/:tertiary?/:quaternary?'
@@ -389,6 +391,18 @@ class App extends Component {
                   />
                   <Route
                     path='/clan/:view?/:subView?'
+                    exact
+                    render={route => (
+                      <Redirect
+                        to={{
+                          pathname: '/character-select',
+                          state: { from: route.location }
+                        }}
+                      />
+                    )}
+                  />
+                  <Route
+                    path='/character'
                     exact
                     render={route => (
                       <Redirect

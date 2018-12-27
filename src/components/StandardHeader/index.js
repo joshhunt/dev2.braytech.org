@@ -39,16 +39,10 @@ class StandardHeader extends React.Component {
             let to = view.slug;
             return (
               <li key={view.slug}>
-                {view.dev ? (
-                  `${view.name}`
-                ) : (
-                  <>
-                    <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
-                      {view.name}
-                    </NavLink>
-                    <div className='description'>{view.desc}</div>
-                  </>
-                )}
+                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+                  {view.name}
+                </NavLink>
+                <div className='description'>{view.desc}</div>
               </li>
             );
           })}
@@ -68,16 +62,10 @@ class StandardHeader extends React.Component {
             let to = view.slug;
             return (
               <li key={view.slug}>
-                {view.dev ? (
-                  `${view.name}`
-                ) : (
-                  <>
-                    <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
-                      {view.name}
-                    </NavLink>
-                    <div className='description'>{view.desc}</div>
-                  </>
-                )}
+                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+                  {view.name}
+                </NavLink>
+                <div className='description'>{view.desc}</div>
               </li>
             );
           })}
