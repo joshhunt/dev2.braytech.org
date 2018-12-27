@@ -86,7 +86,7 @@ class StandardHeader extends React.Component {
     );
 
     return (
-      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen })}>
+      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen, isIndex: this.props.isIndex })}>
         <div className='braytech'>
           <div className='logo'>
             <Link to='/'>

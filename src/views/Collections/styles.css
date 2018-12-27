@@ -96,8 +96,13 @@
   opacity: 0.4;
 }
 
+#collections .sidebar .badges .badge.semiComplete .image.dl,
 #collections .sidebar .badges .badge.fullComplete .image.dl {
   opacity: 1;
+}
+
+#collections .sidebar .badges .badge.fullComplete .image.dl {
+  box-shadow: inset 0 0 0 2px #d7be5b;
 }
 
 #collections .nodes {

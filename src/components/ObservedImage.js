@@ -50,7 +50,9 @@ class ObservedImage extends React.Component {
               });
             }
 
-            this.observer = this.observer.disconnect();
+            if (this.observer) {
+              this.observer = this.observer.disconnect();
+            }
             
           };
 

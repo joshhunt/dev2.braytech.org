@@ -1,0 +1,44 @@
+#notifications {
+  position: relative;
+  z-index: 19;
+  width: 100%;
+  height: 3rem;
+  padding: 0 3rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffeb3b;
+  color: #000;
+  font-size: 14px;
+}
+
+#notifications div strong {
+  margin: 0 1rem 0 0;
+}
+
+#notifications div div {
+  display: inline-block;
+}
+
+@media screen and (max-width: 1200px) {
+  #notifications {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #notifications {
+    height: unset;
+    padding: 1rem 2rem;
+  }
+
+  #notifications div strong {
+    margin: 0 0 0.5rem 0;
+    display: block;
+  }
+
+  #notifications div div {
+    display: block;
+  }
+}

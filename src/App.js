@@ -7,6 +7,8 @@ import packageJSON from '../package.json';
 import globals from './utils/globals';
 import dexie from './utils/dexie';
 import * as ls from './utils/localStorage';
+import i18n from './utils/i18n';
+import { withNamespaces } from 'react-i18next';
 
 import './Core.css';
 import './App.css';
@@ -14,6 +16,7 @@ import './App.css';
 import Header from './components/Header';
 import Tooltip from './components/Tooltip';
 import Footer from './components/Footer';
+import Notifications from './components/Notifications';
 
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
@@ -29,8 +32,6 @@ import Pride from './views/Pride';
 import Credits from './views/Credits';
 import Tools from './views/Tools';
 import ClanBannerBuilder from './views/Tools/ClanBannerBuilder';
-import i18n from './utils/i18n';
-import { withNamespaces } from 'react-i18next';
 
 class App extends Component {
   constructor(props) {
@@ -255,24 +256,6 @@ class App extends Component {
       GoogleAnalytics.init();
     }
 
-    // const ProfileRoute = ({ render: Component, ...rest }) => (
-    //   <Route
-    //     {...rest}
-    //     render={props =>
-    //       this.state.user.response && this.state.user.characterId ? (
-    //         <Component {...props} />
-    //       ) : (
-    //         <Redirect
-    //           to={{
-    //             pathname: '/character-select',
-    //             state: { from: props.location }
-    //           }}
-    //         />
-    //       )
-    //     }
-    //   />
-    // );
-
     if (this.state.manifest.state !== 'ready') {
       if (this.state.manifest.state === 'error') {
         return (
@@ -283,7 +266,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('ERROR')}</div>
+            <div className='download'>{t('Error')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'version') {
@@ -295,7 +278,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('CHECKING DATA')}</div>
+            <div className='download'>{t('Checking data')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'fetching') {
@@ -307,7 +290,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('DOWNLOADING MANIFEST DATA')}</div>
+            <div className='download'>{t('Downloading manifest data')}</div>
           </div>
         );
       } else if (this.state.manifest.state === 'almost') {
@@ -319,7 +302,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('SO CLOSE')}</div>
+            <div className='download'>{t('So close')}</div>
           </div>
         );
       } else {
@@ -331,7 +314,7 @@ class App extends Component {
               </div>
             </div>
             <h4>Braytech {packageJSON.version}</h4>
-            <div className='download'>{t('PREPARING')}</div>
+            <div className='download'>{t('Preparing')}</div>
           </div>
         );
       }
@@ -340,6 +323,7 @@ class App extends Component {
         return (
           <Router>
             <div className={cx('wrapper', this.state.pageDefaut ? this.state.pageDefaut : null)}>
+              <Route path='/' render={route => <Notifications updateAvailable={this.props.updateAvailable} />} />
               <GoogleAnalytics.RouteTracker />
               <div className='main'>
                 <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
@@ -385,6 +369,7 @@ class App extends Component {
         return (
           <Router>
             <div className={cx('wrapper', this.state.pageDefaut ? this.state.pageDefaut : null)}>
+              <Route path='/' render={route => <Notifications updateAvailable={this.props.updateAvailable} />} />
               <GoogleAnalytics.RouteTracker />
               <div className='main'>
                 <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
