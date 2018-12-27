@@ -17,8 +17,9 @@ class Characters extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, nextPath } = this.props;
     let characters = this.props.response.profile.characters.data;
+    const { membershipId, membershipType } = this.props.response.profile.profile.data.userInfo;
     let characterProgressions = this.props.response.profile.characterProgressions.data;
 
     let charactersRender = [];
@@ -53,7 +54,7 @@ class Characters extends React.Component {
             />
           </div>
           <Link
-            to={this.props.location.pathname !== '/' ? this.props.location.pathname : '/account'}
+            to={`/u/${membershipType}/${membershipId}/${character.characterId}${nextPath}`}
             onClick={e => {
               this.props.onCharacterSelect(character.characterId);
             }}

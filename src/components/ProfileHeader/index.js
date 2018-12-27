@@ -36,12 +36,12 @@ class ProfileHeader extends React.Component {
   };
 
   render() {
-    const manifest = this.props.manifest;
-    const characterId = this.props.characterId;
+    const { manifest, user } = this.props;
+    const characterId = user.characterId;
 
-    let profile = this.props.response.profile.profile.data;
-    let characters = this.props.response.profile.characters.data;
-    let characterProgressions = this.props.response.profile.characterProgressions.data;
+    let profile = user.response.profile.profile.data;
+    let characters = user.response.profile.characters.data;
+    let characterProgressions = user.response.profile.characterProgressions.data;
 
     let character = characters.find(character => character.characterId === characterId);
 

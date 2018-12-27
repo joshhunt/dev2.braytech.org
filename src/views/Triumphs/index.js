@@ -4,6 +4,7 @@ import * as ls from '../../utils/localStorage';
 import Root from './Root';
 import SealNode from './SealNode';
 import PresentationNode from './PresentationNode';
+import { ProfileLink } from '../../components/ProfileLink';
 
 import './styles.css';
 import { withNamespaces } from 'react-i18next';
@@ -29,9 +30,7 @@ class Triumphs extends React.Component {
     });
   };
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     if (!this.props.match.params.quaternary && prevProps.location.pathname !== this.props.location.pathname) {
@@ -40,7 +39,7 @@ class Triumphs extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     let primaryHash = this.props.match.params.primary ? this.props.match.params.primary : false;
 
     let toggleCompletedLink = (
@@ -55,7 +54,6 @@ class Triumphs extends React.Component {
           <>
             <i className='uniE0522' />
             {t('Hide acquired')}
-            
           </>
         )}
       </a>
@@ -77,10 +75,10 @@ class Triumphs extends React.Component {
             <div />
             <ul>
               <li>
-                <Link to='/triumphs'>
+                <ProfileLink to='/triumphs'>
                   <i className='uniE742' />
                   {t('Triumphs')}
-                </Link>
+                </ProfileLink>
               </li>
             </ul>
           </div>

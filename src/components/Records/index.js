@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import orderBy from 'lodash/orderBy';
 import cx from 'classnames';
 
 import ObservedImage from '../ObservedImage';
 import ProgressBar from '../ProgressBar';
+import { ProfileLink } from '../ProfileLink';
 
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
@@ -92,8 +92,7 @@ class Records extends React.Component {
           return;
         }
 
-        // eslint-disable-next-line eqeqeq
-        let ref = highlight == recordDefinition.hash ? this.scrollToRecordRef : null;
+        let ref = highlight == recordDefinition.hash ? this.scrollToRecordRef : null; // eslint-disable-line eqeqeq
 
         if (recordDefinition.redacted) {
           records.push({
@@ -246,12 +245,14 @@ class Records extends React.Component {
           return;
         }
 
-        if (enumerateRecordState(state).recordRedeemed && this.props.hideCompleted) {
+        // eslint-disable-next-line eqeqeq
+        const isHighlighted = highlight == recordDefinition.hash;
+
+        if (enumerateRecordState(state).recordRedeemed && this.props.hideCompleted && !isHighlighted) {
           return;
         }
 
-        // eslint-disable-next-line eqeqeq
-        let ref = highlight == recordDefinition.hash ? this.scrollToRecordRef : null;
+        let ref = isHighlighted ? this.scrollToRecordRef : null;
 
         if (recordDefinition.redacted) {
           records.push({
@@ -312,7 +313,7 @@ class Records extends React.Component {
                   </div>
                 </div>
                 <div className='objectives'>{objectives}</div>
-                {link && this.props.selfLink ? <Link to={link} /> : null}
+                {link && this.props.selfLink ? <ProfileLink to={link} /> : null}
               </li>
             )
           });

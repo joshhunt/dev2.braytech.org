@@ -3,6 +3,9 @@ import React from 'react';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import { withNamespaces } from 'react-i18next';
+import queryString from 'query-string';
+
+import Characters from '../../components/Characters';
 
 import Characters from '../../components/Characters';
 import globals from '../../utils/globals';
@@ -114,7 +117,16 @@ class CharacterSelect extends React.Component {
     }
 
     if (displayName) {
-      ls.update('history.profiles', { membershipType: membershipType, membershipId: membershipId, displayName: displayName }, true, 6);
+      ls.update(
+        'history.profiles',
+        {
+          membershipType: membershipType,
+          membershipId: membershipId,
+          displayName: displayName
+        },
+        true,
+        6
+      );
     }
 
     response = responseUtils.profileScrubber(response);
@@ -147,10 +159,14 @@ class CharacterSelect extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     let profileHistory = ls.get('history.profiles') ? ls.get('history.profiles') : [];
     let resultsElement = null;
     let profileElement = null;
+
+    const qs = queryString.parse(this.props.route && this.props.route.location.search);
+
+    const nextPath = qs && qs.next ? qs.next : '/overview';
 
     if (this.state.results) {
       resultsElement = (
@@ -179,8 +195,6 @@ class CharacterSelect extends React.Component {
       resultsElement = <div className='results' />;
     }
 
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
-
     if (this.state.profile) {
       let clan = null;
       if (this.state.profile.groups.results.length === 1) {
@@ -205,7 +219,7 @@ class CharacterSelect extends React.Component {
               {clan}
               {timePlayed}
             </div>
-            <Characters response={this.state.profile} manifest={this.props.manifest} location={{ ...from }} onCharacterSelect={this.CharacterSelectHandler} />
+            <Characters response={this.state.profile} manifest={this.props.manifest} nextPath={nextPath} onCharacterSelect={this.CharacterSelectHandler} />
           </div>
         </>
       );

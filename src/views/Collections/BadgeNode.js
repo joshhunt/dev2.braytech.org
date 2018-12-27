@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { withNamespaces } from 'react-i18next';
 
@@ -57,7 +56,6 @@ class BadgeNode extends React.Component {
 
     let completed = false;
     let progress = [];
-
     classStates.forEach(obj => {
       if (obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) {
         completed = true;
