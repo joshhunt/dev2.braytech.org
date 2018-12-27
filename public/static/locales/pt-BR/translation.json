@@ -1,9 +1,9 @@
 {
-  "ERROR": "ERRO",
-  "CHECKING DATA": "CHECANDO DADOS",
-  "FETCHING": "BAIXANDO",
-  "SO CLOSE": "QUASE LÁ",
-  "PREPARING": "PREPARANDO",
+  "Error": "Erro",
+  "Checking data": "Checando dados",
+  "Downloading manifest data": "???",
+  "So close": "???",
+  "Preparing": "Preparando",
   "Clan": "Clã",
   "Activity and statistics": "Activity and statistics",
   "Collections": "Coleções",
@@ -115,5 +115,9 @@
   "Cycle week": "Ciclo semanal",
   "Weekly": "Weekly",
   "Daily": "Daily",
-  "Seals": "Seals"
+  "Seals": "Seals",
+  "Language": "Language",
+  "Save and restart": "Save and restart",
+  "Update available": "Update available",
+  "An update is available. You can activate it by closing all instances of Braytech.": "An update is available. You can activate it by closing all instances of Braytech."
 }
