@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Triumphs from './views/Triumphs';
 import Account from './views/Account';
@@ -45,6 +45,7 @@ export default class CharacterRoutes extends Component {
 
     return (
       <Switch>
+        <Route path={route.match.path} exact render={() => <Redirect to={`${route.match.url}/account`} />} />
         <Route path={`${route.match.path}/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?`} render={route => <Triumphs {...route} {...user} manifest={manifest} />} />
 
         <Route

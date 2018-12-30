@@ -171,7 +171,7 @@ class CharacterSelect extends React.Component {
 
     const qs = queryString.parse(this.props.route && this.props.route.location.search);
 
-    const nextPath = qs && qs.next ? qs.next : '/account';
+    const nextPath = qs && qs.next ? qs.next : '';
 
     if (this.state.results) {
       resultsElement = (
