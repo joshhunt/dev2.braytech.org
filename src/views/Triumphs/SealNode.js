@@ -37,49 +37,49 @@ class SealNode extends React.Component {
 
     const sealBars = {
       2588182977: {
-        text: 'Wayfarer',
+        text: t('Wayfarer'),
         nodeHash: 2588182977,
         recordHash: 2757681677,
         total: profileRecords[2757681677].objectives[0].completionValue,
         completed: profileRecords[2757681677].objectives[0].progress
       },
       3481101973: {
-        text: 'Dredgen',
+        text: t('Dredgen'),
         nodeHash: 3481101973,
         recordHash: 3798931976,
         total: profileRecords[3798931976].objectives[0].completionValue,
         completed: profileRecords[3798931976].objectives[0].progress
       },
       147928983: {
-        text: 'Unbroken',
+        text: t('Unbroken'),
         nodeHash: 147928983,
         recordHash: 3369119720,
         total: profileRecords[3369119720].objectives[0].completionValue,
         completed: profileRecords[3369119720].objectives[0].progress
       },
       2693736750: {
-        text: 'Chronicler',
+        text: t('Chronicler'),
         nodeHash: 2693736750,
         recordHash: 1754983323,
         total: profileRecords[1754983323].objectives[0].completionValue,
         completed: profileRecords[1754983323].objectives[0].progress
       },
       2516503814: {
-        text: 'Cursebreaker',
+        text: t('Cursebreaker'),
         nodeHash: 2516503814,
         recordHash: 1693645129,
         total: profileRecords[1693645129].objectives[0].completionValue,
         completed: profileRecords[1693645129].objectives[0].progress
       },
       1162218545: {
-        text: 'Rivensbane',
+        text: t('Rivensbane'),
         nodeHash: 1162218545,
         recordHash: 2182090828,
         total: profileRecords[2182090828].objectives[0].completionValue,
         completed: profileRecords[2182090828].objectives[0].progress
       },
       2039028930: {
-        text: 'Blacksmith',
+        text: t('Blacksmith'),
         nodeHash: 2039028930,
         recordHash: 2053985130,
         total: profileRecords[2053985130].objectives[0].completionValue,

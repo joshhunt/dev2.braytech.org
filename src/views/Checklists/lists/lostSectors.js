@@ -10,6 +10,8 @@ const lostSectors = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[3142056444]).forEach(([key, value]) => {
@@ -79,13 +81,13 @@ const lostSectors = props => {
   return (
     <>
       <div className='head'>
-        <h4>Lost Sectors</h4>
+        <h4>{t('Lost Sectors')}</h4>
         <div className='binding'>
-          <p>Character bound</p>
+          <p>{t('Character bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Lost Sectors discovered',
+            progressDescription: t('Lost Sectors discovered'),
             completionValue: Object.keys(characterProgressions[characterId].checklists[3142056444]).length
           }}
           playerProgress={{

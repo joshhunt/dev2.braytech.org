@@ -163,7 +163,7 @@ class ThisWeek extends React.Component {
       },
       ep: {
         1: {
-          boss: 'Nur Abath, Crest of Xol',
+          boss: t('Nur Abath, Crest of Xol'),
           items: [
             // https://github.com/Bungie-net/api/issues/732
             1887808042, // IKELOS_SG
@@ -174,7 +174,7 @@ class ThisWeek extends React.Component {
           ]
         },
         2: {
-          boss: 'Kathok, Roar of Xol',
+          boss: t('Kathok, Roar of Xol'),
           triumphs: [],
           items: [
             1723472487, // IKELOS_SMG
@@ -185,7 +185,7 @@ class ThisWeek extends React.Component {
           ]
         },
         3: {
-          boss: 'Damkath, The Mask',
+          boss: t('Damkath, The Mask'),
           triumphs: [],
           items: [
             // https://youtu.be/lrPf16ZHevU?t=104
@@ -197,7 +197,7 @@ class ThisWeek extends React.Component {
           ]
         },
         4: {
-          boss: 'Naksud, the Famine',
+          boss: t('Naksud, the Famine'),
           triumphs: [],
           items: [
             1887808042, // IKELOS_SG
@@ -212,7 +212,7 @@ class ThisWeek extends React.Component {
           ]
         },
         5: {
-          boss: 'Bok Litur, Hunger of Xol',
+          boss: t('Bok Litur, Hunger of Xol'),
           triumphs: [],
           items: [
             1887808042, // IKELOS_SG
@@ -312,7 +312,7 @@ class ThisWeek extends React.Component {
             3896331530 // Lake of Shadows (Emblem)
           ]
         },
-        //1391780798: { // Broodhold - PS$ exclusive
+        //1391780798: { // Broodhold - PS4 exclusive
         //  triumphs: [],
         //  items: [],
         //  collectibles: []

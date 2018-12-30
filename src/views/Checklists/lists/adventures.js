@@ -10,6 +10,8 @@ const adventures = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(characterProgressions[characterId].checklists[4178338182]).forEach(([key, value]) => {
@@ -86,13 +88,13 @@ const adventures = props => {
   return (
     <>
       <div className='head'>
-        <h4>Adventures</h4>
+        <h4>{t('Adventures')}</h4>
         <div className='binding'>
-          <p>Character bound</p>
+          <p>{t('Character bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Adventures undertaken',
+            progressDescription: t('Adventures undertaken'),
             completionValue: Object.keys(characterProgressions[characterId].checklists[4178338182]).length
           }}
           playerProgress={{

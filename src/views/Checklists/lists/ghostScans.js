@@ -8,6 +8,8 @@ const ghostScans = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[2360931290]).forEach(([key, value]) => {
@@ -52,7 +54,7 @@ const ghostScans = props => {
     if (farmScans.includes(checklist.hash)) {
       scan = {
         displayProperties: {
-          name: 'The Farm'
+          name: t('The Farm')
         }
       };
     }
@@ -67,7 +69,7 @@ const ghostScans = props => {
           })}
         />
         <div className='text'>
-          <p>Scan {number}</p>
+          <p>{t('Scan')} {number}</p>
           <p>
             {scan ? scan.displayProperties.name : `???`}, {place.displayProperties.name}
           </p>
@@ -90,13 +92,13 @@ const ghostScans = props => {
   return (
     <>
       <div className='head'>
-        <h4>Ghost scans</h4>
+        <h4>{t('Ghost scans')}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Ghost scans performed',
+            progressDescription: t('Ghost scans performed'),
             completionValue: Object.keys(profileProgressions.checklists[2360931290]).length
           }}
           playerProgress={{

@@ -8,6 +8,8 @@ const sleeperNodes = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[365218222]).forEach(([key, value]) => {
@@ -62,13 +64,13 @@ const sleeperNodes = props => {
   return (
     <>
       <div className='head'>
-        <h4>Sleeper nodes</h4>
+        <h4>{t('Sleeper Nodes')}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Sleeper nodes hacked',
+            progressDescription: t('Sleeper nodes hacked'),
             completionValue: Object.keys(profileProgressions.checklists[365218222]).length
           }}
           playerProgress={{

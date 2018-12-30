@@ -9,6 +9,8 @@ const caydesJournals = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[2448912219]).forEach(([key, value]) => {
@@ -47,13 +49,13 @@ const caydesJournals = props => {
   return (
     <>
       <div className='head'>
-        <h4>Cayde's Journals</h4>
+        <h4>{t("Cayde's Journals")}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Journals recovered',
+            progressDescription: t('Journals recovered'),
             completionValue: Object.keys(profileProgressions.checklists[2448912219]).length
           }}
           playerProgress={{

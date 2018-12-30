@@ -8,6 +8,8 @@ const catStatues = props => {
 
   let manifest = props.manifest;
 
+  const { t } = props;
+
   let list = [];
 
   Object.entries(profileProgressions.checklists[2726513366]).forEach(([key, value]) => {
@@ -33,7 +35,7 @@ const catStatues = props => {
           })}
         />
         <div className='text'>
-          <p>Feline friend {number}</p>
+          <p>{t('Feline friend')} {number}</p>
         </div>
         <div className='lowlines'>
           <a href={`https://lowlidev.com.au/destiny/maps/2779202173/${checklist.hash}?origin=BRAYTECH`} target='_blank' rel='noopener noreferrer'>
@@ -53,13 +55,13 @@ const catStatues = props => {
   return (
     <>
       <div className='head'>
-        <h4>Cat Statues</h4>
+        <h4>{t('Cat Statues')}</h4>
         <div className='binding'>
-          <p>Profile bound</p>
+          <p>{t('Profile bound')}</p>
         </div>
         <ProgressBar
           objectiveDefinition={{
-            progressDescription: 'Feline friends satisfied',
+            progressDescription: t('Feline friends satisfied'),
             completionValue: Object.keys(profileProgressions.checklists[2726513366]).length
           }}
           playerProgress={{
