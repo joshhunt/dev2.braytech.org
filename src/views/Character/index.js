@@ -2,7 +2,7 @@ import React from 'react';
 import globals from '../../utils/globals';
 import cx from 'classnames';
 
-import Items from '../../components/Items';
+import InventoryItems from '../../components/InventoryItems';
 
 import './styles.css';
 import { withNamespaces } from 'react-i18next';
@@ -56,7 +56,7 @@ class Character extends React.Component {
         <div className='wrapper'>
           <div className='column weapons'>
             <ul className='list items'>
-              <Items manifest={manifest} hashes={Object.values(weapons).map(item => item.hash)} />
+              <InventoryItems manifest={manifest} hashes={Object.values(weapons).map(item => item.hash)} />
             </ul>
           </div>
           <div className='column'></div>
@@ -64,7 +64,7 @@ class Character extends React.Component {
           <div className='column'></div>
           <div className='column armours'>
             <ul className='list items'>
-              <Items manifest={manifest} hashes={Object.values(armours).map(item => item.hash)} />
+              <InventoryItems manifest={manifest} hashes={Object.values(armours).map(item => item.hash)} />
             </ul>
           </div>
         </div>

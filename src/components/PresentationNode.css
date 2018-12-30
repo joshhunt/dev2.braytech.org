@@ -104,13 +104,13 @@
   margin: 0 0 3px 0;
 }
 
-.presentation-node .list.primary li .image {
+.presentation-node .list.primary li .image.dl {
   top: 12%;
   height: 76%;
   opacity: 0.4;
 }
 
-.presentation-node .list.primary li .active .image {
+.presentation-node .list.primary li .active .image.dl {
   opacity: 1;
 }
 

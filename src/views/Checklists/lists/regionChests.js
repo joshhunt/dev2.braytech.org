@@ -2,6 +2,8 @@ import React from 'react';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
+import ProgressBar from '../../../components/ProgressBar';
+
 const regionChests = parent => {
   let props = parent.props;
 
@@ -87,18 +89,17 @@ const regionChests = parent => {
         Profile bound with the exception of <em>Curse of Osiris</em> and <em>Warmind</em> chests
           </p>
         </div>
-        <div className='progress'>
-          <div className='title'>{t('Region chests opened')}</div>
-          <div className='fraction'>
-            {Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[1697465175]).length}
-          </div>
-          <div
-            className='bar'
-            style={{
-              width: `${(Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[1697465175]).length) * 100}%`
-            }}
-          />
-        </div>
+        <ProgressBar
+          objectiveDefinition={{
+            progressDescription: t('Region chests opened'),
+            completionValue: Object.keys(characterProgressions[characterId].checklists[1697465175]).length
+          }}
+          playerProgress={{
+            progress: Object.values(characterProgressions[characterId].checklists[1697465175]).filter(value => value === true).length
+          }}
+          hideCheck
+          chunky
+        />
       </div>
       <ul className='list no-interaction'>{list.map(obj => obj.element)}</ul>
     </>

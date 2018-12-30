@@ -2,6 +2,8 @@ import React from 'react';
 import cx from 'classnames';
 import orderBy from 'lodash/orderBy';
 
+import ProgressBar from '../../../components/ProgressBar';
+
 const adventures = props => {
   let characterProgressions = props.response.profile.characterProgressions.data;
   let characterId = props.characterId;
@@ -90,18 +92,17 @@ const adventures = props => {
         <div className='binding'>
           <p>{t('Character bound')}</p>
         </div>
-        <div className='progress'>
-          <div className='title'>{t('Adventures undertaken')}</div>
-          <div className='fraction'>
-            {Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length}/{Object.keys(characterProgressions[characterId].checklists[4178338182]).length}
-          </div>
-          <div
-            className='bar'
-            style={{
-              width: `${(Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length / Object.keys(characterProgressions[characterId].checklists[4178338182]).length) * 100}%`
-            }}
-          />
-        </div>
+        <ProgressBar
+          objectiveDefinition={{
+            progressDescription: t('Adventures undertaken'),
+            completionValue: Object.keys(characterProgressions[characterId].checklists[4178338182]).length
+          }}
+          playerProgress={{
+            progress: Object.values(characterProgressions[characterId].checklists[4178338182]).filter(value => value === true).length
+          }}
+          hideCheck
+          chunky
+        />
       </div>
       <ul className='list no-interaction'>{list.map(obj => obj.element)}</ul>
     </>

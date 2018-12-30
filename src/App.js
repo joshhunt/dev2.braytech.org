@@ -24,7 +24,7 @@ import Clan from './views/Clan';
 import Collections from './views/Collections';
 import Triumphs from './views/Triumphs';
 import Checklists from './views/Checklists';
-import Overview from './views/Overview';
+import Account from './views/Account';
 import Character from './views/Character';
 import ThisWeek from './views/ThisWeek';
 import Vendors from './views/Vendors';
@@ -330,7 +330,7 @@ class App extends Component {
                 <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
                 <Switch>
                   <Route path='/character-select' render={route => <CharacterSelect location={route.location} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
-                  <Route path='/overview' exact render={() => <Overview {...this.state.user} manifest={this.manifest} />} />
+                  <Route path='/account' exact render={() => <Account {...this.state.user} manifest={this.manifest} />} />
                   <Route path='/clan/:view?/:subView?' exact render={route => <Clan {...this.state.user} manifest={this.manifest} view={route.match.params.view} subView={route.match.params.subView} />} />
                   <Route path='/character' exact render={() => <Character {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route path='/checklists' exact render={() => <Checklists {...this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
@@ -378,7 +378,7 @@ class App extends Component {
                 <Switch>
                   <Route path='/character-select' render={route => <CharacterSelect location={route.location} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
                   <Route
-                    path='/overview'
+                    path='/account'
                     exact
                     render={route => (
                       <Redirect
@@ -465,7 +465,7 @@ class App extends Component {
                   <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
                   <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
-                  <Route path='/' exact render={() => <Index setPageDefault={this.setPageDefault} />} />
+                  <Route path='/' render={() => <Index setPageDefault={this.setPageDefault} />} />
                 </Switch>
               </div>
               <Route path='/' render={route => <Footer route={route} />} />

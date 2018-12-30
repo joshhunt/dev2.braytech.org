@@ -477,7 +477,7 @@ class ThisWeek extends React.Component {
     return (
       <div className='view' id='this-week'>
         <div className='module'>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('Flashpoint')}</div>
           </div>
           <div className='content'>
@@ -488,7 +488,7 @@ class ThisWeek extends React.Component {
               <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered/>
             </ul>
           </div>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('Escalation Protocol')}</div>
           </div>
           <div className='content'>
@@ -500,13 +500,13 @@ class ThisWeek extends React.Component {
           </div>
         </div>
         <div className='module'>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('Nightfalls')}</div>
           </div>
           {nightfalls}
         </div>
         <div className='module curse'>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('The Curse')}</div>
           </div>
           <div className='content'>
@@ -518,7 +518,7 @@ class ThisWeek extends React.Component {
           </div>
         </div>
         <div className='module'>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('Ascendant challenge')}</div>
           </div>
           <div className='content'>

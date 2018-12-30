@@ -1,6 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 
+import ProgressBar from '../../../components/ProgressBar';
+
 const catStatues = props => {
   let profileProgressions = props.response.profile.profileProgression.data;
 
@@ -57,18 +59,17 @@ const catStatues = props => {
         <div className='binding'>
           <p>{t('Profile bound')}</p>
         </div>
-        <div className='progress'>
-          <div className='title'>{t('Feline friends satisfied')}</div>
-          <div className='fraction'>
-            {Object.values(profileProgressions.checklists[2726513366]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2726513366]).length}
-          </div>
-          <div
-            className='bar'
-            style={{
-              width: `${(Object.values(profileProgressions.checklists[2726513366]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2726513366]).length) * 100}%`
-            }}
-          />
-        </div>
+        <ProgressBar
+          objectiveDefinition={{
+            progressDescription: t('Feline friends satisfied'),
+            completionValue: Object.keys(profileProgressions.checklists[2726513366]).length
+          }}
+          playerProgress={{
+            progress: Object.values(profileProgressions.checklists[2726513366]).filter(value => value === true).length
+          }}
+          hideCheck
+          chunky
+        />
       </div>
       <ul className='list no-interaction'>{list}</ul>
     </>

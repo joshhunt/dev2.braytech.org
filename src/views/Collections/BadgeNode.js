@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
+import { withNamespaces } from 'react-i18next';
 
 import ObservedImage from '../../components/ObservedImage';
 
@@ -10,6 +11,7 @@ import { enumerateCollectibleState } from '../../utils/destinyEnums';
 
 class BadgeNode extends React.Component {
   render() {
+    const { t } = this.props;
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
@@ -56,25 +58,34 @@ class BadgeNode extends React.Component {
 
     let completed = false;
     let progress = [];
-console.log(classStates)
+
     classStates.forEach(obj => {
       if (obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) {
         completed = true;
       }
       progress.push(
         <div key={obj.class} className='progress'>
-          <div className='title'>{obj.class}</div>
-          <div className='fraction'>
-            {obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
+          <div className='class-icon'>
+            <span className={`destiny-class_${obj.class.toLowerCase()}`} />
+          </div>
+          <div className='text'>
+            <div className='title'>{obj.class}</div>
+            <div className='fraction'>
+              {obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length}/{obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length}
+            </div>
           </div>
           <div
             className={cx('bar', {
               completed: obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length === obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length
             })}
-            style={{
-              width: `${(obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length / obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) * 100}%`
-            }}
-          />
+          >
+            <div
+              className='fill'
+              style={{
+                width: `${(obj.states.filter(collectible => !enumerateCollectibleState(collectible).notAcquired).length / obj.states.filter(collectible => !enumerateCollectibleState(collectible).invisible).length) * 100}%`
+              }}
+            />
+          </div>
         </div>
       );
     });
@@ -116,4 +127,4 @@ console.log(classStates)
   }
 }
 
-export default BadgeNode;
+export default withNamespaces()(BadgeNode);

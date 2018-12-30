@@ -1,45 +1,71 @@
 #checklists {
-  display: block;
-  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  padding: 4rem 3rem 3rem;
+  grid-gap: 3rem;
 }
 
-#checklists .sub-header {
-  width: calc(100% - 3rem);
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  margin-bottom: 2rem;
-  margin-top: 4rem;
+#checklists .views .list li {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#checklists .views .list li::before {
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.4);
+}
+
+#checklists .views .list li.linked:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+}
+
+#checklists .views .list li a [class^="destiny-"] {
+  display: none;
+}
+
+#checklists .views .list li a.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
+  color: #fff;
+}
+
+#checklists .views .list li a:hover {
+  color: #fff;
 }
 
 #checklists .lists {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 3rem;
 }
 
-#checklists .lists .col {
-  flex-basis: 20%;
-  padding: 0 1.5rem;
+#checklists .lists.col-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
 
-#checklists .lists.col-4 .col {
-  flex-basis: 25%;
+#checklists .lists.col-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 
-#checklists .lists.col-3 .col {
-  flex-basis: calc(100% / 3);
+#checklists .lists.col-2 {
+  grid-template-columns: repeat(2, 1fr);
 }
 
-#checklists .lists.col-2 .col {
-  flex-basis: 50%;
-}
-
-#checklists .lists.col-1 .col {
-  flex-basis: 100%;
+#checklists .lists.col-1 {
+  grid-template-columns: repeat(1, 1fr);
 }
 
 #checklists .lists .col .head {
   margin: 0 0 3rem;
+}
+
+#checklists .lists .col .head h4 {
+  margin: 0 0 0.5rem;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 #checklists .lists .col .head .binding {
@@ -51,7 +77,7 @@
 #checklists .lists .list li {
   position: relative;
   padding: 0;
-  margin: 0 0 0.8rem;
+  margin: 0 0 10px;
   line-height: 1.4;
   font-size: 14px;
   align-items: flex-start;
@@ -63,7 +89,7 @@
   display: inline-block;
   width: 10px;
   height: 10px;
-  margin: 5px 1rem 0 3px;
+  margin: 4px 18px 0 3px;
   flex-shrink: 0;
 }
 
@@ -87,6 +113,14 @@
 
 #checklists .lists .list li .text {
   flex-basis: calc(100% - 2.8rem - 10px);
+}
+
+#checklists .lists .list li .text p {
+  margin: 0 0 4px;
+}
+
+#checklists .lists .list li .text p:last-child {
+  margin: 0;
 }
 
 #checklists .lists .list li .lowlines {
@@ -124,40 +158,7 @@
   margin: 0 1rem 0 3px;
 }
 
-#checklists .selectors ul {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0 1.5rem;
-}
-
-#checklists .selectors .list li {
-  position: relative;
-  margin: 0 7px 7px 0;
-  background-color: rgba(255, 255, 255, 0);
-}
-
-#checklists .selectors ul li::before {
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 0.4);
-}
-
-#checklists .selectors ul li a {
-  position: relative;
-  justify-content: center;
-}
-
-#checklists .selectors ul li a .text {
-  display: none;
-}
-
-#checklists .selectors ul li a.active {
-  background-color: rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 0 1px rgba(214, 214, 214, 1);
-  color: #fff;
-}
-
 @media screen and (max-width: 1200px) {
-  
-
   #checklists .lists .list li .text {
     flex-basis: calc(100% - 1rem - 10px);
   }
@@ -167,38 +168,38 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   #checklists {
-    display: block;
-    width: 100%;
-    padding: 0;
+    grid-template-columns: 1fr;
+    padding: 3rem 2rem 2rem;
+    grid-gap: 2rem;
   }
 
-  #checklists .sub-header {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-bottom: 2rem;
-    margin-top: 3rem;
-    width: calc(100% - 4rem);
-  }
-
-  #checklists .selectors ul {
-    padding: 0 2rem;
+  #checklists .views ul {
     display: grid;
-    grid-gap: 7px;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 6px;
   }
 
-  #checklists .selectors .list li {
+  #checklists .views ul li {
     margin: 0;
   }
 
-  #checklists .lists {
-    padding: 2rem 2rem 0;
+  #checklists .views .list li a {
+    justify-content: center;
   }
 
-  #checklists .lists .col {
-    padding: 0;
+  #checklists .views .list li a [class^="destiny-"] {
+    display: initial;
+    font-size: 20px;
+  }
+
+  #checklists .views .list li a .name {
+    display: none;
+  }
+
+  #checklists .lists .col .head {
+    margin: 0 0 2rem;
   }
 
   #checklists .lists .col .head .binding {

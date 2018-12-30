@@ -200,7 +200,7 @@ const weapon = (manifest, item) => {
         }
         traits.push(
           <div key={plug.hash} className='plug trait'>
-            <ObservedImage className={cx('icon', 'bitmap')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${plug.displayProperties.icon}`} />
             <div className='text'>
               <div className='name'>{plug.displayProperties.name}</div>
               {/* <div className="description">{plug.displayProperties.description}</div> */}

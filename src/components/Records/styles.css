@@ -64,23 +64,8 @@
 
 .list.record-items li .objectives {
   flex-basis: 100%;
+  padding: 0 1rem 1rem calc(2rem + 48px);
   padding: 0 1rem 1rem;
-}
-
-.list.record-items li .objectives .progress {
-  margin: 0 0 3px;
-}
-
-.list.record-items li .objectives .progress:last-child {
-  margin: 0;
-}
-
-.list.record-items li .objectives .progress .title {
-  padding: 8px 0 8px 1rem;
-}
-
-.list.record-items li .objectives .progress .fraction {
-  padding: 8px 1rem 8px 0;
 }
 
 .list.record-items li.completed {
@@ -89,25 +74,28 @@
   color: rgba(207, 191, 124, 1);
 }
 
-.list.record-items li.completed .text .description {
+.list.record-items li.completed .properties .text .description {
   color: rgba(207, 191, 124, 0.8);
   border-top: 1px solid rgba(207, 191, 124, 0.4);
 }
 
-.list.record-items li.completed .progress {
-  background-color: rgba(207, 191, 124, 0.1);
+.list.record-items li.completed .progress-bar .check.ed::before {
+  background-color: rgba(188, 173, 113, 1);
 }
 
-.list.record-items li.completed .progress .bar {
-  box-shadow: inset 0 0 0px 1px rgba(207, 191, 124, 1);
-  background-color: rgba(188, 173, 113, 0.2);
+.list.record-items li.completed .progress-bar .bar {
+  background-color: rgba(188, 173, 113, 0);
+}
+
+.list.record-items li.completed .progress-bar .bar .fill {
+  background-color: rgba(188, 173, 113, 0);
 }
 
 .list.record-items li.linked.completed:hover {
   background-color: rgba(207, 191, 124, 0.4);
 }
 
-.list.record-items li.linked.completed:hover .text .description {
+.list.record-items li.linked.completed:hover .properties .text .description {
   color: rgba(207, 191, 124, 1);
 }
 

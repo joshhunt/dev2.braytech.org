@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { withNamespaces } from 'react-i18next';
 
 import regionChests from './lists/regionChests';
 import lostSectors from './lists/lostSectors';
@@ -12,7 +13,6 @@ import ghostScans from './lists/ghostScans';
 import latentMemories from './lists/latentMemories';
 import caydesJournals from './lists/caydesJournals';
 import './styles.css';
-import { withNamespaces } from 'react-i18next';
 
 class Checklists extends React.Component {
   constructor(props) {
@@ -24,7 +24,6 @@ class Checklists extends React.Component {
     };
 
     this.changeSkip = this.changeSkip.bind(this);
-    this.lowlines = this.lowlines.bind(this);
   }
 
   itemsPerPage = 5;
@@ -39,38 +38,21 @@ class Checklists extends React.Component {
     });
   };
 
-  lowlines = async () => {
-    const request = await fetch(`https://lowlidev.com.au/destiny/api/v2/map/supported`);
-    const response = await request.json();
-    return response;
-  };
-
-  componentDidMount() {
-    // this.lowlines().then(response => {
-    //   const state = this.state;
-    //   state.lowlidev = response.data;
-    //   this.setState(state);
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    // })
-  }
-
   render() {
     const {t} = this.props;
-    if (this.props.viewport.width >= 1600) {
+    if (this.props.viewport.width >= 2000) {
       this.itemsPerPage = 5;
     }
-    if (this.props.viewport.width < 1600) {
+    if (this.props.viewport.width < 2000) {
       this.itemsPerPage = 4;
     }
-    if (this.props.viewport.width < 1280) {
+    if (this.props.viewport.width < 1600) {
       this.itemsPerPage = 3;
     }
-    if (this.props.viewport.width < 900) {
+    if (this.props.viewport.width < 1200) {
       this.itemsPerPage = 2;
     }
-    if (this.props.viewport.width < 600) {
+    if (this.props.viewport.width < 800) {
       this.itemsPerPage = 1;
     }
 
@@ -135,10 +117,10 @@ class Checklists extends React.Component {
 
     return (
       <div className='view' id='checklists'>
-        <div className='sub-header'>
-          <div>{t('Checklists')}</div>
-        </div>
-        <div className='selectors'>
+        <div className='views'>
+          <div className='sub-header sub'>
+            <div>Checklists</div>
+          </div>
           <ul className='list'>
             {lists.map((list, index) => {
               let active = false;
@@ -158,7 +140,7 @@ class Checklists extends React.Component {
                     onClick={this.changeSkip}
                   >
                     <div className={list.icon} />
-                    <div className='text'>{list.name}</div>
+                    <div className='name'>{list.name}</div>
                   </a>
                 </li>
               );
