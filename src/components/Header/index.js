@@ -18,7 +18,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { t, user } = this.props;
+    const { t, user, route, viewport } = this.props;
 
     let views = [
       {
@@ -89,9 +89,9 @@ class Header extends React.Component {
     let standard = ['character-select', 'pride', 'credits', 'settings', 'tools'];
 
     if (this.props.user.response && this.props.user.characterId && this.props.route.location.pathname !== '/' && !standard.includes(this.props.route.location.pathname.split('/')[1])) {
-      return <ProfileHeader {...this.props.route} user={this.props.user} viewport={this.props.viewport} manifest={this.props.manifest} views={views} />;
+      return <ProfileHeader {...route} user={user} viewport={viewport} manifest={this.props.manifest} views={views} />;
     } else {
-      return <StandardHeader {...this.props.user} viewport={this.props.viewport} views={views} isIndex={this.props.route.location.pathname === '/' ? true : false} />;
+      return <StandardHeader {...user} viewport={viewport} views={views} isIndex={this.props.route.location.pathname === '/' ? true : false} />;
     }
   }
 }

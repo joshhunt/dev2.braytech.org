@@ -261,13 +261,17 @@ class App extends Component {
     return (
       <UserContext.Provider value={this.state.user}>
         <Router>
-          <div className='wrapper'>
+          <div className={cx('wrapper', this.state.pageDefaut ? this.state.pageDefaut : null)}>
             <div className='main'>
               <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
 
               <Route path='/' exact render={() => <Index setPageDefault={this.setPageDefault} />} />
-
               <Route path='/character-select' render={route => <CharacterSelect route={route} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
+              <Route path='/settings' exact render={() => <Settings {...this.state.user} manifest={this.manifest} availableLanguages={this.availableLanguages} setPageDefault={this.setPageDefault} />} />
+              <Route path='/pride' exact render={() => <Pride setPageDefault={this.setPageDefault} />} />
+              <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
+              <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
+              <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
 
               <Route path='/u/:membershipType/:membershipId/:characterId' render={route => <CharacterRoutes route={route} user={this.state.user} setUserReponse={this.setUserReponse} viewport={this.state.viewport} manifest={this.manifest} />} />
             </div>

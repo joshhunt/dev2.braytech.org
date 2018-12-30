@@ -7,6 +7,7 @@ const LOADING_STATE = {
   version: 'Checking data',
   fetching: 'Downloading manifest data',
   almost: 'So close',
+  fetchingProfile: 'Fetching profile',
   else: 'Preparing'
 };
 

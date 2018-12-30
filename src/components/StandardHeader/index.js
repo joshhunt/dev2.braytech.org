@@ -32,10 +32,12 @@ class StandardHeader extends React.Component {
   };
 
   render() {
+    const { viewport, isIndex, views } = this.props;
+
     let viewsRender = (
       <div className='views'>
         <ul>
-          {this.props.views.map(view => {
+          {views.map(view => {
             let to = view.slug;
             return (
               <li key={view.slug}>
@@ -58,7 +60,7 @@ class StandardHeader extends React.Component {
     let mobileNav = (
       <div className='nav'>
         <ul>
-          {this.props.views.map(view => {
+          {views.map(view => {
             let to = view.slug;
             return (
               <li key={view.slug}>
@@ -74,7 +76,7 @@ class StandardHeader extends React.Component {
     );
 
     return (
-      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen, isIndex: this.props.isIndex })}>
+      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen, isIndex: isIndex })}>
         <div className='braytech'>
           <div className='logo'>
             <Link to='/'>
