@@ -9,17 +9,6 @@
   margin-left: 1rem;
 }
 
-#clan .stats .sub-header {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  width: 100%;
-  background-color: transparent;
-}
-
 #clan .stats .collation .data {
   display: grid;
   margin: 2rem 0 0;

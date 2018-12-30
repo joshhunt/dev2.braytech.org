@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
+import { withNamespaces } from 'react-i18next';
 
 import ObservedImage from '../../components/ObservedImage';
 import * as ls from '../../utils/localStorage';
 
 import Records from '../../components/Records';
-import { withNamespaces } from 'react-i18next';
 
 class SealNode extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class SealNode extends React.Component {
   };
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const manifest = this.props.manifest;
 
     const profileRecords = this.props.response.profile.profileRecords.data.records;
@@ -90,6 +90,8 @@ class SealNode extends React.Component {
     let sealDefinition = manifest.DestinyPresentationNodeDefinition[this.props.match.params.secondary];
     let tertiaryHash = this.props.match.params.secondary;
 
+    let completed = sealBars[sealDefinition.hash].completed === sealBars[sealDefinition.hash].total ? true : false;
+
     return (
       <div className='node seal'>
         <div className='children'>
@@ -103,19 +105,22 @@ class SealNode extends React.Component {
             <div className='description'>{sealDefinition.displayProperties.description}</div>
           </div>
           <div className='until'>
-            <h4>{t('Seal progress')}</h4>
+            {completed ? <h4 className='completed'>{t('Seal completed')}</h4> : <h4>{t('Seal progress')}</h4>}
             <div className='progress'>
-              <div className='title'>{sealBars[sealDefinition.hash].text}</div>
-              <div className='fraction'>
-                {sealBars[sealDefinition.hash].completed}/{sealBars[sealDefinition.hash].total}
+              <div className='text'>
+                <div className='title'>{sealBars[sealDefinition.hash].text}</div>
+                <div className='fraction'>
+                  {sealBars[sealDefinition.hash].completed}/{sealBars[sealDefinition.hash].total}
+                </div>
               </div>
-              <div
-                className='bar'
-                style={{
-                  width: `${(sealBars[sealDefinition.hash].completed / sealBars[sealDefinition.hash].total) * 100}%`,
-                  backgroundColor: sealBars[sealDefinition.hash].color ? sealBars[sealDefinition.hash].color : ``
-                }}
-              />
+              <div className={cx('bar', { completed: completed })}>
+                <div
+                  className='fill'
+                  style={{
+                    width: `${(sealBars[sealDefinition.hash].completed / sealBars[sealDefinition.hash].total) * 100}%`
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>

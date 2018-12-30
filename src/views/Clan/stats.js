@@ -741,7 +741,7 @@ class StatsView extends React.Component {
 
         collation = (
           <>
-            <div className='sub-header'>
+            <div className='sub-header sub'>
               <div>Gambit</div>
             </div>
             <div className='data'>
@@ -880,7 +880,7 @@ class StatsView extends React.Component {
 
         collation = (
           <>
-            <div className='sub-header'>
+            <div className='sub-header sub'>
               <div>Crucible</div>
             </div>
             <div className='data'>
@@ -956,7 +956,7 @@ class StatsView extends React.Component {
 
         collation = (
           <>
-            <div className='sub-header'>
+            <div className='sub-header sub'>
               <div>Crucible</div>
             </div>
             <div className='data'>
@@ -1050,7 +1050,7 @@ class StatsView extends React.Component {
 
         collation = (
           <>
-            <div className='sub-header'>
+            <div className='sub-header sub'>
               <div>Vanguard</div>
             </div>
             <div className='data'>

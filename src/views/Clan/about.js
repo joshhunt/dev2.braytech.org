@@ -8,6 +8,8 @@ import assign from 'lodash/assign';
 import ClanBanner from '../../components/ClanBanner';
 import Roster from '../../components/Roster';
 import Spinner from '../../components/Spinner';
+import ProgressBar from '../../components/ProgressBar';
+import ProgressCheckbox from '../../components/ProgressCheckbox';
 
 import './about.css';
 import { withNamespaces } from 'react-i18next';
@@ -77,7 +79,7 @@ class AboutView extends React.Component {
     const manifest = this.props.manifest;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
-    const {t} = this.props;
+    const { t } = this.props;
 
     if (clan) {
       const clanLevel = clan.clanInfo.d2ClanProgressions[584850370];
@@ -102,44 +104,33 @@ class AboutView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} {t('members')}</div>
+                <div className='memberCount'>
+                  // {clan.memberCount} {t('members')}
+                </div>
                 <div className='motto'>{clan.motto}</div>
                 <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={clan.about} />
               </div>
-              <div className='sub-header'>
+              <div className='sub-header sub'>
                 <div>{t('Season')} 5</div>
               </div>
               <div className='progression'>
                 <div className='clanLevel'>
                   <div className='text'>{t('Clan level')}</div>
-                  <div className='progress'>
-                    <div className='title'>{t('Level')} {clanLevel.level}</div>
-                    <div className='fraction'>
-                      {clanLevel.progressToNextLevel}/{clanLevel.nextLevelAt}
-                    </div>
-                    <div
-                      className='bar'
-                      style={{
-                        width: `${(clanLevel.progressToNextLevel / clanLevel.nextLevelAt) * 100}%`
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className='personalContribution'>
-                  <div className='text'>{t('Weekly Personal Contribution')}</div>
-                  <ul>
-                    <li>
-                      <div className={cx('state', { completed: weeklyPersonalContribution.weeklyProgress === 5000 })} />
-                      <div className='text'>
-                        <p>
-                          <span>{weeklyPersonalContribution.weeklyProgress}</span> / 5000
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
+                  <ProgressBar
+                    objectiveDefinition={{
+                      progressDescription: `${t('Level')} ${clanLevel.level}`,
+                      completionValue: clanLevel.nextLevelAt
+                    }}
+                    playerProgress={{
+                      progress: clanLevel.progressToNextLevel,
+                      objectiveHash: 'clanLevel'
+                    }}
+                    hideCheck
+                    chunky
+                  />
                 </div>
               </div>
-              <div className='sub-header'>
+              <div className='sub-header sub'>
                 <div>{t('Clan details')}</div>
               </div>
               <div className='progression details'>
@@ -149,14 +140,7 @@ class AboutView extends React.Component {
                     {rewardState ? (
                       rewardState.map(reward => (
                         <li key={reward.rewardEntryHash}>
-                          <div
-                            className={cx('state', {
-                              completed: reward.earned
-                            })}
-                          />
-                          <div className='text'>
-                            <p>{weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name}</p>
-                          </div>
+                          <ProgressCheckbox completed={reward.earned} text={weeklyClanEngramsDefinition[reward.rewardEntryHash].displayProperties.name} />
                         </li>
                       ))
                     ) : (
@@ -164,10 +148,21 @@ class AboutView extends React.Component {
                     )}
                   </ul>
                 </div>
+                <div className='personalContribution'>
+                  <div className='text'>{t('Weekly Personal XP Contribution')}</div>
+                  <ProgressCheckbox
+                    completed={weeklyPersonalContribution.weeklyProgress === 5000}
+                    text={
+                      <>
+                        <span>{weeklyPersonalContribution.weeklyProgress}</span> / 5000
+                      </>
+                    }
+                  />
+                </div>
               </div>
             </div>
             <div className='roster'>
-              <div className='sub-header'>
+              <div className='sub-header sub'>
                 <div>{t('Views')}</div>
               </div>
               <div className='views'>
@@ -185,7 +180,7 @@ class AboutView extends React.Component {
                   </li>
                 </ul>
               </div>
-              <div className='sub-header'>
+              <div className='sub-header sub'>
                 <div>{t('Clan roster')}</div>
                 {this.state.membersResponse ? <div>{this.state.membersResponse.Response.results.filter(member => member.isOnline).length} online</div> : null}
               </div>

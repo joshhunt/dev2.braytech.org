@@ -4,6 +4,7 @@ import orderBy from 'lodash/orderBy';
 import cx from 'classnames';
 
 import ObservedImage from '../ObservedImage';
+import ProgressBar from '../ProgressBar';
 
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
@@ -55,13 +56,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <div key={objectiveDefinition.hash} className='progress'>
-                  <div className='title'>{objectiveDefinition.progressDescription}</div>
-                  <div className='fraction'>
-                    {playerProgress.progress}/{playerProgress.completionValue}
-                  </div>
-                  <div className='bar' style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
-                </div>
+                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else if (characterRecords[characterId].records[recordDefinition.hash]) {
               let playerProgress = null;
@@ -72,13 +67,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <div key={objectiveDefinition.hash} className='progress'>
-                  <div className='title'>{objectiveDefinition.progressDescription}</div>
-                  <div className='fraction'>
-                    {playerProgress.progress}/{playerProgress.completionValue}
-                  </div>
-                  <div className='bar' style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
-                </div>
+                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else {
               objectives.push(null);
@@ -220,13 +209,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <div key={objectiveDefinition.hash} className='progress'>
-                  <div className='title'>{objectiveDefinition.progressDescription}</div>
-                  <div className='fraction'>
-                    {playerProgress.progress}/{playerProgress.completionValue}
-                  </div>
-                  <div className='bar' style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
-                </div>
+                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else if (characterRecords[characterId].records[recordDefinition.hash]) {
               let playerProgress = null;
@@ -237,13 +220,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <div key={objectiveDefinition.hash} className='progress'>
-                  <div className='title'>{objectiveDefinition.progressDescription}</div>
-                  <div className='fraction'>
-                    {playerProgress.progress}/{playerProgress.completionValue}
-                  </div>
-                  <div className='bar' style={{ width: `${(playerProgress.progress / playerProgress.completionValue) * 100}%` }} />
-                </div>
+                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else {
               objectives.push(null);

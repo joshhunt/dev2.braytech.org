@@ -33,17 +33,17 @@ class Header extends React.Component {
         slug: '/triumphs',
         exact: false
       },
+      // {
+      //   name: t('Character'),
+      //   desc: t('Character (dev only)'),
+      //   slug: '/character',
+      //   exact: true,
+      //   dev: true
+      // },
       {
-        name: t('Character'),
-        desc: t('Character (dev only)'),
-        slug: '/character',
-        exact: true,
-        dev: true
-      },
-      {
-        name: t('Overview'),
-        desc: t("Bird's eye view of your progress"),
-        slug: '/overview',
+        name: t('Account'),
+        desc: t("Bird's eye view of your overall progress"),
+        slug: '/account',
         exact: true
       },
       {

@@ -1,6 +1,8 @@
 import React from 'react';
 import cx from 'classnames'
 
+import ProgressBar from '../../../components/ProgressBar';
+
 const latentMemories = (props) => {
 
   let profileProgressions = props.response.profile.profileProgression.data;
@@ -57,13 +59,17 @@ const latentMemories = (props) => {
         <div className="binding">
           <p>Profile bound</p>
         </div>
-        <div className="progress">
-          <div className="title">Memories destroyed</div>
-          <div className="fraction">{Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2955980198]).length}</div>
-          <div className="bar" style={{
-            width: `${ Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2955980198]).length * 100 }%`
-          }}></div>
-        </div>
+        <ProgressBar
+          objectiveDefinition={{
+            progressDescription: 'Memories destroyed',
+            completionValue: Object.keys(profileProgressions.checklists[2955980198]).length
+          }}
+          playerProgress={{
+            progress: Object.values(profileProgressions.checklists[2955980198]).filter(value => value === true).length
+          }}
+          hideCheck
+          chunky
+        />
       </div>
       <ul className="list no-interaction">
         {list}

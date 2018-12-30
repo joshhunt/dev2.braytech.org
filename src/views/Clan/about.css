@@ -7,17 +7,6 @@
   grid-template-columns: 1.6fr 3fr 1.6fr;
 }
 
-#clan > .about .sub-header {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  width: 100%;
-  background-color: transparent;
-}
-
 #clan .banner .canvas canvas {
   width: 100%;
 }
@@ -26,7 +15,7 @@
   margin: 0 0 38px;
 }
 
-#clan .overview .progression .clanLevel .text {
+#clan .overview .progression .clanLevel > .text {
   position: relative;
   text-transform: uppercase;
   text-align: right;
@@ -36,7 +25,7 @@
   margin: 2rem 0 10px;
 }
 
-#clan .overview .progression .clanLevel .text::before {
+#clan .overview .progression .clanLevel > .text::before {
   content: ' ';
   position: absolute;
   top: -10px;
@@ -46,71 +35,14 @@
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-#clan .overview .progression .personalContribution {
-  margin: 0 0 21px;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-end;
-  font-size: 14px;
-}
-
-#clan .overview .progression .personalContribution .text {
-  flex-basis: 100%;
-  text-align: right;
-  margin: 0 0 7px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-#clan .overview .progression li {
-  display: inline-flex;
-}
-
-#clan .overview .progression li .text {
-  flex-basis: calc(100% - 2.8rem - 10px);
-  margin: 0;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-#clan .overview .progression li .text span {
-  color: rgba(255, 255, 255, 1);
-}
-
-#clan .overview .progression li .state {
-  position: relative;
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 5px 1rem 0 3px;
-  flex-shrink: 0;
-}
-
-#clan .overview .progression li .state::before {
-  content: ' ';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
-}
-
-#clan .overview .progression li .state.completed {
-  background-color: #78ba82;
-}
-
-#clan .overview .progression li .state.completed + .text {
-  color: rgba(255, 255, 255, 0.6);
-}
-
 #clan .overview .details {
-  font-size: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 #clan .overview .details .weeklyRewardState > .text {
   color: rgba(255, 255, 255, 0.8);
-  text-transform: uppercase;
   font-size: 16px;
-  font-weight: 500;
   margin: 0 0 1rem;
 }
 
@@ -118,9 +50,23 @@
   display: flex;
   position: relative;
   padding: 0;
-  margin: 0 0 0.4rem;
+  margin: 0 0 10px;
   line-height: 1.4;
   align-items: flex-start;
+}
+
+#clan .overview .details .personalContribution > .text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  margin: 0 0 1rem;
+}
+
+#clan .overview .details .check-box {
+  flex-basis: 100%;
+}
+
+#clan .overview .details .check-box .text span {
+  color: rgba(255, 255, 255, 1);
 }
 
 #clan .roster .sub-header {

@@ -12,7 +12,7 @@
 
 #clan .views .list li {
   text-transform: uppercase;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 2px;
   color: rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0);
@@ -45,15 +45,16 @@
 #clan .clan-properties .name {
   position: relative;
   font-size: 38px;
+  line-height: 1;
   font-weight: 600;
-  margin: 0 0 7px;
+  margin: 3px 0 7px;
   color: rgba(255, 255, 255, 1);
 }
 
 #clan .clan-properties .name::before {
   content: ' ';
   position: absolute;
-  top: -7px;
+  top: -9px;
   left: 0;
   width: 1.3rem;
   height: 5px;

@@ -3,8 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import packageJSON from '../../../package.json';
 import ObservedImage from '../../components/ObservedImage';
+import ProgressBar from '../../components/ProgressBar';
 
-import { classTypeToString, classHashToString } from '../../utils/destinyUtils';
+import { classHashToString } from '../../utils/destinyUtils';
 
 import './styles.css';
 
@@ -69,7 +70,7 @@ class ProfileHeader extends React.Component {
     );
 
     let viewsInline = false;
-    if (this.props.viewport.width > 1200) {
+    if (this.props.viewport.width >= 1500) {
       viewsInline = true;
     }
 
@@ -137,16 +138,18 @@ class ProfileHeader extends React.Component {
                   <div className='basics'>
                     {character.baseCharacterLevel} / {classHashToString(character.classHash, this.manifest, character.genderType)} / <span className='light'>{character.light}</span>
                   </div>
-                  <div className='progress'>
-                    <div
-                      className={cx('bar', {
-                        capped: capped
-                      })}
-                      style={{
-                        width: `${progress * 100}%`
-                      }}
-                    />
-                  </div>
+                  <ProgressBar
+                    classNames={{
+                      capped: capped
+                    }}
+                    objectiveDefinition={{
+                      completionValue: 1
+                    }}
+                    playerProgress={{
+                      progress: progress
+                    }}
+                    hideCheck
+                  />
                   <Link
                     to={{
                       pathname: '/character-select',

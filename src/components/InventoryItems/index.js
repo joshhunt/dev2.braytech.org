@@ -1,11 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
 
-import ObservedImage from './ObservedImage';
+import ObservedImage from '../ObservedImage';
 
-import './Items.css';
+import './styles.css';
 
-class Items extends React.Component {
+class InventoryItems extends React.Component {
   render() {
     let manifest = this.props.manifest;
 
@@ -40,4 +40,4 @@ class Items extends React.Component {
   }
 }
 
-export default Items;
+export default InventoryItems;

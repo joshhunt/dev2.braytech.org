@@ -1,6 +1,8 @@
 import React from 'react';
 import cx from 'classnames';
 
+import ProgressBar from '../../../components/ProgressBar';
+
 const ghostScans = props => {
   let profileProgressions = props.response.profile.profileProgression.data;
 
@@ -92,18 +94,17 @@ const ghostScans = props => {
         <div className='binding'>
           <p>Profile bound</p>
         </div>
-        <div className='progress'>
-          <div className='title'>Ghost scans performed</div>
-          <div className='fraction'>
-            {Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length}/{Object.keys(profileProgressions.checklists[2360931290]).length}
-          </div>
-          <div
-            className='bar'
-            style={{
-              width: `${(Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length / Object.keys(profileProgressions.checklists[2360931290]).length) * 100}%`
-            }}
-          />
-        </div>
+        <ProgressBar
+          objectiveDefinition={{
+            progressDescription: 'Ghost scans performed',
+            completionValue: Object.keys(profileProgressions.checklists[2360931290]).length
+          }}
+          playerProgress={{
+            progress: Object.values(profileProgressions.checklists[2360931290]).filter(value => value === true).length
+          }}
+          hideCheck
+          chunky
+        />
       </div>
       <ul className='list no-interaction'>{list}</ul>
     </>
