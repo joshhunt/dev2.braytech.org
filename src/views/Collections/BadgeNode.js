@@ -15,7 +15,6 @@ class BadgeNode extends React.Component {
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
-    const { t } = this.props;
 
     const characterCollectibles = this.props.response.profile.characterCollectibles.data;
     const profileCollectibles = this.props.response.profile.profileCollectibles.data;
