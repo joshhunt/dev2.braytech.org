@@ -265,10 +265,14 @@ class App extends Component {
             <div className='main'>
               <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
 
+              <Route path='/' exact render={() => <Index setPageDefault={this.setPageDefault} />} />
+
               <Route path='/character-select' render={route => <CharacterSelect route={route} setPageDefault={this.setPageDefault} setUserReponse={this.setUserReponse} user={this.state.user} viewport={this.state.viewport} manifest={this.manifest} />} />
 
               <Route path='/u/:membershipType/:membershipId/:characterId' render={route => <CharacterRoutes route={route} user={this.state.user} setUserReponse={this.setUserReponse} viewport={this.state.viewport} manifest={this.manifest} />} />
             </div>
+
+            <Route path='/' render={route => <Footer route={route} />} />
           </div>
         </Router>
       </UserContext.Provider>
