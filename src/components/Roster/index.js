@@ -5,7 +5,6 @@ import cx from 'classnames';
 import Moment from 'react-moment';
 import orderBy from 'lodash/orderBy';
 import globals from '../../utils/globals';
-import rgbToHsl from '../../utils/rgbToHsl';
 import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 
@@ -126,7 +125,6 @@ class Roster extends React.Component {
               let index = updatedMembers.length > 0 ? updatedMembers.findIndex(prevMember => prevMember.member.destinyUserInfo.membershipId === member.destinyUserInfo.membershipId) : -1;
               if (index > -1) {
                 updatedMembers[index] = response;
-                // console.log(`${member.destinyUserInfo.displayName} updated`);
               } else {
                 updatedMembers.push(response);
               }
@@ -191,7 +189,6 @@ class Roster extends React.Component {
   }
 
   increaseFreshness = () => {
-    // console.log(`Shibuya Roll Call: ${this.state.freshnessCycles + 1}`);
     let groups = this.props.response.groups;
     let clan = groups.results.length > 0 ? groups.results[0].group : false;
     this.groupFetch(clan.groupId)
@@ -210,7 +207,6 @@ class Roster extends React.Component {
 
   componentDidUpdate() {
     if (this.props.keepFresh && !this.state.freshnessTimeout && this.props.members.Response.results.length === this.state.membersFetched) {
-      // console.log('See you in 30s');
       let timeout = setTimeout(this.increaseFreshness, 30000);
       this.setState({ freshnessTimeout: timeout, membersFetched: 0 });
     }
@@ -259,18 +255,11 @@ class Roster extends React.Component {
         let lastCharacterTime = Object.entries(member.profile.characterActivities.data);
         lastCharacterTime = orderBy(lastCharacterTime, [character => character[1].dateActivityStarted], ['desc']);
 
-        // console.log(member, lastCharacterActivity, lastCharacterTime)
-        // console.log(lastCharacterTime, member.profile.characterActivities.data);
-        // console.log(member,, lastCharacterActivity);
-
         if (lastCharacterActivity || lastCharacterTime) {
           let lastCharacterId = lastCharacterActivity ? lastCharacterActivity[0] : lastCharacterTime[0];
           let lastActivity = lastCharacterActivity ? lastCharacterActivity[1] : false;
 
           let lastCharacter = member.profile.characters.data.find(character => character.characterId === lastCharacterId);
-
-          // let hsl = rgbToHsl(lastCharacter.emblemColor.red, lastCharacter.emblemColor.green, lastCharacter.emblemColor.blue);
-          //  style={{ backgroundColor: `hsl(${hsl.h * 360}deg,${Math.max(hsl.s, 0.20) * 100}%,${Math.max(hsl.l, 0.30) * 100}%)` }}
 
           if (mini) {
             members.push({
@@ -285,14 +274,10 @@ class Roster extends React.Component {
               )
             });
           } else {
-            // console.log(lastActivity);
-
             let activityDisplay = null;
             if (lastActivity && member.member.isOnline) {
               let activity = manifest.DestinyActivityDefinition[lastActivity.currentActivityHash];
               let mode = activity ? (activity.placeHash === 2961497387 ? false : manifest.DestinyActivityModeDefinition[lastActivity.currentActivityModeHash]) : false;
-
-              // console.log(lastActivity);
 
               activityDisplay = mode ? (
                 <>
@@ -319,12 +304,20 @@ class Roster extends React.Component {
               lastActive: lastActivity && member.member.isOnline ? new Date(lastActivity.dateActivityStarted).getTime() : new Date(member.profile.profile.data.dateLastPlayed).getTime(),
               lastActivity: lastActivity && member.member.isOnline ? lastActivity.currentActivityHash : 0,
               element: (
-                <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry, thisIsYou: member.member.destinyUserInfo.membershipId == this.props.membershipId })}>
+                <li key={member.member.destinyUserInfo.membershipId} className={cx({ linked: linked, isOnline: member.member.isOnline, blueberry: blueberry, thisIsYou: member.member.destinyUserInfo.membershipId === this.props.membershipId })}>
                   <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${lastCharacter.emblemPath}`} />
                   <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
                   <div className='triumphScore'>{member.profile.profileRecords.data.score}</div>
                   <div className='clanXp'>
-                    <span>{Object.values(member.profile.characterProgressions.data).reduce((sum, member) => { return sum + member.progressions[540048094].weeklyProgress }, 0)}</span> / {Object.values(member.profile.characterProgressions.data).reduce((sum, member) => { return sum + 5000 }, 0)}
+                    <span>
+                      {Object.values(member.profile.characterProgressions.data).reduce((sum, member) => {
+                        return sum + member.progressions[540048094].weeklyProgress;
+                      }, 0)}
+                    </span>{' '}
+                    /{' '}
+                    {Object.values(member.profile.characterProgressions.data).reduce((sum, member) => {
+                      return sum + 5000;
+                    }, 0)}
                   </div>
                   <div className='character'>{character}</div>
                   <div className='activity'>

@@ -1,6 +1,4 @@
 import React from 'react';
-import globals from '../../utils/globals';
-import cx from 'classnames';
 
 import InventoryItems from '../../components/InventoryItems';
 
@@ -15,7 +13,6 @@ class Character extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
@@ -59,9 +56,9 @@ class Character extends React.Component {
               <InventoryItems manifest={manifest} hashes={Object.values(weapons).map(item => item.hash)} />
             </ul>
           </div>
-          <div className='column'></div>
-          <div className='column'></div>
-          <div className='column'></div>
+          <div className='column' />
+          <div className='column' />
+          <div className='column' />
           <div className='column armours'>
             <ul className='list items'>
               <InventoryItems manifest={manifest} hashes={Object.values(armours).map(item => item.hash)} />

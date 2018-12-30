@@ -12,7 +12,6 @@ import './roster.css';
 class RosterView extends React.Component {
   constructor(props) {
     super(props);
-    const {t} = this.props;
     this.state = {
       membersResponse: false,
       rosterKeepFresh: false
@@ -77,7 +76,7 @@ class RosterView extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
 
@@ -92,7 +91,9 @@ class RosterView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} {t('members')}</div>
+                <div className='memberCount'>
+                  // {clan.memberCount} {t('members')}
+                </div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>

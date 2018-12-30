@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import cx from 'classnames';
 import globals from '../../utils/globals';
 import assign from 'lodash/assign';
 import ClanBanner from '../../components/ClanBanner';

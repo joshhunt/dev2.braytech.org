@@ -1,9 +1,4 @@
 import React from 'react';
-import assign from 'lodash/assign';
-import isEqual from 'lodash/isEqual';
-import cx from 'classnames';
-import globals from '../../utils/globals';
-import rgbToHsl from '../../utils/rgbToHsl';
 import Spinner from '../../components/Spinner';
 
 import clanBannerManifestJson from '../../data/clanBannerManifest';
