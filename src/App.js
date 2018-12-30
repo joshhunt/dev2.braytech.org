@@ -14,7 +14,6 @@ import './App.css';
 
 import Loading from './components/Loading';
 import Header from './components/Header';
-import Tooltip from './components/Tooltip';
 import Footer from './components/Footer';
 import Notifications from './components/Notifications';
 
@@ -22,8 +21,6 @@ import CharacterRoutes from './CharacterRoutes';
 
 import Index from './views/Index';
 import CharacterSelect from './views/CharacterSelect';
-import ThisWeek from './views/ThisWeek';
-import Vendors from './views/Vendors';
 import Settings from './views/Settings';
 import Pride from './views/Pride';
 import Credits from './views/Credits';
@@ -262,6 +259,8 @@ class App extends Component {
       <UserContext.Provider value={this.state.user}>
         <Router>
           <div className={cx('wrapper', this.state.pageDefaut ? this.state.pageDefaut : null)}>
+            <Route path='/' render={route => <Notifications updateAvailable={this.props.updateAvailable} />} />
+
             <div className='main'>
               <Route path='/' render={route => <Header route={route} {...this.state} manifest={this.manifest} />} />
 
