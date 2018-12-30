@@ -4,6 +4,7 @@ import cx from 'classnames';
 import assign from 'lodash/assign';
 import { withNamespaces } from 'react-i18next';
 import queryString from 'query-string';
+import { Redirect } from 'react-router-dom';
 
 import Characters from '../../components/Characters';
 
@@ -16,6 +17,10 @@ import errorHandler from '../../utils/errorHandler';
 import Spinner from '../../components/Spinner';
 
 import './styles.css';
+
+export function CharacterSelectRedirect({ match: { url } }) {
+  return <Redirect to={`/character-select?next=${url}`} />;
+}
 
 class CharacterSelect extends React.Component {
   constructor(props) {

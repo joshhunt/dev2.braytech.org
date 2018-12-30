@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import GoogleAnalytics from './components/GoogleAnalytics';
@@ -20,7 +20,7 @@ import Notifications from './components/Notifications';
 import CharacterRoutes from './CharacterRoutes';
 
 import Index from './views/Index';
-import CharacterSelect from './views/CharacterSelect';
+import CharacterSelect, { CharacterSelectRedirect } from './views/CharacterSelect';
 import Settings from './views/Settings';
 import Pride from './views/Pride';
 import Credits from './views/Credits';
@@ -271,6 +271,15 @@ class App extends Component {
               <Route path='/credits' exact render={() => <Credits setPageDefault={this.setPageDefault} />} />
               <Route path='/tools' exact render={() => <Tools setPageDefault={this.setPageDefault} />} />
               <Route path='/tools/clan-banner-builder/:decalBackgroundColorId?/:decalColorId?/:decalId?/:gonfalonColorId?/:gonfalonDetailColorId?/:gonfalonDetailId?/:gonfalonId?/' exact render={route => <ClanBannerBuilder {...route} setPageDefault={this.setPageDefault} />} />
+
+              <Route path='/triumphs/:primary?/:secondary?/:tertiary?/:quaternary?' component={CharacterSelectRedirect} />
+              <Route path='/account' component={CharacterSelectRedirect} />
+              <Route path='/clan/:view?/:subView?' component={CharacterSelectRedirect} />
+              <Route path='/character' component={CharacterSelectRedirect} />
+              <Route path='/checklists' component={CharacterSelectRedirect} />
+              <Route path='/collections/:primary?/:secondary?/:tertiary?/:quaternary?' component={CharacterSelectRedirect} />
+              <Route path='/this-week' component={CharacterSelectRedirect} />
+              <Route path='/vendors/:hash?' component={CharacterSelectRedirect} />
 
               <Route path='/u/:membershipType/:membershipId/:characterId' render={route => <CharacterRoutes route={route} user={this.state.user} setUserReponse={this.setUserReponse} viewport={this.state.viewport} manifest={this.manifest} />} />
             </div>
