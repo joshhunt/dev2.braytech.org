@@ -281,6 +281,9 @@ class Records extends React.Component {
         } else {
           let description = recordDefinition.displayProperties.description !== '' ? recordDefinition.displayProperties.description : false;
           description = !description && recordDefinition.loreHash ? manifest.DestinyLoreDefinition[recordDefinition.loreHash].displayProperties.description.slice(0, 32) + '...' : description;
+          if (recordDefinition.hash === 2367932631) {
+          console.log(enumerateRecordState(state))
+          }
 
           records.push({
             completed: enumerateRecordState(state).recordRedeemed,
@@ -294,6 +297,7 @@ class Records extends React.Component {
                   // eslint-disable-next-line eqeqeq
                   highlight: highlight && highlight == recordDefinition.hash,
                   completed: enumerateRecordState(state).recordRedeemed,
+                  unRedeemed:  !enumerateRecordState(state).recordRedeemed && !enumerateRecordState(state).objectiveNotCompleted,
                   'no-description': !description
                 })}
               >

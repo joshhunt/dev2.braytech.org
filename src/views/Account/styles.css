@@ -88,6 +88,11 @@
   opacity: 1;
 }
 
+#account .module .content.collectibles .collection-items li:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 1);
+}
+
 
 
 

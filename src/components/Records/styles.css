@@ -99,6 +99,11 @@
   color: rgba(207, 191, 124, 1);
 }
 
+.list.record-items li.unRedeemed {
+  background-color: rgba(90, 163, 102, 0.1);
+  box-shadow: inset 0 0 0 1px #5aa366;
+}
+
 .list.record-items li.highlight::after {
   top: 0;
   left: 0;

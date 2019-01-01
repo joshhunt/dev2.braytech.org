@@ -511,7 +511,7 @@ button.square.active {
   position: sticky;
   bottom: 0;
   left: 0;
-  height: 3rem;
+  height: 40px;
   width: 100%;
   padding: 0 3rem;
   z-index: 10;
@@ -519,16 +519,17 @@ button.square.active {
   align-items: center;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.4);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  font-size: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   user-select: none;
 }
 
 html.backdropfilter .sticky-nav {
   background-color: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px) brightness(0.9);
 }
 
 .sticky-nav i {
