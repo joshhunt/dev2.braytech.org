@@ -2,8 +2,9 @@
 import React from 'react';
 import cx from 'classnames';
 import assign from 'lodash/assign';
-import Characters from '../../components/Characters';
+import { withNamespaces } from 'react-i18next';
 
+import Characters from '../../components/Characters';
 import globals from '../../utils/globals';
 import * as responseUtils from '../../utils/responseUtils';
 import * as destinyEnums from '../../utils/destinyEnums';
@@ -12,7 +13,6 @@ import errorHandler from '../../utils/errorHandler';
 import Spinner from '../../components/Spinner';
 
 import './styles.css';
-import { withNamespaces } from 'react-i18next';
 
 class CharacterSelect extends React.Component {
   constructor(props) {
@@ -99,6 +99,7 @@ class CharacterSelect extends React.Component {
 
   ResultHandler = async (membershipType, membershipId, characterId, displayName) => {
     this.setState({ loading: true });
+    window.scrollTo(0, 0);
     let response = await this.ProfileResponse(membershipType, membershipId);
 
     if (response.profile.ErrorCode !== 1) {
@@ -130,6 +131,7 @@ class CharacterSelect extends React.Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.setPageDefault('light');
     if (this.props.user.response) {
       this.setState({ profile: this.props.user.response, loading: false });
@@ -191,8 +193,7 @@ class CharacterSelect extends React.Component {
             Object.keys(this.state.profile.profile.characters.data).reduce((sum, key) => {
               return sum + parseInt(this.state.profile.profile.characters.data[key].minutesPlayedTotal);
             }, 0) / 1440
-          )}{' '}
-          {t('days on the grind')}
+          )} {t('days on the grind')}
         </div>
       );
 
@@ -230,7 +231,7 @@ class CharacterSelect extends React.Component {
         ) : null}
         <div className='search'>
           {errorNotices}
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>{t('Search for player')}</div>
           </div>
           <div className='form'>
@@ -241,7 +242,7 @@ class CharacterSelect extends React.Component {
           <div className='results'>{resultsElement}</div>
           {profileHistory.length > 0 ? (
             <>
-              <div className='sub-header'>
+              <div className='sub-header sub'>
                 <div>{t('Previous')}</div>
               </div>
               <div className='results'>

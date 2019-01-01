@@ -101,7 +101,8 @@
 
 #index .changelog .content ul {
   list-style-type: disc;
-  padding: 0 0 0 2rem;
+  padding: 0 0 0 2rem;  
+  margin: 0 0 1rem;
 }
 
 #index .changelog .content ul li {

@@ -56,7 +56,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
+                <ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else if (characterRecords[characterId].records[recordDefinition.hash]) {
               let playerProgress = null;
@@ -67,7 +67,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
+                <ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else {
               objectives.push(null);
@@ -208,8 +208,13 @@ class Records extends React.Component {
                 }
               });
 
+              // override
+              if (hash === 1278866930 && playerProgress.complete) {
+                playerProgress.progress = 16;
+              }
+
               objectives.push(
-                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
+                <ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else if (characterRecords[characterId].records[recordDefinition.hash]) {
               let playerProgress = null;
@@ -220,7 +225,7 @@ class Records extends React.Component {
               });
 
               objectives.push(
-                <ProgressBar objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
+                <ProgressBar key={objectiveDefinition.hash} objectiveDefinition={objectiveDefinition} playerProgress={playerProgress} />
               );
             } else {
               objectives.push(null);

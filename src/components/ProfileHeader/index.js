@@ -70,7 +70,7 @@ class ProfileHeader extends React.Component {
     );
 
     let viewsInline = false;
-    if (this.props.viewport.width >= 1500) {
+    if (this.props.viewport.width >= 1300) {
       viewsInline = true;
     }
 

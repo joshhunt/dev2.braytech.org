@@ -1,11 +1,11 @@
 {
   "name": "dev2.braytech.org",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
     "dexie": "^2.0.4",
-    "i18next": "^13.0.0",
+    "i18next": "^13.0.1",
     "i18next-xhr-backend": "^1.5.1",
     "lodash": "^4.17.11",
     "moment": "^2.23.0",
@@ -17,8 +17,7 @@
     "react-markdown": "^4.0.4",
     "react-moment": "^0.8.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
-    "three": "^0.98.0"
+    "react-scripts": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

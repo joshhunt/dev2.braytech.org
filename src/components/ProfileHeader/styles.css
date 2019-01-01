@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 160px;
+  height: 152px;
   display: flex;
   flex-flow: row wrap;
 }
@@ -16,7 +16,7 @@
 }
 
 html.backdropfilter #header.profile-header .braytech {
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(4px) brightness(1.4);
 }
 
 #header.profile-header .ui {
@@ -25,8 +25,8 @@ html.backdropfilter #header.profile-header .braytech {
 
 #header.profile-header .profile {
   position: relative;
-  padding: 48px 0 0;
-  height: 160px;
+  padding: 40px 0 0;
+  height: 152px;
   width: 100%;
   flex-basis: 100%;
 }
@@ -82,10 +82,10 @@ html.backdropfilter #header.profile-header .braytech {
   content: ' ';
   position: absolute;
   top: -4px;
-  left: 0;
+  left: 1px;
   width: 18px;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #header.profile-header .characters .list li .basics {
@@ -112,7 +112,7 @@ html.backdropfilter #header.profile-header .braytech {
 #header.profile-header .characters .list li .basics .light::before {
   content: 'l';
   position: absolute;
-  top: 4px;
+  top: 2px;
   left: -10px;
   font-family: 'destiny' !important;
   font-size: 8px;

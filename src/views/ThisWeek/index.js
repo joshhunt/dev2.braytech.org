@@ -1,9 +1,9 @@
 import React from 'react';
+import { withNamespaces } from 'react-i18next';
 
 import Records from '../../components/Records';
 import Collectibles from '../../components/Collectibles';
 import './styles.css';
-import { withNamespaces } from 'react-i18next';
 
 class ThisWeek extends React.Component {
   constructor(props) {

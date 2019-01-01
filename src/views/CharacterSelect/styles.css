@@ -11,11 +11,8 @@
 }
 
 #get-profile .sub-header {
-  margin: 0 0 2rem;
-  width: 100%;
-  border-bottom: 2px solid #848484;
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #848484;
+  border-bottom: 2px solid #6d6d6d;
+  color: #6d6d6d;
 }
 
 #get-profile .error {
@@ -25,7 +22,6 @@
 
 #get-profile .error .sub-header {
   border-bottom: 2px solid #F44336;
-  background-color: rgba(244, 67, 54, 0.1);
   color: #F44336;
 }
 

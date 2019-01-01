@@ -51,7 +51,7 @@ class StandardHeader extends React.Component {
     );
 
     let viewsInline = false;
-    if (this.props.viewport.width > 1200) {
+    if (this.props.viewport.width > 1000) {
       viewsInline = true;
     }
 

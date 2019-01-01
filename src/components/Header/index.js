@@ -58,12 +58,12 @@ class Header extends React.Component {
         slug: '/this-week',
         exact: true
       },
-      {
-        name: t('Vendors'),
-        desc: t("Tracking what's in stock across the Jovians"),
-        slug: '/vendors',
-        exact: false
-      },
+      // {
+      //   name: t('Vendors'),
+      //   desc: t("Tracking what's in stock across the Jovians"),
+      //   slug: '/vendors',
+      //   exact: false
+      // },
       {
         name: t('Tools'),
         desc: t('Assorted Destiny-related tools'),

@@ -3,75 +3,147 @@
   padding: 4rem 3rem 0;
   display: grid;
   grid-gap: 3rem;
-  grid-template-columns: 1fr 1.4fr 1.4fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 #account .module .content {
   margin: 0 0 3rem;
 }
 
-#account .module .content.feedback p {
-  font-size: 14px;
-}
-
 #account .module .content:last-child {
   margin: 0;
 }
 
-#account .module.activity-checklists-seals {
-}
 
-#account .module.activity-checklists-seals .list li {
-  height: unset;
-}
 
-/* #account .module.activity-checklists-seals > div:nth-child(2) {
+#account .module .content.characters .character {
   margin: 0 0 2rem;
-} */
+}
 
-#account ul.activity {
-  display: flex;
-  flex-flow: row wrap;
+#account .module .content.characters .character:last-child {
+  margin: 0;
+}
+
+#account .module .content.characters .character .list {
   margin: 0 0 1rem;
 }
 
-#account ul.activity > li {
-  flex-basis: 20%;
-  margin: 0 0 1rem;
+#account .module .content.characters .character .list li {
+  display: grid;
+  grid-template-columns: 56px 70px 60px auto;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-#account .activity ul li {
-  font-size: 14px;
+#account .module .content.characters .character .list li .emblem {
+  position: relative;
+  width: 38px;
+  height: 38px;
+}
+
+#account .module .content.characters .character .list li .light {
+  position: relative;
+  margin: 0 0 0 14px;
+  font-weight: 500;
+  color: #2ed1c9;
+}
+
+#account .module .content.characters .character .list li .light::before {
+  content: 'l';
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  font-family: 'destiny' !important;
+  font-size: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+#account .module .content.collectibles .collection-items {
+  grid-template-columns: 1fr 1fr;
+}
+
+#account .module .content.collectibles .collection-items li {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#account .module .content.collectibles .collection-items li.completed {
+  background-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.8);
 }
 
-#account .activity ul li:first-child {
-  margin: 0 0 0.5rem;
-  color: rgba(255, 255, 255, 0.6);
+#account .module .content.collectibles .collection-items li .image.dl {
+  opacity: 0.4;
 }
 
-#account .module.ranks {
-  grid-row: 1/3;
-  grid-column: 2/3;
+#account .module .content.collectibles .collection-items li.completed .image.dl {
+  opacity: 1;
 }
 
-#account .module.ranks .content .rank h4 {
+
+
+
+#account .module .content.strikes li {
+  height: unset;
+  font-size: 14px;
+  margin: 0 0 6px;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+}
+
+#account .module .content.strikes li.lowScore {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+#account .module .content.strikes li .score {
+  text-align: right;
+}
+
+
+
+
+#account .module .content.seals .list li {
+  height: unset;
+  margin: 0 0 4px;
+}
+
+#account .module .content.seals .list li:last-child {
+  margin: 0;
+}
+
+#account .module .content.seals .list li .progress-bar {
+  flex-basis: 100%;
+}
+
+
+
+
+
+#account .module .ranks .rank h4 {
   margin: 1.5rem 0 1rem;
 }
 
-#account .module.ranks .content .rank p {
+#account .module .ranks .rank p {
   font-size: 14px;
 }
 
-#account .module.ranks .content .rank {
+#account .module .ranks .rank {
   margin: 0 0 1rem;
 }
 
-#account .module.ranks .content .rank .mode {
+#account .module .ranks .rank .mode {
   display: flex;
 }
 
-#account .module.ranks .content .rank .mode .icon {
+#account .module .ranks .rank .mode .icon {
   flex-basis: 4rem;
   height: 4rem;
   margin: 0;
@@ -81,85 +153,83 @@
   font-size: 52px;
 }
 
-#account .module.ranks .content .rank .mode .name,
-#account .module.ranks .content .rank .mode .resets {
+#account .module .ranks .rank .mode .name,
+#account .module .ranks .rank .mode .resets {
   display: flex;
   align-items: center;
 }
 
-#account .module.ranks .content .rank .mode .name {
+#account .module .ranks .rank .mode .name {
   flex-basis: calc(100% - 7rem);
 }
 
-#account .module.ranks .content .rank .mode .resets {
+#account .module .ranks .rank .mode .resets {
   flex-basis: 2rem;
   justify-content: flex-end;
   margin: 0 1rem 0 0;
 }
 
-#account .module.ranks .content .rank .shallow > .description {
+#account .module .ranks .rank .shallow > .description {
   color: rgba(255, 255, 255, 0.8);
   font-style: italic;
   letter-spacing: 0.5px;
 }
 
-#account .module.ranks .content .rank .shallow {
+#account .module .ranks .rank .shallow {
   padding: 1rem;
 }
 
-#account .module.ranks .content .rank.infamy .mode {
+#account .module .ranks .rank.infamy .mode {
   background-color: #25986e;
 }
 
-#account .module.ranks .content .rank.infamy .mode .icon {
+#account .module .ranks .rank.infamy .mode .icon {
   font-size: 42px;
 }
 
-#account .module.ranks .content .rank.infamy .shallow {
+#account .module .ranks .rank.infamy .shallow {
   background-color: rgba(37, 152, 110, 0.5);
 }
 
-#account .module.ranks .content .rank.valor .mode {
+#account .module .ranks .rank.valor .mode {
   background-color: #ed792c;
 }
 
-#account .module.ranks .content .rank.valor .shallow {
+#account .module .ranks .rank.valor .shallow {
   background-color: rgba(237, 121, 44, 0.5);
 }
 
-#account .module.ranks .content .rank.glory .mode {
+#account .module .ranks .rank.glory .mode {
   background-color: #b52422;
 }
 
-#account .module.ranks .content .rank.glory .shallow {
+#account .module .ranks .rank.glory .shallow {
   background-color: rgba(181, 36, 34, 0.5);
 }
 
-#account .module.ranks .content .rank .progress-bar.disabled {
+#account .module .ranks .rank .progress-bar.disabled {
   opacity: 0;
 }
 
-#account .module.almost {
-  grid-row: 1/3;
-  grid-column: 3/5;
-}
 
-#account .module.almost .list.record-items {
+
+
+
+#account .module .almost .list.record-items {
   grid-template-columns: 1fr;
 }
 
-@media screen and (max-width: 1600px) {
-  #account {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
 
-@media screen and (max-width: 1200px) {
+
+
+@media screen and (max-width: 1300px) {
   #account {
     grid-template-columns: 1fr 1fr;
   }
 
-  #account .module.ranks {
+  
+
+  /* #account .module .ranks {
     grid-row: unset;
     grid-column: 2/3;
   }
@@ -167,10 +237,10 @@
   #account .module.almost {
     grid-row: unset;
     grid-column: 1/3;
-  }
+  } */
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   #account {
     grid-template-columns: 1fr;
     padding: 3rem 2rem 0;
@@ -181,15 +251,19 @@
     margin: 0 0 1rem;
   }
 
-  #account .module.activity-checklists-seals {
+  #account .module .content.collectibles .collection-items {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* #account .module.activity-checklists-seals {
     grid-column: 1/2;
   }
 
-  #account .module.ranks {
+  #account .module .ranks {
     grid-column: 1/2;
   }
 
-  #account .module.ranks .content .rank:last-child {
+  #account .module .ranks .rank:last-child {
     margin: 0 0 1rem;
   }
 
@@ -199,5 +273,5 @@
 
   #account .module.almost .list.record-items {
     grid-template-columns: 1fr;
-  }
+  } */
 }

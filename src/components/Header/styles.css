@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 48px;
+  height: 40px;
   display: flex;
   flex-flow: row wrap;
 }
@@ -18,7 +18,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 48px;
+  height: 40px;
   z-index: 20;
   padding: 0 3rem;
   display: flex;
@@ -32,6 +32,7 @@
 #header .braytech .logo {
   letter-spacing: 1px;
   text-transform: uppercase;
+  padding: 1px 0 0;
 }
 
 #header .braytech .logo span {
@@ -68,7 +69,7 @@
 #header .views ul li a {
   position: relative;
   padding: 0 4px 0;
-  height: 48px;
+  height: 40px;
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.6);
@@ -105,7 +106,7 @@
 
 #header .nav {
   position: fixed;
-  top: 48px;
+  top: 40px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -167,7 +168,7 @@
   }
 
   #header .braytech {
-    height: 48px;
+    height: 40px;
     font-size: 12px;
   }
 
@@ -182,6 +183,7 @@
   }
 
   #header .braytech .trigger {
+    padding: 1px 0 0;
     display: flex;
     align-items: center;
     font-weight: 400;
@@ -203,6 +205,6 @@
   }
   #header .nav {
     padding: 2rem;
-    height: calc(100% - 48px);
+    height: calc(100% - 40px);
   }
 }

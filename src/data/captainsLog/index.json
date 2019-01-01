@@ -13,5 +13,20 @@
     "date": "2018-12-27T12:49:58.234Z",
     "version": "1.1.1",
     "content": "\n## Changes\n- Fixed a clan stats bug\n"
+  },
+  {
+    "date": "2018-12-30T04:13:51.070Z",
+    "version": "1.2.0",
+    "content": "## Changes\n- Updated font\n- Increased pixel perfection of profile header by a factor of 1 billion\n- Built new reusable components for progress bars and checkboxes\n- Fixed Collections bug\n- Gave progress bars in Badges and Seals a shiny new coat of paint\n- Completely reworked triumph records progress display\n- Renamed Overview → Account and ripped it a new one\n- Reworked Checklists\n- Polished up This Week\n- Language updates for Português Brasileiro and Deutsch\n\n## Conversation\nA lot of quality of life changes. A better version of the font. Fonts matter a lot to me. The medium weight on this one is a bit thick but we'll see how she fares.\n\nI've made a mess of the Account view–previously the Overview view–and I'm looking for a better purpose to assign it. Perhaps basics data about your characters, such as time played, subclasses unlocked, whether they've completed storylines, etc."
+  },
+  {
+    "date": "2018-12-31T07:32:48.539Z",
+    "version": "1.2.1",
+    "content": "## Changes\n- Removed link to Vendors page. Read about it below.\n- Made inline nav improvements for smaller viewports\n- Added 'rare collectibles' to Account view\n\n## Conversation\nSo, why the heck did you remove the Vendors page!\n- it was a reflection of my personal vendor data meaning my Destiny progression affects what it displays. Normally, Vendors are hidden behind OAuth–the funky click to login with Bungie buttons–which Braytech doesn’t use. More on this in a tick\n- only a small fraction of users actually used it\n\nSo, why doesn’t Braytech use OAuth then? A few reasons. \n- I’ve always wanted Braytech to be as accessible as possible. Requiring users to authenticate hampers that. OAuth is required for things like inventory actions. That market is very well-filled by DIM, Ishtar Commander, and at least 5 other apps\n- it’d be a fair bit of work to implement and as Braytech is a hobby and hobbies are meant to be fun...\n- why don’t you just have both options?\n\nThe good news? I haven't nuked the page entirely. You can still access it at braytech.org/vendors.\n\nThe final change in this minor update is an improvement to the Account view. I've added 'rare collectibles' allowing you to see, at a glance, if a player is good or not. A joke. I'll be adding more modules over time, as I think of them."
+  },
+  {
+    "date": "2019-01-01T08:54:18.867Z",
+    "version": "1.2.2",
+    "content": "## Changes\n- Added some codes to improve the Character Select view UX\n- Added strike high-scores to Account view\n- Rearranged Account view"
   }
 ]
