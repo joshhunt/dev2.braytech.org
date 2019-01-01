@@ -29,6 +29,7 @@ class Account extends React.Component {
     const characterProgressions = this.props.response.profile.characterProgressions.data;
     const profileRecords = this.props.response.profile.profileRecords.data.records;
     const characterRecords = this.props.response.profile.characterRecords.data;
+    const genderHash = characters.filter(character => character.characterId == characterId)[0].genderHash;
 
     const Characters = () => {
       let charactersEl = [];
@@ -74,49 +75,49 @@ class Account extends React.Component {
           noInteraction: false,
           values: {
             destinations: {
-              text: manifest.DestinyRecordDefinition[2757681677].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[2757681677].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 2588182977,
               recordHash: 2757681677,
               total: profileRecords[2757681677].objectives[0].completionValue,
               completed: profileRecords[2757681677].objectives[0].progress
             },
             gambit: {
-              text: manifest.DestinyRecordDefinition[3798931976].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[3798931976].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 3481101973,
               recordHash: 3798931976,
               total: profileRecords[3798931976].objectives[0].completionValue,
               completed: profileRecords[3798931976].objectives[0].progress
             },
             crucible: {
-              text: manifest.DestinyRecordDefinition[3369119720].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[3369119720].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 147928983,
               recordHash: 3369119720,
               total: profileRecords[3369119720].objectives[0].completionValue,
               completed: profileRecords[3369119720].objectives[0].progress
             },
             lore: {
-              text: manifest.DestinyRecordDefinition[1754983323].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[1754983323].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 2693736750,
               recordHash: 1754983323,
               total: profileRecords[1754983323].objectives[0].completionValue,
               completed: profileRecords[1754983323].objectives[0].progress
             },
             dreamingCity: {
-              text: manifest.DestinyRecordDefinition[1693645129].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[1693645129].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 2516503814,
               recordHash: 1693645129,
               total: profileRecords[1693645129].objectives[0].completionValue,
               completed: profileRecords[1693645129].objectives[0].progress
             },
             raids: {
-              text: manifest.DestinyRecordDefinition[2182090828].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[2182090828].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 1162218545,
               recordHash: 2182090828,
               total: profileRecords[2182090828].objectives[0].completionValue,
               completed: profileRecords[2182090828].objectives[0].progress
             },
             armoury: {
-              text: manifest.DestinyRecordDefinition[2053985130].titleInfo.titlesByGenderHash[2204441813],
+              text: manifest.DestinyRecordDefinition[2053985130].titleInfo.titlesByGenderHash[genderHash],
               nodeHash: 2039028930,
               recordHash: 2053985130,
               total: profileRecords[2053985130].objectives[0].completionValue,
