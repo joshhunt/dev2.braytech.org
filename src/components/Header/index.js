@@ -7,7 +7,7 @@ import ProfileHeader from '../ProfileHeader';
 import { withNamespaces } from 'react-i18next';
 
 function makeUrl(path, user) {
-  return user && user.response ? `${user.urlPrefix}${path}` : `/character-select?next=${path}`;
+  return user && user.response ? `${user.urlPrefix}${path}` : { pathname: '/character-select', state: { next: path } };
 }
 
 class Header extends React.Component {
@@ -24,62 +24,62 @@ class Header extends React.Component {
       {
         name: t('Clan'),
         desc: t('Activity and statistics'),
-        slug: makeUrl('/clan', user),
+        to: makeUrl('/clan', user),
         exact: false
       },
       {
         name: t('Collections'),
         desc: t('Items your Guardian has acquired'),
-        slug: makeUrl('/collections', user),
+        to: makeUrl('/collections', user),
         exact: false
       },
       {
         name: t('Triumphs'),
         desc: t("Records of your Guardian's achievements"),
-        slug: makeUrl('/triumphs', user),
+        to: makeUrl('/triumphs', user),
         exact: false
       },
       // {
       //   name: t('Character'),
       //   desc: t('Character (dev only)'),
-      //   slug: '/character',
+      //   to: '/character',
       //   exact: true,
       //   dev: true
       // },
       {
         name: t('Account'),
         desc: t("Bird's eye view of your overall progress"),
-        slug: makeUrl('/account', user),
+        to: makeUrl('/account', user),
         exact: true
       },
       {
         name: t('Checklists'),
         desc: t('Made a list, check it twice'),
-        slug: makeUrl('/checklists', user),
+        to: makeUrl('/checklists', user),
         exact: true
       },
       {
         name: t('This Week'),
         desc: t('Prestigious records and valued items up for grabs this week'),
-        slug: makeUrl('/this-week', user),
+        to: makeUrl('/this-week', user),
         exact: true
       },
       // {
       //   name: t('Vendors'),
       //   desc: t("Tracking what's in stock across the Jovians"),
-      //   slug: makeUrl('/vendors', user),
+      //   to: makeUrl('/vendors', user),
       //   exact: false
       // },
       {
         name: t('Tools'),
         desc: t('Assorted Destiny-related tools'),
-        slug: '/tools',
+        to: '/tools',
         exact: true
       },
       {
         name: <span className='destiny-settings' />,
         desc: 'Select a different language',
-        slug: '/settings',
+        to: '/settings',
         exact: true
       }
     ];

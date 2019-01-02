@@ -3,7 +3,6 @@ import React from 'react';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import { withNamespaces } from 'react-i18next';
-import queryString from 'query-string';
 import { Redirect } from 'react-router-dom';
 
 import Characters from '../../components/Characters';
@@ -19,7 +18,14 @@ import Spinner from '../../components/Spinner';
 import './styles.css';
 
 export function CharacterSelectRedirect({ match: { url } }) {
-  return <Redirect to={`/character-select?next=${url}`} />;
+  return (
+    <Redirect
+      to={{
+        pathname: '/character-select',
+        state: { next: url }
+      }}
+    />
+  );
 }
 
 class CharacterSelect extends React.Component {
@@ -169,7 +175,7 @@ class CharacterSelect extends React.Component {
     let resultsElement = null;
     let profileElement = null;
 
-    const qs = queryString.parse(this.props.route && this.props.route.location.search);
+    const qs = this.props.route.location.state;
 
     const nextPath = qs && qs.next ? qs.next : '';
 

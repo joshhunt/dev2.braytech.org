@@ -54,11 +54,10 @@ class ProfileHeader extends React.Component {
     let viewsRender = (
       <div className='views'>
         <ul>
-          {this.props.views.map(view => {
-            let to = view.slug;
+          {this.props.views.map((view, index) => {
             return (
-              <li key={view.slug}>
-                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+              <li key={index}>
+                <NavLink to={view.to} onClick={this.NavlinkClickHandler}>
                   {view.name}
                 </NavLink>
                 <div className='description'>{view.desc}</div>
@@ -77,11 +76,10 @@ class ProfileHeader extends React.Component {
     let mobileNav = (
       <div className='nav'>
         <ul>
-          {this.props.views.map(view => {
-            let to = view.slug;
+          {this.props.views.map((view, index) => {
             return (
-              <li key={view.slug}>
-                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+              <li key={index}>
+                <NavLink to={view.to} onClick={this.NavlinkClickHandler}>
                   {view.name}
                 </NavLink>
                 <div className='description'>{view.desc}</div>
