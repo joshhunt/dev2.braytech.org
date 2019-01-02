@@ -1,17 +1,24 @@
 import React from 'react';
-import './styles.css';
 import { withNamespaces } from 'react-i18next';
-import { getLanguageInfo } from '../../utils/languageInfo';
 import cx from 'classnames';
+
+import ProgressCheckbox from '../../components/ProgressCheckbox';
+import { getLanguageInfo } from '../../utils/languageInfo';
+
+import './styles.css';
 
 class Settings extends React.Component {
   constructor(props) {
     super(props);
-    const { i18n } = this.props;
-    let initLanguage = i18n.getCurrentLanguage();
+    let initLanguage = this.props.i18n.getCurrentLanguage();
     this.state = {
-      current: initLanguage,
-      selected: initLanguage
+      language: {
+        current: initLanguage,
+        selected: initLanguage
+      },
+      collectibles: {
+
+      }
     };
   }
 
@@ -23,7 +30,7 @@ class Settings extends React.Component {
 
   saveAndRestart() {
     const { i18n } = this.props;
-    i18n.setCurrentLanguage(this.state.selected);
+    i18n.setCurrentLanguage(this.state.language.selected);
     setTimeout(() => {
       window.location.reload();
     }, 50);
@@ -49,35 +56,55 @@ class Settings extends React.Component {
           onClick={() => {
             this.selectLanguage(code);
           }}
-          className={cx('linked', this.state.selected === code ? 'selected' : '')}
         >
-          <div className='name'>{langInfo.name || langInfo.code}</div>
+          <ProgressCheckbox checked={this.state.language.selected === code} text={langInfo.name || langInfo.code} />
         </li>
       );
     });
 
-    let applyButtons =
-      this.state.current !== this.state.selected ? (
-        <ul className='list'>
-          <li
-            className='linked'
-            onClick={() => {
-              this.saveAndRestart();
-            }}
-          >
-            <div className='name'>{t('Save and restart')}</div>
-          </li>
-        </ul>
-      ) : null;
+    // 0 show everything
+    // 1 hide in triumphs
+    // 2 hide in checklists
+
+    let collectiblesButtons = (
+      <>
+        <li key='0' onClick={() => {}}>
+          <ProgressCheckbox checked={true} text='Show everything' />
+        </li>
+        <li key='1' onClick={() => {}}>
+          <ProgressCheckbox checked={false} text='Hide completed triumphs' />
+        </li>
+        <li key='2' onClick={() => {}}>
+          <ProgressCheckbox checked={false} text='Hide discovered checklist items' />
+        </li>
+      </>
+    );
 
     return (
       <div className='view' id='settings'>
-        <div className={cx('module', 'language')}>
-          <div className='sub-header'>
+        <div className='module language'>
+          <div className='sub-header sub'>
             <div>{t('Language')}</div>
           </div>
-          <ul className='list'>{languageButtons}</ul>
-          {applyButtons}
+          <ul className='list settings'>{languageButtons}</ul>
+          {this.state.language.current !== this.state.language.selected ? (
+            <ul className='list'>
+              <li
+                className='linked'
+                onClick={() => {
+                  this.saveAndRestart();
+                }}
+              >
+                <div className='name'>{t('Save and restart')}</div>
+              </li>
+            </ul>
+          ) : null}
+        </div>
+        <div className='module collectibles'>
+          <div className='sub-header sub'>
+            <div>{t('Collectibles')}</div>
+          </div>
+          <ul className='list settings'>{collectiblesButtons}</ul>
         </div>
       </div>
     );

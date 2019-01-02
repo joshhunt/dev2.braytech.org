@@ -32,54 +32,57 @@ class SealNode extends React.Component {
   render() {
     const { t } = this.props;
     const manifest = this.props.manifest;
+    const characterId = this.props.characterId;
 
+    const characters = this.props.response.profile.characters.data;
+    const genderHash = characters.find(character => character.characterId === characterId).genderHash;
     const profileRecords = this.props.response.profile.profileRecords.data.records;
 
     const sealBars = {
       2588182977: {
-        text: t('Wayfarer'),
+        text: manifest.DestinyRecordDefinition[2757681677].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 2588182977,
         recordHash: 2757681677,
         total: profileRecords[2757681677].objectives[0].completionValue,
         completed: profileRecords[2757681677].objectives[0].progress
       },
       3481101973: {
-        text: t('Dredgen'),
+        text: manifest.DestinyRecordDefinition[3798931976].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 3481101973,
         recordHash: 3798931976,
         total: profileRecords[3798931976].objectives[0].completionValue,
         completed: profileRecords[3798931976].objectives[0].progress
       },
       147928983: {
-        text: t('Unbroken'),
+        text: manifest.DestinyRecordDefinition[3369119720].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 147928983,
         recordHash: 3369119720,
         total: profileRecords[3369119720].objectives[0].completionValue,
         completed: profileRecords[3369119720].objectives[0].progress
       },
       2693736750: {
-        text: t('Chronicler'),
+        text: manifest.DestinyRecordDefinition[1754983323].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 2693736750,
         recordHash: 1754983323,
         total: profileRecords[1754983323].objectives[0].completionValue,
         completed: profileRecords[1754983323].objectives[0].progress
       },
       2516503814: {
-        text: t('Cursebreaker'),
+        text: manifest.DestinyRecordDefinition[1693645129].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 2516503814,
         recordHash: 1693645129,
         total: profileRecords[1693645129].objectives[0].completionValue,
         completed: profileRecords[1693645129].objectives[0].progress
       },
       1162218545: {
-        text: t('Rivensbane'),
+        text: manifest.DestinyRecordDefinition[2182090828].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 1162218545,
         recordHash: 2182090828,
         total: profileRecords[2182090828].objectives[0].completionValue,
         completed: profileRecords[2182090828].objectives[0].progress
       },
       2039028930: {
-        text: t('Blacksmith'),
+        text: manifest.DestinyRecordDefinition[2053985130].titleInfo.titlesByGenderHash[genderHash],
         nodeHash: 2039028930,
         recordHash: 2053985130,
         total: profileRecords[2053985130].objectives[0].completionValue,

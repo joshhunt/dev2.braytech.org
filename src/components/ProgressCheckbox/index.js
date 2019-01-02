@@ -12,7 +12,7 @@ class ProgressCheckbox extends React.Component {
 
   render() {
     let classNames = this.props.classNames;
-    let completed = this.props.completed;
+    let completed = this.props.completed || this.props.checked;
     let text = this.props.text;
 
 

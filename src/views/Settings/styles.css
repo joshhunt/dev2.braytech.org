@@ -1,15 +1,13 @@
 #settings {
   padding: 3rem;
   display: grid;
+  grid-gap: 3rem;
   grid-template-columns: repeat(5, 1fr);
 }
 
 #settings .sub-header {
-  margin: 0 0 2rem;
-  width: 100%;
-  border-bottom: 2px solid #848484;
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #848484;
+  border-bottom: 2px solid #6d6d6d;
+  color: #6d6d6d;
 }
 
 #settings .list li.linked {
@@ -67,7 +65,7 @@
   pointer-events: none;
 }
 
-#settings .module.language .list:last-child {
+#settings .module.language .list:nth-child(3) {
   margin: 2rem 0 0;
 }
 
@@ -92,4 +90,25 @@
   #settings .sub-header {
     margin: 0 0 1rem;
   }
+}
+
+
+
+#settings .module .list.settings li {
+  height: unset;
+  padding: 5px 0;
+  margin: 0 0 7px;
+}
+
+#settings .module .list.settings li .check-box {
+  width: 100%;
+}
+
+#settings .module .list.settings li .check-box .check {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+#settings .module .list.settings li .check-box .text {
+  color: rgba(0, 0, 0, 0.8);
 }
