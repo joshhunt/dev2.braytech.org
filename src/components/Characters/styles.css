@@ -25,11 +25,11 @@
 }
 
 .characters-list .list li:hover::before {
-  box-shadow: inset 0 0 0 1px #d6d6d6;
+  box-shadow: inset 0 0 0 1px #000;
 }
 
-.characters-list .list li.active::after {
-  box-shadow: 0 0 0 2px #d6d6d6;
+.characters-list .list li:hover::after {
+  box-shadow: 0 0 0 2px #000;
 }
 
 .characters-list .list li .image.emblem {
@@ -79,7 +79,7 @@
   position: absolute;
   right: 12px;
   top: 13px;
-  font-size: 34px;
+  font-size: 38px;
   font-weight: 500;
   line-height: 1;
   color: #2ed1c9;

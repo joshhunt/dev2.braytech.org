@@ -10,7 +10,7 @@ const errorHandler = props => {
     case 'privacy':
       error = (
         <>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>Profile privacy</div>
           </div>
           <p>Your profile data may be set to private on Bungie.net.</p>
@@ -25,7 +25,7 @@ const errorHandler = props => {
     default:
       error = (
         <>
-          <div className='sub-header'>
+          <div className='sub-header sub'>
             <div>Don't touch my stuff</div>
           </div>
           <p>There was an unspecified error. It's pretty rude to break someone else's stuff like this...</p>
@@ -36,7 +36,7 @@ const errorHandler = props => {
   if (bungie) {
     error = (
       <>
-        <div className='sub-header'>
+        <div className='sub-header sub'>
           <div>Bungie error</div>
         </div>
         <p>It's likely that the game is undergoing backend maintenance. Check back soon.</p>
