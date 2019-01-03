@@ -38,8 +38,6 @@ export default class CharacterRoutes extends Component {
   };
 
   componentDidMount() {
-    // TODO:
-    //  - refetch is route params changes
     this.fetchProfile();
   }
 
