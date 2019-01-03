@@ -32,7 +32,7 @@ class StandardHeader extends React.Component {
   };
 
   render() {
-    const { viewport, isIndex, views } = this.props;
+    const { isIndex, views } = this.props;
 
     let viewsRender = (
       <div className='views'>

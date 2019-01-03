@@ -4,12 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import orderBy from 'lodash/orderBy';
 import { withNamespaces } from 'react-i18next';
 
-import ObservedImage from '../../components/ObservedImage';
 import Collectibles from '../../components/Collectibles';
 import RecordsAlmost from '../../components/RecordsAlmost';
 import ProgressBar from '../../components/ProgressBar';
-
-import * as utils from '../../utils/destinyUtils';
 
 import './styles.css';
 
@@ -30,43 +27,6 @@ class Account extends React.Component {
     const profileRecords = this.props.response.profile.profileRecords.data.records;
     const characterRecords = this.props.response.profile.characterRecords.data;
     const genderHash = characters.find(character => character.characterId === characterId).genderHash;
-
-    const Characters = () => {
-      let charactersEl = [];
-      characters.forEach(character => {
-        charactersEl.push(
-          <div key={character.characterId} className='character'>
-            <ul className='list'>
-              <li>
-                <ObservedImage
-                  className={cx('image', 'emblem', {
-                    missing: !character.emblemPath
-                  })}
-                  src={`https://www.bungie.net${character.emblemPath ? character.emblemPath : `/img/misc/missing_icon_d2.png`}`}
-                />
-                <div className='level'>
-                  {t('Level')} {character.baseCharacterLevel}
-                </div>
-                <div className='light'>{character.light}</div>
-                <div className='class'>{utils.classHashToString(character.classHash, manifest, character.genderType)}</div>
-              </li>
-            </ul>
-            <div className='timePlayed'>
-              {Math.floor(parseInt(character.minutesPlayedTotal) / 1440) < 2 ? (
-                <>
-                  {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('day played')}
-                </>
-              ) : (
-                <>
-                  {Math.floor(parseInt(character.minutesPlayedTotal) / 1440)} {t('days played')}
-                </>
-              )}
-            </div>
-          </div>
-        );
-      });
-      return charactersEl;
-    };
 
     const Seals = () => {
       let progression = {
@@ -187,23 +147,7 @@ class Account extends React.Component {
     };
 
     const Strikes = () => {
-
-      let strikes = [
-        { hash: 3749730895, score: 1039797865 },
-        { hash: 2737678546, score: 165166474 },
-        { hash: 3054774873, score: 2692332187 },
-        { hash: 1707190649, score: 3399168111 },
-        { hash: 56596211, score: 1526865549 },
-        { hash: 3145627334, score: 3951275509 },
-        { hash: 1336344009, score: 2836924866 },
-        { hash: 2782139949, score: 3340846443 },
-        { hash: 256005845, score: 2099501667 },
-        { hash: 319759693, score: 1060780635 },
-        { hash: 141268704, score: 1329556468 },
-        { hash: 794103965, score: 3450793480 },
-        { hash: 1889144800, score: 2282894388 },
-        { hash: 20431832, score: 3973165904 }
-      ];
+      let strikes = [{ hash: 3749730895, score: 1039797865 }, { hash: 2737678546, score: 165166474 }, { hash: 3054774873, score: 2692332187 }, { hash: 1707190649, score: 3399168111 }, { hash: 56596211, score: 1526865549 }, { hash: 3145627334, score: 3951275509 }, { hash: 1336344009, score: 2836924866 }, { hash: 2782139949, score: 3340846443 }, { hash: 256005845, score: 2099501667 }, { hash: 319759693, score: 1060780635 }, { hash: 141268704, score: 1329556468 }, { hash: 794103965, score: 3450793480 }, { hash: 1889144800, score: 2282894388 }, { hash: 20431832, score: 3973165904 }];
 
       let list = strikes.map(strike => {
         let scoreDefinition = manifest.DestinyRecordDefinition[strike.score];

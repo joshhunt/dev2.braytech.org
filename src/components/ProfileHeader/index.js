@@ -36,7 +36,7 @@ class ProfileHeader extends React.Component {
   };
 
   render() {
-    const { manifest, user, viewport } = this.props;
+    const { manifest, user } = this.props;
     const characterId = user.characterId;
 
     let profile = user.response.profile.profile.data;

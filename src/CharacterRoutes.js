@@ -54,7 +54,7 @@ export default class CharacterRoutes extends Component {
           render={() => (
             <>
               <Account {...user} manifest={manifest} />
-              <Tooltip manifest={this.manifest} />
+              <Tooltip manifest={manifest} />
             </>
           )}
         />
