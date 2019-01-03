@@ -39,9 +39,15 @@ export default class CharacterRoutes extends Component {
 
   componentDidMount() {
     // TODO:
-    //  - don't fetch if we already have a user response in props that matches the route params
     //  - refetch is route params changes
     this.fetchProfile();
+  }
+
+  componentDidUpdate(oldProps) {
+    if (this.props.route.match.params.membershipId !== oldProps.route.match.params.membershipId) {
+      // membership ID has changed, fetch the new user.
+      this.fetchProfile();
+    }
   }
 
   render() {
