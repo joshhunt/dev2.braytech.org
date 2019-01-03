@@ -17,7 +17,16 @@ import { fetchAndWhatever } from './utils/getProfile';
 
 export default class CharacterRoutes extends Component {
   fetchProfile = () => {
-    fetchAndWhatever(this.props.route.match.params.membershipType, this.props.route.match.params.membershipId, this.stateCb, this.recieveUserCb);
+    const {membershipType, membershipId} = this.props.route.match.params;
+      
+    // Check if the membership ID in the route matches the membership id in the current user response
+    // If it does, we've already loaded the user.
+    if (this.props.user.response && this.props.user.response.profile.membershipId === membershipId) {
+      console.log('already loaded profile');
+      return;
+    }
+    
+    fetchAndWhatever(membershipType, membershipId, this.stateCb, this.recieveUserCb);
   };
 
   stateCb = newState => {
