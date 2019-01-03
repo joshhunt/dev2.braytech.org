@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { withNamespaces } from 'react-i18next';
+
 import Root from './Root';
 import BadgeNode from './BadgeNode';
 import PresentationNode from './PresentationNode';
+import { ProfileLink } from '../../components/ProfileLink';
 
 import './styles.css';
-import { withNamespaces } from 'react-i18next';
 
 class Collections extends React.Component {
   constructor(props) {
@@ -41,10 +42,10 @@ class Collections extends React.Component {
             <div />
             <ul>
               <li>
-                <Link to='/collections'>
+                <ProfileLink to='/collections'>
                   <i className='uniE742' />
                   Collections
-                </Link>
+                </ProfileLink>
               </li>
             </ul>
           </div>
@@ -60,10 +61,10 @@ class Collections extends React.Component {
             <div />
             <ul>
               <li>
-                <Link to='/collections'>
+                <ProfileLink to='/collections'>
                   <i className='uniE742' />
                   {t('Collections')}
-                </Link>
+                </ProfileLink>
               </li>
             </ul>
           </div>

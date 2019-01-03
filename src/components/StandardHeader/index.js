@@ -32,16 +32,19 @@ class StandardHeader extends React.Component {
   };
 
   render() {
+    const { isIndex, views } = this.props;
+
     let viewsRender = (
       <div className='views'>
         <ul>
-          {this.props.views.map(view => {
-            let to = view.slug;
+          {views.map((view, index) => {
+            const LinkComponent = typeof view.to === 'object' ? Link : NavLink;
+
             return (
-              <li key={view.slug}>
-                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+              <li key={index}>
+                <LinkComponent to={view.to} onClick={this.NavlinkClickHandler}>
                   {view.name}
-                </NavLink>
+                </LinkComponent>
                 <div className='description'>{view.desc}</div>
               </li>
             );
@@ -58,13 +61,13 @@ class StandardHeader extends React.Component {
     let mobileNav = (
       <div className='nav'>
         <ul>
-          {this.props.views.map(view => {
-            let to = view.slug;
+          {views.map((view, index) => {
+            const LinkComponent = typeof view.to === 'object' ? Link : NavLink;
             return (
-              <li key={view.slug}>
-                <NavLink to={to} exact={view.exact} onClick={this.NavlinkClickHandler}>
+              <li key={index}>
+                <LinkComponent to={view.to} onClick={this.NavlinkClickHandler}>
                   {view.name}
-                </NavLink>
+                </LinkComponent>
                 <div className='description'>{view.desc}</div>
               </li>
             );
@@ -74,7 +77,7 @@ class StandardHeader extends React.Component {
     );
 
     return (
-      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen, isIndex: this.props.isIndex })}>
+      <div id='header' className={cx('standard', { navOpen: this.state.mobileNavOpen, isIndex: isIndex })}>
         <div className='braytech'>
           <div className='logo'>
             <Link to='/'>

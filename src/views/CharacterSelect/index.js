@@ -3,6 +3,7 @@ import React from 'react';
 import cx from 'classnames';
 import assign from 'lodash/assign';
 import { withNamespaces } from 'react-i18next';
+import { Redirect } from 'react-router-dom';
 
 import Characters from '../../components/Characters';
 import globals from '../../utils/globals';
@@ -13,6 +14,17 @@ import errorHandler from '../../utils/errorHandler';
 import Spinner from '../../components/Spinner';
 
 import './styles.css';
+
+export function CharacterSelectRedirect({ match: { url } }) {
+  return (
+    <Redirect
+      to={{
+        pathname: '/character-select',
+        state: { next: url }
+      }}
+    />
+  );
+}
 
 class CharacterSelect extends React.Component {
   constructor(props) {
@@ -114,7 +126,16 @@ class CharacterSelect extends React.Component {
     }
 
     if (displayName) {
-      ls.update('history.profiles', { membershipType: membershipType, membershipId: membershipId, displayName: displayName }, true, 6);
+      ls.update(
+        'history.profiles',
+        {
+          membershipType: membershipType,
+          membershipId: membershipId,
+          displayName: displayName
+        },
+        true,
+        6
+      );
     }
 
     response = responseUtils.profileScrubber(response);
@@ -147,18 +168,22 @@ class CharacterSelect extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     let profileHistory = ls.get('history.profiles') ? ls.get('history.profiles') : [];
     let resultsElement = null;
     let profileElement = null;
 
+    const qs = this.props.route.location.state;
+
+    const nextPath = qs && qs.next ? qs.next : '';
+
     if (this.state.results) {
       resultsElement = (
-        <div className='results'>
-          <ul className='list'>
+        <div className="results">
+          <ul className="list">
             {this.state.results.length > 0 ? (
               this.state.results.map(result => (
-                <li className='linked' key={result.membershipId}>
+                <li className="linked" key={result.membershipId}>
                   <a
                     onClick={e => {
                       this.ResultHandler(result.membershipType, result.membershipId, false, result.displayName);
@@ -170,42 +195,41 @@ class CharacterSelect extends React.Component {
                 </li>
               ))
             ) : (
-              <li className='no-profiles'>{t('No profiles found')}</li>
+              <li className="no-profiles">{t('No profiles found')}</li>
             )}
           </ul>
         </div>
       );
     } else {
-      resultsElement = <div className='results' />;
+      resultsElement = <div className="results" />;
     }
-
-    const { from } = this.props.location.state || { from: { pathname: '/' } };
 
     if (this.state.profile) {
       let clan = null;
       if (this.state.profile.groups.results.length === 1) {
-        clan = <div className='clan'>{this.state.profile.groups.results[0].group.name}</div>;
+        clan = <div className="clan">{this.state.profile.groups.results[0].group.name}</div>;
       }
 
       let timePlayed = (
-        <div className='timePlayed'>
+        <div className="timePlayed">
           {Math.floor(
             Object.keys(this.state.profile.profile.characters.data).reduce((sum, key) => {
               return sum + parseInt(this.state.profile.profile.characters.data[key].minutesPlayedTotal);
             }, 0) / 1440
-          )} {t('days on the grind')}
+          )}{' '}
+          {t('days on the grind')}
         </div>
       );
 
       profileElement = (
         <>
-          <div className='user'>
-            <div className='info'>
-              <div className='displayName'>{this.state.profile.profile.profile.data.userInfo.displayName}</div>
+          <div className="user">
+            <div className="info">
+              <div className="displayName">{this.state.profile.profile.profile.data.userInfo.displayName}</div>
               {clan}
               {timePlayed}
             </div>
-            <Characters response={this.state.profile} manifest={this.props.manifest} location={{ ...from }} onCharacterSelect={this.CharacterSelectHandler} />
+            <Characters response={this.state.profile} manifest={this.props.manifest} nextPath={nextPath} onCharacterSelect={this.CharacterSelectHandler} />
           </div>
         </>
       );
@@ -222,33 +246,33 @@ class CharacterSelect extends React.Component {
     }
 
     return (
-      <div className={cx('view', { loading: this.state.loading })} id='get-profile'>
+      <div className={cx('view', { loading: this.state.loading })} id="get-profile">
         {reverse ? (
-          <div className='profile'>
+          <div className="profile">
             {this.state.loading ? <Spinner dark /> : null}
             {profileElement}
           </div>
         ) : null}
-        <div className='search'>
+        <div className="search">
           {errorNotices}
-          <div className='sub-header sub'>
+          <div className="sub-header sub">
             <div>{t('Search for player')}</div>
           </div>
-          <div className='form'>
-            <div className='field'>
-              <input onInput={this.SearchDestinyPlayer} type='text' placeholder={t('insert gamertag')} spellCheck='false' />
+          <div className="form">
+            <div className="field">
+              <input onInput={this.SearchDestinyPlayer} type="text" placeholder={t('insert gamertag')} spellCheck="false" />
             </div>
           </div>
-          <div className='results'>{resultsElement}</div>
+          <div className="results">{resultsElement}</div>
           {profileHistory.length > 0 ? (
             <>
-              <div className='sub-header sub'>
+              <div className="sub-header sub">
                 <div>{t('Previous')}</div>
               </div>
-              <div className='results'>
-                <ul className='list'>
+              <div className="results">
+                <ul className="list">
                   {profileHistory.map(result => (
-                    <li className='linked' key={result.membershipId}>
+                    <li className="linked" key={result.membershipId}>
                       <a
                         onClick={e => {
                           this.ResultHandler(result.membershipType, result.membershipId, false, result.displayName);
@@ -265,7 +289,7 @@ class CharacterSelect extends React.Component {
           ) : null}
         </div>
         {!reverse ? (
-          <div className='profile'>
+          <div className="profile">
             {this.state.loading ? <Spinner dark /> : null}
             {profileElement}
           </div>

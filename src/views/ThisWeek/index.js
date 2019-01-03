@@ -13,7 +13,7 @@ class ThisWeek extends React.Component {
   }
 
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const manifest = this.props.manifest;
     const milestones = this.props.response.milestones;
 
@@ -403,76 +403,83 @@ class ThisWeek extends React.Component {
         }
       },
       flashpoint: {
-        538154339: {// FLASHPOINT: TITAN
+        538154339: {
+          // FLASHPOINT: TITAN
           triumphs: [
             2542531058, // Flashpoint
             1632551190 // Heroically Adventurous
           ]
         },
-        794779273: { //FLASHPOINT: IO
+        794779273: {
+          //FLASHPOINT: IO
           triumphs: [
             2163667980, // Flashpoint
             3686586344 // Heroically Adventurous
           ]
         },
-        905940422: { //FLASHPOINT: MERCURY
+        905940422: {
+          //FLASHPOINT: MERCURY
           triumphs: [
             2548580601, // Flashpoint
             3632308741 // Heroically Adventurous
           ]
         },
-        2332272114: { //FLASHPOINT: EDZ
+        2332272114: {
+          //FLASHPOINT: EDZ
           triumphs: [
             855929237, // Flashpoint
             1683000545 // Heroically Adventurous
           ]
         },
-        3232202236: { //FLASHPOINT: TANGLED SHORE
+        3232202236: {
+          //FLASHPOINT: TANGLED SHORE
           triumphs: [
             2070013491 // Flashpoint
             // Has no 'Heroically Adventurous'
-
           ]
         },
-        3588655854: { //FLASHPOINT: NESSUS
+        3588655854: {
+          //FLASHPOINT: NESSUS
           triumphs: [
             1652021369, // Flashpoint
             633055621 // Heroically Adventurous
           ]
         },
-        3929972810: { //FLASHPOINT: MARS
+        3929972810: {
+          //FLASHPOINT: MARS
           triumphs: [
             1414820429, // Flashpoint
             1417930213 // Heroically Adventurous
           ]
         }
-
       }
     };
 
     // console.log(cycleInfo.week);
     // console.log(consolidatedInfo.curse[cycleInfo.week.curse], consolidatedInfo.ascendant[cycleInfo.week.ascendant], consolidatedInfo.ep[cycleInfo.week.ep]);
 
-    // flashpoint    
+    // flashpoint
     const flashpoint = manifest.DestinyMilestoneDefinition[463010297].quests[milestones[463010297].availableQuests[0].questItemHash];
     let nightfalls = [];
     // scored nightfall strikes
-    milestones[2171429505].activities.filter(activity => activity.modifierHashes).forEach(activity => {
-      let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
+    milestones[2171429505].activities
+      .filter(activity => activity.modifierHashes)
+      .forEach(activity => {
+        let nightfall = manifest.DestinyActivityDefinition[activity.activityHash];
 
-      nightfalls.push(
-        <div key={nightfall.hash} className='content'>
-          <div className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
-          <h3>{nightfall.selectionScreenDisplayProperties.name}</h3>
-          <ul className='list collection-items'>
-            <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
-          </ul>
-          <ul className='list record-items'>
-            <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
-          </ul>
-        </div>
-      );
-    });
+        nightfalls.push(
+          <div key={nightfall.hash} className='content'>
+            <div className='sub-title'>{manifest.DestinyDestinationDefinition[nightfall.destinationHash].displayProperties.name}</div>
+            <h3>{nightfall.selectionScreenDisplayProperties.name}</h3>
+            <ul className='list collection-items'>
+              <Collectibles selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].collectibles} />
+            </ul>
+            <ul className='list record-items'>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.nightfall[nightfall.hash].triumphs} ordered />
+            </ul>
+          </div>
+        );
+      });
 
     return (
       <div className='view' id='this-week'>
@@ -481,11 +488,10 @@ class ThisWeek extends React.Component {
             <div>{t('Flashpoint')}</div>
           </div>
           <div className='content'>
-            <div
-              className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
+            <div className='sub-title'>{manifest.DestinyDestinationDefinition[flashpoint.destinationHash].displayProperties.name}</div>
             <h3>{flashpoint.displayProperties.name}</h3>
             <ul className='list record-items'>
-              <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered/>
+              <Records selfLink {...this.props} hashes={consolidatedInfo.flashpoint[flashpoint.questItemHash].triumphs} ordered />
             </ul>
           </div>
           <div className='sub-header sub'>
@@ -511,7 +517,9 @@ class ThisWeek extends React.Component {
           </div>
           <div className='content'>
             <div className='sub-title'>{t('The Dreaming City')}</div>
-            <h3>{t('Cycle week')} {cycleInfo.week.curse}</h3>
+            <h3>
+              {t('Cycle week')} {cycleInfo.week.curse}
+            </h3>
             <ul className='list record-items'>
               <Records selfLink {...this.props} hashes={consolidatedInfo.curse[cycleInfo.week.curse].triumphs} ordered />
             </ul>

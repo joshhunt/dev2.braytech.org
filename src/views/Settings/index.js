@@ -1,6 +1,5 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import cx from 'classnames';
 
 import ProgressCheckbox from '../../components/ProgressCheckbox';
 import { getLanguageInfo } from '../../utils/languageInfo';
@@ -16,9 +15,7 @@ class Settings extends React.Component {
         current: initLanguage,
         selected: initLanguage
       },
-      collectibles: {
-
-      }
+      collectibles: {}
     };
   }
 

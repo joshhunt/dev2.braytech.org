@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../components/ObservedImage';
 import * as ls from '../../utils/localStorage';
+import { ProfileNavLink } from '../../components/ProfileLink';
 
 import Collectibles from '../../components/Collectibles';
 
@@ -57,9 +57,9 @@ class PresentationNode extends React.Component {
 
       primaryChildren.push(
         <li key={node.hash} className='linked'>
-          <NavLink isActive={isActive} to={`/collections/${primaryHash}/${node.hash}`}>
+          <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.displayProperties.icon}`} />
-          </NavLink>
+          </ProfileNavLink>
         </li>
       );
     });
@@ -80,22 +80,28 @@ class PresentationNode extends React.Component {
 
       secondaryChildren.push(
         <li key={node.hash} className='linked'>
-          <NavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
+          <ProfileNavLink isActive={isActive} to={`/collections/${primaryHash}/${secondaryHash}/${node.hash}`}>
             {node.displayProperties.name}
-          </NavLink>
+          </ProfileNavLink>
         </li>
       );
     });
 
     return (
-      <div className="node">
-        <div className="header">
-          <div className="name">
-            {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-            {primaryDefinition.displayProperties.name} <span>{primaryDefinition.children.presentationNodes.length !== 1 ? <>// {secondaryDefinition.displayProperties.name}</> : null}</span>
+      <div className='node'>
+        <div className='header'>
+          <div className='name'>
+            {primaryDefinition.displayProperties.name}{' '}
+            <span>
+              {primaryDefinition.children.presentationNodes.length !== 1 ? (
+                <>
+                  {'//'} {secondaryDefinition.displayProperties.name}
+                </>
+              ) : null}
+            </span>
           </div>
         </div>
-        <div className="children">
+        <div className='children'>
           <ul
             className={cx('list', 'primary', {
               'single-primary': primaryDefinition.children.presentationNodes.length === 1
@@ -103,10 +109,10 @@ class PresentationNode extends React.Component {
           >
             {primaryChildren}
           </ul>
-          <ul className="list secondary">{secondaryChildren}</ul>
+          <ul className='list secondary'>{secondaryChildren}</ul>
         </div>
-        <div className="collectibles">
-          <ul className="list tertiary collection-items">
+        <div className='collectibles'>
+          <ul className='list tertiary collection-items'>
             <Collectibles {...this.props} {...this.state} node={tertiaryHash} highlight={quaternaryHash} />
           </ul>
         </div>

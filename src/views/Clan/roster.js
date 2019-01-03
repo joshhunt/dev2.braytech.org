@@ -1,21 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import cx from 'classnames';
-import Moment from 'react-moment';
 import globals from '../../utils/globals';
 import assign from 'lodash/assign';
-import ClanBanner from '../../components/ClanBanner';
 import Roster from '../../components/Roster';
 import Spinner from '../../components/Spinner';
 import { withNamespaces } from 'react-i18next';
+import ClanNav from './ClanNav';
 
 import './roster.css';
 
 class RosterView extends React.Component {
   constructor(props) {
     super(props);
-    const {t} = this.props;
     this.state = {
       membersResponse: false,
       rosterKeepFresh: false
@@ -25,16 +21,10 @@ class RosterView extends React.Component {
   }
 
   turnOnKeepFresh = () => {
-    if (this.state.rosterKeepFresh) {
-      this.setState({
-        rosterKeepFresh: false
-      });
-    } else {
-      this.setState({
-        rosterKeepFresh: true
-      });
-    }
-  }
+    this.setState({
+      rosterKeepFresh: !this.state.rosterKeepFresh
+    });
+  };
 
   groupFetch = async groupId => {
     let requests = [
@@ -86,8 +76,7 @@ class RosterView extends React.Component {
   }
 
   render() {
-    const manifest = this.props.manifest;
-    const {t} = this.props;
+    const { t } = this.props;
     const groups = this.props.response.groups;
     const clan = groups.results.length > 0 ? groups.results[0].group : false;
 
@@ -102,28 +91,25 @@ class RosterView extends React.Component {
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
                 {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>// {clan.memberCount} {t('members')}</div>
+                <div className='memberCount'>
+                  // {clan.memberCount} {t('members')}
+                </div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>
-                <ul className='list'>
-                  <li className='linked'>
-                    <NavLink to='/clan' exact> {t('About')}</NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/roster'> {t('Roster')}</NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/stats'> {t('Stats')}</NavLink>
-                  </li>
-                </ul>
+                <ClanNav />
               </div>
               <div className='info'>
                 <p>{t('Pulsing blueberries are freshly acquired members from the last 2 weeks.')}</p>
               </div>
               <div className='freshness'>
                 <ul className='list'>
-                  <li className={cx('linked', { selected: this.state.rosterKeepFresh })} onClick={this.turnOnKeepFresh}>
+                  <li
+                    className={cx('linked', {
+                      selected: this.state.rosterKeepFresh
+                    })}
+                    onClick={this.turnOnKeepFresh}
+                  >
                     <div className='bg' />
                     <div className='name'>{this.state.rosterKeepFresh ? <>{t('Auto-update on')}</> : <>{t('Auto-update off')}</>}</div>
                   </li>

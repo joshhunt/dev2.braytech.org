@@ -1,8 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import cx from 'classnames';
-import Moment from 'react-moment';
 import globals from '../../utils/globals';
 import assign from 'lodash/assign';
 import ClanBanner from '../../components/ClanBanner';
@@ -11,6 +8,7 @@ import Spinner from '../../components/Spinner';
 import ProgressBar from '../../components/ProgressBar';
 import ProgressCheckbox from '../../components/ProgressCheckbox';
 
+import ClanNav from './ClanNav';
 import './about.css';
 import { withNamespaces } from 'react-i18next';
 
@@ -103,9 +101,8 @@ class AboutView extends React.Component {
                   {clan.name}
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
-                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
                 <div className='memberCount'>
-                  // {clan.memberCount} {t('members')}
+                  {'//'} {clan.memberCount} {t('members')}
                 </div>
                 <div className='motto'>{clan.motto}</div>
                 <ReactMarkdown className='bio' escapeHtml disallowedTypes={['image', 'imageReference']} source={clan.about} />
@@ -166,19 +163,7 @@ class AboutView extends React.Component {
                 <div>{t('Views')}</div>
               </div>
               <div className='views'>
-                <ul className='list'>
-                  <li className='linked'>
-                    <NavLink to='/clan' exact>
-                      {t('About')}
-                    </NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/roster'>{t('Roster')}</NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/stats'>{t('Stats')}</NavLink>
-                  </li>
-                </ul>
+                <ClanNav />
               </div>
               <div className='sub-header sub'>
                 <div>{t('Clan roster')}</div>

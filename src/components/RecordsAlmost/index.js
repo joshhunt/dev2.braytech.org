@@ -13,9 +13,6 @@ class RecordsAlmost extends React.Component {
 
   render() {
     const manifest = this.props.manifest;
-    const characterId = this.props.characterId;
-
-    const characterRecords = this.props.response.profile.characterRecords.data;
     const profileRecords = this.props.response.profile.profileRecords.data.records;
 
     let almost = [];
@@ -103,7 +100,7 @@ class RecordsAlmost extends React.Component {
       return distanceA < distanceB ? -1 : distanceA > distanceB ? 1 : 0;
     });
 
-    almost = this.props.limit ? almost.slice(0,3) : almost;
+    almost = this.props.limit ? almost.slice(0, 3) : almost;
 
     return (
       <ul className={cx('list record-items almost')}>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment-timezone';
 import Moment from 'react-moment';
@@ -9,6 +8,7 @@ import { orderBy } from 'lodash/lodash';
 import Spinner from '../../components/Spinner';
 import ObservedImage from '../../components/ObservedImage';
 import Tooltip from '../../components/Tooltip';
+import { ProfileNavLink } from '../../components/ProfileLink';
 
 import '../../components/PresentationNode.css';
 import './styles.css';
@@ -59,7 +59,7 @@ class Vendors extends Component {
   }
 
   render() {
-    const {t}= this.props;
+    const { t } = this.props;
     let manifest = this.props.manifest;
 
     if (this.state.vendors.length === 0) {
@@ -129,9 +129,9 @@ class Vendors extends Component {
             reset: moment(vendor.vendor.data.nextRefreshDate).unix(),
             element: (
               <li key={vendor.vendor.data.vendorHash} className='linked'>
-                <NavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
+                <ProfileNavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
                   {definition.displayProperties.name}
-                </NavLink>
+                </ProfileNavLink>
               </li>
             )
           });
@@ -141,9 +141,9 @@ class Vendors extends Component {
             reset: moment(vendor.vendor.data.nextRefreshDate).unix(),
             element: (
               <li key={vendor.vendor.data.vendorHash} className='linked'>
-                <NavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
+                <ProfileNavLink isActive={isActive} to={`/vendors/${vendor.vendor.data.vendorHash}`}>
                   {definition.displayProperties.name}
-                </NavLink>
+                </ProfileNavLink>
               </li>
             )
           });

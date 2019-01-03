@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
 import moment from 'moment';
 import globals from '../../utils/globals';
 import assign from 'lodash/assign';
 import orderBy from 'lodash/orderBy';
-import merge from 'lodash/merge';
 import ObservedImage from '../../components/ObservedImage';
 import Spinner from '../../components/Spinner';
+import ClanNav from './ClanNav';
 
 import './stats.css';
 import {withNamespaces} from "react-i18next";
@@ -206,24 +205,33 @@ class StatsView extends React.Component {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.secondsPlayed.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.allPvE ? member.allPvE.secondsPlayed.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.secondsPlayed.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.allPvE ? member.allPvE.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.kills.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.kills.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.allPvE ? member.allPvE.kills.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.kills.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                kills: member.allPvE ? member.allPvE.kills.basic.value : false
+              };
             })
           },
           deaths: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.deaths.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.deaths.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.allPvE ? member.allPvE.deaths.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.deaths.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                deaths: member.allPvE ? member.allPvE.deaths.basic.value : false
+              };
             })
           },
           killsDeathsRatio: {
@@ -232,32 +240,44 @@ class StatsView extends React.Component {
                 return sum + member.killsDeathsRatio.basic.value;
               }, 0) / stats.allPvE.length
             ).toFixed(2),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, killsDeathsRatio: member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                killsDeathsRatio: member.allPvE ? member.allPvE.killsDeathsRatio.basic.value : false
+              };
             })
           },
           orbsDropped: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.orbsDropped.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.orbsDropped.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.allPvE ? member.allPvE.orbsDropped.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.orbsDropped.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                orbsDropped: member.allPvE ? member.allPvE.orbsDropped.basic.value : false
+              };
             })
           },
           publicEvents: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.publicEventsCompleted.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, publicEvents: member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                publicEvents: member.allPvE ? member.allPvE.publicEventsCompleted.basic.value : false
+              };
             })
           },
           adventures: {
             value: stats.allPvE.reduce((sum, member) => {
               return sum + member.adventuresCompleted.basic.value;
             }, 0),
-            ordered: orderBy(raw, [member => member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false], ['desc']).map(member => {
-              return { membershipId: member.membershipId, adventures: member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false };
+            ordered: orderBy(raw, [member => (member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false)], ['desc']).map(member => {
+              return {
+                membershipId: member.membershipId,
+                adventures: member.allPvE ? member.allPvE.adventuresCompleted.basic.value : false
+              };
             })
           }
         },
@@ -267,7 +287,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.allPvP ? member.allPvP.secondsPlayed.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.allPvP ? member.allPvP.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
@@ -275,7 +298,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.allPvP ? member.allPvP.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.allPvP ? member.allPvP.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -283,7 +309,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.allPvP ? member.allPvP.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.allPvP ? member.allPvP.deaths.basic.value : false
+              };
             })
           },
           bestSingleGameKills: {
@@ -291,7 +320,10 @@ class StatsView extends React.Component {
               return sum + member.bestSingleGameKills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.bestSingleGameKills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, bestSingleGameKills: member.allPvP ? member.allPvP.bestSingleGameKills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                bestSingleGameKills: member.allPvP ? member.allPvP.bestSingleGameKills.basic.value : false
+              };
             })
           },
           killsDeathsRatio: {
@@ -301,7 +333,10 @@ class StatsView extends React.Component {
               }, 0) / stats.allPvP.length
             ).toFixed(2),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.killsDeathsRatio.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, killsDeathsRatio: member.allPvP ? member.allPvP.killsDeathsRatio.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                killsDeathsRatio: member.allPvP ? member.allPvP.killsDeathsRatio.basic.value : false
+              };
             })
           },
           winRatio: {
@@ -313,7 +348,10 @@ class StatsView extends React.Component {
                 return sum + member.activitiesEntered.basic.value;
               }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.activitiesWon.basic.value / member.allPvP.activitiesEntered.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, winRatio: member.allPvP ? member.allPvP.activitiesWon.basic.value / member.allPvP.activitiesEntered.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                winRatio: member.allPvP ? member.allPvP.activitiesWon.basic.value / member.allPvP.activitiesEntered.basic.value : false
+              };
             })
           },
           medalStreak7x: {
@@ -321,7 +359,10 @@ class StatsView extends React.Component {
               return sum + member.medalStreak7x.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.medalStreak7x.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medalStreak7x: member.allPvP ? member.allPvP.medalStreak7x.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medalStreak7x: member.allPvP ? member.allPvP.medalStreak7x.basic.value : false
+              };
             })
           },
           medalStreakAbsurd: {
@@ -329,7 +370,10 @@ class StatsView extends React.Component {
               return sum + member.medalStreakAbsurd.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.medalStreakAbsurd.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medalStreakAbsurd: member.allPvP ? member.allPvP.medalStreakAbsurd.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medalStreakAbsurd: member.allPvP ? member.allPvP.medalStreakAbsurd.basic.value : false
+              };
             })
           },
           medalAbilityVoidwalkerDistance: {
@@ -337,7 +381,10 @@ class StatsView extends React.Component {
               return sum + member.medalAbilityVoidwalkerDistance.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.medalAbilityVoidwalkerDistance.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medalAbilityVoidwalkerDistance: member.allPvP ? member.allPvP.medalAbilityVoidwalkerDistance.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medalAbilityVoidwalkerDistance: member.allPvP ? member.allPvP.medalAbilityVoidwalkerDistance.basic.value : false
+              };
             })
           }
         },
@@ -347,7 +394,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.ironBanner ? member.ironBanner.secondsPlayed.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.ironBanner ? member.ironBanner.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
@@ -355,7 +405,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.ironBanner ? member.ironBanner.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.ironBanner ? member.ironBanner.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -363,7 +416,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.ironBanner ? member.ironBanner.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.ironBanner ? member.ironBanner.deaths.basic.value : false
+              };
             })
           },
           bestSingleGameKills: {
@@ -371,7 +427,10 @@ class StatsView extends React.Component {
               return sum + member.bestSingleGameKills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.bestSingleGameKills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, bestSingleGameKills: member.ironBanner ? member.ironBanner.bestSingleGameKills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                bestSingleGameKills: member.ironBanner ? member.ironBanner.bestSingleGameKills.basic.value : false
+              };
             })
           },
           killsDeathsRatio: {
@@ -381,7 +440,10 @@ class StatsView extends React.Component {
               }, 0) / stats.ironBanner.length
             ).toFixed(2),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.killsDeathsRatio.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, killsDeathsRatio: member.ironBanner ? member.ironBanner.killsDeathsRatio.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                killsDeathsRatio: member.ironBanner ? member.ironBanner.killsDeathsRatio.basic.value : false
+              };
             })
           },
           winRatio: {
@@ -393,7 +455,10 @@ class StatsView extends React.Component {
                 return sum + member.activitiesEntered.basic.value;
               }, 0),
             ordered: orderBy(raw, [member => (member.ironBanner ? member.ironBanner.activitiesWon.basic.value / member.ironBanner.activitiesEntered.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, winRatio: member.ironBanner ? member.ironBanner.activitiesWon.basic.value / member.ironBanner.activitiesEntered.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                winRatio: member.ironBanner ? member.ironBanner.activitiesWon.basic.value / member.ironBanner.activitiesEntered.basic.value : false
+              };
             })
           },
           medalStreak7x: {
@@ -401,7 +466,10 @@ class StatsView extends React.Component {
               return sum + member.medalStreak7x.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.allPvP ? member.allPvP.medalStreak7x.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medalStreak7x: member.allPvP ? member.allPvP.medalStreak7x.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medalStreak7x: member.allPvP ? member.allPvP.medalStreak7x.basic.value : false
+              };
             })
           }
         },
@@ -411,7 +479,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.strikes ? member.strikes.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.strikes ? member.strikes.secondsPlayed.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.strikes ? member.strikes.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
@@ -419,7 +490,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.strikes ? member.strikes.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.strikes ? member.strikes.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.strikes ? member.strikes.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -427,7 +501,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.strikes ? member.strikes.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.strikes ? member.strikes.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.strikes ? member.strikes.deaths.basic.value : false
+              };
             })
           },
           orbsDropped: {
@@ -435,7 +512,10 @@ class StatsView extends React.Component {
               return sum + member.orbsDropped.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.strikes ? member.strikes.orbsDropped.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.strikes ? member.strikes.orbsDropped.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                orbsDropped: member.strikes ? member.strikes.orbsDropped.basic.value : false
+              };
             })
           },
           activitiesCleared: {
@@ -443,7 +523,10 @@ class StatsView extends React.Component {
               return sum + member.activitiesCleared.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.strikes ? member.strikes.activitiesCleared.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, activitiesCleared: member.strikes ? member.strikes.activitiesCleared.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                activitiesCleared: member.strikes ? member.strikes.activitiesCleared.basic.value : false
+              };
             })
           }
         },
@@ -453,7 +536,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.nightfalls ? member.nightfalls.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, activitiesCleared: member.nightfalls ? member.nightfalls.activitiesCleared.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                activitiesCleared: member.nightfalls ? member.nightfalls.activitiesCleared.basic.value : false
+              };
             })
           },
           kills: {
@@ -461,7 +547,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.nightfalls ? member.nightfalls.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.nightfalls ? member.nightfalls.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.nightfalls ? member.nightfalls.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -469,7 +558,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.nightfalls ? member.nightfalls.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.nightfalls ? member.nightfalls.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.nightfalls ? member.nightfalls.deaths.basic.value : false
+              };
             })
           },
           orbsDropped: {
@@ -477,7 +569,10 @@ class StatsView extends React.Component {
               return sum + member.orbsDropped.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.nightfalls ? member.nightfalls.orbsDropped.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.nightfalls ? member.nightfalls.orbsDropped.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                orbsDropped: member.nightfalls ? member.nightfalls.orbsDropped.basic.value : false
+              };
             })
           },
           activitiesCleared: {
@@ -485,7 +580,10 @@ class StatsView extends React.Component {
               return sum + member.activitiesCleared.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.nightfalls ? member.nightfalls.activitiesCleared.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, activitiesCleared: member.nightfalls ? member.nightfalls.activitiesCleared.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                activitiesCleared: member.nightfalls ? member.nightfalls.activitiesCleared.basic.value : false
+              };
             })
           }
         },
@@ -495,7 +593,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.raids ? member.raids.secondsPlayed.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.raids ? member.raids.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
@@ -503,7 +604,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.raids ? member.raids.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.raids ? member.raids.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -511,7 +615,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.raids ? member.raids.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.raids ? member.raids.deaths.basic.value : false
+              };
             })
           },
           suicides: {
@@ -519,7 +626,10 @@ class StatsView extends React.Component {
               return sum + member.suicides.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.suicides.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, suicides: member.raids ? member.raids.suicides.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                suicides: member.raids ? member.raids.suicides.basic.value : false
+              };
             })
           },
           orbsDropped: {
@@ -527,7 +637,10 @@ class StatsView extends React.Component {
               return sum + member.orbsDropped.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.orbsDropped.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.raids ? member.raids.orbsDropped.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                orbsDropped: member.raids ? member.raids.orbsDropped.basic.value : false
+              };
             })
           },
           activitiesCleared: {
@@ -535,7 +648,10 @@ class StatsView extends React.Component {
               return sum + member.activitiesCleared.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.raids ? member.raids.activitiesCleared.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, activitiesCleared: member.raids ? member.raids.activitiesCleared.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                activitiesCleared: member.raids ? member.raids.activitiesCleared.basic.value : false
+              };
             })
           }
         },
@@ -545,7 +661,10 @@ class StatsView extends React.Component {
               return sum + member.secondsPlayed.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.secondsPlayed.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, secondsPlayed: member.gambit ? member.gambit.secondsPlayed.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                secondsPlayed: member.gambit ? member.gambit.secondsPlayed.basic.value : false
+              };
             })
           },
           kills: {
@@ -553,7 +672,10 @@ class StatsView extends React.Component {
               return sum + member.kills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.kills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, kills: member.gambit ? member.gambit.kills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                kills: member.gambit ? member.gambit.kills.basic.value : false
+              };
             })
           },
           deaths: {
@@ -561,7 +683,10 @@ class StatsView extends React.Component {
               return sum + member.deaths.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.deaths.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, deaths: member.gambit ? member.gambit.deaths.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                deaths: member.gambit ? member.gambit.deaths.basic.value : false
+              };
             })
           },
           killsDeathsRatio: {
@@ -571,7 +696,10 @@ class StatsView extends React.Component {
               }, 0) / stats.gambit.length
             ).toFixed(2),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.killsDeathsRatio.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, killsDeathsRatio: member.gambit ? member.gambit.killsDeathsRatio.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                killsDeathsRatio: member.gambit ? member.gambit.killsDeathsRatio.basic.value : false
+              };
             })
           },
           orbsDropped: {
@@ -579,7 +707,10 @@ class StatsView extends React.Component {
               return sum + member.orbsDropped.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.orbsDropped.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, orbsDropped: member.gambit ? member.gambit.orbsDropped.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                orbsDropped: member.gambit ? member.gambit.orbsDropped.basic.value : false
+              };
             })
           },
           winRatio: {
@@ -591,7 +722,10 @@ class StatsView extends React.Component {
                 return sum + member.activitiesEntered.basic.value;
               }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.activitiesWon.basic.value / member.gambit.activitiesEntered.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, winRatio: member.gambit ? member.gambit.activitiesWon.basic.value / member.gambit.activitiesEntered.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                winRatio: member.gambit ? member.gambit.activitiesWon.basic.value / member.gambit.activitiesEntered.basic.value : false
+              };
             })
           },
           motesDeposited: {
@@ -599,7 +733,10 @@ class StatsView extends React.Component {
               return sum + member.motesDeposited.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.motesDeposited.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, motesDeposited: member.gambit ? member.gambit.motesDeposited.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                motesDeposited: member.gambit ? member.gambit.motesDeposited.basic.value : false
+              };
             })
           },
           motesLost: {
@@ -607,7 +744,10 @@ class StatsView extends React.Component {
               return sum + member.motesLost.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.motesLost.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, motesLost: member.gambit ? member.gambit.motesLost.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                motesLost: member.gambit ? member.gambit.motesLost.basic.value : false
+              };
             })
           },
           motesDenied: {
@@ -615,7 +755,10 @@ class StatsView extends React.Component {
               return sum + member.motesDenied.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.motesDenied.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, motesDenied: member.gambit ? member.gambit.motesDenied.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                motesDenied: member.gambit ? member.gambit.motesDenied.basic.value : false
+              };
             })
           },
           blockerKills: {
@@ -623,7 +766,10 @@ class StatsView extends React.Component {
               return sum + member.blockerKills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.blockerKills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, blockerKills: member.gambit ? member.gambit.blockerKills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                blockerKills: member.gambit ? member.gambit.blockerKills.basic.value : false
+              };
             })
           },
           primevalDamage: {
@@ -631,7 +777,10 @@ class StatsView extends React.Component {
               return sum + member.primevalDamage.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.primevalDamage.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, primevalDamage: member.gambit ? member.gambit.primevalDamage.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                primevalDamage: member.gambit ? member.gambit.primevalDamage.basic.value : false
+              };
             })
           },
           invasionKills: {
@@ -639,7 +788,10 @@ class StatsView extends React.Component {
               return sum + member.invasionKills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.invasionKills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, invasionKills: member.gambit ? member.gambit.invasionKills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                invasionKills: member.gambit ? member.gambit.invasionKills.basic.value : false
+              };
             })
           },
           invaderKills: {
@@ -647,7 +799,10 @@ class StatsView extends React.Component {
               return sum + member.invaderKills.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.invaderKills.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, invaderKills: member.gambit ? member.gambit.invaderKills.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                invaderKills: member.gambit ? member.gambit.invaderKills.basic.value : false
+              };
             })
           },
           medals_pvecomp_medal_overkillmonger: {
@@ -655,7 +810,10 @@ class StatsView extends React.Component {
               return sum + member.medals_pvecomp_medal_overkillmonger.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.medals_pvecomp_medal_overkillmonger.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medals_pvecomp_medal_overkillmonger: member.gambit ? member.gambit.medals_pvecomp_medal_overkillmonger.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medals_pvecomp_medal_overkillmonger: member.gambit ? member.gambit.medals_pvecomp_medal_overkillmonger.basic.value : false
+              };
             })
           },
           medals_pvecomp_medal_invader_kill_four: {
@@ -663,7 +821,10 @@ class StatsView extends React.Component {
               return sum + member.medals_pvecomp_medal_invader_kill_four.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.medals_pvecomp_medal_invader_kill_four.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medals_pvecomp_medal_invader_kill_four: member.gambit ? member.gambit.medals_pvecomp_medal_invader_kill_four.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medals_pvecomp_medal_invader_kill_four: member.gambit ? member.gambit.medals_pvecomp_medal_invader_kill_four.basic.value : false
+              };
             })
           },
           medals_pvecomp_medal_tags_denied_15: {
@@ -671,7 +832,10 @@ class StatsView extends React.Component {
               return sum + member.medals_pvecomp_medal_tags_denied_15.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.medals_pvecomp_medal_tags_denied_15.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medals_pvecomp_medal_tags_denied_15: member.gambit ? member.gambit.medals_pvecomp_medal_tags_denied_15.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medals_pvecomp_medal_tags_denied_15: member.gambit ? member.gambit.medals_pvecomp_medal_tags_denied_15.basic.value : false
+              };
             })
           },
           medals_pvecomp_medal_fast_fill: {
@@ -679,7 +843,10 @@ class StatsView extends React.Component {
               return sum + member.medals_pvecomp_medal_fast_fill.basic.value;
             }, 0),
             ordered: orderBy(raw, [member => (member.gambit ? member.gambit.medals_pvecomp_medal_fast_fill.basic.value : false)], ['desc']).map(member => {
-              return { membershipId: member.membershipId, medals_pvecomp_medal_fast_fill: member.gambit ? member.gambit.medals_pvecomp_medal_fast_fill.basic.value : false };
+              return {
+                membershipId: member.membershipId,
+                medals_pvecomp_medal_fast_fill: member.gambit ? member.gambit.medals_pvecomp_medal_fast_fill.basic.value : false
+              };
             })
           }
         }
@@ -725,9 +892,14 @@ class StatsView extends React.Component {
           }
 
           return (
-            <li key={member.member.destinyUserInfo.membershipId} className={cx('linked', { thisIsYou: rank.membershipId === this.props.membershipId })}>
+            <li
+              key={member.member.destinyUserInfo.membershipId}
+              className={cx('linked', {
+                thisIsYou: rank.membershipId === this.props.membershipId
+              })}
+            >
               <div className='rank'>
-                <div className='value'></div>
+                <div className='value' />
               </div>
               <div className='displayName'>{member.member.destinyUserInfo.displayName}</div>
               <div className='stat'>{stat}</div>
@@ -872,8 +1044,8 @@ class StatsView extends React.Component {
               </div>
             </div>
             <div className='flair-gambit'>
-              <div className='l1 destiny-gambit_dazzle'></div>
-              <div className='l2 destiny-gambit_dazzle'></div>
+              <div className='l1 destiny-gambit_dazzle' />
+              <div className='l2 destiny-gambit_dazzle' />
             </div>
           </>
         );
@@ -1157,33 +1329,11 @@ class StatsView extends React.Component {
                   {clan.name}
                   <div className='tag'>[{clan.clanInfo.clanCallsign}]</div>
                 </div>
-                {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
-                <div className='memberCount'>
-                  // {clan.memberCount} {t('members')}
-                </div>
+                <div className='memberCount'>{'//'} {clan.memberCount} members</div>
                 <div className='motto'>{clan.motto}</div>
               </div>
               <div className='views'>
-                <ul className='list'>
-                  <li className='linked'>
-                    <NavLink to='/clan' exact>{t('About')}</NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/roster'>{t('Roster')}</NavLink>
-                  </li>
-                  <li className='linked'>
-                    <NavLink to='/clan/stats'>{t('Stats')}</NavLink>
-                  </li>
-                  <li className='linked child'>
-                    <NavLink to='/clan/stats' exact>{t('Vanguard')}</NavLink>
-                  </li>
-                  <li className='linked child'>
-                    <NavLink to='/clan/stats/crucible'>{t('Crucible')}</NavLink>
-                  </li>
-                  <li className='linked child'>
-                    <NavLink to='/clan/stats/gambit'>{t('Gambit')}</NavLink>
-                  </li>
-                </ul>
+                <ClanNav showStatChildren />
               </div>
             </div>
             <div className='collation'>{this.state.members.length > 0 ? collation : <Spinner />}</div>

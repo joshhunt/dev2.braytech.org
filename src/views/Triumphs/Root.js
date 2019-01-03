@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
 import ObservedImage from '../../components/ObservedImage';
@@ -7,11 +6,12 @@ import ObservedImage from '../../components/ObservedImage';
 import { enumerateRecordState } from '../../utils/destinyEnums';
 
 import RecordsAlmost from '../../components/RecordsAlmost';
+import { ProfileLink } from '../../components/ProfileLink';
 import { withNamespaces } from 'react-i18next';
 
 class Root extends React.Component {
   render() {
-    const {t} = this.props;
+    const { t } = this.props;
     const manifest = this.props.manifest;
     const characterId = this.props.characterId;
 
@@ -86,7 +86,7 @@ class Root extends React.Component {
         nodeChildNode.children.presentationNodes.forEach(nodeChildNodeChild => {
           let nodeChildNodeChildNode = manifest.DestinyPresentationNodeDefinition[nodeChildNodeChild.presentationNodeHash];
           if (nodeChildNodeChildNode.redacted) {
-            console.log(nodeChildNodeChildNode)
+            console.log(nodeChildNodeChildNode);
             return;
           }
           nodeChildNodeChildNode.children.records.forEach(record => {
@@ -103,10 +103,10 @@ class Root extends React.Component {
 
       nodes.push(
         <div key={node.hash} className='node'>
-          <Link to={`/triumphs/${node.hash}`}>
+          <ProfileLink to={`/triumphs/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             {node.displayProperties.name}
-          </Link>
+          </ProfileLink>
           <div className='state'>
             <span>{states.filter(record => enumerateRecordState(record).recordRedeemed).length}</span> / {states.filter(record => !enumerateRecordState(record).invisible).length}
           </div>
@@ -135,10 +135,11 @@ class Root extends React.Component {
             completed: sealBars[node.hash].completed === sealBars[node.hash].total
           })}
         >
-          <Link to={`/triumphs/seal/${node.hash}`}>
+          <ProfileLink to={`/triumphs/seal/${node.hash}`}>
             <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${node.originalIcon}`} />
             {node.displayProperties.name}
-          </Link>
+          </ProfileLink>
+
           <div className='state'>
             <span>{sealBars[node.hash].completed}</span> / {sealBars[node.hash].total}
           </div>
